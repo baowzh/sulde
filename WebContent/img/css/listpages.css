@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/* CSS Document */
+.listSheet {
+	width: 980px;
+	height: 480px;
+	border: solid 1px #09C;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.news3 {
+	height: 95%;
+	padding: 15px 0px 10px 0px;
+	float: left;
+	width: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-webkit-writing-mode: vertical-rl;
+	-moz-writing-mode: vertical-rl;
+	-ms-writing-mode: vertical-rl;
+	-o-writing-mode: vertical-rl;
+	writing-mode: tb-rl;
+	background: url(icon_66.gif) 8px 0px no-repeat;
+}

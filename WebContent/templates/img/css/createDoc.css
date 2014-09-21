@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+
+.roundCornerFrame{border-radius:5px; border:solid 1px #ccc; margin:5px; background:#1b6fbd;}
+.content{width:950px; margin:9px; background:white; padding:5px; border-radius:5px;}
+.label{-webkit-writing-mode: vertical-lr; -moz-writing-mode: vertical-lr; -ms-writing-mode: vertical-lr; -o-writing-mode: vertical-lr; writing-mode: tb-lr; line-height:20px; word-break:keep-all; text-align:left; -webkit-text-orientation: sideways-right; -ms-text-orientation: sideways-right; width:30px; text-align:left; float:left; height:7em;}
+
+
+.inputHolder { width:30px; height:500px;  overflow:hidden; float:left;}
+.inputHolder input{   -webkit-transform: rotate(90deg); -webkit-transform-origin:10px 10px; writing-mode:tb-lr; font-family:"Menksoft  ";}
+.inputHolder input.title{ height:400px; }
+.inputHolder input.webkitTitle{ height:1em;    width:400px; }
+.inputHolder select {  -webkit-width:400px;    -webkit-transform: rotate(90deg); -webkit-transform-origin:10px 10px; writing-mode:tb-lr; font-family:"Menksoft  ";}
+.abstract{height:500px; width:90px; float:left}
+.abstract textarea{-webkit-writing-mode: vertical-lr; -moz-writing-mode: vertical-lr; -ms-writing-mode: vertical-lr; -o-writing-mode: vertical-lr; writing-mode: tb-lr; line-height:20px; word-break:keep-all; text-align:left; -webkit-text-orientation: sideways-right; -ms-text-orientation: sideways-right;  text-align:left; }
+
+.richeditBox{ height:600px; width:860px; background:#eee; float:left;}
+.send{ width:25px; height:600px; float:left; padding-left:5px;}

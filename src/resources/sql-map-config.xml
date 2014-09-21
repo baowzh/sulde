@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<!-- useStatementNamespaces="true" -->
+	<settings enhancementEnabled="true" maxTransactions="50"
+		maxRequests="100" maxSessions="100" />
+		<sqlMap resource="sqlmaps/programSQL.xml" />
+		<sqlMap resource="sqlmaps/programitemSQL.xml" />
+		<sqlMap resource="sqlmaps/webtemplateSQL.xml" />
+		<sqlMap resource="sqlmaps/channelSQL.xml" />
+		<sqlMap resource="sqlmaps/documentSQL.xml" />
+		<sqlMap resource="sqlmaps/imgSQL.xml" />
+		<sqlMap resource="sqlmaps/userSQL.xml" />
+		<sqlMap resource="sqlmaps/opinionSQL.xml"/>
+		<sqlMap resource="sqlmaps/voteSQL.xml"/>
+</sqlMapConfig>

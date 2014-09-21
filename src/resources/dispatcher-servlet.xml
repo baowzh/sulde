@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<context:annotation-config />
+	<!-- 把标记了@Controller注解的类转换为bean -->
+	<context:component-scan base-package="com.mongolia.website.controler"></context:component-scan> 
+	<!--
+	<mvc:resources mapping="/html/**" location="/WEB-INF/html/" />
+    <mvc:annotation-driven/>
+      -->
+	<bean id="viewResolver3" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"> 
+		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/> 
+		<property name="viewNames" value="*.ftl"/> 
+		<property name="contentType" value="text/html; charset=utf-8"/> 
+		<property name="cache" value="true" />   
+		<property name="prefix" value="" />  
+		<property name="suffix" value="" />   
+		<property name="order" value="1"/>
+	</bean>
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean id="annotationMethodHandlerAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<property name="webBindingInitializer">
+			<bean class="com.mongolia.website.controler.BindingInitializer"/>
+		</property>
+		
+	</bean> 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/sitemanager/*.do"/>
+			<bean id="interceptor1" class="com.mongolia.website.controler.interceptor.CheckLoginInterceptor">
+				<property name="excludedUrls">  
+					<list>  
+						<value>/website/*.do</value>  
+					</list>  
+				</property> 
+			</bean>	
+		</mvc:interceptor>     
+	</mvc:interceptors> 
+	 
+	<!--<bean id="checkloninfo" class="com.mongolia.website.controler.interceptor.CheckLoginInterceptor"></bean>-->
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/pages/"/>
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="3"></property> 
+	</bean>
+	<bean name="xmlViewResover" class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location" value="classpath:/resources/jsonview.xml"/>
+		<property name="order" value="2"></property> 
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+        <!-- 指定所上传文件的总大小不能超过20000KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 --> 
+        <property name="maxUploadSize" value="404857600"/> 
+        <property name="defaultEncoding" value="UTF-8" />  
+    </bean> 
+</beans>

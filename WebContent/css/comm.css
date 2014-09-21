@@ -1,0 +1,100 @@
+body {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
+	font-size: 12px;
+}
+.p12lan {
+	font-family: "ËÎÌו", Arial;
+	font-size: 12px;
+	color: #006FC4;
+	line-height:23px;
+	text-decoration: none;
+}
+.p12hui {
+	font-family: "ËÎÌו", Arial;
+	font-size: 12px;
+	color: #707070;
+	text-decoration: none;
+}
+
+.pdv_class {
+	position: absolute;
+}
+.programName{
+	font-size: 16px;
+	left:20px;
+	background-image:url(../img/bg.gif);
+	}
+
+.ddd {
+	writing-mode:tb-rl;font-family:MenksoftQagan;font-size:15px
+}
+
+.images {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px auto;
+	background: #F00;
+	width: 370px;
+	height: 330px;
+	position: absolute;
+	left: 0px;
+	top: 108px;
+	border-style: solid;
+	border-width: 0px;
+}
+
+.menu {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	background: #FFF;
+	width: 1024px;
+	height: 100px;
+	left: 0px;
+	top: 10px;
+	disply: none;
+	border-style: solid;
+	border-width: 1px;
+	boder-color: #FF0000;
+}
+
+
+#contain {
+	position: relative;
+	height: 95%;
+	padding: 10px;
+	margin: 10px auto;
+	border: 0;
+	width: 1024px;
+	background: none repeat scroll 0% 0% transparent;
+	margin: 0px auto;
+	padding: 0px;
+}
+#bottom {
+	position: absolute;
+	height: 70px;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+	boder-color: #c00;
+	width: 1024px;
+	top:1440px;
+	align:center
+	background: none repeat scroll 0% 0% transparent;
+	padding: 0px;
+	background-image:url(../img/bg.gif);
+}
+
+.menumain_dolphin {
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	height: 42px;
+}

@@ -1,0 +1,139 @@
+
+/*body {
+	font-family: MenksoftQagan;
+	font-size:12pt; 
+	margin-left: 5px;
+	margin-top: 30px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	background-image:url(bg.gif);
+	}*/
+table.buhBg {
+	background-image:url(buhBg.jpg);
+	background-color:#FFFFFF;
+	}
+table.teruunBg {
+	background-image:url(teruunBg.gif);
+	}
+.buhBg td{
+	writing-mode:tb-rl;
+	font-family: MenksoftQagan;
+	font-size:12pt;
+	}
+textarea{
+	writing-mode:tb-rl;
+	font-family: MenksoftQagan;
+	font-size:12pt;
+	}
+td.teruunGarchag0 {
+	font-size: 20px; 
+	color:#e4f1f2;
+	}
+td.teruunGarchag1 {
+	font-size: 30px; 
+	color:#eae839;
+	}
+td.teruunGarchag2 {
+	font-size:20px;
+	color:#401d01;
+	}
+td.teruunGarchag3 {
+	font-size:19px; 
+	color:#401d01;
+	}
+td.uulagGarchagBg {
+	background-image:url(uulagGarchagBg.gif);
+	font-size: 19px;
+	color:#3f3f3f;
+	}
+td.garchagShogom {
+	background-color:#956b6d;
+	}
+td.holvooSuuliinBg {
+	background-image:url(holvooSuuliinBg.gif);
+	}
+.blogDetailDate {
+	font-size: 18px;
+	font-family:Georgia;
+	}
+.date {
+	font-size: 10px;
+	font-family:Georgia;
+	}
+.uulag {
+	font-size:20px;
+	color:#272728;
+	line-height: 24px;
+	}
+.uulagSuul {
+	font-size:16px; 
+	color:#272728;
+	}
+.nuurSoleh {
+	font-size:16px; 
+	color:#272728;
+	}
+.holvooSuul {
+	font-size:18px; 
+	color:#626262;
+	}
+	
+<!-- bicheesiin heseg -->
+
+td.uldesenBicheesBg {
+	background-image:url(uldesenBicheesBg.gif);
+	font-size:16px;
+	color:#272728;
+	}
+td.uldesenHun {
+	font-size:20px;
+	color:#272728;
+	}
+td.bichesUulag {
+	font-size:16px;
+	color:#272728;
+	line-height:24px;
+	}
+td.husneg {
+	font-size:18px;
+	color:#272728;
+	}
+td.bichesSogom {
+	background-color:#956b6d;
+	}
+	.MBichesText {
+	writing-mode: tb-rl;
+	font-size: 16px;
+	white-space: nowrap;
+	font-family: MenksoftQagan;
+	margin: 10px 0 0 0;
+	line-height: 24px;
+	color:#3f3f3f;
+	}
+.MBichesText td{
+	writing-mode: tb-rl;
+	font-size: 16px;
+	white-space: nowrap;
+	font-family: MenksoftQagan;
+	margin: 10px 0 0 0;
+	line-height: 24px;
+	color:#3f3f3f;
+	}
+.MArticleText {
+	writing-mode: tb-rl;
+	font-size: 20px;
+	white-space: nowrap;
+	font-family: MenksoftQagan;
+	margin: 10px 0 0 0;
+	line-height: 24px;
+	color:#3f3f3f;
+	}
+.MArticleText td{
+	writing-mode: tb-rl;
+	font-size: 20px;
+	white-space: nowrap;
+	font-family: MenksoftQagan;
+	margin: 10px 0 0 0;
+	line-height: 24px;
+	color:#3f3f3f;
+	}

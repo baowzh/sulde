@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+
+ .navl{ width:20px; height:100px; float:left; text-align:left}
+.navl a{color:#333;  }
+.nav2{ width:20px; height:80px; float:left; text-align:center; background:#960; border-radius:5px;}
+.nav2 a{color:#fff; }
+ .navCard{height:100px; padding:25px 35px; margin: 0 5px; border:solid 1px #396; border-radius:0px 0px 5px 5px;  ;  background:url(../navbg.png) left top no-repeat}
+ .navChagan{ background:url(../navbgChagan.png) left top no-repeat}
+
+ .navaAlag{ background:url(../navbgChagan.png) left top no-repeat;}
+ .navHar{}
+ .navNogoon{ background:url(../navbgNogoon.png) left top no-repeat}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="program">
+	<typeAlias alias="ProgramValue" type="com.mongolia.website.model.ProgramValue"/>
+	<typeAlias alias="MenuValue" type="com.mongolia.website.model.MenuValue"/>
+	<typeAlias alias="WebPageValue" type="com.mongolia.website.model.WebPageValue"/>
+	<typeAlias alias="PageChannelRelationValue" type="com.mongolia.website.model.PageChannelRelationValue"/>
+	<select id="getProgramValuesValue" parameterClass="java.util.Map"
+		resultClass="ProgramValue">
+	<![CDATA[
+		select * from  Program
+	]]>
+	</select>
+	<select id="getmenus" parameterClass="java.util.Map"
+		resultClass="MenuValue">
+		select * from  menu 
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="menutype">
+				menutype=#menutype#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getpages" parameterClass="java.util.Map"
+		resultClass="WebPageValue">
+			select * from  page  
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="pageid">
+				pageid=#pageid#
+			</isNotNull>
+		</dynamic>
+		
+	</select>
+	<delete id="deletepage"  parameterClass="java.util.Map">
+		delete from page where pageid=#pageid#
+	</delete>
+	<update id="updatepage"  parameterClass="com.mongolia.website.model.WebPageValue">
+		update 
+		<dynamic prepend="set" > 
+			<isNotNull prepend="," property="pagename">
+		  	pagename=#pagename#
+			</isNotNull>
+			<isNotNull prepend="," property="comment">
+		  	comment=#comment#
+			</isNotNull>
+			<isNotNull prepend="," property="showtemplateid">
+		  	showtemplateid=#showtemplateid#
+			</isNotNull>
+			<isNotNull prepend="," property="parentpageid">
+		  	parentpageid=#parentpageid#
+			</isNotNull>
+		</dynamic>   
+		 where  pageid=#pageid#
+	</update>
+	<select id="getRelatedChannels" parameterClass="java.util.Map" resultClass="PageChannelRelationValue">
+		select  a.pagename,b.chnlname,c.*  FROM page a,channel b,pageandchannelrelation c where a.pageid=c.pageid and b.channelid=c.channelid 
+		<dynamic prepend="and" > 
+			<isNotNull prepend="and" property="pageid">
+		        c.pageid=#pageid#
+			</isNotNull>
+			<isNotNull prepend="and" property="channelid">
+		        c.channelid=#channelid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<insert id="addChannelToPage" parameterClass="PageChannelRelationValue">
+		insert pageandchannelrelation(
+		pageid,
+		channelid,
+		channeldisplaytype,
+		channeldoccount,
+		variablename,
+		channellistordercol) values(
+		#pageid#,
+		#channelid#,
+		#channeldisplaytype#,
+		#channeldoccount#,
+		#variablename#,
+		#channellistordercol#
+		)
+	</insert>
+	<select id="checkChannelIsRelated" parameterClass="PageChannelRelationValue" resultClass="java.lang.Integer">
+		select count(1) from  pageandchannelrelation where  pageid=#pageid# and channelid=#channelid# and  channeldisplaytype=#channeldisplaytype#
+	</select>
+	<select id="pageIsParentPage" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	  select count(1) from page where parentpageid=#pageid#	
+	</select>
+	<delete id="deleteChannelFromPage" parameterClass="java.util.Map"  >
+		delete from  pageandchannelrelation where  pageid=#pageid# and channelid=#channelid# and  channeldisplaytype=#displayType#
+	</delete>
+	
+</sqlMap>

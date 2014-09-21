@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="program">
+	<typeAlias alias="ProgramItem" type="com.mongolia.website.model.ProgramItem"/>
+	<typeAlias alias="ProgramValue" type="com.mongolia.website.model.ProgramValue"/>
+	<select id="getProgramItemsValue" parameterClass="java.util.Map"
+		resultClass="ProgramItem">
+		select itemid,title,releaseDate,checkDate,ischecked,programkind,authorid,authorname,displayInIndex,css,itemIcon,imgurl from  programitem
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="programkind">
+				programkind=#programkind#
+			</isNotNull>
+		</dynamic>
+		<isNotNull prepend="" property="start">
+				order by releasedate limit #start#,#end#
+		</isNotNull>
+	</select>
+	<select id="getProgramItemWithContent" parameterClass="java.util.Map"
+		resultClass="ProgramItem">
+	<![CDATA[
+		select * from  programitem where itemid=#itemid#
+		and programkind=#programkind#
+	]]>
+	</select>
+	<insert id="addnews" parameterClass="ProgramItem">
+		insert into programitem(itemid,title,releaseDate,checkDate,ischecked,programkind,content,authorid,authorname,displayInIndex,css,itemIcon,imgurl) values(#itemid#,#title#,#releaseDate#,#checkDate#,#ischecked#,#programkind#,#content#,#auhtorid#,#authorname#,#displayInIndex#,#css#,#itemIcon#,#imgurl#)
+	</insert>
+	<delete id="deteletProgramItem"  parameterClass="java.util.Map">
+		delete from  programitem where itemid=#id#
+	</delete>
+	<insert id="programValue" parameterClass="ProgramValue">
+		insert into program(programcomm   ,
+    programid   ,
+    z_index   ,
+    left1   ,
+    top  ,
+    height  ,
+    width  ,
+    background_img   ,
+    background   ,
+    border   ,
+    style   ,
+    programKind  ,
+    itemImg) values(#programcomm#,
+    #programid#,
+    #z_index#,
+    #left#,
+    #top#,
+    #height#,
+    #width#,
+    #background_img#,
+    #background# ,
+    #border# ,
+    #style#,
+    #programKind#,
+    #itemImg#
+    )
+	</insert>
+</sqlMap>

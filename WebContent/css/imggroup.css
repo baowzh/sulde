@@ -1,0 +1,95 @@
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}  /*图片太高时出现了右侧滚动条  滚动条会让ul宽度变化的效果看起来有点震动！ 所以这里去掉*/
+* {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+body {
+	background: #CCCCCC;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	margin-top: 3%;
+}
+
+.content {
+	background: #ffffff;
+	margin: 0 auto;
+	position: relative;
+	width: 500px;
+	height: 300px;
+	border: 10px solid #ffffff;
+}
+
+.content li {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+}
+
+.content span {
+	position: absolute;
+	left: 47%;
+	top: 45%;
+}
+
+.content .left,.content .right {
+	position: absolute;
+	top: 0;
+	z-index: 11;
+}
+
+.content .left {
+	cursor: url(img/cur-left.cur.ico), auto;
+	left: 0;
+}
+
+.content .right {
+	right: 0;
+	cursor: url(img/cur-right.cur.ico), auto;
+}
+
+.bottom {
+	hight: 20px;
+	background: #ffffff;
+	margin: 0 auto;
+	overflow: hidden;
+	line-height: 10px;
+	padding: 0 10px;
+}
+
+.div1 {
+	position:absolute;
+	width: 300px;
+	height: 205px;
+	top: 102px;
+	left: 100px;
+	border-style: solid;
+	z-index: 99;
+	border: 1px;
+	display:block;
+}
+
+.div2 {
+	position:absolute;
+	width: 300px;
+	height: 205px;
+	top: 102px;
+	left: 100px;
+	border-style: solid;
+	z-index: 2;
+	border: 1px;
+	display: none
+}

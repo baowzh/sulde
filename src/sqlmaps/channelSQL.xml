@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="program">
+	<typeAlias alias="Channel" type="com.mongolia.website.model.Channel"/>
+	
+	<select id="getChannel" parameterClass="java.util.Map"
+		resultClass="Channel">
+		select channelid,chnlname,chnldesc,parentid,chnlorder,chnldatapath,chnlorderby,cruser,crtime,status,chnltype,linkurl from  channel
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="channelid">
+				channelid=#channelid#
+			</isNotNull>
+			<isNotNull prepend="and" property="chnlname">
+				CHNLNAME=#chnlname#
+			</isNotNull>
+		</dynamic>
+ 
+	</select>
+	<insert id="addChannel" parameterClass="Channel">
+		insert into channel( channelid,
+    CHNLNAME   ,
+    CHNLDESC   ,
+    PARENTID  ,
+    CHNLORDER  ,
+    CHNLDATAPATH,
+CHNLORDERBY,
+CRUSER,
+CRTIME,
+STATUS,
+CHNLTYPE,
+LINKURL  ) values(
+#channelid#,
+    #chnlname#   ,
+    #chnldesc#   ,
+    #parentid#   ,
+    #chnlorder#  ,
+    #chnldatapath# ,
+    #chnlorderby#,
+    #cruser#,
+    #crtime#,
+    #status#,
+    #chnltype#,
+    #linkurl#
+    )
+	</insert>
+	<update id="updateChannel" parameterClass="Channel">
+		
+		update channel
+		<dynamic prepend="set" > 
+			<isNotNull prepend="," property="chnlname">
+		  	CHNLNAME=#chnlname#
+			</isNotNull>
+			<isNotNull prepend="," property="chnldesc">
+		  	chnldesc=#chnldesc#
+			</isNotNull>
+
+		</dynamic>   
+		 where  channelid=#channelid#
+	
+	</update>
+	<delete id="deleteChannel" parameterClass="java.util.Map"       >
+		delete from  channel where  channelid in (#channelid#)
+	</delete>
+</sqlMap>

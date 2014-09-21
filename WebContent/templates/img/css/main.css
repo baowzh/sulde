@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Document */
+
+ /*div:nth-of-type(odd){background:#FC6}
+ div:nth-of-type(even){background:#0CC}
+ #f3d7b0
+ 
+ */
+@font-face
+{
+font-family: "Menksoft  ";
+src: url(../../font/MenksoftScnin.ttf);
+}
+
+/*
+导航与网尾 */
+.tailCard{height:100px; padding:25px 80px; margin: 0 5px; border:solid 1px #eee; border-bottom:none; border-radius:5px 5px 0px 0px ; background:white; color:black;}
+.tailCard a{color:#333;}
+.vdrtgalSuld{ background:#FC9;}
+
+
+.taj{ text-align:right;}
+ a {text-decoration:none; color:#630; line-height:100%;}
+.chagan a{  color:#333}
+.nogoon a{ color:#363}
+a:hover{color:#C00;}
+body{  margin:0; font-family:"Menksoft  "; font-size:16px; line-height:100%;}
+body.chagan{background:#eee; margin:0; font-family:"Menksoft  "; font-size:16px;}
+body.nogoon{background:#69C; margin:0; font-family:"Menksoft  "; font-size:16px;}
+body.alag{ margin:0; font-family:"Menksoft  "; font-size:16px;}
+.msheet{-webkit-writing-mode: vertical-lr; -moz-writing-mode: vertical-lr; -ms-writing-mode: vertical-lr; -o-writing-mode: vertical-lr; writing-mode: tb-lr; line-height:20px;   word-break:keep-all; text-align:left;-webkit-text-orientation: sideways-right; -ms-text-orientation: sideways-right;}
+.mVsheet{
+ column-width:400px;
+ column-fill:auto;
+ column-rule:dashed  2px #ccc;
+ column-gap:40px;
+ -webkit-column-width:400px;  
+ -webkit-column-rule:dashed  2px #ccc;
+ -webkit-column-gap:40px;
+-webkit-writing-mode: vertical-lr; -moz-writing-mode: vertical-lr; -ms-writing-mode: vertical-lr; -o-writing-mode: vertical-lr; writing-mode: tb-lr; line-height:20px;     text-align:left;
+-webkit-text-orientation: sideways-right; -ms-text-orientation: sideways-right;
+width:100%;
+word-break:keep-all;
+overflow::visible;}
+.mVsheetIE89{
+	 writing-mode: tb-lr; line-height:20px;     text-align:left; 
+	 overflow-x:scroll  ;
+	 height:500px;
+	 width:100%;
+	 word-break:keep-all;
+}
+.ScrollToView{ width:0px; height:0px;   left:90%; top:50%; z-index:3; position:relative; }
+.ScrollToView div{width:32px; height:32px;   background:url(../scrolltoview.png) 0px 0px no-repeat;}
+.ScrollToView div:hover{width:32px; height:32px;   background:url(../scrolltoview.png) -32px no-repeat;}
+
+
+.lcell{float:left; overflow:hidden; border:0; margin:0; padding:0;}
+.cell1{width:300px; height:350px;}
+.cell2{width:600px; height:350px;}
+.lmainR{width:990px; margin:0 auto;}
+.m0a { margin:0 auto; }
+.ofh{overflow:hidden;}
+.cbt { clear:both; }
+.flt { float:left; }
+.frt { float:right; }
+.m1ln{writing-mode:tb-lr; -webkit-writing-mode:vertical-lr; -webkit-text-orientation: sideways-right; -ms-text-orientation: sideways-right; width:20px;  overflow:hidden; float:left; overflow:hidden; text-overflow:ellipsis;white-space:nowrap; }
+
+.xldgurg{width:69px; margin:5px; height:310px; float:left;}
+.xldgurg .avtr{width: 69px; height:69px; float:left; }
+.xldgurg .avtr img{width: 59px; height:59px; border:solid 1px #ccc; padding:5px; background:#eee;}
+.xldgurg .desc{ width:60px; padding:5px; height:230px;  float:left}
+.xldgurg .desc .m1ln{height:230px;}
+.xldgurg .desc  { color:#c00}
+
+
+
+
+/*mongolian form element*/
+.mfl{ width:28px; height:200px; overflow:hidden}
+.mfl input, button{
+-webkit-transform:rotate(90deg); /* Safari and Chrome */
+-webkit-transform-origin:10px 10px;
+font-family:"Menksoft  ";
+writing-mode:tb-lr;
+}
+
+
+
+
+.bgylw{background:#f3d7b0}
+.cardt1{width:290px; height:340px; border:solid 1px  #ccc; border-radius:5px; margin:5px auto; background:white; overflow:hidden;}
+.cardt2{width:590px; height:340px; border:solid 1px  #ccc; border-radius:5px; margin:5px auto; background:white; overflow:hidden;}
+.nwsls1{width:240px; padding:10px; height:320px; float:left;}
+.nwsls1 .ad{width:210px;  height:107px; margin-bottom:10px; overflow:hidden; float:left;}
+.nwsl1{writing-mode:tb-lr; -webkit-writing-mode:vertical-lr; -webkit-text-orientation: sideways-right; -ms-text-orientation: sideways-right; line-height:20px; height:320px; overflow:hidden;   white-space:nowrap; text-overflow: ellipsis; float:left; background:url(../icon.png) no-repeat center 0px; text-indent:20px; width:20px;}
+.ttl1{width:30px; height:320px; padding-top:30px;  background:url(../buttonbg.png) no-repeat center center; color:white; line-height:30px; float:left;}
+.ttl1 a{color:#fff; text-decoration:none; line-height:25px; width:100%;}
+
+.chagan .ttl1{width:30px; height:320px; padding-top:30px;  background:url(../button-chagan.png) no-repeat center center; color:blue; line-height:30px; float:left;}
+.chagan .ttl1 a{color:#333; text-decoration:none;}
+.nogoon .ttl1{width:30px; height:320px; padding-top:30px;  background:url(../button-nogoon.png) no-repeat center center; color:blue; line-height:30px; float:left;}
+.nogoon .ttl1 a{color:#600; text-decoration:none;}
+
+
+
+
+
+
+
+
+.cardt2{width:590px; height:340px; border:solid 1px #09C; border-radius:5px; margin:5px auto; background:white; overflow:hidden;}
+.cardt3{width:230px; height:340px; border:solid 1px #09C; border-radius:5px; margin:5px auto; background:white; overflow:hidden;}
+.cardt4{width:980px; height:340px; border:solid 1px #09C; border-radius:5px; margin:5px auto; background:white; overflow:hidden;}
+.cardt5{width:830px; height:340px; border:solid 1px #09C; border-radius:5px; margin:5px auto; background:white; overflow:hidden;}
+
+.cardlogin{width:140px; height:340px; margin:5px;border:solid 1px #39F; border-radius:5px; background:url(../loginbg.png); color:#00F}
+.cardlogin td{text-align:left; vertical-align:top}
+.h100{height:100px;}
+
+
+/*分页*/
+.pagenav{margin:0px 5em; padding-left:1em; padding-right:1em; height:3em; background:#eee; border:solid 1px #ddd; border-radius:5px; text-align:center; line-height:3em; font-family:Tahoma, Geneva, sans-serif; font-size:9pt; font-weight:bold;}
+.pagenav input{height:24px; width:30px; padding:0; margin:0; overflow:hidden;}
+
+
+.picshow{height:120px; margin:5px; width:938px;}
+.picshow img{width:170px; height:110px; border:solid 5px #ddd; margin-left:6px;}

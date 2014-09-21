@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+.sldrFrm{width:580px; height:330px;  }
+.sldrFrm img{ border:none;}
+.sldrFrm .wndL{height:330px; width:443px;  float:left; overflow:hidden; background:#F60}
+.sldrFrm .wndL img{height:330px; width:440px;}
+.sldrFrm .wndR{float:right; width:135px; height:320px;  }
+.sldrFrm .wndThmb{width:137px; height:100px; overflow:hidden; text-align:right;   float:right;  padding-top:5px; padding-bottom:5px;}
+ 
+.sldrFrm .wndThmb img{width:132px; height:100px; }
+.msOvrBg{ background:#F60}

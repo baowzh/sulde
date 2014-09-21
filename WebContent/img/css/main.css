@@ -1,0 +1,656 @@
+﻿@charset "utf-8";
+
+/* CSS Document */ /*div:nth-of-type(odd){background:#FC6}
+ div:nth-of-type(even){background:#0CC}
+ #f3d7b0
+ 
+ */
+@font-face {
+	font-family: "Menksoft  ";
+	src: url(../../font/MenksoftScnin.ttf);
+}
+
+/*
+导航与网尾 */
+.tailCard {
+	height: 100px;
+	padding: 25px 80px;
+	margin: 0 5px;
+	border: solid 1px #eee;
+	border-bottom: none;
+	border-radius: 5px 5px 0px 0px;
+	background: white;
+	/* 	background: url(../maxia1.png) 0px 0px no-repeat; */
+	color: black;
+}
+
+.tailCard a {
+	color: #333;
+}
+
+.vdrtgalSuld {
+	background: #FC9;
+}
+
+.taj {
+	text-align: right;
+}
+
+a {
+	text-decoration: none;
+	/* 	color: #630; */
+	line-height: 100%;
+	color: #575a5b;
+}
+
+.chagan a {
+	color: #333
+}
+
+.nogoon a {
+	color: #363
+}
+
+a:hover {
+	color: #C00;
+}
+
+body {
+	margin: 0;
+	font-family: "Menksoft  ";
+	font-size: 16px;
+	line-height: 100%;
+}
+
+body.chagan {
+	background: #eee;
+	margin: 0;
+	font-family: "Menksoft  ";
+	font-size: 16px;
+}
+
+body.nogoon {
+	background: #69C;
+	margin: 0;
+	font-family: "Menksoft  ";
+	font-size: 16px;
+}
+
+body.alag {
+	margin: 0;
+	font-family: "Menksoft  ";
+	font-size: 16px;
+}
+
+.msheet {
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	writing-mode: tb-lr;
+	line-height: 20px;
+	word-break: keep-all;
+	text-align: left;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+}
+
+.mVsheet {
+	column-width: 400px;
+	column-fill: auto;
+	column-rule: dashed 2px #ccc;
+	column-gap: 40px;
+	-webkit-column-width: 400px;
+	-webkit-column-rule: dashed 2px #ccc;
+	-webkit-column-gap: 40px;
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	writing-mode: tb-lr;
+	line-height: 20px;
+	text-align: left;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	width: 100%;
+	word-break: keep-all;
+	overflow: : visible;
+}
+
+.mVblock {
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	writing-mode: tb-lr;
+	line-height: 20px;
+	text-align: left;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	word-break: keep-all;
+	overflow: : visible;
+	display: block;
+	float: left;
+	width: auto;
+	background: #eee;
+}
+
+.mVsheetIE89 {
+	writing-mode: tb-lr;
+	line-height: 20px;
+	text-align: left;
+	overflow-x: scroll;
+	height: 500px;
+	width: 100%;
+	word-break: keep-all;
+}
+
+.ScrollToView {
+	width: 0px;
+	height: 0px;
+	left: 90%;
+	top: 50%;
+	z-index: 3;
+	position: relative;
+}
+
+.ScrollToView div {
+	width: 32px;
+	height: 32px;
+	background: url(../scrolltoview.png) 0px 0px no-repeat;
+}
+
+.ScrollToView div:hover {
+	width: 32px;
+	height: 32px;
+	background: url(../scrolltoview.png) -32px no-repeat;
+}
+
+.lcell {
+	float: left;
+	overflow: hidden;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.cell1 {
+	width: 300px;
+	height: 350px;
+}
+
+.cell2 {
+	width: 600px;
+	height: 350px;
+}
+
+.lmainR {
+	width: 990px;
+	margin: 0 auto;
+}
+
+.m0a {
+	margin: 0 auto;
+}
+
+.ofh {
+	overflow: hidden;
+}
+
+.cbt {
+	clear: both;
+}
+
+.flt {
+	float: left;
+}
+
+.frt {
+	float: right;
+}
+
+.m1ln {
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	width: 20px;
+	overflow: hidden;
+	float: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.xldgurg {
+	width: 69px;
+	margin: 5px;
+	height: 310px;
+	float: left;
+}
+
+.xldgurg .avtr {
+	width: 69px;
+	height: 69px;
+	float: left;
+}
+
+.xldgurg .avtr img {
+	width: 59px;
+	height: 59px;
+	border: solid 1px #ccc;
+	padding: 5px;
+	background: #eee;
+}
+
+.xldgurg .desc {
+	width: 60px;
+	padding: 5px;
+	height: 230px;
+	float: left
+}
+
+.xldgurg .desc .m1ln {
+	height: 230px;
+}
+
+.xldgurg .desc {
+	color: #c00
+}
+
+/*mongolian form element*/
+.mfl {
+	width: 24px;
+	height: 200px;
+	overflow: hidden
+}
+
+.mfl input, button {
+	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-webkit-transform-origin: 10px 10px;
+	font-family: "Menksoft  ";
+	writing-mode: tb-lr;
+}
+
+.search {
+	width: 24px;
+	height: 300px;
+	overflow: hidden
+}
+
+.search input, button {
+	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-webkit-transform-origin: 10px 10px;
+	font-family: "Menksoft  ";
+	writing-mode: tb-lr;
+}
+
+.bgylw {
+	background: #f3d7b0
+}
+
+.cardt1 {
+	width: 290px;
+	height: 340px;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.cardt2 {
+	width: 590px;
+	height: 340px;
+	border: solid 1px #ccc;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.nwsls1 {
+	width: 240px;
+	padding: 5px;
+	height: 320px;
+	float: left;
+}
+
+.nwsls1 .ad {
+	width: 210px;
+	height: 107px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	float: left;
+}
+
+.nwsl1 {
+	line-height: 20px;
+	height: 320px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	float: left;
+	background: url(../icon.png) no-repeat center 0px;
+	text-indent: 20px;
+	width: 20px;
+}
+
+.mnlist {
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	line-height: 20px;
+	height: 320px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	float: left;
+	/* 	background: url(../icon.png) no-repeat center 0px; */
+	text-indent: 20px;
+	width: 20px;
+}
+
+.operator {
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	/* 	line-height: 20px; */
+	height: 440px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	background: url(../mkh_share_bg.jpg) no-repeat center top;
+	text-indent: 20px;
+	width: 30px;
+	padding-left: 10px;
+}
+
+.commoper {
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	height: 410px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	background: url(../comment.jpg) no-repeat center top;
+	text-indent: 20px;
+	width: 60px;
+	border: 1px solid #bec8c8;
+	float: left;
+}
+
+.title {
+	white-space: nowrap;
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	text-overflow: ellipsis;
+	line-height: 20px;
+	height: 250px;
+	overflow: hidden;
+}
+
+.author {
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	line-height: 20px;
+	height: 40px;
+}
+
+.ttl1 {
+	width: 30px;
+	height: 340px;
+	padding-top: 0px;
+	background: url(../buttonbg.png) no-repeat center center;
+	color: white;
+	line-height: 30px;
+	float: left;
+	text-align: center;
+}
+
+.ttl1 a {
+	/*color: #fff;*/
+	color: #097ed2;
+	text-decoration: none;
+	line-height: 25px;
+	width: 100%;
+}
+
+.chagan .ttl1 {
+	width: 30px;
+	height: 320px;
+	padding-top: 30px;
+	background: url(../button-chagan.png) no-repeat center center;
+	color: blue;
+	line-height: 30px;
+	float: left;
+}
+
+.chagan .ttl1 a {
+	color: #333;
+	text-decoration: none;
+}
+
+.nogoon .ttl1 {
+	width: 30px;
+	height: 320px;
+	padding-top: 30px;
+	background: url(../button-nogoon.png) no-repeat center center;
+	color: blue;
+	line-height: 30px;
+	float: left;
+}
+
+.nogoon .ttl1 a {
+	color: #600;
+	text-decoration: none;
+}
+
+.cardt2 {
+	width: 590px;
+	height: 340px;
+	border: solid 1px #09C;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.cardt3 {
+	width: 230px;
+	height: 340px;
+	border: solid 1px #09C;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.cardt4 {
+	width: 980px;
+	height: 340px;
+	border: solid 1px #09C;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.cardt5 {
+	width: 830px;
+	height: 340px;
+	border: solid 1px #09C;
+	border-radius: 5px;
+	margin: 5px auto;
+	background: white;
+	overflow: hidden;
+}
+
+.cardlogin {
+	width: 140px;
+	height: 340px;
+	margin: 5px;
+	border: solid 1px #39F;
+	border-radius: 5px;
+	background: url(../loginbg.png);
+	color: #00F
+}
+
+.cardlogin td {
+	text-align: left;
+	vertical-align: top
+}
+
+.h100 {
+	height: 100px;
+}
+
+/*分页*/
+.pagenav {
+	margin: 0px 5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	/* 	height: 3em; */
+	/* 	background: #eee; */
+	/* 	border: solid 1px #ddd; */
+	border-radius: 5px;
+	text-align: center;
+	line-height: 3em;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+}
+
+.pagenav input {
+	height: 24px;
+	width: 30px;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.picshow {
+	height: 120px;
+	margin: 5px;
+	width: 938px;
+}
+
+.picshow img {
+	width: 170px;
+	height: 110px;
+	border: solid 5px #ddd;
+	margin-left: 6px;
+}
+
+/*登录以后*/
+.loin {
+	width: 120px;
+	margin: 5px;
+	height: 310px;
+	float: left;
+}
+
+.loin .avtr {
+	width: 100px;
+	height: 100px;
+	float: center;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+.loin .avtr img {
+	width: 100px;
+	height: 100px;
+	border: solid 1px #ccc;
+	padding: 5px;
+	background: #eee;
+}
+
+.loin .desc {
+	width: 60px;
+	padding: 15px;
+	height: 160px;
+	float: center
+}
+
+.loin .desc .m1ln {
+	height: 160px;
+}
+
+.loin .desc {
+	color: #c00
+}
+
+.regform {
+	width: 24px;
+	height: 60px;
+	overflow: hidden
+}
+
+.regform input, button {
+	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-webkit-transform-origin: 10px 10px;
+	font-family: "Menksoft  ";
+	writing-mode: tb-lr;
+}
+
+.sharenwsl1 {
+	line-height: 20px;
+	height: 300px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	float: left;
+	background: url(../fl_01.gif) no-repeat center 0px;
+	text-indent: 20px;
+	width: 20px;
+}
+/*以下对联广告的css代码*/
+.duilian {
+	top: 100px;
+	position: absolute;
+	width: 120px;
+	overflow: hidden;
+	display: none;
+}
+
+.duilian_left {
+	left: 6px;
+}
+
+.duilian_right {
+	right: 6px;
+}
+
+.duilian_con {
+	border: #fff solid 1px;
+	width: 120px;
+	height: 400px;
+	overflow: hidden;
+	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+}
+
+.duilian_close {
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	display: block;
+	font-size: 13px;
+	color: #555555;
+	text-decoration: none;
+}
+/*以下对联广告的css代码*/

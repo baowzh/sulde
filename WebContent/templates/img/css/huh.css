@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ background:#fff;}
+
+ .navl{ width:20px; height:100px; float:left; text-align:left}
+.navl a{color:white;  }
+.nav2{ width:20px; height:80px; float:left; text-align:center; background:#C90; border-radius:5px;}
+.nav2 a{color:#fff; }
+ .navCard{height:100px; padding:25px 35px; margin: 0 5px; border:solid 1px  #06F; border-radius:0px 0px 5px 5px;  ;  background:url(../navbg.png) left top no-repeat}
+ 
+ 

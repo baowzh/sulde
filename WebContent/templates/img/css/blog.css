@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+a img{border:none;}
+
+
+ .navl{ width:20px; height:100px; float:left; text-align:left}
+.navl a{color:white;  }
+.nav2{ width:20px; height:80px; float:left; text-align:center; background:#C90; border-radius:5px;}
+.nav2 a{color:#fff; }
+ .navCard{height:100px; padding:25px 35px; margin: 0 5px; border:solid 1px  #06F; border-radius:0px 0px 5px 5px;  ;  background:url(../navbg.png) left top no-repeat}
+
+
+.contentArea h1{ line-height:120%; margin:20px;}
+.shareBookmark{margin:200px 20px 20px 20px;}
+.contentArea p{text-indent:2em;}
+.contentArea .comment{  }
+.commentEdit{    border:0.5em solid #ddd; width:400px; overflow-x:scroll; height:400px;  Column-width:100%; ; }
+.postSheet{ border:solid 10px #CCF; display:run-in; height:390px;  margin-left:10px;  }
+.postSheet+ .postSheet{ border-left:none;}
+.postSheet .posterInf{ height:390px; display:inline-block; width:70px; padding:5px; background:#CCF;}
+.posterInf .avtThumb{ width:45px; border:solid 5px #eee; height:60px; margin-left:10px;}
+.posterInf .avtThumb img{width:45px; height:60px; border:none;}
+.posterInf .inf{ width:60px; height:300px;  padding:5px;}
+.posterInf .row{ height:140px; padding-bottom:5px; width:60px; float:left; line-height:20px;}
+.postSheet p{text-indent:2em;   margin:0; padding:5px;  }
+
+
+.blogbody{width:970px; padding:5px;    margin:5px auto; border-radius:5px;}
+.blgmain{width:710px; margin-left:260px;     min-height:400px;}
+.blgL{width:250px; min-height:400px;  float:left;}
+ .pin{background:url(../custom/pin.png) no-repeat 0px 0px ; width:120px; height:92px; left:-47px; top:-73px; position:relative;}
+ .nameCard{width:190px; padding:5px; background:white; border:solid 5px #ddd;}
+ 
+ .newsAbs{ background:#eee; margin-top:1em; margin-bottom:1em; padding:5px; text-indent:2em;}
+ 
+.avatar{width:120px; border:solid 1px #ccc; padding:7px; background:#eee; float:left}
+.avatar img{width:120px; height:160px;}
+
+
+/**
+文档列表样式
+*/
+.addNewArtcl{ width:0px; height:0px; float:right; overflow:visible;}
+.addNewArtcl .borderOuter{ width:20px; height:100px; border:solid 5px #ddd;  background:#eee url(../addnew.png) center top no-repeat; padding-top:25px;   left:-30px; top:-0px; position:relative; overflow:hidden; border-radius:5px;}.addNewArtcl{ width:0px; height:0px; float:right; overflow:visible;}
+.addNewAlbum{ width:0px; height:0px; float:right; overflow:visible;}
+.addNewAlbum .borderOuter{ width:20px; height:100px; border:solid 5px #ddd;  background:#eee url(../addnew.png) center top no-repeat; text-indent:25px;   left:-10px; top:-0px; position:relative; overflow:hidden; border-radius:5px;}
+.addNewAlbum .borderOuter:hover{background:#def url(../addnew.png) center top no-repeat;  border:solid 5px #cde;}
+.artclList{float:left; width:600px;}
+/*文档分页*/
+.paginationArea{margin:0 auto; max-width:15em;}
+ 
+.txtBlogList{padding:5px; margin-top:10px; background:white; width:680px;}
+.txtBlogList .m1ln{ height:300px; overflow:hidden;}
+.ttltxtblg{  text-indent:1em;}
+
+.glryBox{padding:5px; margin-top:10px; background:white; width:680px;}
+.glryBox .folder{ width:140px; height:105px;  float:left; padding-bottom:5px; overflow:hidden; margin:  5px 10px;}
+.glryBox img{width:110px; height:75px; padding:5px; background:#ddd; float:left;}
+.glryBox .m1ln{ padding-top:5px; padding-bottom:5px; height:75px; }
+.glryBox .time{ height:15px; width:140px; float:left; padding-top:5px; text-align:center; }
+
+.recentAcvtyBox{padding:5px; margin-top:10px;  background:#fff; width:680px; float:left; overflow:hidden;}
+
+ 
+ 
+.friendL{ width:75px; float:left; overflow:hidden; height:80px;}
+.friendL .i{ width:70px; height:75px; margin-left:5px; margin-top:5px; background:white;}
+.friendL img{ border:solid 1px #ccc; background:#eee; padding:4px; width:40px; height:60px; float:left}

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="vote">
+	<typeAlias alias="VoteDetailValue" type="com.mongolia.website.model.VoteDetailValue" />
+	<typeAlias alias="QuestionValue" type="com.mongolia.website.model.QuestionValue" />
+	<typeAlias alias="VoteValue" type="com.mongolia.website.model.VoteValue" />
+	<typeAlias alias="VoteResultValue" type="com.mongolia.website.model.VoteResultValue" />
+	<typeAlias alias="VoteResultDetailValue" type="com.mongolia.website.model.VoteResultDetailValue" />
+	<insert id="addVoteDetailValue" parameterClass="VoteDetailValue">
+		insert into
+		votedetail(
+		voteid,
+		questionid,
+		questiondesc ,
+		questiontype
+		)
+		values(
+		#voteid#,
+		#questionid#,
+		#questiondesc# ,
+		#questiontype#
+		)
+	</insert>
+	<insert id="addQuestionValue" parameterClass="QuestionValue">
+		insert into
+		votequestiondetail (
+		questionid,
+		answerid,
+		answername,
+		charindex
+		)
+		values(
+		#questionid#,
+		#answerid#,
+		#answername#,
+		#charindex#
+		)
+	</insert>
+	<insert id="addVote" parameterClass="VoteValue">
+		insert into vote (
+		voteid,
+		topic,
+		createtime,
+		status,
+		userid,
+		enddate
+		)
+		values(
+		#voteid#,
+		#topic#,
+		#createtime#,
+		#status#,
+		#userid#,
+		#enddate#
+		)
+	</insert>
+	<select id="getVoteValue" parameterClass="java.util.Map"
+		resultClass="VoteValue">
+		select a.*,b.artname from vote a,user b where a.userid=b.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="voteid">
+				voteid=#voteid#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				a.status=#status#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				a.userid=#userid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<update id="updateVoteValue" parameterClass="VoteValue">
+		update vote
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="topic">
+				topic=#topic#
+			</isNotNull>
+			<isNotNull prepend="," property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				status=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="createtime">
+				createtime=#createtime#
+			</isNotNull>
+			<isNotNull prepend="," property="enddate">
+				enddate=#enddate#
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="where">
+			<isNotNull prepend="" property="voteid">
+				voteid=#voteid#
+			</isNotNull>
+		</dynamic>
+	</update>
+	<delete id="deleteVote" parameterClass="java.util.Map">
+		delete from vote where
+		voteid=#voteid#
+	</delete>
+	<select id="getVoteDetailValue" parameterClass="java.util.Map"
+		resultClass="VoteDetailValue">
+		select * from votedetail
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="voteid">
+				voteid=#voteid#
+			</isNotNull>
+			<isNotNull prepend="and" property="questionid">
+				questionid=#questionid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getVoteQuestionDetail" parameterClass="java.util.Map"
+		resultClass="QuestionValue">
+		select * from votequestiondetail
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="questionid">
+				questionid=#questionid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<insert id="addVoteResultValue" parameterClass="VoteResultValue">
+		insert into
+		voteresult (
+		voteid,
+		joinerid,
+		questionid,
+		votedate,
+		questiontype,
+		questiondesc,
+		answerid
+		)
+		values(
+		#voteid#,
+		#joinerid#,
+		#questionid#,
+		#votedate#,
+		#questiontype#,
+		#questiondesc#,
+		#answerid#
+		)
+	</insert>
+	<insert id="addVoteResultDetailValue" parameterClass="VoteResultDetailValue">
+		insert into
+		voteresultdetail (
+		joinerid,
+		questionid,
+		answerid,
+		answerdesc,
+		charindex
+		)
+		values(
+		#joinerid#,
+		#questionid#,
+		#answerid#,
+		#answerdesc#,
+		#charindex#
+		)
+	</insert>
+	<select id="getVoteResultEvery" parameterClass="java.util.Map" resultClass="VoteResultDetailValue">
+	  select count(1) as votenum,a.answerid ,a.answerdesc,a.charindex from voteresultdetail a 
+	  where a.questionid=#questionid#
+	   group by a.answerid,a.answerdesc,a.charindex
+	</select>
+	<select id="getMultiQuestionResult" parameterClass="java.util.Map" resultClass="VoteResultValue">
+	  select count(1) as votenum,a.answerid from voteresult a 
+	  where a.questionid=#questionid#
+	   group by a.answerid
+	</select>
+	
+	<select id="getVoteResult" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	  select count(1) as votenum from voteresultdetail a 
+	  where a.questionid=#questionid#
+	</select>
+	<delete id="deleteVoteDetail" parameterClass="java.util.Map">
+		delete from votedetail 
+		<dynamic prepend="where">
+		<isNotNull prepend="and" property="questionid">
+				questionid=#questionid#
+			</isNotNull>
+			<isNotNull prepend="and" property="voteid">
+				voteid=#voteid#
+			</isNotNull>
+		</dynamic>
+	</delete>
+	<delete id="deleteVoteQuestion" parameterClass="java.util.Map">
+		delete from votequestiondetail 
+		 <dynamic prepend="where">
+			<isNotNull prepend="and" property="questionid">
+				questionid=#questionid#
+			</isNotNull>
+			<isNotNull prepend="and" property="answerid">
+				answerid=#answerid#
+			</isNotNull>
+		</dynamic>
+	</delete>
+	<select id="getVoteJoinerCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	  select count(1) as votenum from ( select DISTINCT joinerid,voteid  from  voteresult) a 
+	  where a.voteid=#voteid#
+	</select>
+	<select id="getVoteResultCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	  select count(1) from voteresult  a
+	  <dynamic prepend="where" >
+	  	   <isNotNull prepend="and" property="voteid">
+			a.voteid=#voteid#
+			</isNotNull>
+			 <isNotNull prepend="and" property="questionid">
+			 a.questionid=#questionid#
+			 </isNotNull>
+	  </dynamic>
+	</select>
+	
+	<select id="pagingVoteResult" parameterClass="java.util.Map" resultClass="VoteResultValue">
+	  select a.*,(select artname from user where user.userid=a.joinerid) as artname from voteresult  a
+	  <dynamic prepend="where" >
+	  	   <isNotNull prepend="and" property="voteid">
+			a.voteid=#voteid#
+			</isNotNull>
+			 <isNotNull prepend="and" property="questionid">
+			 a.questionid=#questionid#
+			 </isNotNull>
+	  </dynamic>
+	  order by a.votedate desc limit #startindex# ,#fechcount#
+	</select>
+
+</sqlMap>

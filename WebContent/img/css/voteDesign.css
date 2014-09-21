@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+.voteList {
+	width: 880px;
+	background: #eee;
+	height: 600px;
+	float: right;
+	overflow-x: scroll;
+	white-space: normal;
+}
+.voteList td{text-indent:0; padding-top: 1em; text-indent:2em; white-space: normal; }
+
+voteList
+.voteDesc{
+	width: 150px;
+	height: 600px;
+	float: left;
+	background: #eff;
+	white-space: normal;
+}
+.voteInstTitle{
+	
+}

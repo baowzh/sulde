@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OpinionValue">
+	<typeAlias alias="OpinionValue" type="com.mongolia.website.model.OpinionValue"/>
+	<!-- 查询意见建议-->
+	<select id="getOpinions" parameterClass="com.mongolia.website.model.QueryOpinionFrom" resultClass="OpinionValue">
+		select * from opinion 
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="strdate">
+				<![CDATA[uploaddate>=#strdate#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="enddate">
+				<![CDATA[uploaddate<=#enddate#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				title=#title#
+			</isNotNull>
+			<isNotNull prepend="and" property="read">
+				read=#read#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="opinionid">
+				opinionid=#opinionid#
+			</isNotNull>
+			
+		</dynamic>
+	</select>
+	<!--保存意见建议-->
+	<insert id="addOpinion" parameterClass="OpinionValue">
+		insert into opinion(
+		 opinionid,
+		 title,
+		 content,
+		 uploaddate,
+		 readed,
+		 userid,
+		 artname
+		  )
+		 values
+		 (
+		  #opinionid#,
+		  #title#,
+		  #content#,
+		  #uploaddate#,
+		  #readed#,
+		  #userid#,
+		  #artname#
+    )
+	</insert>
+	<update id="updateOpinion" parameterClass="OpinionValue">
+			update opinion
+		<dynamic prepend="set" > 
+			<isNotNull prepend="," property="read">
+				  read=#read#
+			</isNotNull>
+		</dynamic>   
+			 where  opinionid=#opinionid#
+	</update>
+</sqlMap>

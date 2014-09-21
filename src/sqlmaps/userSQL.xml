@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TAXSURVEY_USER">
+	<typeAlias alias="User" type="com.mongolia.website.model.UserValue" />
+	<typeAlias alias="FriendValue" type="com.mongolia.website.model.FriendValue" />
+	<typeAlias alias="VisitorValue" type="com.mongolia.website.model.VisitorValue" />
+	<typeAlias alias="UserValue" type="com.mongolia.website.model.UserValue" />
+	<typeAlias alias="FriendNews" type="com.mongolia.website.model.FriendNews" />
+	<select id="getUser" parameterClass="java.util.Map" resultClass="User">
+		select
+		userid,
+		password,
+		artname,
+		firstname,
+		username,
+		bolgname,
+		home,
+		sex,
+		regdate,
+		logindate,
+		headimg,
+		userkind,
+		birthday,
+		unit,
+		( select districtname from
+		district where district.districtcode=province ) as province,
+		( select
+		districtname from district where district.districtcode=nowprovince )
+		as nowprovince,
+		phone,
+		qq,
+		email,
+		hope,
+		belief,
+		idol,
+		maxim,
+		age,
+		music,
+		book,
+		singer,
+		headimgsm,
+		stoped,
+		stopeddate
+		from
+		user
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="username">
+				username=#username#
+			</isNotNull>
+			<isNotNull prepend="and" property="district">
+				username=#district#
+			</isNotNull>
+			<isNotNull prepend="and" property="likeusername">
+			<![CDATA[instr(artname,trim(#likeusername#))>0]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="strregtime">
+			<![CDATA[regdate>=#strregtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endregtime">
+			<![CDATA[regdate<=#endregtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="userkind">
+				userkind=#userkind#
+			</isNotNull>
+		</dynamic>
+		order by regdate desc
+	</select>
+
+	<insert id="createUser" parameterClass="com.mongolia.website.model.UserValue">
+		insert into user(
+		userid,
+		password,
+		artname,
+		firstname,
+		username,
+		bolgname,
+		home,
+		sex,
+		regdate,
+		logindate,
+		headimg,
+		userkind,
+		birthday,
+		unit,
+		province,
+		nowprovince,
+		phone,
+		qq,
+		email,
+		hope,
+		belief,
+		idol,
+		maxim,
+		age,
+		headimgsm
+		)
+		values
+		(
+		#userid#,
+		#password#,
+		#artname#,
+		#firstname#,
+		#username#,
+		#bolgname#,
+		#home#,
+		#sex#,
+		#regdate#,
+		#logindate#,
+		#headimg#,
+		#userkind#,
+		#birday#,
+		#unit#,
+		#province#,
+		#nowprovince#,
+		#phone#,
+		#qq#,
+		#email#,
+		#hope#,
+		#belief#,
+		#idol#,
+		#maxim#,
+		#age#,
+		#headimgsm#
+		)
+	</insert>
+
+	<update id="updateUser" parameterClass="User">
+		update user
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="password">
+				password=#password#
+			</isNotNull>
+			<isNotNull prepend="," property="artname">
+				artname=#artname#
+			</isNotNull>
+			<isNotNull prepend="," property="firstname">
+				firstname=#firstname#
+			</isNotNull>
+			<isNotNull prepend="," property="username">
+				username=#username#
+			</isNotNull>
+			<isNotNull prepend="," property="bolgname">
+				bolgname=#bolgname#
+			</isNotNull>
+			<isNotNull prepend="," property="home">
+				home=#home#
+			</isNotNull>
+			<isNotNull prepend="," property="sex">
+				sex=#sex#
+			</isNotNull>
+			<isNotNull prepend="," property="regdate">
+				regdate=#regdate#
+			</isNotNull>
+			<isNotNull prepend="," property="logindate">
+				logindate=#logindate#
+			</isNotNull>
+			<isNotNull prepend="," property="headimg">
+				headimg=#headimg#
+			</isNotNull>
+			<isNotNull prepend="," property="userkind">
+				userkind=#userkind#
+			</isNotNull>
+			<isNotNull prepend="," property="birthday">
+				birthday=#birthday#
+			</isNotNull>
+			<isNotNull prepend="," property="unit">
+				unit=#unit#
+			</isNotNull>
+			<isNotNull prepend="," property="province">
+				province=#province#
+			</isNotNull>
+			<isNotNull prepend="," property="nowprovince">
+				nowprovince=#nowprovince#
+			</isNotNull>
+			<isNotNull prepend="," property="phone">
+				phone=#phone#
+			</isNotNull>
+			<isNotNull prepend="," property="qq">
+				qq=#qq#
+			</isNotNull>
+			<isNotNull prepend="," property="email">
+				email=#email#
+			</isNotNull>
+			<isNotNull prepend="," property="hope">
+				hope=#hope#
+			</isNotNull>
+			<isNotNull prepend="," property="belief">
+				belief=#belief#
+			</isNotNull>
+			<isNotNull prepend="," property="idol">
+				idol=#idol#
+			</isNotNull>
+			<isNotNull prepend="," property="maxim">
+				maxim=#maxim#
+			</isNotNull>
+			<isNotNull prepend="," property="headimgsm">
+				headimgsm=#headimgsm#
+			</isNotNull>
+			<isNotNull prepend="," property="music">
+				music=#music#
+			</isNotNull>
+			<isNotNull prepend="," property="book">
+				book=#book#
+			</isNotNull>
+			<isNotNull prepend="," property="singer">
+				singer=#singer#
+			</isNotNull>
+
+		</dynamic>
+		where userid=#userid#
+
+	</update>
+	<update id="stopUserAndReuse" parameterClass="java.util.Map">
+		update user
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="stoped">
+				stoped=#stoped#
+			</isNotNull>
+			<isNotNull prepend="," property="stopeddate">
+				stopeddate=#stopeddate#
+			</isNotNull>
+
+		</dynamic>
+		where userid=#userid#
+	</update>
+
+	<delete id="deleteUser" parameterClass="java.util.Map">
+		delete from user where
+		userid in (#userid#)
+	</delete>
+	<select id="getFriendList" parameterClass="java.util.Map"
+		resultClass="FriendValue">
+		select friend.* from friend ,user where friend.friendid=user.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				friend.userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="friendname">
+				friend.friendname=#friendname#
+			</isNotNull>
+			<isNotNull prepend="and" property="friendid">
+				friend.friendid=#friendid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getVisitorList" parameterClass="java.util.Map"
+		resultClass="VisitorValue">
+		select DISTINCT visitorid,visitorname,visitorimg,visitorimgurl from
+		visitor,user where visitor.visitorid=user.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				visitor.userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="visitorid">
+				visitor.visitorid=#visitorid#
+			</isNotNull>
+			<isNotNull prepend="and" property="visitorname">
+				visitor.visitorname=#visitorname#
+			</isNotNull>
+			<isNotNull prepend="and" property="visitortype">
+				visitor.visitortype=#visitortype#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getTotalVisitorCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from visitor
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="getDateVisitCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from visitor
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="visitdate">
+				visitdate=#visitdate#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<insert id="addVisitorValue" parameterClass="com.mongolia.website.model.VisitorValue">
+		insert into visitor(
+		visitorid,
+		visitorname,
+		visitdate,
+		visitorimg,
+		visitorimgurl,
+		userid,
+		visittype,
+		visitobjid,
+		visitortype
+		)
+		values
+		(
+		#visitorid#,
+		#visitorname#,
+		#visitdate#,
+		#visitorimg#,
+		#visitorimgurl#,
+		#userid#,
+		#visittype#,
+		#visitobjid#,
+		#visitortype#
+		)
+	</insert>
+
+	<insert id="addFriendValue" parameterClass="com.mongolia.website.model.FriendValue">
+		insert into friend(
+		friendid,
+		friendname,
+		friendimg,
+		friendimgurl,
+		userid
+		)
+		values
+		(
+		#friendid#,
+		#friendname#,
+		#friendimg#,
+		#friendimgurl#,
+		#userid#
+		)
+	</insert>
+	<select id="getTopUsers" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select DISTINCT a.*,b.retnum  from user a ,(select document.userid,count(1) as
+		retnum from document where <![CDATA[CRTIME>=#startDate#]]>
+		and
+	<![CDATA[ CRTIME<=#endDate#]]>
+		GROUP BY userid) b where a.userid=b.userid order by retnum desc
+	</select>
+	<select id="getRecentRegistUsers" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select * from user where  <![CDATA[  userkind<>2 ]]>
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="startDate">
+			<![CDATA[regdate>=#startDate#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+			<![CDATA[regdate<=#endDate#]]>
+			</isNotNull>
+			</dynamic>
+			 order by regdate desc limit #startindex#, #fechcount#
+	</select>
+	<!--博主登录以后能看到所有好友发表的文章列表 -->
+	<select id="getFriendNews" parameterClass="java.util.Map"
+		resultClass="FriendNews">
+		select
+		b.*,c.DOCTITLE,c.DOCTYPE,c.DOCRELTIME,c.DOCAUTHOR,c.docid,c.DOCABSTRACT
+		from friend a ,user b,document c
+		where a.friendid=b.userid and a.friendid=c.userid
+		and a.userid=#userid#
+		and <![CDATA[c.DOCRELTIME>=#queryDate#]]>
+	</select>
+	<!--当前博主的动态 发布、 分享、收藏、评论 -->
+	<select id="getBlogUserNews" parameterClass="java.util.Map"
+		resultClass="FriendNews">
+		select h.* from (
+		select a.*,c.DOCTITLE,c.DOCTYPE,b.sharedate
+		dydate,c.DOCAUTHOR,c.docid,c.DOCABSTRACT from user a,sharedresource
+		b,document c where b.resourceid=c.DOCID
+		and a.userid=b.userid and b.userid=#userid# and <![CDATA[b.sharedate>=#queryDate#]]>
+		union ALL
+		select a.*,c.DOCTITLE,c.DOCTYPE,b.markeddate
+		dydate,c.DOCAUTHOR,c.docid,c.DOCABSTRACT from user a,markedresource
+		b,document c where b.resourceid=c.DOCID
+		and a.userid=b.userid and b.userid=#userid# and <![CDATA[b.markeddate>=#queryDate#]]>
+		) h order by dydate
+	</select>
+	<update id="modifyUserPass" parameterClass="java.util.Map">
+		update user set
+		password=#pass# where userid=#userid#
+	</update>
+	<update id="delfriend" parameterClass="java.util.Map">
+		delete from friend where
+		userid=#userid# and friendid=#friendid#
+	</update>
+	<select id="pagingQueryFriends" parameterClass="java.util.Map"
+		resultClass="FriendValue">
+		select friend.* from friend ,user where friend.friendid=user.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				friend.userid=#userid#
+			</isNotNull>
+			order by friendid LIMIT #startindex#, #fetchcount#
+		</dynamic>
+	</select>
+	<select id="QueryFriendCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from friend , user where friend.friendid=user.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				friend.userid=#userid#
+			</isNotNull>
+
+		</dynamic>
+	</select>
+	<select id="paingQueryUser" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select
+		userid,
+		password,
+		artname,
+		firstname,
+		username,
+		bolgname,
+		home,
+		sex,
+		regdate,
+		logindate,
+		headimg,
+		userkind,
+		birthday,
+		unit,
+		( select districtname from
+		district where district.districtcode=province ) as province,
+		( select
+		districtname from district where district.districtcode=nowprovince )
+		as nowprovince,
+		phone,
+		qq,
+		email,
+		hope,
+		belief,
+		idol,
+		maxim,
+		age,
+		music,
+		book,
+		singer,
+		headimgsm,
+		stoped,
+		stopeddate
+		from
+		user
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="username">
+				username=#username#
+			</isNotNull>
+			<isNotNull prepend="and" property="district">
+				username=#district#
+			</isNotNull>
+			<isNotNull prepend="and" property="likeusername">
+			<![CDATA[( instr(artname,trim(#likeusername#))>0 or  artname like #likeusername#||'%'   ) ]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="strregtime">
+			<![CDATA[regdate>=#strregtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endregtime">
+			<![CDATA[regdate<=#endregtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="userkind">
+				userkind=#userkind#
+			</isNotNull>
+		</dynamic>
+		order by  regdate desc  LIMIT #startindex#, #fetchcount#
+	</select>
+     <select id="paingUserCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select
+		count(1)
+		from
+		user
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="username">
+				username=#username#
+			</isNotNull>
+			<isNotNull prepend="and" property="district">
+				username=#district#
+			</isNotNull>
+			<isNotNull prepend="and" property="likeusername">
+			<![CDATA[instr(artname,trim(#likeusername#))>0]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="strregtime">
+			<![CDATA[regdate>=#strregtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endregtime">
+			<![CDATA[regdate<=#endregtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="userkind">
+				userkind=#userkind#
+			</isNotNull>
+		</dynamic>
+		order by  regdate desc  
+	</select>
+
+</sqlMap>

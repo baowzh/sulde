@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="program">
+	<typeAlias alias="Webtemplate" type="com.mongolia.website.model.Webtemplate"/>
+	<typeAlias alias="TemplateValue" type="com.mongolia.website.model.TemplateValue"/>
+	<select id="getwebtemplate" parameterClass="java.util.Map"
+		resultClass="Webtemplate">
+	<![CDATA[
+		select tempname as templatename,tempfile as templatefile from template where tempname=#name#
+	]]>
+	</select>
+	<select id="gettemplatevalues" parameterClass="java.util.Map"
+		resultClass="TemplateValue">		
+	    select  tempid,
+	 tempname,
+	 tempdesc,
+	 tempext,
+	 temptype,
+	 case  WHEN TEMPTYPE=1 then '列表模板'WHEN TEMPTYPE=2 then  '概览模板' WHEN TEMPTYPE=3 then '嵌套模板' end   temptypestr
+	 from template 
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="tempid">
+				tempid=#tempid#
+			</isNotNull>
+			<isNotNull prepend="and" property="tempname">
+				tempname=#tempname#
+			</isNotNull>
+			<isNotNull prepend="and" property="temptype">
+				temptype=#temptype#
+			</isNotNull>
+		</dynamic>		
+	</select>
+	<insert id="addTemplate" parameterClass="TemplateValue">
+		insert into template( tempid,
+    tempname   ,
+    tempdesc   ,
+    tempext   ,
+    tempfile  ,
+    temptype  ) values(#tempid#,
+    #tempname#   ,
+    #tempdesc#   ,
+    #tempext#   ,
+    #tempfile#  ,
+    #temptype# 
+    )
+	</insert>
+	<delete id="deleteTemplateValue" parameterClass="java.util.Map">
+		delete from  template where  tempid=#id#
+	</delete>
+	<select id="checktemplateisused"  parameterClass="java.util.Map"  resultClass="java.lang.Integer">
+		 select count(1) from templateemploy where  templateid=#id#
+	</select>
+	<insert id="addwebpage" parameterClass="com.mongolia.website.model.WebPageValue">
+		insert into page( pageid,
+    pagename   ,
+    showtemplateid   ,
+    comment   ,
+    parentpageid    ) values(#pageid#,
+    #pagename#   ,
+    #showtemplateid#   ,
+    #comment#   ,
+    #parentpageid#  
+    )
+	</insert>
+</sqlMap>

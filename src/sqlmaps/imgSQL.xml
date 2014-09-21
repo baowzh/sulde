@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="img">
+	<typeAlias alias="ImgValue" type="com.mongolia.website.model.ImgValue"/>
+	<typeAlias alias="ImgGrpupValue" type="com.mongolia.website.model.ImgGrpupValue"/>	
+	<typeAlias alias="ToolsbarValue" type="com.mongolia.website.model.ToolsbarValue"/>	
+	<insert id="addImgValue" parameterClass="ImgValue">
+        insert into img (
+          imgid,
+          imgname,
+          imgurl ,
+          imgicon ,
+          imgdesc ,
+          imggroupid ,
+          userid,
+          imgcontent,
+          width,
+          height 
+       )  values(
+          #imgid#,
+          #imgname#,
+          #imgurl# ,
+          #imgicon# ,
+          #imgdesc# ,
+          #imggroupid# ,
+          #userid#,
+          #imgcontent#,
+          #width#,
+          #height#
+ )
+	</insert>
+	<select id="getImgList" parameterClass="java.util.Map"
+		resultClass="ImgValue">
+      select img.*, b.sharecount,b.markcount,b.commcount,b.readcount,b.crtime from img,document b where img.imgid=b.docid
+		<dynamic prepend="and" >
+			<isNotNull prepend="and" property="imgid">
+				imgid=#imgid#
+			</isNotNull>
+			<isNotNull prepend="and" property="imggroupid">
+				imggroupid=#imggroupid#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				img.userid=#userid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<insert id="addImgGrpupValue" parameterClass="ImgGrpupValue">
+        insert into imggroup (
+           imggroupid,
+           imggroupname,
+           imggroupkind ,
+           userid,
+           faceimg,
+           createdtime
+         )  values( #imggroupid#,
+           #imggroupname#,
+           #imggroupkind# ,
+           #userid# ,
+           #faceimg#,
+           #createdtime#
+         )
+	</insert>
+	<select id="getImgGrpupList" parameterClass="java.util.Map"
+		resultClass="ImgGrpupValue">
+       select * from imggroup
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="imggroupid">
+				imggroupid=#imggroupid#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+		</dynamic>
+		order by createdtime desc
+	</select>
+	<delete id="deleteimg" parameterClass="java.util.Map">
+		delete from img 
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="imgid">
+				imgid=#imgid#
+			</isNotNull>
+			<isNotNull prepend="and" property="imggroupid">
+				imggroupid=#imggroupid#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+		</dynamic>
+	</delete>
+	<delete id="deleteimggroup" parameterClass="java.util.Map">
+		delete from imggroup 
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="imggroupid">
+				imggroupid=#imggroupid#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+		</dynamic>
+	</delete>
+	<select id="getPageToolsBar" parameterClass="java.util.Map"
+		resultClass="ToolsbarValue">
+       select * from toolsbar
+		<dynamic prepend="where" >
+			<isNotNull prepend="and" property="url">
+				pageurl=#url#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<update id="updateimggroup" parameterClass="ImgGrpupValue">
+      update imggroup 
+		<dynamic prepend="set" >
+			<isNotNull prepend="," property="imggroupname">
+		imggroupname=#imggroupname#
+			</isNotNull>
+			<isNotNull prepend="," property="imggroupkind">
+		imggroupkind=#imggroupkind#
+			</isNotNull>
+			<isNotNull prepend="," property="faceimg">
+		faceimg=#faceimg#
+			</isNotNull>
+			
+		</dynamic>
+    where imggroupid=#imggroupid#
+	</update>
+</sqlMap>

@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+.loginSheet {
+	border-radius: 5px;
+	margin: 5px;
+	background: #1b6fbd;
+	height: 500px;
+	border: solid 1px #1b6fbd;
+}
+
+.border {
+	width: 285px;
+	height: 360px;
+	border-radius: 5px;
+	padding-left: 15px;
+	margin: 60px auto;
+	background: url(../left-arrow.png) no-repeat 1px 40px;
+}
+
+.loginWindow {
+	width: 270px;
+	height: 360px;
+	border-radius: 10px;
+	background: #f0eff1;
+	border: solid #f0eff1 1px;
+}
+
+.iconContainer {
+	width: 330px;
+	height: 400px;
+	margin-top: 60px;
+	float: left;
+	background: url(../avatar-sam09-8-251.jpg) no-repeat right top;
+}
+
+.content {
+	width: 120px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	height: 300px;
+}
+
+.mglForm {
+	
+}
+
+.mglForm .label {
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	writing-mode: tb-lr;
+	line-height: 20px;
+	word-break: keep-all;
+	text-align: left;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	width: 30px;
+	text-align: left;
+	float: left;
+	height: 7em;
+}
+
+.mglForm .inputHolder {
+	width: 30px;
+	height: 11em;
+	overflow: hidden;
+	float: left;
+}
+
+.inputHolder input {
+	-webkit-width: 8em;
+	-webkit-transform: rotate(90deg);
+	-webkit-transform-origin: 10px 10px;
+	writing-mode: tb-lr;
+	font-family: "Menksoft  ";
+}
