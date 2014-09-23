@@ -83,7 +83,6 @@ public class BlogManagerAction {
 	private UserManager userManager;
 	@Autowired
 	private WebSiteVisitorManager webSiteVisitorManager;
-
 	/**
 	 * 进入个人主页
 	 * 
@@ -421,7 +420,7 @@ public class BlogManagerAction {
 			agentkind = 0;
 		}
 		map.put("agentkind", agentkind);
-		return new ModelAndView("userspace/updDoc", map);
+		return new ModelAndView("userspace/createDoc", map);
 	}
 
 	/**
@@ -2025,4 +2024,17 @@ public class BlogManagerAction {
 		//
 
 	}
+	@RequestMapping("/gzipdoccontent.do")
+	public ModelAndView gzipdoccontent(HttpServletRequest request,
+			ModelMap map) throws Exception {
+		try {
+			this.webResourceManager.gzipdoccontent();
+			map.put("success", 1);
+		} catch (Exception ex) {
+			map.put("success", 0);
+			map.put("mess", ex.getMessage());
+		}
+		return new ModelAndView("jsonView", map);
+	}
+	
 }
