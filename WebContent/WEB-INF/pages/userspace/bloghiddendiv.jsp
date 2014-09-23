@@ -63,17 +63,22 @@
 		onclick="javascript:switchdiv('receivediv','senddiv');">
 		</div>
 	<!--  -->
-	<div class="  lcell" style="width: 800px;height:450px;" id="receivediv">
-		<iframe width="100%" height="450px;" frameBorder="0" frameSpacing="0"
-			scrolling="auto" src="getMessage.do?type=1"></iframe>
+	<div class="  lcell" style="width: 800px; height: 450px;"
+		id="receivediv">
+		<c:if test="${notlogin==0}">
+			<iframe width="100%" height="450px;" frameBorder="0" frameSpacing="0"
+				scrolling="auto" src="getMessage.do?type=1"></iframe>
+		</c:if>
 	</div>
 	<div class="mnlist"
 		onclick="javascript:switchdiv('senddiv','receivediv');">
 		 </div>
-	<div class="  lcell" style="width: 800px;height:450px; display: none;" id="senddiv">
-
-		<iframe width="100%" height="450px;" frameBorder="0" frameSpacing="0"
-			scrolling="auto" src="getMessage.do?type=2"></iframe>
+	<div class="  lcell"
+		style="width: 800px; height: 450px; display: none;" id="senddiv">
+		<c:if test="${notlogin==0}">
+			<iframe width="100%" height="450px;" frameBorder="0" frameSpacing="0"
+				scrolling="auto" src="getMessage.do?type=2"></iframe>
+		</c:if>
 
 	</div>
 </div>
