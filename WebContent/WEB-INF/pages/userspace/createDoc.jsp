@@ -166,7 +166,7 @@
 			<br>
 			<div class="mnlist"
 				style="width: 20px; height: 200px; text-align: center;">
-				<a href="javascript:checkAndSubmit();"></a>&nbsp;&nbsp; <a
+				<a href="javascript:submit();"></a>&nbsp;&nbsp; <a
 					href="javascript:openemfacewindow">&nbsp;&nbsp; </a>
 
 			</div>
@@ -211,6 +211,15 @@
 		// 			$('#addnews').action = "adddoc.do";
 		// 		}
 		// 		document.getElementById("addnews").submit();
+	}
+	function submit(){
+		
+		if ($('#opertype').val() == 2) {
+					$('#addnews')[0].action = "updatedoc.do";
+				} else {
+					$('#addnews')[0].action = "adddoc.do";
+				}
+				document.getElementById("addnews").submit();
 	}
 </SCRIPT>
 </html>
