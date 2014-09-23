@@ -766,15 +766,21 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 	}
 
 	@Override
-	public void setDocCommentCount(String docid,String add,String sub) throws Exception {
+	public void setDocCommentCount(String docid, String add, String sub)
+			throws Exception {
 		// TODO Auto-generated method stub
-		Map<String,Object> params=new HashMap<String,Object>();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("docid", docid);
 		params.put("add", add);
 		params.put("sub", sub);
 		this.getSqlMapClientTemplate().update("setcommentcount", params);
-		
+
 	}
-	
+
+	@Override
+	public void updimg(ImgValue imgValue) throws Exception {
+		// TODO Auto-generated method stub
+		this.getSqlMapClientTemplate().update("updateimgcontent", imgValue);
+	}
 
 }

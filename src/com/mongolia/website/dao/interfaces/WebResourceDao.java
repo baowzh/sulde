@@ -623,6 +623,14 @@ public interface WebResourceDao extends BaseDao {
 	public List<ImgValue> getSharedImgs(Map<String, Object> params)
 			throws Exception;
 
-	public void setDocCommentCount(String docid,String add,String sub) throws Exception;
+	public void setDocCommentCount(String docid, String add, String sub)
+			throws Exception;
+
+	/**
+	 * 
+	 * @param imgValue
+	 * @throws Exception
+	 */
+	public void updimg(ImgValue imgValue) throws Exception;
 
 }
