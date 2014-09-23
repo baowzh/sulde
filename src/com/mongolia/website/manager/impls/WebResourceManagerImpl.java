@@ -196,7 +196,15 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	public List getDocList(Map<String, Object> params) throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
-			return webResourceDao.getDocList(params);
+			List<DocumentValue> docs = webResourceDao.getDocList(params);
+			//
+			for (DocumentValue documentValue : docs) {
+				byte[] newdoccontent = this.ungzipdoccontent(documentValue
+						.getDoccontent());
+				documentValue.setDoccontent(newdoccontent);
+			}
+			return docs;
+			
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
 		}
