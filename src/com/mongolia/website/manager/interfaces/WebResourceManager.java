@@ -100,7 +100,8 @@ public interface WebResourceManager {
 	 * @param groupid
 	 * @throws ManagerException
 	 */
-	public void doDeleteImgGroup(String groupid,String userid) throws ManagerException;
+	public void doDeleteImgGroup(String groupid, String userid)
+			throws ManagerException;
 
 	/**
 	 * 添加照片
@@ -158,7 +159,8 @@ public interface WebResourceManager {
 	 * @throws ManagerException
 	 */
 	public Map<String, Object> getBlogInfo(UserValue blogUser,
-			UserValue sessionUser, Integer self,String docchannel) throws ManagerException;
+			UserValue sessionUser, Integer self, String docchannel)
+			throws ManagerException;
 
 	/**
 	 * 
@@ -377,13 +379,15 @@ public interface WebResourceManager {
 	 */
 	public List<VoteResultDetailValue> calVoteResult(String voteid,
 			String questionid) throws Exception;
-    /**
-     * 
-     * @param voteid
-     * @param userid
-     * @throws Exception
-     */
+
+	/**
+	 * 
+	 * @param voteid
+	 * @param userid
+	 * @throws Exception
+	 */
 	public void doDelVote(String voteid, String userid) throws Exception;
+
 	/**
 	 * 
 	 * @param voteid
@@ -392,20 +396,26 @@ public interface WebResourceManager {
 	 */
 
 	public Map<String, Object> checkVoteStatus(String voteid) throws Exception;
+
 	/**
 	 * 删除问卷调调查中的一个问题
+	 * 
 	 * @param voteid
 	 * @param questionid
 	 * @throws Exception
 	 */
-	public void doDelVoteQuestion(String voteid, String questionid) throws Exception;
+	public void doDelVoteQuestion(String voteid, String questionid)
+			throws Exception;
+
 	/**
 	 * 
 	 * @param questionid
 	 * @param answerid
 	 * @throws Exception
 	 */
-	public void doDelVoteQuestionSel(String questionid, String answerid) throws Exception;
+	public void doDelVoteQuestionSel(String questionid, String answerid)
+			throws Exception;
+
 	/**
 	 * 
 	 * @param voteid
@@ -414,14 +424,22 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public PaingVoteResult pagingqueryVoteResult(String voteid,String questionid,Integer pageindex)throws Exception;
+	public PaingVoteResult pagingqueryVoteResult(String voteid,
+			String questionid, Integer pageindex) throws Exception;
+
 	/**
 	 * 
 	 * @param params
 	 * @return
 	 * @throws Exception
 	 */
-	public PaingModel pagingQuerySharedDocs(Map<String,Object> params,int doctype,int pageindex,int pagesize)throws Exception;
-	
+	public PaingModel pagingQuerySharedDocs(Map<String, Object> params,
+			int doctype, int pageindex, int pagesize) throws Exception;
+
+	/**
+	 * 
+	 * @throws Exception
+	 */
+	public void gzipdoccontent() throws Exception;
 
 }

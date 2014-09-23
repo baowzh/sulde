@@ -1,5 +1,8 @@
 package com.mongolia.website.manager.impls;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,6 +86,10 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			documentValue.setDocsource(new Double(1));
 			documentValue.setDoctitle(imgValue.getImgdesc());
 			this.webResourceDao.adddoc(documentValue);
+			//
+			byte[] imgcontent = imgValue.getImgcontent();
+			byte[] newcontent = this.gzipdoccontent(imgcontent);
+			imgValue.setImgcontent(newcontent);
 			webResourceDao.addImg(imgValue);
 			// 如果是封面修改相册封面
 			if (imgValue.getCover() == 1) {
@@ -90,7 +99,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 						.getImgGroupList(queryparams);
 				if (groups != null && !groups.isEmpty()) {
 					ImgGrpupValue imgGrpupValue = groups.get(0);
-					imgGrpupValue.setFaceimg(imgValue.getImgcontent());
+					imgGrpupValue.setFaceimg(imgcontent);
 					this.webResourceDao.updIImgGroup(imgGrpupValue);
 				}
 			}
@@ -121,6 +130,11 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		List<ImgValue> returnList = new ArrayList<ImgValue>();
 		try {
 			returnList = webResourceDao.getImgList(params);
+			for (ImgValue imgValue : returnList) {
+				byte[] imgcontent = imgValue.getImgcontent();
+				byte newcontent[] = this.ungzipdoccontent(imgcontent);
+				imgValue.setImgcontent(newcontent);
+			}
 			return returnList;
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
@@ -131,6 +145,12 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	public void doAdddoc(DocumentValue docValue) throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
+			//
+			byte[] content = docValue.getDoccontent();
+			if (content != null) {
+				byte[] newcontent = gzipdoccontent(content);
+				docValue.setDoccontent(newcontent);
+			}
 			webResourceDao.adddoc(docValue);
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
@@ -220,6 +240,9 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
+			byte[] imgcontent = imgGrpupValue.getFaceimg();
+			//byte[] newcontent = this.gzipdoccontent(imgcontent);
+			imgGrpupValue.setFaceimg(imgcontent);
 			this.webResourceDao.updIImgGroup(imgGrpupValue);
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
@@ -336,10 +359,10 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					.getUserid());
 			map.put("messageCount", messageCount);
 			Date queryDate1 = new Date();
-			Calendar calendar=java.util.Calendar.getInstance();
+			Calendar calendar = java.util.Calendar.getInstance();
 			calendar.setTime(new Date());
-			calendar.add(Calendar.DAY_OF_YEAR, 0-10);
-			queryDate1=calendar.getTime();
+			calendar.add(Calendar.DAY_OF_YEAR, 0 - 10);
+			queryDate1 = calendar.getTime();
 			map.put("blogNews", this.webResourceDao.getBlogNews(
 					blogUser.getUserid(), queryDate1));
 			// 获取当前博主分享的作品
@@ -379,8 +402,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			} else {
 				Date queryDate = new Date();
 				calendar.setTime(new Date());
-				calendar.add(Calendar.DAY_OF_YEAR, 0-10);
-				queryDate=calendar.getTime();
+				calendar.add(Calendar.DAY_OF_YEAR, 0 - 10);
+				queryDate = calendar.getTime();
 				map.put("blogNews", this.webResourceDao.getFriendNews(
 						blogUser.getUserid(), queryDate));
 			}
@@ -411,8 +434,14 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				throw new ManagerException("");
 			} else {
 				DocumentValue documentValue = documentvalues.get(0);
-				// documentValue.setHtmlstr(new String(documentValue
-				// .getDoccontent()));
+				//
+				if (documentValue.getDoccontent() != null) {
+					byte newcontent[] = ungzipdoccontent(documentValue
+							.getDoccontent());
+					documentValue.setDoccontent(newcontent);
+				}
+
+				//
 				if (documentValue.getDoctype().intValue() == StaticConstants.RESOURCE_TYPE_DOC) {
 					String docContent = new String(
 							documentValue.getDoccontent());
@@ -433,8 +462,6 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					docContent = bufferi.toString();
 					documentValue.setHtmlstr(docContent);
 				}
-
-				//
 				// 添加读者次数
 				VisitorValue visitorValue = new VisitorValue();
 				visitorValue.setVisitobjid(docid);
@@ -726,6 +753,11 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	public void doUpdDoc(DocumentValue docValue) throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
+			byte[] content = docValue.getDoccontent();
+			if (content != null) {
+				byte[] newcontent = gzipdoccontent(content);
+				docValue.setDoccontent(newcontent);
+			}
 			this.webResourceDao.upddoc(docValue);
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
@@ -1282,6 +1314,86 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			paingModel.setPreviousindex(1);
 		}
 		return paingModel;
+	}
+
+	@Override
+	public void gzipdoccontent() throws Exception {
+		// TODO Auto-generated method stub
+		List<ImgValue> docs = this.webResourceDao
+				.getImgList(new HashMap<String, Object>());
+		for (ImgValue documentValue : docs) {
+			byte[] content = documentValue.getImgcontent();
+			if (content != null) {
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				GZIPOutputStream gzip = null;
+				try {
+					gzip = new GZIPOutputStream(out);
+					gzip.write(content);
+					gzip.finish();
+					gzip.close();
+					byte[] newcontent = out.toByteArray();
+					out.size();
+					documentValue.setImgcontent(newcontent);
+					out.close();
+					this.webResourceDao.updimg(documentValue);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param contentn
+	 * @return
+	 */
+	private byte[] gzipdoccontent(byte[] contentn) {
+		try {
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			GZIPOutputStream gzip = new GZIPOutputStream(out);
+			gzip.write(contentn);
+			gzip.finish();
+			gzip.close();
+			byte[] newcontent = out.toByteArray();
+			out.size();
+			out.close();
+			return newcontent;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param contentn
+	 * @return
+	 */
+	private byte[] ungzipdoccontent(byte[] contentn) {
+		try {
+			//
+			ByteArrayInputStream in = new ByteArrayInputStream(contentn);
+			GZIPInputStream ginzip = new GZIPInputStream(in);
+			byte[] buffer = new byte[1024];
+			int offset = -1;
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			while ((offset = ginzip.read(buffer)) != -1) {
+				out.write(buffer, 0, offset);
+			}
+			ginzip.close();
+			out.flush();
+			byte newcontent[] = out.toByteArray();
+			out.close();
+			in.close();
+			return newcontent;
+			//
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
 }
