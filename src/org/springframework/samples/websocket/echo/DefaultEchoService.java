@@ -25,7 +25,8 @@ public class DefaultEchoService implements EchoService {
 
 	@Override
 	public String getMessage(String message) {
-		return String.format(this.echoFormat, message);
+		//return String.format(this.echoFormat, message);
+		return message;
 	}
 
 }
