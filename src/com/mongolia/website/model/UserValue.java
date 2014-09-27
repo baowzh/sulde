@@ -59,6 +59,13 @@ public class UserValue implements UserDetails {
 	private byte headimgsm[];
 	private Integer stoped;
 	private Date stopeddate;
+	private String districtcode;
+	private String parentcode;
+	private String parentcode1;
+	private String hsien;
+	private String nowhsien;
+	private String profession;
+	private Integer blogclass;
 
 	public String getLastip() {
 		return lastip;
@@ -487,5 +494,60 @@ public class UserValue implements UserDetails {
 		this.weeke = weeke;
 	}
 
-	
+	public String getDistrictcode() {
+		return districtcode;
+	}
+
+	public void setDistrictcode(String districtcode) {
+		this.districtcode = districtcode;
+	}
+
+	public String getParentcode() {
+		return parentcode;
+	}
+
+	public void setParentcode(String parentcode) {
+		this.parentcode = parentcode;
+	}
+
+	public String getParentcode1() {
+		return parentcode1;
+	}
+
+	public void setParentcode1(String parentcode1) {
+		this.parentcode1 = parentcode1;
+	}
+
+	public String getHsien() {
+		return hsien;
+	}
+
+	public void setHsien(String hsien) {
+		this.hsien = hsien;
+	}
+
+	public String getNowhsien() {
+		return nowhsien;
+	}
+
+	public void setNowhsien(String nowhsien) {
+		this.nowhsien = nowhsien;
+	}
+
+	public String getProfession() {
+		return profession;
+	}
+
+	public void setProfession(String profession) {
+		this.profession = profession;
+	}
+
+	public Integer getBlogclass() {
+		return blogclass;
+	}
+
+	public void setBlogclass(Integer blogclass) {
+		this.blogclass = blogclass;
+	}
+
 }

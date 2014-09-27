@@ -27,6 +27,7 @@ import com.mongolia.website.controler.ckeditor.SamplePostData;
 import com.mongolia.website.controler.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
+import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
 import com.mongolia.website.model.MenuValue;
 import com.mongolia.website.model.OpinionValue;
 import com.mongolia.website.model.PagingIndex;
@@ -37,6 +38,7 @@ import com.mongolia.website.model.QueryOpinionFrom;
 import com.mongolia.website.model.QueryUserForm;
 import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
+import com.mongolia.website.util.StaticConstants;
 
 /**
  * 网站管理
@@ -49,6 +51,8 @@ public class WebSiteManagerAction implements PaingActionIA {
 	private WebSiteManager webSiteManager;
 	@Autowired
 	private UserManager userManager;
+	@Autowired
+	private WebSiteVisitorManager webSiteVisitorManager;
 
 	/**
 	 * 打开后台管理功能
@@ -206,6 +210,7 @@ public class WebSiteManagerAction implements PaingActionIA {
 			Integer startindex = ((queryDocForm.getPageindex() - 1) * 30);
 			queryDocParams.put("displaydoccount", 30);
 			queryDocParams.put("startindex", startindex);
+			queryDocParams.put("doctype", StaticConstants.DOCTYPE_DOC);
 			Map<String, Object> result = this.webSiteManager
 					.getDocuments(queryDocParams);
 			map.put("docs", result.get("docs"));
@@ -601,6 +606,84 @@ public class WebSiteManagerAction implements PaingActionIA {
 	@RequestMapping("/addadvert.do")
 	public ModelAndView addadvert(HttpServletRequest request, ModelMap map) {
 		return new ModelAndView("sitemanager/adverts", map);
+	}
+
+	/**
+	 * 获取图片列表
+	 * 
+	 * @param request
+	 * @param response
+	 * @param map
+	 * @param imgValue
+	 * @return
+	 */
+	@RequestMapping("/pagingimglist.do")
+	public ModelAndView pagingImgList(HttpServletRequest request, ModelMap map) {
+		try {
+			String pageindex = request.getParameter("pageindex");
+			PaingModel paingModel = new PaingModel();
+			paingModel.setDoctype(StaticConstants.DOCTYPE_IMG);
+			if (pageindex == null) {
+				paingModel.setPageindex(1);
+				pageindex = "1";
+			} else {
+				paingModel.setPageindex(Integer.parseInt(pageindex));
+			}
+			paingModel.setStartrow((paingModel.getPageindex() - 1) * 24);
+			paingModel.setEndrow(paingModel.getPagesize());
+			paingModel.setPagesize(24);
+			paingModel.setDocstatus(StaticConstants.DOCSTATUS1);
+			PaingModel pageModel = webSiteVisitorManager
+					.pagingquerydoc(paingModel);
+			map.put("imgList", pageModel.getDocList());
+			if (pageModel.getDocList().isEmpty()) {
+				map.put("isempty", 1);
+			} else {
+				map.put("isempty", 0);
+			}
+			String idAndIndexrel = "";
+			for (int i = 0; i < pageModel.getDocList().size(); i++) {
+				idAndIndexrel = idAndIndexrel + (i + 1) + ","
+						+ pageModel.getDocList().get(i).getDocid() + "#";
+			}
+			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
+			for (int i = 0; i < paingModel.getPagecount(); i++) {
+				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
+				pagingIndex.setPageindex(i + 1);
+				if (Integer.parseInt(pageindex) == i + 1) {
+					pagingIndex.setCurrent(1);
+				}
+				if (i == 0) {
+					indexs.add(pagingIndex);
+					pagingIndex.setDoc(0);
+				} else if (i == paingModel.getPagecount() - 1) {
+					indexs.add(pagingIndex);
+					pagingIndex.setDoc(0);
+				} else if (i + 1 == paingModel.getPageindex()) {
+					indexs.add(pagingIndex);
+					pagingIndex.setCurrent(1);
+				} else if (i == paingModel.getPageindex()) {
+					indexs.add(pagingIndex);
+					if (i + 2 != paingModel.getPagecount() && i != 1) {
+						pagingIndex.setDoc(1);
+						pagingIndex.setFront(0);
+					}
+				} else if (i == paingModel.getPageindex() - 2) {
+					indexs.add(pagingIndex);
+					if (i != 1 && i + 1 != paingModel.getPagecount()
+							&& i + 1 != paingModel.getPageindex()) {
+						pagingIndex.setDoc(1);
+						pagingIndex.setFront(1);
+					}
+				}
+			}
+			map.put("pagingindexs", indexs);
+			map.put("imgcount", pageModel.getRowcount());
+			map.put("idAndIndexrel", idAndIndexrel);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ModelAndView("sitemanager/checkphoto", map);
 	}
 
 }

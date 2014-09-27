@@ -14,6 +14,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mongolia.website.manager.interfaces.UserManager;
+import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.ImgeUtil;
@@ -259,10 +262,51 @@ public class UserMangerAction {
 			map.put("self", "0");
 		}
 		List<UserValue> users = this.userManager.getUsers(userid, null);
-		if (users != null && !users.isEmpty()) {
-			map.put("userinfo", users.get(0));
-			request.getSession().setAttribute("user", users.get(0));// 在线session
+		try {
+			List<DistrictValue> districts = this.userManager.getDistrictValues(
+					null, null, "top");
+			map.put("districts", districts);
+			// 获取地区信息
+			if (users != null && !users.isEmpty()) {
+				map.put("userinfo", users.get(0));
+				List<DistrictValue> districts1 = this.userManager
+						.getDistrictValues(null, null, null);
+				setUserDistrictInfo(users.get(0), districts1);
+				DistrictValue nullDistrictValue = new DistrictValue();
+				nullDistrictValue.setDistrictcode("99");
+				nullDistrictValue.setDistrictname("");
+				if (users.get(0).getProvince() != null) {
+					List<DistrictValue> hsiens = this.userManager
+							.getDistrictValues(null, userValue.getProvince(),
+									null);
+					hsiens.add(nullDistrictValue);
+					map.put("hsiens", hsiens);
+				} else {
+					List<DistrictValue> hsiens = new ArrayList<DistrictValue>();
+					hsiens.add(nullDistrictValue);
+					map.put("hsiens", hsiens);
+				}
+				if (users.get(0).getNowprovince() != null) {
+					List<DistrictValue> nowhsien = this.userManager
+							.getDistrictValues(null,
+									userValue.getNowprovince(), null);
+					nowhsien.add(nullDistrictValue);
+					map.put("nowhsien", nowhsien);
+				} else {
+					List<DistrictValue> hsiens = new ArrayList<DistrictValue>();
+					hsiens.add(nullDistrictValue);
+					map.put("nowhsien", hsiens);
+				}
+				request.getSession().setAttribute("user", users.get(0));// 在线session
+				// 所有问题列表已json方式输出
+				JSONObject json = new JSONObject();
+				json.put("districts", districts1);
+				map.put("districtsdata", json.toString());
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
+
 		return new ModelAndView("userspace/edituserinfo", map);
 	}
 
@@ -298,6 +342,10 @@ public class UserMangerAction {
 							.get(i);
 					String OriginalFilename = commonsMultipartFile
 							.getOriginalFilename();
+					if (OriginalFilename == null
+							|| OriginalFilename.equalsIgnoreCase("")) {
+						continue;
+					}
 					OriginalFilename = OriginalFilename.split("\\.")[1];
 					imgname = UUIDMaker.getUUID() + "." + OriginalFilename;
 					imgnamesm = UUIDMaker.getUUID() + "." + OriginalFilename;
@@ -690,5 +738,41 @@ public class UserMangerAction {
 			map.put("mess", ex.getMessage());
 		}
 		return new ModelAndView("jsonView", map);
+	}
+
+	/**
+	 * 
+	 * @param userValue
+	 * @param districts
+	 */
+	private void setUserDistrictInfo(UserValue userValue,
+			List<DistrictValue> districts) {
+		for (DistrictValue districtValue : districts) {
+			if (districtValue.getDistrictcode().equalsIgnoreCase(
+					userValue.getProvince())) {
+				//
+				if (districtValue.getDistrictcode().length() > 2) {
+					userValue
+							.setParentcode1(districtValue.getDistrictcode()
+									.substring(
+											0,
+											districtValue.getDistrictcode()
+													.length() - 2));
+				}
+			}
+			if (districtValue.getDistrictcode().equalsIgnoreCase(
+					userValue.getNowprovince())) {
+				if (districtValue.getDistrictcode().length() > 2) {
+					userValue
+							.setParentcode(districtValue.getDistrictcode()
+									.substring(
+											0,
+											districtValue.getDistrictcode()
+													.length() - 2));
+				}
+			}
+
+		}
+
 	}
 }

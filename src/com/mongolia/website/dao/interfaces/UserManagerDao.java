@@ -3,6 +3,7 @@ package com.mongolia.website.dao.interfaces;
 import java.util.List;
 import java.util.Map;
 
+import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.UserValue;
 
@@ -88,11 +89,22 @@ public interface UserManagerDao extends BaseDao {
 	 */
 	public List<UserValue> paingQueryUser(Map<String, Object> params)
 			throws Exception;
-    /**
-     * 
-     * @param params
-     * @return
-     * @throws Exception
-     */
+
+	/**
+	 * 
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
 	public Integer paingUserCount(Map<String, Object> params) throws Exception;
+
+	/**
+	 * 
+	 * @param districtcode
+	 * @param parentcode
+	 * @return
+	 * @throws Exception
+	 */
+	public List<DistrictValue> getDistrictValues(String districtcode,
+			String parentcode, String top) throws Exception;
 }

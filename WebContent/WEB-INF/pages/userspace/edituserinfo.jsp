@@ -132,16 +132,51 @@
 								<td style="height: 90px">
 									<div class="mfl">
 										<select name="province" id="province"
+											onchange="javascript:loadChildDistrict('province',1);"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;" />
-										<option value="11"></option>
-										<option value="12"></option>
-										<option value="13"></option>
-										</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select
+										<c:forEach items="${districts}" var="districtValue"
+											varStatus="status">
+											<c:if test="${districtValue.districtcode==userinfo.province}">
+												<option
+													value="<c:out value="${districtValue.districtcode}"/>"
+													selected="selected"><c:out
+														value="${districtValue.districtname}" /></option>
+											</c:if>
+											<c:if test="${districtValue.districtcode!=userinfo.province}">
+												<option
+													value="<c:out value="${districtValue.districtcode}" />"><c:out
+														value="${districtValue.districtname}" /></option>
+											</c:if>
+
+
+										</c:forEach>
+										<!-- 										<option value="11"></option> -->
+										<!-- 										<option value="12"></option> -->
+										<!-- 										<option value="13"></option> -->
+
+										</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select
 											name="hsien" id="hsien"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-											<option value="11"></option>
-											<option value="12"></option>
-											<option value="13"></option>
+
+											<!-- 											<option value="11"></option> -->
+											<!-- 											<option value="12"></option> -->
+											<!-- 											<option value="13"></option> -->
+											<c:forEach items="${hsiens}" var="districtValue"
+												varStatus="status">
+												<c:if test="${districtValue.districtcode==userinfo.hsien}">
+													<option
+														value="<c:out value="${districtValue.districtcode}"/>"
+														selected="selected"><c:out
+															value="${districtValue.districtname}" /></option>
+												</c:if>
+												<c:if
+													test="${districtValue.districtcode!=userinfo.province}">
+													<option
+														value="<c:out value="${districtValue.districtcode}" />"><c:out
+															value="${districtValue.districtname}" /></option>
+												</c:if>
+											</c:forEach>
+
 										</select>
 									</div>
 								</td>
@@ -155,16 +190,37 @@
 								<td>
 									<div class="mfl">
 										<select name="nowprovince" id="nowprovince"
+											onchange="javascript:loadChildDistrict('nowprovince',2);"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-											<option value="11"></option>
-											<option value="12"></option>
-											<option value="13"></option>
+											<c:forEach items="${districts}" var="districtValue"
+												varStatus="status">
+												<option
+													value="<c:out value="${districtValue.districtcode}"/>"><c:out
+														value="${districtValue.districtname}" /></option>
+											</c:forEach>
 										</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select
 											name="nowhsien" id="nowhsien"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-											<option value="11"></option>
-											<option value="12"></option>
-											<option value="13"></option>
+											<c:forEach items="${nowhsien}" var="districtValue"
+												varStatus="status">
+												<c:if test="${districtValue.districtcode==userinfo.hsien}">
+													<option
+														value="<c:out value="${districtValue.districtcode}"/>"
+														selected="selected"><c:out
+															value="${districtValue.districtname}" /></option>
+												</c:if>
+												<c:if
+													test="${districtValue.districtcode!=userinfo.province}">
+													<option
+														value="<c:out value="${districtValue.districtcode}" />"><c:out
+															value="${districtValue.districtname}" /></option>
+												</c:if>
+											</c:forEach>
+
+											<!-- 											<option value="11"></option> -->
+											<!-- 											<option value="12"></option> -->
+											<!-- 											<option value="13"></option> -->
+
 										</select>
 									</div>
 								</td>
@@ -179,6 +235,30 @@
 									<div class="mfl">
 										<input type="text" name="phone" id="phone"
 											value="<c:out value="${userinfo.phone}"/>"></input>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="m1ln h100">  </div>
+								</td>
+								<td colspan="3">
+									<div class="mfl">
+										<input type="text" name="profession" id="profession"
+											value="<c:out value="${userinfo.profession}"/>"></input>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="m1ln h100">  </div>
+								</td>
+								<td colspan="3">
+									<div class="mfl">
+										<input type="text" name="blogclass" id="blogclass"
+											value="<c:out value="${userinfo.blogclass}"/>"></input>
 									</div>
 								</td>
 
@@ -314,7 +394,7 @@
 							</tr>
 							<tr>
 								<td colspan="4" align="center" valign="middle">
-									<div class="mnlist" style="text-align:center;">
+									<div class="mnlist" style="text-align: center;">
 										<a href="javascript:dosubmit();"></a>
 									</div>
 
@@ -334,4 +414,7 @@
 		<div class="cbt"></div>
 	</div>
 </body>
+<script>
+	var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
+</script>
 </html>

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.mongolia.website.dao.interfaces.UserManagerDao;
+import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.UserValue;
 
@@ -97,6 +98,18 @@ public class UserManagerDaoImpl extends BaseDaoiBatis implements UserManagerDao 
 		// TODO Auto-generated method stub
 		return (Integer) this.getSqlMapClientTemplate().queryForObject(
 				"paingUserCount", params);
+	}
+
+	@Override
+	public List<DistrictValue> getDistrictValues(String districtcode,
+			String parentcode, String top) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> queryparams = new HashMap<String, Object>();
+		queryparams.put("districtcode", districtcode);
+		queryparams.put("parentcode", parentcode);
+		queryparams.put("top", top);
+		return this.getSqlMapClientTemplate().queryForList("getDistrictValues",
+				queryparams);
 	}
 
 }

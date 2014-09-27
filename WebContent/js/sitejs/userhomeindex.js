@@ -24,12 +24,16 @@ var openpage = function(index, currentuserid, type, neebarlocation) {
 					// 启动进度条
 					if (neebarlocation) {
 						var sheetheight = $(".mVsheet").css("height");
-						var pxindex = sheetheight.indexOf('px');
-						sheetheight = sheetheight.substring(0, pxindex);
-						sheetheight = sheetheight - 400 + 900;
-						$(".loadingbox").css("top", "" + sheetheight + "px");
+						if (sheetheight == undefined) {
+							//return;
+						} else {
+							var pxindex = sheetheight.indexOf('px');
+							sheetheight = sheetheight.substring(0, pxindex);
+							sheetheight = sheetheight - 400 + 900;
+							$(".loadingbox")
+									.css("top", "" + sheetheight + "px");
+						}
 					}
-
 					$(".loadingbox").show();
 				},
 				error : function() {// 请求失败处理函数
@@ -223,114 +227,63 @@ var addmessface = function(emotionname) {
  */
 var receivemessage = function() {
 
-	/*$
-			.ajax({
-				async : true,
-				cache : false,
-				type : 'POST',
-				dataType : "json",
-				url : "getmessages.do",// 请求的action路径
-				error : function() {// 请求失败处理函数
-					alert('请求失败');
-				},
-				success : function(data) { // 请求成功后处理函数。
-					var innerHTML = '';
-					for (i in data.receiveMess) {
-						innerHTML = innerHTML
-								+ ' <div class=\"xldgurg\" style=\"width: 124px; height: 470px;\"> '
-								+ ' <div class=\"avtr\"><a '
-								+ ' href=\"gouserindex.do?userid= '
-								+ data.receiveMess[i].messagesenderid
-								+ ' \"> '
-								+ ' <img '
-								+ ' src=\"getsmheadimge.do?userid='
-								+ data.receiveMess[i].messagesenderid
-								+ '\"'
-								+ ' width=\"570\" height=\"447\" />'
-								+ ' </a> <input type=\"checkbox\" name=\"selectbox\"'
-								+ ' id=\"'
-								+ data.receiveMess[i].messagesenderid
-								+ ' \"/>'
-								+ ' </div>'
-								+ ' <div class=\"desc  \" style=\"color: #000; height: 370px;widht:120px;\">'
-								+ ' <div class=\"m1ln\" style=\"height: 350px;\">'
-								+ ' <a' + ' href=\"gouserindex.do?userid='
-								+ data.receiveMess[i].messagesenderid + ' \">'
-								+ data.receiveMess[i].artname + ' </a> ';
-						var kindstr = "";
-						var messstr = "";
-						if (data.receiveMess[i].messtype == 2) {
-							kindstr = "    ";
-							messstr = "    "
-									+ data.receiveMess[i].sendtime
-									+ "<br><a href=\"javascript:readmessage('"
-									+ data.receiveMess[i].messageid
-									+ "',1);\" style=\"color:#f00\"> </a>";
-						} else if (data.receiveMess[i].messtype == 4) {
-							kindstr = "   ";
-							messstr = "   "
-									+ data.receiveMess[i].sendtime
-									+ '<br><a href=\"javascript:addfriends(\''
-									+ data.receiveMess[i].messagesenderid
-									+ '\',1,\''
-									+ data.receiveMess[i].messageid
-									+ '\')\" style=\"color:#f00;\"></a>  <a href=\"\" style=\"color:#f00;\"> </a>';
-						} else {
-
-						}
-
-						innerHTML = innerHTML
-								+ kindstr
-								+ ' </div>'
-								+ ' <div class=\"m1ln\" style=\"height: 350px;width:100px;\" >'
-								+ messstr + '</div>' + '</div>' + '</div>';
-					}
-					$("#receivediv").html(innerHTML);*/
+	/*
+	 * $ .ajax({ async : true, cache : false, type : 'POST', dataType : "json",
+	 * url : "getmessages.do",// 请求的action路径 error : function() {// 请求失败处理函数
+	 * alert('请求失败'); }, success : function(data) { // 请求成功后处理函数。 var innerHTML =
+	 * ''; for (i in data.receiveMess) { innerHTML = innerHTML + ' <div
+	 * class=\"xldgurg\" style=\"width: 124px; height: 470px;\"> ' + ' <div
+	 * class=\"avtr\"><a ' + ' href=\"gouserindex.do?userid= ' +
+	 * data.receiveMess[i].messagesenderid + ' \"> ' + ' <img ' + '
+	 * src=\"getsmheadimge.do?userid=' + data.receiveMess[i].messagesenderid +
+	 * '\"' + ' width=\"570\" height=\"447\" />' + ' </a> <input
+	 * type=\"checkbox\" name=\"selectbox\"' + ' id=\"' +
+	 * data.receiveMess[i].messagesenderid + ' \"/>' + ' </div>' + ' <div
+	 * class=\"desc \" style=\"color: #000; height: 370px;widht:120px;\">' + '
+	 * <div class=\"m1ln\" style=\"height: 350px;\">' + ' <a' + '
+	 * href=\"gouserindex.do?userid=' + data.receiveMess[i].messagesenderid + '
+	 * \">' + data.receiveMess[i].artname + ' </a> '; var kindstr = ""; var
+	 * messstr = ""; if (data.receiveMess[i].messtype == 2) { kindstr = "
+	 *    "; messstr = "    " +
+	 * data.receiveMess[i].sendtime + "<br><a href=\"javascript:readmessage('" +
+	 * data.receiveMess[i].messageid + "',1);\" style=\"color:#f00\">
+	 * </a>"; } else if (data.receiveMess[i].messtype == 4) { kindstr =
+	 * "   "; messstr = "   " +
+	 * data.receiveMess[i].sendtime + '<br><a href=\"javascript:addfriends(\'' +
+	 * data.receiveMess[i].messagesenderid + '\',1,\'' +
+	 * data.receiveMess[i].messageid + '\')\" style=\"color:#f00;\"></a> 
+	 * <a href=\"\" style=\"color:#f00;\"> </a>'; } else {
+	 *  }
+	 * 
+	 * innerHTML = innerHTML + kindstr + ' </div>' + ' <div class=\"m1ln\"
+	 * style=\"height: 350px;width:100px;\" >' + messstr + '</div>' + '</div>' + '</div>'; }
+	 * $("#receivediv").html(innerHTML);
+	 */
 	//
-	/*innerHTML = "";
-	for (i in data.sendMess) {
-		innerHTML = innerHTML
-				+ ' <div class=\"xldgurg\" style=\"width: 124px; height: 470px; !important;\"> '
-				+ ' <div class=\"avtr\"><a '
-				+ ' href=\"gouserindex.do?userid= '
-				+ data.sendMess[i].userid
-				+ ' \"> '
-				+ ' <img '
-				+ ' src=\"getsmheadimge.do?userid='
-				+ data.sendMess[i].userid
-				+ '\"'
-				+ ' width=\"570\" height=\"447\" />'
-				+ ' </a> <input type=\"checkbox\" name=\"selectbox\"'
-				+ ' id=\"'
-				+ data.sendMess[i].userid
-				+ ' \"/>'
-				+ ' </div>'
-				+ ' <div class=\"desc  \" style=\"color: #000; height: 370px;widht:120px;!important;\">'
-				+ ' <div class=\"m1ln\" style=\"height: 350px;\">'
-				+ ' <a'
-				+ ' href=\"gouserindex.do?userid='
-				+ data.sendMess[i].userid
-				+ ' \">'
-				+ data.sendMess[i].artname
-				+ '    </a>'
-				+ ' </div>'
-				+ ' <div class=\"m1ln\" style=\"height: 350px;width:100px; !important;\" >'
-				+ '   '
-				+ data.sendMess[i].sendtime
-				+ '<br> <a href=\"\" style=\"color:#f00\">  </a></div></div></div>';
-	}
-	
-	$("#senddiv").html(innerHTML);
-	
-	$("#accordion").dialog({
-		height : 510,
-		width : 1000,
-		resizable : false,
-		modal : true
-
-	});
-	}
-	});*/
+	/*
+	 * innerHTML = ""; for (i in data.sendMess) { innerHTML = innerHTML + ' <div
+	 * class=\"xldgurg\" style=\"width: 124px; height: 470px; !important;\"> ' + '
+	 * <div class=\"avtr\"><a ' + ' href=\"gouserindex.do?userid= ' +
+	 * data.sendMess[i].userid + ' \"> ' + ' <img ' + '
+	 * src=\"getsmheadimge.do?userid=' + data.sendMess[i].userid + '\"' + '
+	 * width=\"570\" height=\"447\" />' + ' </a> <input type=\"checkbox\"
+	 * name=\"selectbox\"' + ' id=\"' + data.sendMess[i].userid + ' \"/>' + '
+	 * </div>' + ' <div class=\"desc \" style=\"color: #000; height:
+	 * 370px;widht:120px;!important;\">' + ' <div class=\"m1ln\" style=\"height:
+	 * 350px;\">' + ' <a' + ' href=\"gouserindex.do?userid=' +
+	 * data.sendMess[i].userid + ' \">' + data.sendMess[i].artname + ' 
+	 *   </a>' + ' </div>' + ' <div class=\"m1ln\"
+	 * style=\"height: 350px;width:100px; !important;\" >' + '   ' +
+	 * data.sendMess[i].sendtime + '<br> <a href=\"\"
+	 * style=\"color:#f00\"> </a></div></div></div>'; }
+	 * 
+	 * $("#senddiv").html(innerHTML);
+	 * 
+	 * $("#accordion").dialog({ height : 510, width : 1000, resizable : false,
+	 * modal : true
+	 * 
+	 * }); } });
+	 */
 
 	$("#accordion").dialog({
 		height : 510,

@@ -2,6 +2,7 @@ package com.mongolia.website.manager.interfaces;
 
 import java.util.List;
 
+import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.UserValue;
 
@@ -65,7 +66,8 @@ public interface UserManager {
 	 * 
 	 * @throws Exception
 	 */
-	public void doAddFriendAndConfirmMess(FriendValue friendValue,String messid,Integer agree) throws Exception;
+	public void doAddFriendAndConfirmMess(FriendValue friendValue,
+			String messid, Integer agree) throws Exception;
 
 	/**
 	 * 修改用户名密码
@@ -74,7 +76,25 @@ public interface UserManager {
 	 * @param pass
 	 * @throws Exception
 	 */
-	public void doModifyPass(String userid, String username, String pass,String oldpass)
-			throws Exception;
-	public void doDelFriend(String userid,String friendid)throws Exception;
+	public void doModifyPass(String userid, String username, String pass,
+			String oldpass) throws Exception;
+
+	/**
+	 * 解除朋友关系
+	 * 
+	 * @param userid
+	 * @param friendid
+	 * @throws Exception
+	 */
+	public void doDelFriend(String userid, String friendid) throws Exception;
+
+	/**
+	 * 
+	 * @param districtcode
+	 * @param parentcode
+	 * @return
+	 * @throws Exception
+	 */
+	public List<DistrictValue> getDistrictValues(String districtcode,
+			String parentcode, String top) throws Exception;
 }

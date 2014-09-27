@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.samples.websocket.echo.DefaultEchoService;
 import org.springframework.samples.websocket.echo.EchoWebSocketHandler;
+import org.springframework.samples.websocket.echo.SocketMessageListener;
 import org.springframework.samples.websocket.snake.SnakeWebSocketHandler;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,7 +19,6 @@ import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
 @EnableWebMvc
 @EnableWebSocket
 public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
-
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 
@@ -27,21 +27,20 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
 
 		registry.addHandler(echoWebSocketHandler(), "/sockjs/echo").withSockJS();
 		registry.addHandler(echoWebSocketHandler(), "/sockjs/echo-issue4").withSockJS().setHttpMessageCacheSize(20000);
-
-		registry.addHandler(snakeWebSocketHandler(), "/sockjs/snake").withSockJS();
+	 	registry.addHandler(snakeWebSocketHandler(), "/sockjs/snake").withSockJS();
 	}
 
-	@Bean
+	@Bean(name="echoWebSocketHandler")
 	public WebSocketHandler echoWebSocketHandler() {
 		return new EchoWebSocketHandler(echoService());
 	}
 
-	@Bean
+	@Bean(name="snakeWebSocketHandler")
 	public WebSocketHandler snakeWebSocketHandler() {
 		return new PerConnectionWebSocketHandler(SnakeWebSocketHandler.class);
 	}
 
-	@Bean
+	@Bean(name="echoService")
 	public DefaultEchoService echoService() {
 		return new DefaultEchoService("Did you say \"%s\"?");
 	}
@@ -52,5 +51,6 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+	
 
 }

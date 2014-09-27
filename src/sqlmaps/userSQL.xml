@@ -8,6 +8,7 @@
 	<typeAlias alias="VisitorValue" type="com.mongolia.website.model.VisitorValue" />
 	<typeAlias alias="UserValue" type="com.mongolia.website.model.UserValue" />
 	<typeAlias alias="FriendNews" type="com.mongolia.website.model.FriendNews" />
+	<typeAlias alias="DistrictValue" type="com.mongolia.website.model.DistrictValue" />
 	<select id="getUser" parameterClass="java.util.Map" resultClass="User">
 		select
 		userid,
@@ -24,11 +25,8 @@
 		userkind,
 		birthday,
 		unit,
-		( select districtname from
-		district where district.districtcode=province ) as province,
-		( select
-		districtname from district where district.districtcode=nowprovince )
-		as nowprovince,
+		province,
+	    nowprovince,
 		phone,
 		qq,
 		email,
@@ -42,7 +40,9 @@
 		singer,
 		headimgsm,
 		stoped,
-		stopeddate
+		stopeddate,
+		hsien,
+		nowhsien
 		from
 		user
 		<dynamic prepend="where">
@@ -97,7 +97,9 @@
 		idol,
 		maxim,
 		age,
-		headimgsm
+		headimgsm,
+		hsien,
+		nowhsien
 		)
 		values
 		(
@@ -125,7 +127,9 @@
 		#idol#,
 		#maxim#,
 		#age#,
-		#headimgsm#
+		#headimgsm#,
+		#hsien#,
+		#nowhsien#
 		)
 	</insert>
 
@@ -210,7 +214,12 @@
 			<isNotNull prepend="," property="singer">
 				singer=#singer#
 			</isNotNull>
-
+			<isNotNull prepend="," property="hsien">
+				hsien=#hsien#
+			</isNotNull>
+			<isNotNull prepend="," property="nowhsien">
+				nowhsien=#nowhsien#
+			</isNotNull>
 		</dynamic>
 		where userid=#userid#
 
@@ -336,7 +345,8 @@
 	</insert>
 	<select id="getTopUsers" parameterClass="java.util.Map"
 		resultClass="UserValue">
-		select DISTINCT a.*,b.retnum  from user a ,(select document.userid,count(1) as
+		select DISTINCT a.*,b.retnum from user a ,(select
+		document.userid,count(1) as
 		retnum from document where <![CDATA[CRTIME>=#startDate#]]>
 		and
 	<![CDATA[ CRTIME<=#endDate#]]>
@@ -345,15 +355,15 @@
 	<select id="getRecentRegistUsers" parameterClass="java.util.Map"
 		resultClass="UserValue">
 		select * from user where  <![CDATA[  userkind<>2 ]]>
-		<dynamic prepend="where" >
+		<dynamic prepend="where">
 			<isNotNull prepend="and" property="startDate">
 			<![CDATA[regdate>=#startDate#]]>
 			</isNotNull>
 			<isNotNull prepend="and" property="endDate">
 			<![CDATA[regdate<=#endDate#]]>
 			</isNotNull>
-			</dynamic>
-			 order by regdate desc limit #startindex#, #fechcount#
+		</dynamic>
+		order by regdate desc limit #startindex#, #fechcount#
 	</select>
 	<!--博主登录以后能看到所有好友发表的文章列表 -->
 	<select id="getFriendNews" parameterClass="java.util.Map"
@@ -361,7 +371,8 @@
 		select
 		b.*,c.DOCTITLE,c.DOCTYPE,c.DOCRELTIME,c.DOCAUTHOR,c.docid,c.DOCABSTRACT
 		from friend a ,user b,document c
-		where a.friendid=b.userid and a.friendid=c.userid
+		where a.friendid=b.userid and
+		a.friendid=c.userid
 		and a.userid=#userid#
 		and <![CDATA[c.DOCRELTIME>=#queryDate#]]>
 	</select>
@@ -372,12 +383,14 @@
 		select a.*,c.DOCTITLE,c.DOCTYPE,b.sharedate
 		dydate,c.DOCAUTHOR,c.docid,c.DOCABSTRACT from user a,sharedresource
 		b,document c where b.resourceid=c.DOCID
-		and a.userid=b.userid and b.userid=#userid# and <![CDATA[b.sharedate>=#queryDate#]]>
+		and a.userid=b.userid and
+		b.userid=#userid# and <![CDATA[b.sharedate>=#queryDate#]]>
 		union ALL
 		select a.*,c.DOCTITLE,c.DOCTYPE,b.markeddate
 		dydate,c.DOCAUTHOR,c.docid,c.DOCABSTRACT from user a,markedresource
 		b,document c where b.resourceid=c.DOCID
-		and a.userid=b.userid and b.userid=#userid# and <![CDATA[b.markeddate>=#queryDate#]]>
+		and a.userid=b.userid and
+		b.userid=#userid# and <![CDATA[b.markeddate>=#queryDate#]]>
 		) h order by dydate
 	</select>
 	<update id="modifyUserPass" parameterClass="java.util.Map">
@@ -425,11 +438,8 @@
 		userkind,
 		birthday,
 		unit,
-		( select districtname from
-		district where district.districtcode=province ) as province,
-		( select
-		districtname from district where district.districtcode=nowprovince )
-		as nowprovince,
+	    province,
+	    nowprovince,
 		phone,
 		qq,
 		email,
@@ -443,7 +453,9 @@
 		singer,
 		headimgsm,
 		stoped,
-		stopeddate
+		stopeddate,
+		hsien,
+		nowhsien
 		from
 		user
 		<dynamic prepend="where">
@@ -469,9 +481,9 @@
 				userkind=#userkind#
 			</isNotNull>
 		</dynamic>
-		order by  regdate desc  LIMIT #startindex#, #fetchcount#
+		order by regdate desc LIMIT #startindex#, #fetchcount#
 	</select>
-     <select id="paingUserCount" parameterClass="java.util.Map"
+	<select id="paingUserCount" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
 		select
 		count(1)
@@ -500,7 +512,23 @@
 				userkind=#userkind#
 			</isNotNull>
 		</dynamic>
-		order by  regdate desc  
+		order by regdate desc
+	</select>
+	<select id="getDistrictValues" parameterClass="java.util.Map"
+		resultClass="DistrictValue">
+		select * from district
+		<dynamic prepend="where">
+		<isNotNull prepend="and" property="districtcode">
+		  districtcode=#districtcode#
+		</isNotNull>
+		<isNotNull prepend="and" property="parentcode">
+		parentcode=#parentcode#
+		</isNotNull>
+		<isNotNull prepend="and" property="top">
+		(parentcode='' or  parentcode is null)
+		</isNotNull>
+		
+		</dynamic>
 	</select>
 
 </sqlMap>

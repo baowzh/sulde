@@ -12,6 +12,7 @@ import com.mongolia.website.dao.interfaces.UserManagerDao;
 import com.mongolia.website.dao.interfaces.WebResourceDao;
 import com.mongolia.website.manager.ManagerException;
 import com.mongolia.website.manager.interfaces.UserManager;
+import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.StaticConstants;
@@ -64,35 +65,37 @@ public class UserManagerImpl implements UserManager {
 			if (userValue.getPassword().equalsIgnoreCase(
 					sysUserValue.getPassword())) {
 				return true;
-			}else{
-				throw new Exception("3");	
+			} else {
+				throw new Exception("3");
 			}
 		}
 		return false;
 	}
 
 	@Override
-	public void doAddFriendAndConfirmMess(FriendValue friendValue,String messid,Integer agree) throws Exception {
+	public void doAddFriendAndConfirmMess(FriendValue friendValue,
+			String messid, Integer agree) throws Exception {
 		// TODO Auto-generated method stub
 		// 已经存在则不添加
-		if(agree.intValue()==1){
-			List<FriendValue> friends=webResourceDao.getFriendValues(friendValue.getFriendid(), friendValue.getUserid(), null);
-			if(friends!=null&&!friends.isEmpty()){
-				return ;
+		if (agree.intValue() == 1) {
+			List<FriendValue> friends = webResourceDao.getFriendValues(
+					friendValue.getFriendid(), friendValue.getUserid(), null);
+			if (friends != null && !friends.isEmpty()) {
+				return;
 			}
 			// 把对方价位自己的朋友，同事把自己价位对方的朋友
-			FriendValue friendValue1=new FriendValue();
+			FriendValue friendValue1 = new FriendValue();
 			friendValue1.setFriendid(friendValue.getUserid());
 			friendValue1.setUserid(friendValue.getFriendid());
-			Map<String,Object> queryparams=new HashMap<String,Object>();
+			Map<String, Object> queryparams = new HashMap<String, Object>();
 			queryparams.put("userid", friendValue.getUserid());
-			List<UserValue> users=this.userManagerDao.getUser(queryparams);
+			List<UserValue> users = this.userManagerDao.getUser(queryparams);
 			users.get(0).getArtname();
 			friendValue1.setFriendname(users.get(0).getArtname());
 			this.userManagerDao.addFriend(friendValue);
-			this.userManagerDao.addFriend(friendValue1);	
+			this.userManagerDao.addFriend(friendValue1);
 		}//
-		// 信息只为已读
+			// 信息只为已读
 		this.webResourceDao.confiremMess(messid);
 	}
 
@@ -150,8 +153,8 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public void doModifyPass(String userid, String username, String pass,String oldpass)
-			throws Exception {
+	public void doModifyPass(String userid, String username, String pass,
+			String oldpass) throws Exception {
 		// TODO Auto-generated method stub
 		List<UserValue> users = this.getUsers(userid, null);
 		if (users == null || users.isEmpty()) {
@@ -161,7 +164,7 @@ public class UserManagerImpl implements UserManager {
 			if (!userValue.getUsername().equalsIgnoreCase(username)) {
 				throw new ManagerException("3");
 			}
-			if(!oldpass.equalsIgnoreCase(userValue.getPassword())){
+			if (!oldpass.equalsIgnoreCase(userValue.getPassword())) {
 				throw new ManagerException("4");
 			}
 			this.userManagerDao.modifyUserPass(userid, username, pass);
@@ -172,8 +175,14 @@ public class UserManagerImpl implements UserManager {
 	public void doDelFriend(String userid, String friendid) throws Exception {
 		// TODO Auto-generated method stub
 		this.userManagerDao.delFriend(userid, friendid);
-		this.userManagerDao.delFriend(friendid,userid);
+		this.userManagerDao.delFriend(friendid, userid);
 	}
-	
+
+	@Override
+	public List<DistrictValue> getDistrictValues(String districtcode,
+			String parentcode,String top) throws Exception {
+		// TODO Auto-generated method stub
+		return this.userManagerDao.getDistrictValues(districtcode, parentcode,top);
+	}
 
 }

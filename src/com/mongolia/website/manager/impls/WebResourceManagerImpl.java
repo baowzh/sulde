@@ -132,8 +132,10 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			returnList = webResourceDao.getImgList(params);
 			for (ImgValue imgValue : returnList) {
 				byte[] imgcontent = imgValue.getImgcontent();
-				byte newcontent[] = this.ungzipdoccontent(imgcontent);
-				imgValue.setImgcontent(newcontent);
+				if (imgcontent != null) {
+					byte newcontent[] = this.ungzipdoccontent(imgcontent);
+					imgValue.setImgcontent(newcontent);
+				}
 			}
 			return returnList;
 		} catch (Exception ex) {
@@ -197,14 +199,14 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		// TODO Auto-generated method stub
 		try {
 			List<DocumentValue> docs = webResourceDao.getDocList(params);
-			//
 			for (DocumentValue documentValue : docs) {
-				byte[] newdoccontent = this.ungzipdoccontent(documentValue
-						.getDoccontent());
-				documentValue.setDoccontent(newdoccontent);
+				if (documentValue.getDoccontent() != null) {
+					byte[] newdoccontent = this.ungzipdoccontent(documentValue
+							.getDoccontent());
+					documentValue.setDoccontent(newdoccontent);
+				}
 			}
 			return docs;
-			
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
 		}
@@ -249,7 +251,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		// TODO Auto-generated method stub
 		try {
 			byte[] imgcontent = imgGrpupValue.getFaceimg();
-			//byte[] newcontent = this.gzipdoccontent(imgcontent);
+			// byte[] newcontent = this.gzipdoccontent(imgcontent);
 			imgGrpupValue.setFaceimg(imgcontent);
 			this.webResourceDao.updIImgGroup(imgGrpupValue);
 		} catch (Exception ex) {

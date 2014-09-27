@@ -47,47 +47,8 @@ var dosubmit = function() {
 		MessageWindow.showMess("' '      ");
 		return;
 	}
-	// document.getElementById("userinfoform").submit();
-	$("#userinfoform").submit(); //表单提交时乱码
+	$("#userinfoform").submit(); // 表单提交时乱码
 	// 用局部刷新的方式提交
-	/*
-	$.ajax({
-			async : false,
-			cache : false,
-			type : 'POST',
-			dataType : "json",
-			url : "edituserinfo.do",// 请求的action路径
-			error : function() {// 请求失败处理函数
-				alert('请求失败');
-			},
-			data : {
-				bolgname : $("#bolgname").val(),
-				firstname : $("#firstname").val(),
-				artname : $("#artname").val(),
-				birthday : $("#birthday").val(),
-				sex : $("#sex").val(),
-				unit : $("#unit").val(),
-				province : $("#province").val(),
-				nowprovince : $("#nowprovince").val(),
-				phone : $("#phone").val(),
-				qq : $("#qq").val(),
-				email:$("#email").val(),
-				hope:$("#hope").val(),
-				belief:$("#belief").val(),
-				idol:$("#idol").val(),
-				maxim:$("#maxim").val(),
-				music:$("#music").val(),
-				book:$("#book").val(),
-				singer:$("#singer").val()
-			},
-			success : function(data) { // 请求成功后处理函数。
-				if (data.success == '1') {
-					//window.location.href = "userheadimgedit.do";
-					 $("#userinfoform")[0].submit();
-				}
-			}
-		});*/
-
 };
 /**
  * 监听录入框输入事件避免输入过大的字符串
@@ -102,6 +63,28 @@ var onChange = function(mess, obj, length) {
 						+ '             ');
 		obj.value = '';
 		return;
+	}
+
+};
+/**
+ * 加载子集区划
+ */
+var loadChildDistrict = function(selid, type) {
+	var selectedcode = $("#" + selid).val();
+	var optionhtml = '<option value="99"></option>';
+	for (district in districtsdata.districts) {
+		if (selectedcode == districtsdata.districts[district].parentcode) {
+			optionhtml = optionhtml + '<option value="'
+					+ districtsdata.districts[district].districtcode + '">'
+					+ districtsdata.districts[district].districtname
+					+ '</option>'
+		}
+	}
+	if (type == 1) {
+		$("#hsien").html(optionhtml);
+
+	} else {
+		$("#nowhsien").html(optionhtml);
 	}
 
 };

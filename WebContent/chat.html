@@ -1,0 +1,211 @@
+<!DOCTYPE >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信短信回复平台登录</title>
+<link href="websocket/css/css.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="websocket/css/global.css">
+<script type="text/javascript" src="js/jqGrid/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="websocket/js/App.js"></script>
+<script src="websocket/js/sockjs-0.3.min.js"></script>
+<script src="websocket/js/websocket.js"></script>
+</head>
+<body>
+	<div id="loginform" style="display: block;">
+		<!-- 		<form id="loginform" action="../chatroomlog.jhtml" method="post"> -->
+		<div class="head">
+			<div class="top">
+				<div class="fl">
+					<a href="#"> <img
+						src="websocket/images/logo.png" />
+					</a>
+				</div>
+				<div class="fr">
+					你好：admin <a href="#"> 退出 </a>
+				</div>
+			</div>
+		</div>
+		<div class="main" style="min-height: 540px;">
+			<div class="fl" style="margin: 38px;">
+				<img src="websocket/images/leftimg.jpg" />
+			</div>
+			<div class="fl login">
+				<ul>
+					<li><input class="addr-add-ipt yhName" name="username"
+						id="username" type="text" value="" maxlength="10" /></li>
+					<li><input class="addr-add-ipt yhPass" name="pass" id="pass"
+						type="password" value="" maxlength="10" /></li>
+					<li><input class="addr-add-ipt"
+						style="width: 50%; line-height: 16px;" name="checkcode"
+						id="checkcode" type="text" value="" maxlength="4" />
+						<div class="fr">
+							<img src="../randCodeImage" />
+						</div></li>
+					<li><a class="org-btn w-full" href="javascript:login()">
+							登录 </a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- 		</form> -->
+		<!--底部版权信息-->
+		<div class="foot">中国联合网络通信有限公司内蒙古分公司 版权所有 蒙B2-20050041号</div>
+	</div>
+	<div id="chatroom" style="display: none;">
+		<div class="head">
+			<div class="top">
+				<div class="fl">
+					<a href="#"> <img
+						src="websocket/images/logo.png" />
+					</a>
+				</div>
+				<div class="fr">
+					你好：admin <a href="#"> 退出 </a>
+				</div>
+			</div>
+		</div>
+		<div class="main">
+			<div class="fl negotiator">
+				<h2>2014年9月22日 10:42</h2>
+				<div class="negotbox">
+					<ul id="userlist">
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture02"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture02"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+						<!-- 						<li><a href="#"> <span class="picture01"></span><span>18347923224</span> -->
+						<!-- 						</a></li> -->
+					</ul>
+				</div>
+			</div>
+			<!--右边消息内容开始-->
+			<div class="fl mainright">
+				<h2>
+					总人数：<em>40</em>人&nbsp;&nbsp;&nbsp;已处理：<em>12</em>人&nbsp;&nbsp;&nbsp;已回复：<em
+						class="lv">10</em>人&nbsp;&nbsp;&nbsp;未处理：<em class="hong">18</em>人
+				</h2>
+				<div class="dialog">
+					<!--客户信息-->
+					<div class="information">
+						<span class="picture02"></span> <span class="xiaoxz"
+							id="currentphone"><em>手机号：</em>18347923224</span>
+						<!-- 						<span class="xiaoxz"><em>付费类型：</em>预付费</span>  -->
+						<a href="#" class="button01"> 完成 </a>
+					</div>
+					<!--中间对话框-->
+					<ul class="dialogbox" id="console">
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lv">18347923224</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">你好!</p> -->
+						<!-- 						</li> -->
+						<!-- 						<li> -->
+						<!-- 							<p> -->
+						<!-- 								<em class="lan">联通微信客服</em><span>12:09:36</span> -->
+						<!-- 							</p> -->
+						<!-- 							<p class="indent">您好！请问有什么可以帮到您的？</p> -->
+						<!-- 						</li> -->
+					</ul>
+					<div class="inputbox">
+						<textarea name="message" id="message" class="shuruk"></textarea>
+						<div class="shuomin">
+							<span>Ctrl+Enter 可发送消息&nbsp;</span><a class="button02"
+								href="javascript:echo();">发送</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

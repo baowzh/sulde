@@ -22,6 +22,9 @@
 		<div class=mnlist>
 			<a href="articlelist.do">  </a>
 		</div>
+		<div class=mnlist>
+			<a href="pagingimglist.do">  </a>
+		</div>
 		<div class="mnlist">
 			<a href="userlist.do">   </a>
 		</div>

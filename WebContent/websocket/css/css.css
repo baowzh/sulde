@@ -1,0 +1,465 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+Site: 微信信息回复平台
+Author: wu qing
+*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li,
+	pre, form, fieldset, legend, button, input, textarea, th, td {
+	margin: 0;
+	padding: 0;
+}
+
+body, button, input, select, textarea {
+	font: 12px/1.5 tahoma, \5b8b\4f53, arial, simsun, sans-serif;
+	color: #777;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+}
+
+address, cite, dfn, em, var {
+	font-style: normal;
+}
+
+code, kbd, pre, samp {
+	font-family: courier new, courier, monospace;
+}
+
+small {
+	font-size: 12px;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	outline: none;
+}
+
+a: hover {
+	text-decoration: underline;
+}
+
+sup {
+	vertical-align: text-top;
+}
+
+sub {
+	vertical-align: text-bottom;
+}
+
+legend {
+	color: #000;
+}
+
+fieldset, img {
+	border: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset, img {
+	border: none;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+}
+
+.clear {
+	clear: both;
+}
+
+.hight {
+	height: 8px;
+}
+
+.none {
+	display: none;
+}
+
+.word-break {
+	word-break: break-all;
+	word-wrap: break-word;
+	overflow: hidden
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+body {
+	background: #cedbe0;
+	font-family: "SimSun", "Microsoft YaHei";
+}
+
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow-y: scroll;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+/*
+首页头部s
+*/
+.head {
+	margin: 0px auto;
+	height: 50px;
+	width: 100%;
+	overflow: hidden;
+	background: #444444;
+}
+
+.top {
+	margin: 5px auto;
+	width: 934px;
+	padding: 0px 15px 0px 8px;
+	color: #c6c8ca;
+	font-size: 12px;
+	line-height: 40px;
+}
+
+.top a {
+	color: #c6c8ca;
+}
+
+.top a:hover {
+	color: #f24e06;
+}
+
+.main {
+	margin: 0px auto;
+	overflow: hidden;
+	width: 950px;
+	background: #fff;
+}
+
+.negotiator {
+	background: #f0f0f0;
+	width: 226px;
+	min-height: 630px;
+}
+
+.negotiator h2 {
+	display: block;
+	padding: 10px 0px 3px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 24px;
+	font-family: "Microsoft YaHei";
+}
+
+.negotbox {
+	margin: 0px 12px 10px 12px;
+	overflow: auto;
+	height: 590px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: #fff;
+}
+/* SCROLLBAR-FACE-COLOR: 滚动条凸出部分的颜色 
+SCROLLBAR-HIGHLIGHT-COLOR: 滚动条空白部分的颜色 
+SCROLLBAR-SHADOW-COLOR: 立体滚动条阴影的颜色 
+SCROLLBAR-3DLIGHT-COLOR: 滚动条亮边的颜色 
+SCROLLBAR-ARROW-COLOR: 上下按钮上三角箭头的颜色 
+SCROLLBAR-TRACK-COLOR: 滚动条的背景颜色 
+SCROLLBAR-DARKSHADOW-COLOR: 滚动条强阴影的颜色 
+SCROLLBAR-BASE-COLOR: 滚动条的基本颜色*/
+.negotbox ul {
+	overflow: hidden;
+	display: block;
+}
+
+.negotbox ul li {
+	border-bottom: #f5f5f5 1px solid;
+	display: block;
+	overflow: hidden;
+	padding: 12px;
+	overflow: hidden;
+}
+
+.negotbox ul li span {
+	float: left;
+	line-height: 38px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #191919;
+}
+
+.picture02 {
+	float: left;
+	width: 38px;
+	height: 38px;
+	background: url(../images/img01.gif) no-repeat center;
+	display: block;
+	margin-right: 10px;
+}
+
+.picture01 {
+	float: left;
+	width: 38px;
+	height: 38px;
+	background: url(../images/img02.gif) no-repeat center;
+	display: block;
+	margin-right: 10px;
+}
+
+/*右边对话框样式*/
+.mainright {
+	width: 690px;
+	margin-left: 16px;
+}
+
+.mainright h2 {
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	display: block;
+	padding: 10px 0px 3px;
+	text-align: right;
+	line-height: 24px;
+	font-weight: normal;
+	overflow: hidden;
+	padding-right: 10px;
+}
+
+.mainright em {
+	font-weight: bold;
+}
+
+.hong {
+	color: #f23206;
+}
+
+.lv {
+	color: #36af00;
+}
+
+.lan {
+	color: #4595e6;
+}
+
+.dialog {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: #fafafa;
+	min-height: 592px;
+	border: 1px solid #e2e1dd;
+}
+
+.information {
+	background: #f5f5f5;
+	border-bottom: 1px solid #e2e1dd;
+	padding: 15px;
+	overflow: hidden;
+}
+
+.information span {
+	
+}
+
+.xiaoxz {
+	float: left;
+	line-height: 38px;
+	font-size: 14px;
+	margin: 0px 30px 0px 10px;
+}
+
+.button01 {
+	float: right;
+	font-size: 14px;
+	margin: 2px 5px;
+	width: 68px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	font-weight: bold;
+	color: #f24e06;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-image: -moz-linear-gradient(top, #faedbb 0%, #fae3bb 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #faedbb),
+		color-stop(1, #fae3bb));
+	-webkit-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	-moz-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	border: 1px solid #f6d299;
+}
+
+.button02 {
+	float: right;
+	font-size: 14px;
+	width: 68px;
+	height: 30px;
+	text-align: center;
+	color: #ffffff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-image: -moz-linear-gradient(top, #75c114 0%, #54a707 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #75c114),
+		color-stop(1, #54a707));
+	-webkit-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	-moz-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+}
+
+.dialogbox {
+	height: 370px;
+	padding: 10px 18px;
+	overflow: auto;
+	display: block;
+}
+
+.dialogbox li {
+	
+}
+
+.dialogbox em {
+	padding-right: 15px;
+}
+
+.indent {
+	padding-left: 1em
+}
+
+.inputbox {
+	background: #f5f5f5;
+	border-top: 1px solid #e2e1dd;
+	padding: 15px;
+	overflow: hidden;
+	height: 100px;
+}
+
+.shuruk {
+	border: 1px solid #dcdcdc;
+	height: 68px;
+	background: #FFF;
+	width: 100%;
+	overflow-y: hidden;
+}
+
+.shuomin {
+	text-align: right;
+	padding: 10px 5px;
+	line-height: 30px;
+}
+
+.login {
+	margin: 76px 40px 70px;
+	padding: 34px 22px 60px;
+	width: 200px;
+	height: 222px;
+	border: 1px solid #f3f3f3;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-image: -moz-linear-gradient(top, #fefefc 0%, #f5f5f5 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefc),
+		color-stop(1, #f5f5f5));
+	-webkit-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	-moz-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+}
+
+.login ul li {
+	margin: 22px 0px 0px;
+	display: block;
+	overflow: hidden;
+	padding: 0px;
+}
+
+.addr-add-ipt {
+	width: 100%;
+	padding: 5px 5px;
+	border: 1px solid #e5e5e5;
+	font-size: 10px;
+	line-height: 20px;
+	color: #c5c5c5;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.yhName {
+	padding-left: 28px;
+	background: url(../images/yhName.jpg) #FFF no-repeat 5px;
+}
+
+.yhPass {
+	padding-left: 28px;
+	background: url(../images/yhPass.jpg) #FFF no-repeat 5px;
+}
+
+/*按钮样式*/
+.org-btn {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #469fb5;
+	font-size: 14px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-image: -moz-linear-gradient(top, #fefefc 0%, #d7e5eb 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefc),
+		color-stop(1, #d7e5eb));
+	-webkit-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	-moz-box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	box-shadow: 0 1px 1px rgba(220, 233, 240, 0.75);
+	border: 1px solid #bed1d8;
+}
+
+.org-btn:hover {
+	color: #469fb5;
+	background-image: -moz-linear-gradient(top, #d7e5eb 0%, #fefefc 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d7e5eb),
+		color-stop(1, #fefefc));
+}
+
+.w-full {
+	width: 100%;
+}
+
+/*底部样式*/
+.foot {
+	background: #444444;
+	text-align: center;
+	padding: 5px 0px;
+	color: #c6c8ca;
+	font-size: 12px;
+	line-height: 30px;
+}
