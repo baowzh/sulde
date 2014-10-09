@@ -530,5 +530,18 @@
 		
 		</dynamic>
 	</select>
+	<select id="getRecentLoginUsers" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select * from user where  <![CDATA[  userkind<>2 ]]>
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="startDate">
+			<![CDATA[regdate>=#startDate#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+			<![CDATA[regdate<=#endDate#]]>
+			</isNotNull>
+		</dynamic>
+		order by logindate desc limit #startindex#, #fechcount#
+	</select>
 
 </sqlMap>

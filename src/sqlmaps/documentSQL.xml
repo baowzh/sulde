@@ -3,72 +3,75 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="document">
-	<typeAlias alias="DocumentValue" type="com.mongolia.website.model.DocumentValue"/>	
-	<typeAlias alias="ChannelDocValue" type="com.mongolia.website.model.ChannelDocValue"/>	
-	<typeAlias alias="MessageValue" type="com.mongolia.website.model.MessageValue"/>
-	<typeAlias alias="ShareResourceValue" type="com.mongolia.website.model.ShareResourceValue"/>
-	<typeAlias alias="MarkedResourceValue" type="com.mongolia.website.model.MarkedResourceValue"/>
-	<typeAlias alias="TopDocumentValue" type="com.mongolia.website.model.TopDocumentValue"/>
+	<typeAlias alias="DocumentValue" type="com.mongolia.website.model.DocumentValue" />
+	<typeAlias alias="ChannelDocValue" type="com.mongolia.website.model.ChannelDocValue" />
+	<typeAlias alias="MessageValue" type="com.mongolia.website.model.MessageValue" />
+	<typeAlias alias="ShareResourceValue"
+		type="com.mongolia.website.model.ShareResourceValue" />
+	<typeAlias alias="MarkedResourceValue"
+		type="com.mongolia.website.model.MarkedResourceValue" />
+	<typeAlias alias="TopDocumentValue"
+		type="com.mongolia.website.model.TopDocumentValue" />
 	<insert id="addDocumentValue" parameterClass="DocumentValue">
-    insert into document (
-            DOCID,
-            DOCCHANNEL,
-            DOCTYPE ,
-            DOCTITLE ,
-            DOCSOURCE ,
-            DOCSTATUS ,
-            DOCCONTENT ,
-            DOCHTMLCON,
-            DOCABSTRACT ,
-            DOCKEYWORDS ,
-            DOCAUTHOR ,
-            DOCPUBURL ,
-            DOCPUBTIME ,
-            DOCRELTIME ,
-            CRUSER ,
-            CRTIME,
-            DOCWORDSCOUNT ,
-            TITLECOLOR ,
-            TEMPLATEID ,
-            HITSCOUNT ,
-            DOCPUBHTMLCON ,
-            SUBDOCTITLE ,
-            ATTACHPIC ,
-            DOCFILENAME ,
-            DOCSOURCENAME,
-            userid
-       )  values( #docid#,
-            #docchannel#,
-            #doctype#,
-            #doctitle#,
-            #docsource#,
-            #docstatus#,
-            #doccontent#,
-            #dochtmlcon#,
-            #docabstract#,
-            #dockeywords#,
-            #docauthor#,
-            #docpuburl#,
-            #docpubtime#,
-            #docreltime#,
-            #cruser#,
-            #crtime#,
-            #docwordscount#,
-            #titlecolor#,
-            #templateid#,
-            #hitscount#,
-            #docpubhtmlcon#,
-            #subdoctitle#,
-            #attachpic#,
-            #docfilename#,
-            #docsourcename#,
-            #userid#
-     )
+		insert into document (
+		DOCID,
+		DOCCHANNEL,
+		DOCTYPE ,
+		DOCTITLE ,
+		DOCSOURCE ,
+		DOCSTATUS ,
+		DOCCONTENT ,
+		DOCHTMLCON,
+		DOCABSTRACT ,
+		DOCKEYWORDS ,
+		DOCAUTHOR ,
+		DOCPUBURL ,
+		DOCPUBTIME ,
+		DOCRELTIME ,
+		CRUSER ,
+		CRTIME,
+		DOCWORDSCOUNT ,
+		TITLECOLOR ,
+		TEMPLATEID ,
+		HITSCOUNT ,
+		DOCPUBHTMLCON ,
+		SUBDOCTITLE ,
+		ATTACHPIC ,
+		DOCFILENAME ,
+		DOCSOURCENAME,
+		userid
+		) values( #docid#,
+		#docchannel#,
+		#doctype#,
+		#doctitle#,
+		#docsource#,
+		#docstatus#,
+		#doccontent#,
+		#dochtmlcon#,
+		#docabstract#,
+		#dockeywords#,
+		#docauthor#,
+		#docpuburl#,
+		#docpubtime#,
+		#docreltime#,
+		#cruser#,
+		#crtime#,
+		#docwordscount#,
+		#titlecolor#,
+		#templateid#,
+		#hitscount#,
+		#docpubhtmlcon#,
+		#subdoctitle#,
+		#attachpic#,
+		#docfilename#,
+		#docsourcename#,
+		#userid#
+		)
 	</insert>
 	<select id="getUserDocList" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-       select * from document
-		<dynamic prepend="where" >
+		select * from document
+		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docid">
 				docid=#docid#
 			</isNotNull>
@@ -88,11 +91,12 @@
 				doctype=#doctype#
 			</isNotNull>
 			<isNotNull prepend="and" property="top">
-				exists(select 1 from topdocument  where topdocument.docid=document.docid and topdocument.type=#top#
+				exists(select 1 from topdocument where
+				topdocument.docid=document.docid and topdocument.type=#top#
 			<![CDATA[and #currentday#>= topdocument.startdate and  #currentday#<=topdocument.enddate]]>
-				 )
+				)
 			</isNotNull>
-			
+
 			<isNotNull prepend="and" property="authorname">
 			<![CDATA[instr(DOCAUTHOR,trim(#authorname#))>0]]>
 			</isNotNull>
@@ -109,8 +113,8 @@
 	</select>
 	<select id="paingUserDocList" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-       select * from document
-		<dynamic prepend="where" >
+		select * from document
+		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docid">
 				docid=#docid#
 			</isNotNull>
@@ -130,11 +134,12 @@
 				doctype=#doctype#
 			</isNotNull>
 			<isNotNull prepend="and" property="top">
-				exists(select 1 from topdocument  where topdocument.docid=document.docid and topdocument.type=#top#
+				exists(select 1 from topdocument where
+				topdocument.docid=document.docid and topdocument.type=#top#
 			<![CDATA[and #currentday#>= topdocument.startdate and  #currentday#<=topdocument.enddate]]>
-				 )
+				)
 			</isNotNull>
-			
+
 			<isNotNull prepend="and" property="authorname">
 			<![CDATA[instr(DOCAUTHOR,trim(#authorname#))>0]]>
 			</isNotNull>
@@ -148,12 +153,12 @@
 			<![CDATA[crtime<=#endcrtime#]]>
 			</isNotNull>
 		</dynamic>
-		  order by crtime asc limit #startindex#, #displaydoccount#
+		order by crtime asc limit #startindex#, #displaydoccount#
 	</select>
 	<select id="getUserDocCount" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
-       select count(1) from document
-		<dynamic prepend="where" >
+		select count(1) from document
+		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docid">
 				docid=#docid#
 			</isNotNull>
@@ -173,11 +178,12 @@
 				doctype=#doctype#
 			</isNotNull>
 			<isNotNull prepend="and" property="top">
-				exists(select 1 from topdocument  where topdocument.docid=document.docid and topdocument.type=#top#
+				exists(select 1 from topdocument where
+				topdocument.docid=document.docid and topdocument.type=#top#
 			<![CDATA[and #currentday#>= topdocument.startdate and  #currentday#<=topdocument.enddate]]>
-				 )
+				)
 			</isNotNull>
-			
+
 			<isNotNull prepend="and" property="authorname">
 			<![CDATA[instr(DOCAUTHOR,trim(#authorname#))>0]]>
 			</isNotNull>
@@ -189,29 +195,36 @@
 			</isNotNull>
 			<isNotNull prepend="and" property="endcrtime">
 			<![CDATA[crtime<=#endcrtime#]]>
-			</isNotNull>	
+			</isNotNull>
 		</dynamic>
 	</select>
-	<select id="getDistinctDocChannels" parameterClass="java.util.Map" resultClass="Channel" >
-		select DISTINCT a.* from channel a,document b where  a.CHANNELID=b.DOCCHANNEL and b.DOCSTATUS=1
+	<select id="getDistinctDocChannels" parameterClass="java.util.Map"
+		resultClass="Channel">
+		select DISTINCT a.* from channel a,document b
+		where a.CHANNELID=b.DOCCHANNEL and b.DOCSTATUS=1
 	</select>
 	<insert id="addChannelDocValue" parameterClass="ChannelDocValue">
-		insert into  channeldoc(channelid,docid,achievement,imgid) values(#channelid#,#docid#,#priority#,#imgid#)
+		insert into
+		channeldoc(channelid,docid,achievement,imgid)
+		values(#channelid#,#docid#,#priority#,#imgid#)
 	</insert>
-	<select id="getChannelDoc" parameterClass="java.util.Map"  resultClass="DocumentValue">
+	<select id="getChannelDoc" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
 		SELECT
-         a.doctitle,
-         b.docid
-        from document a, channeldoc b
-        where a.DOCCHANNEL=b.channelid
-        and a.DOCID=b.docid
+		a.doctitle,
+		b.docid
+		from document a, channeldoc b
+		where a.DOCCHANNEL=b.channelid
+		and a.DOCID=b.docid
 		<isNotNull prepend="and" property="channelid">
 			b.channelid=#channelid#
 		</isNotNull>
 	</select>
-	<select id="pagingquerydoc" parameterClass="com.mongolia.website.model.PaingModel" resultClass="DocumentValue">
-		SELECT document.*,IFNULL(document.readcount,0) as  ireadcount  FROM document 
-		<dynamic prepend="where" >
+	<select id="pagingquerydoc" parameterClass="com.mongolia.website.model.PaingModel"
+		resultClass="DocumentValue">
+		SELECT document.*,IFNULL(document.readcount,0) as ireadcount FROM
+		document
+		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docchannel">
 				docchannel=#docchannel#
 			</isNotNull>
@@ -225,15 +238,18 @@
 				userid=#userid#
 			</isNotNull>
 			<isNotNull prepend="and" property="imggroupid">
-				exists(select 1 from imggroup,img where imggroup.imggroupid=img.imggroupid and img.imgid=document.docid and imggroup.imggroupid=#imggroupid# )
+				exists(select 1 from
+				imggroup,img where imggroup.imggroupid=img.imggroupid and
+				img.imgid=document.docid and imggroup.imggroupid=#imggroupid# )
 			</isNotNull>
-			
+
 		</dynamic>
-		    ORDER BY document.DOCRELTIME desc  LIMIT #startrow#, #endrow#
+		ORDER BY document.DOCRELTIME desc LIMIT #startrow#, #endrow#
 	</select>
-	<select id="getRowCount" parameterClass="com.mongolia.website.model.PaingModel" resultClass="java.lang.Integer">
-		SELECT count(1) FROM document 
-		<dynamic prepend="where" >
+	<select id="getRowCount" parameterClass="com.mongolia.website.model.PaingModel"
+		resultClass="java.lang.Integer">
+		SELECT count(1) FROM document
+		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docchannel">
 				docchannel=#docchannel#
 			</isNotNull>
@@ -247,52 +263,56 @@
 				docstatus=#docstatus#
 			</isNotNull>
 			<isNotNull prepend="and" property="imggroupid">
-				exists(select 1 from imggroup,img where imggroup.imggroupid=img.imggroupid and img.imgid=document.docid and imggroup.imggroupid=#imggroupid# )
+				exists(select 1 from
+				imggroup,img where imggroup.imggroupid=img.imggroupid and
+				img.imgid=document.docid and imggroup.imggroupid=#imggroupid# )
 			</isNotNull>
 		</dynamic>
 	</select>
 	<update id="addreadertodoc" parameterClass="java.util.Map">
-		update  document set readcount=IFNULL(readcount,0)+1 where docid=#docid#
+		update document set
+		readcount=IFNULL(readcount,0)+1 where docid=#docid#
 	</update>
 	<insert id="addMessageValue" parameterClass="MessageValue">
-	insert into message (
-             messageid,
-	         messagesenderid,
-	         messagesendername,
-	         messagecont,	         
-	         sendtime,
-	         userid,
-	         resourcekind,
-	         resourceid,
-	         messtime,
-	         messtype,
-	         received,
-	         hidden
-       )values(
-        #messageid#,
-	         #messagesenderid#,
-	         #messagesendername#,
-	         #messagecont#,	        
-	         #sendtime#,
-	         #userid#,
-	         #resourcekind#,
-	         #resourceid#,
-	         #messtime#,
-	         #messtype#,
-	         0,
-	         #hidden#
-       )
+		insert into message (
+		messageid,
+		messagesenderid,
+		messagesendername,
+		messagecont,
+		sendtime,
+		userid,
+		resourcekind,
+		resourceid,
+		messtime,
+		messtype,
+		received,
+		hidden
+		)values(
+		#messageid#,
+		#messagesenderid#,
+		#messagesendername#,
+		#messagecont#,
+		#sendtime#,
+		#userid#,
+		#resourcekind#,
+		#resourceid#,
+		#messtime#,
+		#messtype#,
+		0,
+		#hidden#
+		)
 	</insert>
-	<select id="getResourceCommentList" parameterClass="java.util.Map" resultClass="MessageValue">
+	<select id="getResourceCommentList" parameterClass="java.util.Map"
+		resultClass="MessageValue">
 		SELECT message.*,user.artname FROM message ,user where
 		message.userid=USER.userid
-		<dynamic prepend="and" >
+		<dynamic prepend="and">
 			<isNotNull prepend="and" property="resourceid">
 				resourceid=#resourceid#
 			</isNotNull>
 			<isNotNull prepend="and" property="resourcekind">
 				resourcekind=#resourcekind#
-			</isNotNull>	
+			</isNotNull>
 			<isNotNull prepend="and" property="userid">
 				message.userid=#userid#
 			</isNotNull>
@@ -310,74 +330,82 @@
 			</isEqual>
 
 		</dynamic>
-		    ORDER BY message.sendtime desc
+		ORDER BY message.sendtime desc
 	</select>
 	<insert id="addShareResourceValue" parameterClass="ShareResourceValue">
-	insert into sharedresource (
-             originalauthorid,
-	         userid,
-	         resourceid,
-	         resourcekind,
-	         sharedate
-       )values(
-             #originalauthorid#,
-	         #userid#,
-	         #resourceid#,
-	         #resourcekind#,
-	         #sharedate#
-       )
+		insert into sharedresource (
+		originalauthorid,
+		userid,
+		resourceid,
+		resourcekind,
+		sharedate
+		)values(
+		#originalauthorid#,
+		#userid#,
+		#resourceid#,
+		#resourcekind#,
+		#sharedate#
+		)
 	</insert>
 	<update id="docisshared" parameterClass="java.util.Map">
-		UPDATE document set document.sharecount=IFNULL(document.sharecount,0)+1 where document.DOCID=#docid#
+		UPDATE document set
+		document.sharecount=IFNULL(document.sharecount,0)+1 where
+		document.DOCID=#docid#
 	</update>
 	<insert id="addMarkedResourceValue" parameterClass="MarkedResourceValue">
-	insert into markedresource (
-             originalauthorid,
-	         userid,
-	         resourceid,
-	         resourcekind,
-	         markeddate
-       )values(
-             #originalauthorid#,
-	         #userid#,
-	         #resourceid#,
-	         #resourcekind#,
-	         #markeddate#
-       )
+		insert into markedresource (
+		originalauthorid,
+		userid,
+		resourceid,
+		resourcekind,
+		markeddate
+		)values(
+		#originalauthorid#,
+		#userid#,
+		#resourceid#,
+		#resourcekind#,
+		#markeddate#
+		)
 	</insert>
 	<update id="docismarked" parameterClass="java.util.Map">
-		UPDATE document set document.markcount=IFNULL(document.markcount,0)+1 where document.DOCID=#docid#
+		UPDATE document set
+		document.markcount=IFNULL(document.markcount,0)+1 where
+		document.DOCID=#docid#
 	</update>
-	<select id="getResourceCommentCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	<select id="getResourceCommentCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
 		SELECT count(1) FROM message ,user where
 		message.messagesenderid=USER.userid
-		<dynamic prepend="and" >
+		<dynamic prepend="and">
 			<isNotNull prepend="and" property="resourceid">
 				resourceid=#resourceid#
 			</isNotNull>
 			<isNotNull prepend="and" property="resourcekind">
 				resourcekind=#resourcekind#
-			</isNotNull>	
+			</isNotNull>
 		</dynamic>
-		    ORDER BY message.sendtime desc
+		ORDER BY message.sendtime desc
 	</select>
 	<update id="docisVisited" parameterClass="java.util.Map">
-		UPDATE document set document.readcount=IFNULL(document.readcount,0)+1 where document.DOCID=#docid#
+		UPDATE document set
+		document.readcount=IFNULL(document.readcount,0)+1 where
+		document.DOCID=#docid#
 	</update>
-	<select id="getFriendsDocList" parameterClass="java.util.Map" resultClass="DocumentValue">		
-   select *
-      from document
-      where exists (select 1
-          from friend
-         where friend.friendid = document.userid
-           and friend.userid = #userid#)
+	<select id="getFriendsDocList" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
+		select *
+		from document
+		where exists (select 1
+		from friend
+		where friend.friendid = document.userid
+		and friend.userid = #userid#)
 	<![CDATA[  and document.DOCRELTIME >= #lastTenDay# ]]>
 	<![CDATA[  and document.DOCRELTIME <= #currentDate#]]>
-      order by DOCRELTIME LIMIT #start#, #end#
+		order by DOCRELTIME LIMIT #start#, #end#
 	</select>
 	<update id="updDocumentValue" parameterClass="DocumentValue">
-	update 	 document set DOCCONTENT=#doccontent# 
-		<dynamic prepend="," >
+		update document set DOCCONTENT=#doccontent#
+		<dynamic prepend=",">
 			<isNotNull prepend="," property="doctitle">
 				DOCTITLE= #doctitle#
 			</isNotNull>
@@ -391,118 +419,137 @@
 				DOCABSTRACT= #docabstract#
 			</isNotNull>
 		</dynamic>
-	where docid=#docid# and userid=#userid#
+		where docid=#docid# and userid=#userid#
 	</update>
-	<delete id="delResourceComment"  parameterClass="java.util.Map">
-		delete from message where   resourceid=#resourceid# and resourcekind=#resourcekind#
-		<dynamic prepend="and" >
+	<delete id="delResourceComment" parameterClass="java.util.Map">
+		delete from message where resourceid=#resourceid# and
+		resourcekind=#resourcekind#
+		<dynamic prepend="and">
 			<isNotNull prepend="and" property="messageid">
 				messageid=#messageid#
 			</isNotNull>
 		</dynamic>
 	</delete>
-	<delete id="delDocument"  parameterClass="java.util.Map">
-		delete from document where docid=#docid# and userid=#userid# 
+	<delete id="delDocument" parameterClass="java.util.Map">
+		delete from document
+		where docid=#docid# and userid=#userid#
 	</delete>
-	<delete id="delDocumentByUserid"  parameterClass="java.util.Map">
-		delete from document where userid=#userid# 
+	<delete id="delDocumentByUserid" parameterClass="java.util.Map">
+		delete from
+		document where userid=#userid#
 	</delete>
-	<delete id="deleteFriendByUserid"  parameterClass="java.util.Map">
-		delete from friend where userid=#userid# 
+	<delete id="deleteFriendByUserid" parameterClass="java.util.Map">
+		delete from
+		friend where userid=#userid#
 	</delete>
-	<delete id="deleteImgByUserid"  parameterClass="java.util.Map">
-		delete from img where userid=#userid# 
+	<delete id="deleteImgByUserid" parameterClass="java.util.Map">
+		delete from img
+		where userid=#userid#
 	</delete>
-	<delete id="deleteImgGroupByUserid"  parameterClass="java.util.Map">
-		delete from imggroup where userid=#userid# and imggroupid=#imggroupid#
+	<delete id="deleteImgGroupByUserid" parameterClass="java.util.Map">
+		delete from
+		imggroup where userid=#userid# and imggroupid=#imggroupid#
 	</delete>
-	<delete id="deleteMarkeResourceByUserid"  parameterClass="java.util.Map">
-		delete from markedresource where userid=#userid# 
+	<delete id="deleteMarkeResourceByUserid" parameterClass="java.util.Map">
+		delete
+		from markedresource where userid=#userid#
 	</delete>
-	<delete id="deleteMessageByUserid"  parameterClass="java.util.Map">
-		delete from message where userid=#userid# 
+	<delete id="deleteMessageByUserid" parameterClass="java.util.Map">
+		delete from
+		message where userid=#userid#
 	</delete>
-	<delete id="deleteShareResourceByUserid"  parameterClass="java.util.Map">
-		delete from sharedresource where userid=#userid# 
+	<delete id="deleteShareResourceByUserid" parameterClass="java.util.Map">
+		delete
+		from sharedresource where userid=#userid#
 	</delete>
-	<delete id="deleteVisitLogByUserid"  parameterClass="java.util.Map">
-		delete from visitor where userid=#userid# 
+	<delete id="deleteVisitLogByUserid" parameterClass="java.util.Map">
+		delete from
+		visitor where userid=#userid#
 	</delete>
-	<delete id="delSharedResource"  parameterClass="java.util.Map">
-		delete from sharedresource where resourceid=#resourceid# and resourcekind=#resourcekind# 
+	<delete id="delSharedResource" parameterClass="java.util.Map">
+		delete from
+		sharedresource where resourceid=#resourceid# and
+		resourcekind=#resourcekind#
 	</delete>
-	<delete id="delMarkedresource"  parameterClass="java.util.Map">
-		delete from markedresource where resourceid=#resourceid# and resourcekind=#resourcekind# 
+	<delete id="delMarkedresource" parameterClass="java.util.Map">
+		delete from
+		markedresource where resourceid=#resourceid# and
+		resourcekind=#resourcekind#
 	</delete>
 	<update id="checkdocument" parameterClass="java.util.Map">
-		UPDATE document set document.DOCSTATUS=#status# where document.DOCID=#docid#
+		UPDATE document set
+		document.DOCSTATUS=#status# where document.DOCID=#docid#
 	</update>
 	<insert id="createtopdocument" parameterClass="TopDocumentValue">
-	insert into topdocument (
-          docid  ,
-          type   ,
-          startdate ,
-          enddate  ,
-          playindex  ,
-          docimg ,
-          checkuserid ,
-          groupid
-          )values(
-          #docid#  ,
-          #toptype#   ,
-          #startdate# ,
-          #enddate#  ,
-          #playindex#  ,
-          #docimg# ,
-          #checkuserid# ,
-          #groupid#
-          ) 
+		insert into topdocument (
+		docid ,
+		type ,
+		startdate ,
+		enddate ,
+		playindex ,
+		docimg ,
+		checkuserid ,
+		groupid
+		)values(
+		#docid# ,
+		#toptype# ,
+		#startdate# ,
+		#enddate# ,
+		#playindex# ,
+		#docimg# ,
+		#checkuserid# ,
+		#groupid#
+		)
 	</insert>
-	
-	<select id="getTopDocuments"  parameterClass="java.util.Map" resultClass="TopDocumentValue" >
-	  select a.*,b.doctitle as title from topdocument a,document b where a.docid=b.docid
-		<dynamic prepend="and" >
+
+	<select id="getTopDocuments" parameterClass="java.util.Map"
+		resultClass="TopDocumentValue">
+		select a.*,b.doctitle as title from topdocument a,document b where
+		a.docid=b.docid
+		<dynamic prepend="and">
 			<isNotNull prepend="and" property="type">
-	  	    type=#type#
+				type=#type#
 			</isNotNull>
 			<isNotNull prepend="and" property="fetchDate">
 			<![CDATA[ startdate<=#fetchDate# and  enddate>=#fetchDate# ]]>
 			</isNotNull>
 			<isNotNull prepend="and" property="docid">
-	  	     docid=#docid#
+				docid=#docid#
 			</isNotNull>
 			<isNotNull prepend=" " property="limit">
-	  	    LIMIT 0, #limit#
+				LIMIT 0, #limit#
 			</isNotNull>
-			
-		</dynamic> 
+
+		</dynamic>
 	</select>
-	<select id="getMessageList" parameterClass="java.util.Map" resultClass="MessageValue">
-		SELECT   messageid    ,              
-                 messagesenderid ,            
-                 messagesendername ,        
-                 messagecont,
-                 messagesenderimgurl  ,       
-                 sendtime,               
-                 message.userid,                     
-                 resourcekind ,            
-                 resourceid  ,               
-                 messtime,                   
-                 received ,                  
-                 messtype,                  
-                 receiverid    
-             ,   if(#recorsend#=1,messagesendername,(select artname from user where user.userid=message.userid)) artname FROM message ,user 
-	     	
-		<dynamic prepend="where" >
+	<select id="getMessageList" parameterClass="java.util.Map"
+		resultClass="MessageValue">
+		SELECT messageid ,
+		messagesenderid ,
+		messagesendername ,
+		messagecont,
+		messagesenderimgurl ,
+		sendtime,
+		message.userid,
+		resourcekind ,
+		resourceid ,
+		messtime,
+		received ,
+		messtype,
+		receiverid
+		, if(#recorsend#=1,messagesendername,(select artname from user where
+		user.userid=message.userid)) artname FROM message ,user
+
+		<dynamic prepend="where">
 			<isEqual prepend="and" property="recorsend" compareValue="1">
-				 message.userid=USER.userid
-				and messagesenderid!=#userid#	
+				message.userid=USER.userid
+				and messagesenderid!=#userid#
 			</isEqual>
 			<isEqual prepend="and" property="recorsend" compareValue="2">
-				 message.messagesenderid=USER.userid	
+				message.messagesenderid=USER.userid
 				and message.userid!=#userid#
 			</isEqual>
-			
+
 			<isNotNull prepend="and" property="messagesenderid">
 				message.messagesenderid=#messagesenderid#
 			</isNotNull>
@@ -518,103 +565,140 @@
 			<isNotNull prepend="and" property="messtype">
 				message.messtype=#messtype#
 			</isNotNull>
-			
+
 		</dynamic>
-		    ORDER BY message.sendtime desc
+		ORDER BY message.sendtime desc
 	</select>
-	<update id="confirmmess" parameterClass="java.util.Map" >
-		update message set message.received=1 where message.messageid=#messageid#
+	<update id="confirmmess" parameterClass="java.util.Map">
+		update
+		message set message.received=1 where message.messageid=#messageid#
 	</update>
 	<select id="nextdoc" parameterClass="java.util.Map" resultClass="DocumentValue">
-	  select * from document 
-	  <dynamic prepend="where" >
-	  	   <isNotNull prepend="and" property="imggroupid">
-			exists(select 1 from  img,imggroup where img.imggroupid=imggroup.imggroupid
-			and img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
+		select * from document
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="imggroupid">
+				exists(select 1 from img,imggroup where img.imggroupid=imggroup.imggroupid
+				and img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
 			</isNotNull>
-			 <isNotNull prepend="and" property="docid">
+			<isNotNull prepend="and" property="docid">
 			 	<![CDATA[  document.docid>#docid# ]]>
-			 </isNotNull>
-	  </dynamic>
-        order by document.docid desc limit 1 
-	</select>
-	<select id="previosdoc" parameterClass="java.util.Map" resultClass="DocumentValue">
-	  select * from document 
-	  <dynamic prepend="where" >
-	  	   <isNotNull prepend="and" property="imggroupid">
-			exists(select 1 from  img,imggroup where img.imggroupid=imggroup.imggroupid
-			and img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
 			</isNotNull>
-			 <isNotNull prepend="and" property="docid">
+		</dynamic>
+		order by document.docid desc limit 1
+	</select>
+	<select id="previosdoc" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
+		select * from document
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="imggroupid">
+				exists(select 1 from img,imggroup where img.imggroupid=imggroup.imggroupid
+				and img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
+			</isNotNull>
+			<isNotNull prepend="and" property="docid">
 			 	<![CDATA[  document.docid<#docid# ]]>
-			 </isNotNull>
-	  </dynamic>
-        order by document.docid asc limit 1 
+			</isNotNull>
+		</dynamic>
+		order by document.docid asc limit 1
 	</select>
-	<select id="messageValueContent" parameterClass="java.util.Map"  resultClass="MessageValue" >
-	  select * from message where messageid=#messid#
+	<select id="messageValueContent" parameterClass="java.util.Map"
+		resultClass="MessageValue">
+		select * from message where messageid=#messid#
 	</select>
-	<select id="getMessageCount" parameterClass="java.util.Map"  resultClass="java.lang.Integer" >
-	  select count(1) from message where userid=#userid# and messtype in (3,4)
+	<select id="getMessageCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from message where userid=#userid# and messtype in (3,4)
 	</select>
-	<select id="isshared" parameterClass="java.util.Map"  resultClass="java.lang.Integer" >
-	  select count(1) from sharedresource where userid=#userid# and resourceid=#resourceid#
+	<select id="isshared" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from sharedresource where userid=#userid# and
+		resourceid=#resourceid#
 	</select>
-	<select id="ismarked" parameterClass="java.util.Map"  resultClass="java.lang.Integer" >
-	  select count(1) from markedresource where userid=#userid# and resourceid=#resourceid#
+	<select id="ismarked" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from markedresource where userid=#userid# and
+		resourceid=#resourceid#
 	</select>
-	
-	<select id="getSharedDocCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
-	  select count(1) from sharedresource a , document b where a.resourceid=b.docid and
-	  b.userid=a.originalauthorid
-	  <dynamic prepend="and" >
-	  	   <isNotNull prepend="and" property="userid">
-			 a.userid=#userid#
+
+	<select id="getSharedDocCount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from sharedresource a , document b where
+		a.resourceid=b.docid and
+		b.userid=a.originalauthorid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				a.userid=#userid#
 			</isNotNull>
 			<isNotNull prepend="and" property="doctype">
-			 a.resourcekind=#doctype#
+				a.resourcekind=#doctype#
 			</isNotNull>
-	  </dynamic>
+		</dynamic>
 	</select>
 	<!-- 获取分享作文列表 -->
-	<select id="getSharedDocs" parameterClass="java.util.Map" resultClass="DocumentValue">
-	  select b.* from sharedresource a , document b where a.resourceid=b.docid and
-	  b.userid=a.originalauthorid
-	  <dynamic prepend="and" >
-	  	   <isNotNull prepend="and" property="userid">
-			 a.userid=#userid#
+	<select id="getSharedDocs" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
+		select b.* from sharedresource a , document b where
+		a.resourceid=b.docid and
+		b.userid=a.originalauthorid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				a.userid=#userid#
 			</isNotNull>
-			 <isNotNull prepend="and" property="doctype">
-			 b.doctype=#doctype#
+			<isNotNull prepend="and" property="doctype">
+				b.doctype=#doctype#
 			</isNotNull>
-	  </dynamic>
-	   order by a.sharedate LIMIT #start#, #rowcount#
+		</dynamic>
+		order by a.sharedate LIMIT #start#, #rowcount#
 	</select>
-	<!-- 获取分享图片列表-->
-	<select id="getSharedImgs" parameterClass="java.util.Map" resultClass="com.mongolia.website.model.ImgValue">
-	  select b.* from sharedresource a , img b where a.resourceid=b.imgid and
-	  b.imgid=a.originalauthorid
-	  <dynamic prepend="and" >
-	  	   <isNotNull prepend="and" property="userid">
-			 a.userid=#userid#
+	<!-- 获取分享图片列表 -->
+	<select id="getSharedImgs" parameterClass="java.util.Map"
+		resultClass="com.mongolia.website.model.ImgValue">
+		select b.* from sharedresource a , img b where a.resourceid=b.imgid
+		and
+		b.imgid=a.originalauthorid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="userid">
+				a.userid=#userid#
 			</isNotNull>
-			 <isNotNull prepend="and" property="doctype">
-			 b.doctype=#doctype#
+			<isNotNull prepend="and" property="doctype">
+				b.doctype=#doctype#
 			</isNotNull>
-	  </dynamic>
-	   order by a.sharedate LIMIT #start#, #rowcount#
+		</dynamic>
+		order by a.sharedate LIMIT #start#, #rowcount#
 	</select>
 	<update id="setcommentcount" parameterClass="java.util.Map">
 		update document set docid=#docid#
-		 <dynamic prepend="," >
-	  	   <isNotNull prepend="," property="add">
-	  	   commcount=IFNULL(commcount,0)+1
-	  	   </isNotNull>
-	  	    <isNotNull prepend="," property="sub">
-	  	   commcount=IFNULL(commcount,0)-1
-	  	   </isNotNull>
-	  	  </dynamic>
-		  where docid=#docid#
+		<dynamic prepend=",">
+			<isNotNull prepend="," property="add">
+				commcount=IFNULL(commcount,0)+1
+			</isNotNull>
+			<isNotNull prepend="," property="sub">
+				commcount=IFNULL(commcount,0)-1
+			</isNotNull>
+		</dynamic>
+		where docid=#docid#
 	</update>
-	
+
+	<select id="getRecentDocComm" parameterClass="java.util.Map"
+		resultClass="MessageValue">
+		SELECT message.*,user.artname FROM message ,user where
+		message.userid=USER.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="resourceid">
+				resourceid=#resourceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="resourcekind">
+				resourcekind=#resourcekind#
+			</isNotNull>
+			<isNotNull prepend="and" property="messtype">
+				messtype=#messtype#
+			</isNotNull>
+		</dynamic>
+		ORDER BY message.sendtime desc LIMIT #startindex#, #fechcount#
+	</select>
+	<select id="getTopDocumentWithClickCount" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
+		select * from document order by document.readcount desc limit
+		#startindex#,#fechcount#
+	</select>
+
 </sqlMap>
