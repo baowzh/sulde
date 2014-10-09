@@ -66,6 +66,8 @@ public class UserValue implements UserDetails {
 	private String nowhsien;
 	private String profession;
 	private Integer blogclass;
+	private String professioncode;
+	private String professionname;
 
 	public String getLastip() {
 		return lastip;
@@ -549,5 +551,22 @@ public class UserValue implements UserDetails {
 	public void setBlogclass(Integer blogclass) {
 		this.blogclass = blogclass;
 	}
+
+	public String getProfessioncode() {
+		return professioncode;
+	}
+
+	public void setProfessioncode(String professioncode) {
+		this.professioncode = professioncode;
+	}
+
+	public String getProfessionname() {
+		return professionname;
+	}
+
+	public void setProfessionname(String professionname) {
+		this.professionname = professionname;
+	}
+	
 
 }
