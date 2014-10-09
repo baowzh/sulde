@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.mongolia.website.dao.interfaces.UserManagerDao;
 import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
+import com.mongolia.website.model.ProfessionValue;
 import com.mongolia.website.model.UserValue;
 
 @Repository("userManagerDao")
@@ -109,6 +110,17 @@ public class UserManagerDaoImpl extends BaseDaoiBatis implements UserManagerDao 
 		queryparams.put("parentcode", parentcode);
 		queryparams.put("top", top);
 		return this.getSqlMapClientTemplate().queryForList("getDistrictValues",
+				queryparams);
+	}
+
+	@Override
+	public List<ProfessionValue> getProfessionValues(String professioncode,
+			String professionname) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> queryparams = new HashMap<String, Object>();
+		queryparams.put("professioncode", professioncode);
+		queryparams.put("professionname", professionname);
+		return this.getSqlMapClientTemplate().queryForList("getProfessions",
 				queryparams);
 	}
 

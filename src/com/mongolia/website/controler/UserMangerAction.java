@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
+import com.mongolia.website.model.ProfessionValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.ImgeUtil;
 import com.mongolia.website.util.StaticConstants;
@@ -266,6 +267,10 @@ public class UserMangerAction {
 			List<DistrictValue> districts = this.userManager.getDistrictValues(
 					null, null, "top");
 			map.put("districts", districts);
+			// 获取用户职业列表
+			List<ProfessionValue> professions = this.userManager
+					.getProfessionValues(null, null);
+			map.put("professions", professions);
 			// 获取地区信息
 			if (users != null && !users.isEmpty()) {
 				map.put("userinfo", users.get(0));

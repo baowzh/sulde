@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
+import com.mongolia.website.model.ProfessionValue;
 import com.mongolia.website.model.UserValue;
 
 public interface UserManagerDao extends BaseDao {
@@ -107,4 +108,14 @@ public interface UserManagerDao extends BaseDao {
 	 */
 	public List<DistrictValue> getDistrictValues(String districtcode,
 			String parentcode, String top) throws Exception;
+
+	/**
+	 * 获取职业信息
+	 * @param professioncode
+	 * @param professionname
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ProfessionValue> getProfessionValues(String professioncode,
+			String professionname) throws Exception;
 }

@@ -14,6 +14,7 @@ import com.mongolia.website.manager.ManagerException;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
+import com.mongolia.website.model.ProfessionValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.StaticConstants;
 import com.mongolia.website.util.UUIDMaker;
@@ -64,7 +65,7 @@ public class UserManagerImpl implements UserManager {
 				.equalsIgnoreCase(sysUserValue.getUsername())) {
 			if (userValue.getPassword().equalsIgnoreCase(
 					sysUserValue.getPassword())) {
-				// 
+				//
 				sysUserValue.setLogindate(new Date());
 				this.userManagerDao.updateUser(sysUserValue);
 				return true;
@@ -183,9 +184,18 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public List<DistrictValue> getDistrictValues(String districtcode,
-			String parentcode,String top) throws Exception {
+			String parentcode, String top) throws Exception {
 		// TODO Auto-generated method stub
-		return this.userManagerDao.getDistrictValues(districtcode, parentcode,top);
+		return this.userManagerDao.getDistrictValues(districtcode, parentcode,
+				top);
+	}
+
+	@Override
+	public List<ProfessionValue> getProfessionValues(String professioncode,
+			String professionname) throws Exception {
+		// TODO Auto-generated method stub
+		return this.userManagerDao.getProfessionValues(professioncode,
+				professionname);
 	}
 
 }
