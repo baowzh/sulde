@@ -9,6 +9,7 @@
 	<typeAlias alias="UserValue" type="com.mongolia.website.model.UserValue" />
 	<typeAlias alias="FriendNews" type="com.mongolia.website.model.FriendNews" />
 	<typeAlias alias="DistrictValue" type="com.mongolia.website.model.DistrictValue" />
+	<typeAlias alias="ProfessionValue" type="com.mongolia.website.model.ProfessionValue" />
 	<select id="getUser" parameterClass="java.util.Map" resultClass="User">
 		select
 		userid,
@@ -26,7 +27,7 @@
 		birthday,
 		unit,
 		province,
-	    nowprovince,
+		nowprovince,
 		phone,
 		qq,
 		email,
@@ -42,7 +43,20 @@
 		stoped,
 		stopeddate,
 		hsien,
-		nowhsien
+		nowhsien,
+		(select districtname
+		from district where districtcode=hsien ) as hsienname,
+		(select
+		districtname from district where districtcode=nowhsien ) as
+		nowhsienname,
+		(select districtname from district where
+		districtcode=province ) as provincename,
+		(select districtname from
+		district where districtcode=nowprovince ) as nowprovincename,
+		professioncode,
+		(select professionname from profession where
+		profession.professioncode=user.professioncode ) as professionname,
+		blogclass
 		from
 		user
 		<dynamic prepend="where">
@@ -99,7 +113,9 @@
 		age,
 		headimgsm,
 		hsien,
-		nowhsien
+		nowhsien,
+		professioncode,
+		blogclass
 		)
 		values
 		(
@@ -129,7 +145,9 @@
 		#age#,
 		#headimgsm#,
 		#hsien#,
-		#nowhsien#
+		#nowhsien#,
+		#professioncode#,
+		#blogclass#
 		)
 	</insert>
 
@@ -219,6 +237,12 @@
 			</isNotNull>
 			<isNotNull prepend="," property="nowhsien">
 				nowhsien=#nowhsien#
+			</isNotNull>
+			<isNotNull prepend="," property="professioncode">
+				professioncode=#professioncode#
+			</isNotNull>
+			<isNotNull prepend="," property="blogclass">
+				blogclass=#blogclass#
 			</isNotNull>
 		</dynamic>
 		where userid=#userid#
@@ -438,8 +462,8 @@
 		userkind,
 		birthday,
 		unit,
-	    province,
-	    nowprovince,
+		province,
+		nowprovince,
 		phone,
 		qq,
 		email,
@@ -455,7 +479,9 @@
 		stoped,
 		stopeddate,
 		hsien,
-		nowhsien
+		nowhsien,
+		professioncode,
+		blogclass
 		from
 		user
 		<dynamic prepend="where">
@@ -518,16 +544,17 @@
 		resultClass="DistrictValue">
 		select * from district
 		<dynamic prepend="where">
-		<isNotNull prepend="and" property="districtcode">
-		  districtcode=#districtcode#
-		</isNotNull>
-		<isNotNull prepend="and" property="parentcode">
-		parentcode=#parentcode#
-		</isNotNull>
-		<isNotNull prepend="and" property="top">
-		(parentcode='' or  parentcode is null)
-		</isNotNull>
-		
+			<isNotNull prepend="and" property="districtcode">
+				districtcode=#districtcode#
+			</isNotNull>
+			<isNotNull prepend="and" property="parentcode">
+				parentcode=#parentcode#
+			</isNotNull>
+			<isNotNull prepend="and" property="top">
+				(parentcode='' or
+				parentcode is null)
+			</isNotNull>
+
 		</dynamic>
 	</select>
 	<select id="getRecentLoginUsers" parameterClass="java.util.Map"
@@ -543,5 +570,16 @@
 		</dynamic>
 		order by logindate desc limit #startindex#, #fechcount#
 	</select>
-
+	<select id="getProfessions" parameterClass="java.util.Map"
+		resultClass="ProfessionValue">
+		select * from Profession
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="professioncode">
+				professioncode=#professioncode#
+			</isNotNull>
+			<isNotNull prepend="and" property="professionname">
+				professionname=#professionname#
+			</isNotNull>
+		</dynamic>
+	</select>
 </sqlMap>
