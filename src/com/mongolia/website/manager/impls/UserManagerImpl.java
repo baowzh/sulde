@@ -64,6 +64,9 @@ public class UserManagerImpl implements UserManager {
 				.equalsIgnoreCase(sysUserValue.getUsername())) {
 			if (userValue.getPassword().equalsIgnoreCase(
 					sysUserValue.getPassword())) {
+				// 
+				sysUserValue.setLogindate(new Date());
+				this.userManagerDao.updateUser(sysUserValue);
 				return true;
 			} else {
 				throw new Exception("3");

@@ -22,6 +22,7 @@ import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
 import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.ImgNew;
 import com.mongolia.website.model.ImgValue;
+import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PageChannelRelationValue;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.ProgramItem;
@@ -41,6 +42,8 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 	private WebResourceDao webResourceDao;
 	@Autowired
 	private WebPageManagerDao webPageManagerDao;
+	@Autowired
+	private SysConfig sysConfig;
 
 	@Override
 	public List<ProgramValue> getProgramList() throws Exception {
@@ -128,22 +131,22 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 			List<UserValue> toDelUser = new ArrayList<UserValue>();
 			for (UserValue user : users) {
 				for (UserValue topUser : topUsers) {
-					if (user.getUserid().equalsIgnoreCase(topUser.getUserid())) {						
+					if (user.getUserid().equalsIgnoreCase(topUser.getUserid())) {
 						toDelUser.add(user);
 					}
 				}
-				user.setWeeke(fechtime+1);
+				user.setWeeke(fechtime + 1);
 			}
 			users.removeAll(toDelUser);
 			topUsers.addAll(users);
 			fechtime++;
 		}
 		// 通过访问量进行排序
-		//if (topUsers != null && !topUsers.isEmpty()) {
-			// UserValue sortuser[]=new UserValue[topUsers.size()];
-			// topUsers.toArray(sortuser);
-			//topUsers=sortUserByVisitCount(topUsers);
-		//}
+		// if (topUsers != null && !topUsers.isEmpty()) {
+		// UserValue sortuser[]=new UserValue[topUsers.size()];
+		// topUsers.toArray(sortuser);
+		// topUsers=sortUserByVisitCount(topUsers);
+		// }
 
 		indexPageContent.put("topUsers", topUsers);
 		// 获取最近注册的12个用户列表(最多取4月之内的，4月之内的)
@@ -203,6 +206,18 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray
 				.fromObject(imgNews);
 		indexPageContent.put("pics", jsonArray.toString());
+		String sitename = sysConfig.getSitename();
+		if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {// 如果是altanhurd
+			List<UserValue> recentLoginUsers = this.webSiteVisitorDao
+					.getRecentLoginUsers(sysConfig.getRecentlogusercount()); // 获取最近登录用户列表
+			indexPageContent.put("recentLoginUsers", recentLoginUsers);
+			// 获取最新的评论信息
+			List<MessageValue> mess = this.webResourceDao.getRecentDocComm(
+					sysConfig.getRecentcommcount(),
+					StaticConstants.RESOURCE_TYPE_DOC,
+					StaticConstants.MESS_TYPE_COMM);
+			indexPageContent.put("recentDocComm", mess);
+		}
 		return indexPageContent;
 	}
 
@@ -265,7 +280,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 				} else {
 					return 0;
 				}
-				
+
 			}
 		});
 		toSortUsers = Arrays.asList(sortuser);

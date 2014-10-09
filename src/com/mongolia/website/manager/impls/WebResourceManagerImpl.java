@@ -38,6 +38,7 @@ import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.PaingVoteResult;
 import com.mongolia.website.model.QuestionValue;
 import com.mongolia.website.model.ShareResourceValue;
+import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.model.VisitorValue;
 import com.mongolia.website.model.VoteDetailForm;
@@ -58,6 +59,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	private WebSiteVisitorManager webSiteVisitorManager;
 	@Autowired
 	private ChannelManagerDao channelDao;
+	@Autowired
+	private SysConfig sysConfig;
 
 	@Override
 	public void doAddIImgGroup(ImgGrpupValue imgGrpupValue)
@@ -424,6 +427,17 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			}
 			List<VoteValue> votelist = this.getVoteList(params);
 			map.put("votelist", votelist);
+			String sitename = sysConfig.getSitename();
+			if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {// 如果是altanhurd
+				// 获取热门文章
+				List<DocumentValue> topDocuments = this.webResourceDao
+						.getTopDocuments(sysConfig.getTopdocumentcount());
+				map.put("topDocuments", topDocuments);
+				// 获取精选文章
+				List<TopDocumentValue> seleDocuments = this.webSiteVisitorManager
+						.getTopDocuments(StaticConstants.TOP_TYPE1, null, 7);
+				map.put("seleDocuments", seleDocuments);
+			}
 
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
