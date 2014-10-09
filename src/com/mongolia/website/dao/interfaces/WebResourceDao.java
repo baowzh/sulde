@@ -633,4 +633,24 @@ public interface WebResourceDao extends BaseDao {
 	 */
 	public void updimg(ImgValue imgValue) throws Exception;
 
+	/**
+	 * 获取最新的评论信息
+	 * 
+	 * @param messcount
+	 * @return
+	 * @throws Exception
+	 */
+	public List<MessageValue> getRecentDocComm(int messcount,
+			Integer resourcekind, Integer messtype) throws Exception;
+
+	/**
+	 * 获取热门文章
+	 * 
+	 * @param doccount
+	 * @return
+	 * @throws Exception
+	 */
+	public List<DocumentValue> getTopDocuments(Integer doccount)
+			throws Exception;
+
 }

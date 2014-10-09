@@ -54,7 +54,7 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 			@Override
 			public int compare(DocumentValue o1, DocumentValue o2) {
 				// TODO Auto-generated method stub
-				return o2.getIreadcount()-o1.getIreadcount();
+				return o2.getIreadcount() - o1.getIreadcount();
 			}
 
 		});
@@ -86,8 +86,6 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 			int startindex, int fetchcount) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> params = new HashMap<String, Object>();
-		// params.put("startDate", startDate);
-		// params.put("endDate", endDate);
 		params.put("startindex", startindex);
 		params.put("fechcount", fetchcount);
 		return this.getSqlMapClientTemplate().queryForList(
@@ -104,6 +102,18 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 		queryparams.put("limit", limit);
 		return this.getSqlMapClientTemplate().queryForList("getTopDocuments",
 				queryparams);
+	}
+
+	@Override
+	public List<UserValue> getRecentLoginUsers(Integer dispalycount)
+			throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("startindex", 0);
+		params.put("fechcount", dispalycount);
+		List<UserValue> users = this.getSqlMapClientTemplate().queryForList(
+				"getRecentLoginUsers", params);
+		return users;
 	}
 
 }

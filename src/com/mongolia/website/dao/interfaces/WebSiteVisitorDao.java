@@ -12,11 +12,31 @@ import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
 
 public interface WebSiteVisitorDao extends BaseDao {
+	/**
+	 * 获取栏目列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ProgramValue> getProgramList() throws Exception;
 
+	/**
+	 * 获取栏目明细
+	 * 
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ProgramItem> getProgramItemList(Map<String, Object> params)
 			throws Exception;
 
+	/**
+	 * 获取明细内容
+	 * 
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
 	public ProgramItem getItemContent(Map<String, Object> params)
 			throws Exception;
 
@@ -57,8 +77,8 @@ public interface WebSiteVisitorDao extends BaseDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<UserValue> getRecentRegistUsers(Date startDate, Date endDate,int startindex,int fetchcount)
-			throws Exception;
+	public List<UserValue> getRecentRegistUsers(Date startDate, Date endDate,
+			int startindex, int fetchcount) throws Exception;
 
 	/**
 	 * 获取排前面的
@@ -70,5 +90,14 @@ public interface WebSiteVisitorDao extends BaseDao {
 	 */
 	public List<TopDocumentValue> getTopDocuments(Date fetchDate, Integer Type,
 			String docid, Integer limit) throws Exception;
+
+	/**
+	 * 获取最近登录的用户列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserValue> getRecentLoginUsers(Integer dispalycount)
+			throws Exception;
 
 }
