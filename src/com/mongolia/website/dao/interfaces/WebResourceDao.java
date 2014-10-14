@@ -250,8 +250,8 @@ public interface WebResourceDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public List<MessageValue> getCommentList(String resourceid,
-			Integer resourceKind, String userid, String messid, String senderid)
-			throws Exception;
+			Integer resourceKind, String userid, String messid,
+			String senderid, Integer status) throws Exception;
 
 	/**
 	 * 
@@ -651,6 +651,26 @@ public interface WebResourceDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public List<DocumentValue> getTopDocuments(Integer doccount)
+			throws Exception;
+
+	/**
+	 * 获取评论列表
+	 * 
+	 * @param queryParams
+	 * @return
+	 * @throws Exception
+	 */
+	public List<MessageValue> getCommentList(Map<String, Object> queryParams)
+			throws Exception;
+
+	/**
+	 * 获取评论总行数
+	 * 
+	 * @param queryParams
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getCommentCount(Map<String, Object> queryParams)
 			throws Exception;
 
 }

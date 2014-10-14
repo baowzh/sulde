@@ -1,6 +1,5 @@
 package com.mongolia.website.model;
 
-import java.util.Date;
 
 public class QueryDocForm {
 	private Integer status;

@@ -50,6 +50,7 @@ import com.mongolia.website.controler.ckeditor.SamplePostData;
 import com.mongolia.website.manager.ManagerException;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebResourceManager;
+import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
 import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.ImgGrpupValue;
@@ -83,6 +84,9 @@ public class BlogManagerAction {
 	private UserManager userManager;
 	@Autowired
 	private WebSiteVisitorManager webSiteVisitorManager;
+	@Autowired
+	private WebSiteManager webSiteManager;
+
 	/**
 	 * 进入个人主页
 	 * 
@@ -218,7 +222,7 @@ public class BlogManagerAction {
 				userid = documentValue.getUserid();
 
 				comments = this.webResourceManager.getResourceCommentList(
-						docid, StaticConstants.DOCTYPE_DOC, null, null, null);
+						docid, StaticConstants.DOCTYPE_DOC, null, null, null,null);
 				// 计算每个comments 是否要显示
 			}
 			if (sessionUser != null
@@ -410,7 +414,12 @@ public class BlogManagerAction {
 			HttpServletResponse response, ModelMap map) {
 		String docid = request.getParameter("docid");
 		docid = docid.split(",")[0];
-		map.put("opertype", "2");
+		String opertype = request.getParameter("opertype");
+		if (opertype == null || opertype.equalsIgnoreCase("")) {
+			map.put("opertype", "2");
+		} else {
+			map.put("opertype", opertype);
+		}
 		map.put("docid", docid);
 		Integer agentkind = 0;
 		String user_agent_kind = request.getHeader("user-agent");
@@ -466,12 +475,17 @@ public class BlogManagerAction {
 	@RequestMapping("/updatedoc.do")
 	public ModelAndView updatedoc(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map, DocumentValue docValue) {
+		UserValue sessionUser = (UserValue) request.getSession().getAttribute(
+				"user");// 在线session
 		try {
-			UserValue sessionUser = (UserValue) request.getSession()
-					.getAttribute("user");// 在线session
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("docid", docValue.getDocid());
-			params.put("userid", sessionUser.getUserid());
+			if (sessionUser.getUserkind().intValue() == StaticConstants.USER_KIND2
+					.intValue()) {
+				params.put("userid", null);
+			} else {
+				params.put("userid", sessionUser.getUserid());
+			}
 			List<DocumentValue> docList = this.webResourceManager
 					.getDocList(params);
 			DocumentValue documentValue = docList.get(0);
@@ -483,12 +497,21 @@ public class BlogManagerAction {
 			documentValue.setDoctype(1);
 			documentValue.setDocabstract(docValue.getDocabstract());
 			documentValue.setDoctitle(docValue.getDoctitle());
+			if (sessionUser.getUserkind().intValue() == StaticConstants.USER_KIND2
+					.intValue()) {
+				documentValue.setCompiler(sessionUser.getArtname());
+			}
 			webResourceManager.doUpdDoc(documentValue);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		// return this.gointoroom(request, map);
-		return new ModelAndView("redirect:gouserindex.do");
+		if (sessionUser.getUserkind().intValue() == StaticConstants.USER_KIND2
+				.intValue()) {
+			return new ModelAndView("redirect:articlelist.do");
+		} else {
+			return new ModelAndView("redirect:gouserindex.do");
+		}
+
 	}
 
 	/**
@@ -844,7 +867,7 @@ public class BlogManagerAction {
 				map.put("imgs", imgs);
 				List<MessageValue> comments = this.webResourceManager
 						.getResourceCommentList(imgid,
-								StaticConstants.DOCTYPE_IMG, null, null, null);
+								StaticConstants.DOCTYPE_IMG, null, null, null,null);
 				if (documentValue != null) {
 					documentValue.setCommentCount(comments.size());
 				}
@@ -1043,7 +1066,7 @@ public class BlogManagerAction {
 			Map<String, Object> params = new HashMap<String, Object>();
 			List<MessageValue> comments = this.webResourceManager
 					.getResourceCommentList(docid, Integer.parseInt(doctype),
-							null, null, null);
+							null, null, null,null);
 			if (comments != null && !comments.isEmpty()) {
 				UserValue userValue = (UserValue) request.getSession()
 						.getAttribute("user");// 在线session
@@ -1201,8 +1224,8 @@ public class BlogManagerAction {
 					.getAttribute("user");// 在线session
 			String currentuserid = sessionUser.getUserid();
 			String pageIndex = request.getParameter("pageIndex");
-			if(pageIndex==null){
-				pageIndex="1";
+			if (pageIndex == null) {
+				pageIndex = "1";
 			}
 			List<MessageValue> receiveMessList = this.webResourceManager
 					.getReceMessList(currentuserid, null,
@@ -1360,10 +1383,15 @@ public class BlogManagerAction {
 		try {
 			//
 			String opergroupid = request.getParameter("opergroupid");
+			String userid = request.getParameter("userid");
 			UserValue sessionUser = (UserValue) request.getSession()
 					.getAttribute("user");
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("userid", sessionUser.getUserid());
+			if (userid == null || userid.equalsIgnoreCase("")) {
+				params.put("userid", sessionUser.getUserid());
+			} else {
+				params.put("userid", userid);
+			}
 			map.put("imggroupid", opergroupid);
 			List<ImgValue> result = this.webResourceManager.getImgList(params);
 			map.put("photoList", result);
@@ -1424,7 +1452,7 @@ public class BlogManagerAction {
 			UserValue user = null;
 			String userid = request.getParameter("userid");
 			Map<String, Object> params = new HashMap<String, Object>();
-			if (userid == null) {
+			if (userid == null || userid.equalsIgnoreCase("")) {
 				params.put("userid", sessionUser.getUserid());
 				userid = sessionUser.getUserid();
 			} else {
@@ -2017,16 +2045,18 @@ public class BlogManagerAction {
 			mati.appendTail(bufferi);
 			comment = bufferi.toString();
 			messageValue.setContenthtml(comment);
-			SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-			messageValue.setSendtimestr(format.format(messageValue.getSendtime()));
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			messageValue.setSendtimestr(format.format(messageValue
+					.getSendtime()));
 			//
 		}
 		//
 
 	}
+
 	@RequestMapping("/gzipdoccontent.do")
-	public ModelAndView gzipdoccontent(HttpServletRequest request,
-			ModelMap map) throws Exception {
+	public ModelAndView gzipdoccontent(HttpServletRequest request, ModelMap map)
+			throws Exception {
 		try {
 			this.webResourceManager.gzipdoccontent();
 			map.put("success", 1);
@@ -2036,5 +2066,29 @@ public class BlogManagerAction {
 		}
 		return new ModelAndView("jsonView", map);
 	}
-	
+
+	/**
+	 * 审核内容
+	 * 
+	 * @param request
+	 * @param response
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("/uploaddoc.do")
+	public ModelAndView checkDocument(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String docid = request.getParameter("docid");
+		String docids[] = { docid };
+		try {
+			this.webSiteManager.doCheckDocument(docids, new Integer(3));
+			map.put("success", 1);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			map.put("success", 0);
+			return new ModelAndView("error", map);
+		}
+		return new ModelAndView("jsonView", map);
+	}
+
 }

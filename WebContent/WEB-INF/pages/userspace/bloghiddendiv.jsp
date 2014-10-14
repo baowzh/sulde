@@ -176,9 +176,9 @@
 					</td>
 					<td style="height: 90px">
 						<div class="mfl">
-							<c:out value="${user.province}" />
+							<c:out value="${user.provincename}" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<c:out value="${user.province}" />
+							<c:out value="${user.hsienname}" />
 						</div>
 					</td>
 					<td></td>
@@ -191,9 +191,9 @@
 					<td>
 						<div class="mfl">
 
-							<c:out value="${user.nowprovince}" />
+							<c:out value="${user.nowprovincename}" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<c:out value="${user.nowprovince}" />
+							<c:out value="${user.nowhsienname}" />
 						</div>
 					</td>
 					<td></td>

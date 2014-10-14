@@ -32,10 +32,12 @@ import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MarkedResourceValue;
+import com.mongolia.website.model.MessagePaingModel;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.PaingVoteResult;
+import com.mongolia.website.model.QueryDocForm;
 import com.mongolia.website.model.QuestionValue;
 import com.mongolia.website.model.ShareResourceValue;
 import com.mongolia.website.model.TopDocumentValue;
@@ -563,27 +565,27 @@ public class WebResourceManagerImpl implements WebResourceManager {
 
 	@Override
 	public List<MessageValue> getResourceCommentList(String resourceid,
-			Integer resourceType, String userid, String messid, String senderid)
-			throws ManagerException {
+			Integer resourceType, String userid, String messid,
+			String senderid, Integer staus) throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
 			List<MessageValue> comments = new ArrayList<MessageValue>();
 			if (resourceType == StaticConstants.RESOURCE_TYPE_DOC) {
 				comments = this.webResourceDao.getCommentList(resourceid,
 						StaticConstants.RESOURCE_TYPE_DOC, userid, messid,
-						senderid);
+						senderid, staus);
 			} else if (resourceType == StaticConstants.RESOURCE_TYPE_IMG) {
 				comments = this.webResourceDao.getCommentList(resourceid,
 						StaticConstants.RESOURCE_TYPE_IMG, userid, messid,
-						senderid);
+						senderid, staus);
 			} else if (resourceType == StaticConstants.RESOURCE_TYPE_VIDEO) {
 				comments = this.webResourceDao.getCommentList(resourceid,
 						StaticConstants.RESOURCE_TYPE_VIDEO, userid, messid,
-						senderid);
+						senderid, staus);
 			} else {
 				comments = this.webResourceDao.getCommentList(resourceid,
 						StaticConstants.RESOURCE_TYPE_DOC, userid, messid,
-						senderid);
+						senderid, staus);
 			}
 			for (int i = 0; i < comments.size(); i++) {
 				MessageValue messageValue = comments.get(i);
@@ -794,7 +796,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		// TODO Auto-generated method stub
 		try {
 			List<MessageValue> messageList = this.getResourceCommentList(
-					resourceid, resourceType, userid, messageid, null);
+					resourceid, resourceType, userid, messageid, null, null);
 			if (messageList == null || messageList.isEmpty()) {
 				throw new ManagerException("01");
 			}
@@ -1420,4 +1422,83 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		}
 	}
 
+	@Override
+	public MessagePaingModel paingQueryComment(Map<String, Object> params,
+			Integer rowcount, Integer pageIndex) throws Exception {
+		// TODO Auto-generated method stub
+		if (pageIndex == null || pageIndex == 0) {
+			pageIndex = 1;
+		}
+		Integer startindex = (pageIndex - 1) * rowcount;
+		params.put("startindex", startindex);
+		params.put("fechcount", rowcount);
+		List<MessageValue> mess = this.webResourceDao.getCommentList(params);
+		for (int i = 0; i < mess.size(); i++) {
+			MessageValue messageValue = mess.get(i);
+			
+			messageValue.setContenthtml(new String(messageValue
+					.getMessagecont(), "utf-8"));
+			java.text.SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+			if (messageValue.getSendtime() != null) {
+
+				messageValue.setSendtimestr(simpleDateFormat
+						.format(messageValue.getSendtime()));
+			}
+		}
+		showemotion(mess);
+		Integer totalRowCount = this.webResourceDao.getCommentCount(params);
+		int pageCount = totalRowCount / rowcount;
+		if (totalRowCount % rowcount > 0) {
+			pageCount = pageCount + 1;
+		}
+		MessagePaingModel paingModel = new MessagePaingModel();
+		paingModel.setRowcount("" + totalRowCount);
+		paingModel.setPagecount(pageCount);
+		if (paingModel.getPageindex() < paingModel.getPagecount()) {
+			paingModel.setNextindex(pageCount);
+		} else {
+			paingModel.setNextindex(paingModel.getPageindex() + 1);
+		}
+		if (paingModel.getPageindex() > 1) {
+			paingModel.setPreviousindex(paingModel.getPageindex() - 1);
+		} else {
+			paingModel.setPreviousindex(1);
+		}
+		paingModel.setMesslist(mess);
+		return paingModel;
+	}
+
+	/**
+	 * 
+	 * @param comments
+	 */
+	private void showemotion(List<MessageValue> comments) {
+		//
+		for (MessageValue messageValue : comments) {
+			//
+			// 使用正则表达式替换表情部分
+			String comment = messageValue.getContenthtml();
+			String matchStr = "\\[\\w+\\]";
+			Pattern destStri = Pattern.compile(matchStr);// ^
+			Matcher mati = destStri.matcher(comment);
+			StringBuffer bufferi = new StringBuffer();
+			while (mati.find()) {
+				String groupi = mati.group(0);
+				groupi = groupi.substring(1, groupi.length() - 1);
+				String imgStr = "<img src=\"img/faces/" + groupi + ".gif\"/>";
+				mati.appendReplacement(bufferi, imgStr);
+
+			}
+			mati.appendTail(bufferi);
+			comment = bufferi.toString();
+			messageValue.setContenthtml(comment);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			messageValue.setSendtimestr(format.format(messageValue
+					.getSendtime()));
+			//
+		}
+		//
+
+	}
 }

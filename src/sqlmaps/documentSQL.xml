@@ -13,7 +13,8 @@
 	<typeAlias alias="TopDocumentValue"
 		type="com.mongolia.website.model.TopDocumentValue" />
 	<insert id="addDocumentValue" parameterClass="DocumentValue">
-		insert into document (
+		insert into
+		document (
 		DOCID,
 		DOCCHANNEL,
 		DOCTYPE ,
@@ -25,7 +26,8 @@
 		DOCABSTRACT ,
 		DOCKEYWORDS ,
 		DOCAUTHOR ,
-		DOCPUBURL ,
+		DOCPUBURL
+		,
 		DOCPUBTIME ,
 		DOCRELTIME ,
 		CRUSER ,
@@ -113,7 +115,8 @@
 	</select>
 	<select id="paingUserDocList" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select * from document
+		select document.*,(select channel.CHNLNAME from channel where
+		channel.CHANNELID=document.DOCCHANNEL ) as chnaname from document
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docid">
 				docid=#docid#
@@ -201,7 +204,8 @@
 	<select id="getDistinctDocChannels" parameterClass="java.util.Map"
 		resultClass="Channel">
 		select DISTINCT a.* from channel a,document b
-		where a.CHANNELID=b.DOCCHANNEL and b.DOCSTATUS=1
+		where
+		a.CHANNELID=b.DOCCHANNEL and b.DOCSTATUS=1
 	</select>
 	<insert id="addChannelDocValue" parameterClass="ChannelDocValue">
 		insert into
@@ -214,7 +218,8 @@
 		a.doctitle,
 		b.docid
 		from document a, channeldoc b
-		where a.DOCCHANNEL=b.channelid
+		where
+		a.DOCCHANNEL=b.channelid
 		and a.DOCID=b.docid
 		<isNotNull prepend="and" property="channelid">
 			b.channelid=#channelid#
@@ -274,7 +279,8 @@
 		readcount=IFNULL(readcount,0)+1 where docid=#docid#
 	</update>
 	<insert id="addMessageValue" parameterClass="MessageValue">
-		insert into message (
+		insert into message
+		(
 		messageid,
 		messagesenderid,
 		messagesendername,
@@ -328,12 +334,16 @@
 			<isEqual property="resourcekind" compareValue="4">
 				message.received=0
 			</isEqual>
+			<isNotNull prepend="and" property="status">
+				message.status=#status#
+			</isNotNull>
 
 		</dynamic>
 		ORDER BY message.sendtime desc
 	</select>
 	<insert id="addShareResourceValue" parameterClass="ShareResourceValue">
-		insert into sharedresource (
+		insert into
+		sharedresource (
 		originalauthorid,
 		userid,
 		resourceid,
@@ -353,7 +363,8 @@
 		document.DOCID=#docid#
 	</update>
 	<insert id="addMarkedResourceValue" parameterClass="MarkedResourceValue">
-		insert into markedresource (
+		insert into
+		markedresource (
 		originalauthorid,
 		userid,
 		resourceid,
@@ -397,7 +408,8 @@
 		from document
 		where exists (select 1
 		from friend
-		where friend.friendid = document.userid
+		where
+		friend.friendid = document.userid
 		and friend.userid = #userid#)
 	<![CDATA[  and document.DOCRELTIME >= #lastTenDay# ]]>
 	<![CDATA[  and document.DOCRELTIME <= #currentDate#]]>
@@ -417,6 +429,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="docabstract">
 				DOCABSTRACT= #docabstract#
+			</isNotNull>
+			<isNotNull prepend="," property="compiler">
+				compiler= #compiler#
 			</isNotNull>
 		</dynamic>
 		where docid=#docid# and userid=#userid#
@@ -481,7 +496,8 @@
 		document.DOCSTATUS=#status# where document.DOCID=#docid#
 	</update>
 	<insert id="createtopdocument" parameterClass="TopDocumentValue">
-		insert into topdocument (
+		insert into
+		topdocument (
 		docid ,
 		type ,
 		startdate ,
@@ -532,12 +548,14 @@
 		sendtime,
 		message.userid,
 		resourcekind ,
-		resourceid ,
+		resourceid
+		,
 		messtime,
 		received ,
 		messtype,
 		receiverid
-		, if(#recorsend#=1,messagesendername,(select artname from user where
+		,
+		if(#recorsend#=1,messagesendername,(select artname from user where
 		user.userid=message.userid)) artname FROM message ,user
 
 		<dynamic prepend="where">
@@ -571,14 +589,17 @@
 	</select>
 	<update id="confirmmess" parameterClass="java.util.Map">
 		update
-		message set message.received=1 where message.messageid=#messageid#
+		message set
+		message.received=1 where message.messageid=#messageid#
 	</update>
 	<select id="nextdoc" parameterClass="java.util.Map" resultClass="DocumentValue">
 		select * from document
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="imggroupid">
-				exists(select 1 from img,imggroup where img.imggroupid=imggroup.imggroupid
-				and img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
+				exists(select 1 from
+				img,imggroup where img.imggroupid=imggroup.imggroupid
+				and
+				img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
 			</isNotNull>
 			<isNotNull prepend="and" property="docid">
 			 	<![CDATA[  document.docid>#docid# ]]>
@@ -591,8 +612,10 @@
 		select * from document
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="imggroupid">
-				exists(select 1 from img,imggroup where img.imggroupid=imggroup.imggroupid
-				and img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
+				exists(select 1 from
+				img,imggroup where img.imggroupid=imggroup.imggroupid
+				and
+				img.imgid=document.docid and imggroup.imggroupid=#imggroupid#)
 			</isNotNull>
 			<isNotNull prepend="and" property="docid">
 			 	<![CDATA[  document.docid<#docid# ]]>
@@ -606,16 +629,19 @@
 	</select>
 	<select id="getMessageCount" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
-		select count(1) from message where userid=#userid# and messtype in (3,4)
+		select count(1) from message where userid=#userid# and
+		messtype in (3,4)
 	</select>
 	<select id="isshared" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
-		select count(1) from sharedresource where userid=#userid# and
+		select count(1) from sharedresource where userid=#userid#
+		and
 		resourceid=#resourceid#
 	</select>
 	<select id="ismarked" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
-		select count(1) from markedresource where userid=#userid# and
+		select count(1) from markedresource where userid=#userid#
+		and
 		resourceid=#resourceid#
 	</select>
 
@@ -697,8 +723,58 @@
 	</select>
 	<select id="getTopDocumentWithClickCount" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select * from document order by document.readcount desc limit
+		select * from document order by document.readcount desc
+		limit
 		#startindex#,#fechcount#
+	</select>
+
+	<select id="paingquerycomment" parameterClass="java.util.Map"
+		resultClass="MessageValue">
+		SELECT message.*,user.artname FROM message ,user where
+		message.userid=USER.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="resourcekind">
+				resourcekind=#resourcekind#
+			</isNotNull>
+			<isNotNull prepend="and" property="artname">
+				user.artname like
+				'%'||#artname#||'%'
+			</isNotNull>
+			<isNotNull prepend="and" property="strcrtime">
+			<![CDATA[sendtime>=#strcrtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endcrtime">
+			<![CDATA[sendtime<=#endcrtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				message.status=#status#
+			</isNotNull>
+		</dynamic>
+		ORDER BY message.sendtime desc limit
+		#startindex#,#fechcount#
+	</select>
+	<select id="paingquerycommentcount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		SELECT count(1) FROM message ,user where
+		message.userid=USER.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="resourcekind">
+				resourcekind=#resourcekind#
+			</isNotNull>
+			<isNotNull prepend="and" property="artname">
+				user.artname like
+				'%'||#artname#||'%'
+			</isNotNull>
+			<isNotNull prepend="and" property="strcrtime">
+			<![CDATA[sendtime>=#strcrtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="endcrtime">
+			<![CDATA[sendtime<=#endcrtime#]]>
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				message.status=#status#
+			</isNotNull>
+		</dynamic>
 	</select>
 
 </sqlMap>

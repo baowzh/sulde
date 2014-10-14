@@ -67,7 +67,7 @@ a img {
 .postSheet {
 	border: solid 10px #CCF;
 	display: run-in;
-	height: 390px;
+	height: 410px;
 	margin-left: 10px;
 }
 
@@ -76,7 +76,7 @@ a img {
 }
 
 .postSheet .posterInf {
-	height: 390px;
+	height: 410px;
 	display: inline-block;
 	width: 70px;
 	padding: 5px;

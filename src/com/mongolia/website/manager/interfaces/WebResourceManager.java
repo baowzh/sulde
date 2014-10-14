@@ -8,6 +8,7 @@ import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgValue;
+import com.mongolia.website.model.MessagePaingModel;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.PaingVoteResult;
@@ -185,8 +186,8 @@ public interface WebResourceManager {
 	 * @throws ManagerException
 	 */
 	public List<MessageValue> getResourceCommentList(String resourceid,
-			Integer resourceType, String userid, String messid, String senderid)
-			throws ManagerException;
+			Integer resourceType, String userid, String messid,
+			String senderid, Integer staus) throws ManagerException;
 
 	public Integer getResourceCommentCount(String resourceid,
 			Integer resourceType) throws ManagerException;
@@ -441,5 +442,14 @@ public interface WebResourceManager {
 	 * @throws Exception
 	 */
 	public void gzipdoccontent() throws Exception;
+
+	/**
+	 * 
+	 * @param params
+	 * @throws Exception
+	 */
+	public MessagePaingModel paingQueryComment(
+			Map<String, Object> queryDocForm, Integer rowCount,
+			Integer pageindex) throws Exception;
 
 }

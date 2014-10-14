@@ -150,17 +150,12 @@
 
 
 										</c:forEach>
-										<!-- 										<option value="11"></option> -->
-										<!-- 										<option value="12"></option> -->
-										<!-- 										<option value="13"></option> -->
+
 
 										</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select
 											name="hsien" id="hsien"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
 
-											<!-- 											<option value="11"></option> -->
-											<!-- 											<option value="12"></option> -->
-											<!-- 											<option value="13"></option> -->
 											<c:forEach items="${hsiens}" var="districtValue"
 												varStatus="status">
 												<c:if test="${districtValue.districtcode==userinfo.hsien}">
@@ -217,10 +212,6 @@
 												</c:if>
 											</c:forEach>
 
-											<!-- 											<option value="11"></option> -->
-											<!-- 											<option value="12"></option> -->
-											<!-- 											<option value="13"></option> -->
-
 										</select>
 									</div>
 								</td>
@@ -245,20 +236,59 @@
 								</td>
 								<td colspan="3">
 									<div class="mfl">
-										<input type="text" name="profession" id="profession"
-											value="<c:out value="${userinfo.profession}"/>"></input>
+										<select name="professioncode" id="professioncode"
+											onchange="javascript:loadChildDistrict('province',1);"
+											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;" />
+										<c:forEach items="${professions}" var="professionValue"
+											varStatus="status">
+											<c:if
+												test="${professionValue.professioncode==userinfo.professioncode}">
+												<option
+													value="<c:out value="${professionValue.professioncode}"/>"
+													selected="selected"><c:out
+														value="${professionValue.professionname}" /></option>
+											</c:if>
+											<c:if
+												test="${professionValue.professioncode!=userinfo.professioncode}">
+												<option
+													value="<c:out value="${professionValue.professioncode}" />"><c:out
+														value="${professionValue.professionname}" /></option>
+											</c:if>
+										</c:forEach>
+										</select>
 									</div>
 								</td>
 
 							</tr>
 							<tr>
 								<td>
-									<div class="m1ln h100">  </div>
+									<div class="m1ln h100"> </div>
 								</td>
 								<td colspan="3">
 									<div class="mfl">
-										<input type="text" name="blogclass" id="blogclass"
-											value="<c:out value="${userinfo.blogclass}"/>"></input>
+<!-- 										<input type="text" name="blogclass" id="blogclass" -->
+<%-- 											value="<c:out value="${userinfo.blogclass}"/>"></input> --%>
+										<c:choose>
+											<c:when test="${userinfo.blogclass==1}">
+												<input type="radio" name="blogclass" checked="true"
+													id="blogclass"></input>
+												<input type="radio" name="blogclass" id="blogclass">
+													</input>
+												<input type="radio" name="blogclass" id="blogclass"></input>
+											</c:when>
+											<c:when test="${userinfo.blogclass==0}">
+												<input type="radio" name="blogclass id="blogclass"></input>
+												<input type="radio" name="blogclass" checked="true"
+													id="blogclass"></input>
+												<input type="radio" name="blogclass" id="blogclass"></input>
+											</c:when>
+											<c:otherwise>
+												<input type="radio" name="blogclass" id="blogclass"></input>
+												<input type="radio" name="blogclass" id="blogclass"></input>
+												<input type="radio" name="blogclass" checked="true"
+													id="blogclass"></input>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</td>
 
@@ -416,5 +446,6 @@
 </body>
 <script>
 	var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
+	var professions = <c:out value="${professions}" escapeXml="false" />;
 </script>
 </html>

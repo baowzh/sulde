@@ -61,6 +61,14 @@ public class WebSiteVisiterAction {
 			ex.printStackTrace();
 		}
 		map.put("indexPageContent", indexPageContent);
+		Integer agentkind = 0;
+		String user_agent_kind = request.getHeader("user-agent");
+		if (user_agent_kind.indexOf("Chrome") > 0) {
+			agentkind = 1;
+		} else {
+			agentkind = 0;
+		}
+		map.put("agentkind", agentkind);
 		return new ModelAndView("website/index", map);
 	}
 
@@ -202,7 +210,7 @@ public class WebSiteVisiterAction {
 			for (int i = 0; i < paingUser.getPageCount(); i++) {
 				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
 				pagingIndex.setPageindex(i + 1);
-				if(i+1==queryUserForm.getPageindex().intValue()){
+				if (i + 1 == queryUserForm.getPageindex().intValue()) {
 					pagingIndex.setCurrent(1);
 				}
 				if (i == 0) {
@@ -213,7 +221,7 @@ public class WebSiteVisiterAction {
 					pagingIndex.setDoc(0);
 				} else if (i + 1 == queryUserForm.getPageindex().intValue()) {
 					indexs.add(pagingIndex);
-					
+
 				} else if (i == queryUserForm.getPageindex()) {
 					indexs.add(pagingIndex);
 					if (i + 2 != paingUser.getPageCount() && i != 1) {
@@ -301,7 +309,7 @@ public class WebSiteVisiterAction {
 			for (int i = 0; i < pageCount; i++) {
 				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
 				pagingIndex.setPageindex(i + 1);
-				if(i+1==queryDocForm.getPageindex().intValue()){
+				if (i + 1 == queryDocForm.getPageindex().intValue()) {
 					pagingIndex.setCurrent(1);
 				}
 				if (i == 0) {

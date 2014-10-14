@@ -20,8 +20,14 @@
 <script src="js/messagebox/jquery.msgbox.js"></script>
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
+<style>
+<c:if test="${agentkind==0}">
+body {
+	font-size: 16px;
+}
+</c:if>
+</style>
 </head>
-
 <body>
 	<div style="background: #1b6dd2;">
 		<div class="lmainR ofh" style="text-align: center;">
@@ -366,9 +372,6 @@
 									</a>
 								</div>
 							</div>
-
-
-
 						</c:forEach>
 						</table>
 					</div>
@@ -377,8 +380,8 @@
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 150px; height: 700px;">
-			<div class="lcell cardlogin" id="logindiv">
+		<div class="  lcell" style="width: 150px; height: 660px;">
+			<div class="lcell cardlogin" id="logindiv" style="height: 300px;">
 				<form id="loginform">
 					<table border="0" style="margin: 1em auto;">
 						<tr>
@@ -435,12 +438,12 @@
 			</div>
 		</div>
 		<div class="  lcell" style="width: 840px;">
-			<div class="lcell " style="width: 840px; height: 350px;">
-				<div class="cardt5">
+			<div class="lcell " style="width: 840px; height: 310px;">
+				<div class="cardt5" style="height: 300px;">
 					<div class="ttl1 m1ln">
 						<a href="#">  </a>
 					</div>
-					<div style="width: 810px; margin: 10px; height: 330px">
+					<div style="width: 810px; margin: 10px; height: 300px;">
 						<c:forEach items="${indexPageContent.topUsers}" var="userValue"
 							varStatus="status">
 							<div class="xldgurg">
@@ -737,13 +740,13 @@
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 990px;">
-			<div class="lcell " style="width: 990px; height: 350px;">
-				<div class="cardt4">
+		<div class="  lcell" style="width: 990px; height: 310px;">
+			<div class="lcell " style="width: 990px; height: 310px;">
+				<div class="cardt4" style="height: 300px;">
 					<div class="ttl1 m1ln">
 						<a href="#">  </a>
 					</div>
-					<div style="width: 948px; margin: 0px; height: 330px" class="ofh">
+					<div style="width: 948px; margin: 0px; height: 300px" class="ofh">
 						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
 							varStatus="status">
 							<div class="xldgurg">

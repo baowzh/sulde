@@ -232,10 +232,10 @@ public class WebSiteManagerImpl implements WebSiteManager {
 				continue;
 			}
 			DocumentValue documentValue = doces.get(0);
-			if (documentValue.getDocstatus().intValue() == 1) {
+			//if (documentValue.getDocstatus().intValue() == 1) {
 				this.WebSiteManagerDao.checkDocument(documentValue.getDocid(),
-						new Integer(2));
-			}
+						status);
+			//}
 		}
 	}
 
