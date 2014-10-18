@@ -6,6 +6,8 @@ public class PagingIndex {
 	private Integer current = 0;
 	private Integer doc = 0;
 	private Integer front = 0;
+	private String showstr;
+	private String id;
 
 	public Integer getPageindex() {
 		return pageindex;
@@ -46,5 +48,22 @@ public class PagingIndex {
 	public void setFront(Integer front) {
 		this.front = front;
 	}
+
+	public String getShowstr() {
+		return showstr;
+	}
+
+	public void setShowstr(String showstr) {
+		this.showstr = showstr;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 
 }

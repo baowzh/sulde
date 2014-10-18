@@ -77,19 +77,29 @@
 									<c:forEach items="${docList}" var="documentValue"
 										varStatus="status">
 										<div class="m1ln">
-											<a><img src="img/dot.gif"></a><a
+											<a><img src="img/dot.gif"></a> <a
 												href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}" />"><c:out
-													value="${documentValue.doctitle}" escapeXml="false" /> </a>&nbsp;
+													value="${documentValue.doctitle}" escapeXml="false" /> </a>
+
+											&nbsp;
 										</div>
 									</c:forEach>
 								</div>
 								<div class="cbt"></div>
 								<div class="paginationArea">
-									<div class="pagination">
+									<div class="pagination" id="docpagelist">
+										<a class="first disabled" id="firsta"
+											href="javascript:openpage('1','<c:out value="${user.userid}" />',1,1);switchclass('first');">
+											<span id="pagefirst" class="spanstyle">&lt;&lt; </span>
+										</a> <a class="first disabled" id="previousa"
+											href="javascript:openpage('<c:out value="${previousindex}" />','<c:out value="${user.userid}" />',1,1);switchclass('pageprevious');">
+											<span id="pageprevious" class="spanstyle">&nbsp;&lt;&nbsp;
+										</span>
+										</a>
 										<c:forEach items="${docpageIndexs}" var="pagingIndex"
 											varStatus="status">
 											<a class="first disabled" id="doclista"
-												href="javascript:openpage('<c:out value="${pagingIndex.pageindex}" />','<c:out value="${user.userid}" />',1);switchclass('page<c:out value="${pagingIndex.pageindex}" />');">
+												href="javascript:openpage('<c:out value="${pagingIndex.pageindex}" />','<c:out value="${user.userid}" />',1,1);switchclass('page<c:out value="${pagingIndex.pageindex}" />');">
 												<c:if test="${status.index==0}">
 													<span id="page<c:out value="${pagingIndex.pageindex}" />"
 														class="curspanstyle">&nbsp;<c:out
@@ -104,6 +114,15 @@
 
 											</a>
 										</c:forEach>
+										<a class="first disabled" id="nexta"
+											href="javascript:openpage('2','<c:out value="${user.userid}" />',1,1);switchclass('pagenext');">
+											<span id="pagenext" class="spanstyle">&nbsp;&gt;&nbsp;
+										</span>
+										</a> <a class="first disabled" id="lasta"
+											href="javascript:openpage('<c:out value="${pageCount}" />','<c:out value="${user.userid}" />',1,1);switchclass('pagelast');">
+											<span id="pagelast" class="spanstyle">&gt;&gt; </span>
+										</a> <input type="hidden" name="pagecount" id="pagecount"
+											value="<c:out value="${pageCount}" />" />
 									</div>
 								</div>
 							</div>
@@ -151,7 +170,15 @@
 								</div>
 								<div class="cbt"></div>
 								<div class="paginationArea">
-									<div class="pagination">
+									<div class="pagination" id="sharedoclist">
+										<a class="first disabled" id="firsta"
+											href="javascript:openpage('1','<c:out value="${user.userid}" />',2);switchclass('first');">
+											<span id="pagefirst" class="spanstyle">&lt;&lt; </span>
+										</a> <a class="first disabled" id="previousa"
+											href="javascript:openpage('<c:out value="${previousindex}" />','<c:out value="${user.userid}" />',2);switchclass('pageprevious');">
+											<span id="pageprevious" class="spanstyle">&nbsp;&lt;&nbsp;
+										</span>
+										</a>
 										<c:forEach items="${sharepageIndexs}" var="pagingIndex"
 											varStatus="status">
 											<a class="first disabled"
@@ -169,6 +196,15 @@
 												</c:if>
 											</a>
 										</c:forEach>
+										<a class="first disabled" id="nexta"
+											href="javascript:openpage('2','<c:out value="${user.userid}" />',2);switchclass('pagenext');">
+											<span id="pagenext" class="spanstyle">&nbsp;&gt;&nbsp;
+										</span>
+										</a> <a class="first disabled" id="lasta"
+											href="javascript:openpage('<c:out value="${pageCount}" />','<c:out value="${user.userid}" />',2);switchclass('pagelast');">
+											<span id="pagelast" class="spanstyle">&gt;&gt; </span>
+										</a>
+
 									</div>
 								</div>
 							</div>

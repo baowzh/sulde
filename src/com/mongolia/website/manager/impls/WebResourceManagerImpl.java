@@ -3,6 +3,10 @@ package com.mongolia.website.manager.impls;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +41,6 @@ import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.PaingVoteResult;
-import com.mongolia.website.model.QueryDocForm;
 import com.mongolia.website.model.QuestionValue;
 import com.mongolia.website.model.ShareResourceValue;
 import com.mongolia.website.model.TopDocumentValue;
@@ -340,14 +343,15 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			map.put("docpagecount", pageCount);
 			// 组织首页分页连接
 			List<PagingIndex> pageIndexs = new ArrayList<PagingIndex>();
-			for (int i = 0; i < pageCount; i++) {
+			for (int i = 0; i < pageCount && i < 3; i++) {
 				PagingIndex pagingIndex = new PagingIndex();
 				pagingIndex.setPageindex(i + 1);
 				pageIndexs.add(pagingIndex);
 			}
-			if (pageIndexs.size() > 1) {
+			//if (pageIndexs.size() > 1) {
 				map.put("docpageIndexs", pageIndexs);
-			}
+			//}
+			map.put("pageCount", pageCount);
 			// 获取用户朋友列表 只显示8个
 			List<FriendValue> fvalues = this.getFriendValues(null,
 					blogUser.getUserid(), null,
@@ -385,15 +389,15 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					StaticConstants.DOCTYPE_DOC, 1, 24);
 			map.put("sharePaingModel", sharePaingModel);
 			List<PagingIndex> sharepageIndexs = new ArrayList<PagingIndex>();
-			for (int i = 0; i < sharePaingModel.getPagecount(); i++) {
+			for (int i = 0; i < sharePaingModel.getPagecount() && i < 3; i++) {
+
 				PagingIndex pagingIndex = new PagingIndex();
 				pagingIndex.setPageindex(i + 1);
-				// 先不设置连接
 				sharepageIndexs.add(pagingIndex);
 			}
-			if (pageIndexs.size() > 1) {
-				map.put("sharepageIndexs", sharepageIndexs);
-			}
+			// if (pageIndexs.size() > 1) {
+			map.put("sharepageIndexs", sharepageIndexs);
+			// }
 			// 添加一个浏览记录
 			if (self.intValue() == 0) {
 				VisitorValue visitorValue = new VisitorValue();
@@ -1435,7 +1439,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		List<MessageValue> mess = this.webResourceDao.getCommentList(params);
 		for (int i = 0; i < mess.size(); i++) {
 			MessageValue messageValue = mess.get(i);
-			
+
 			messageValue.setContenthtml(new String(messageValue
 					.getMessagecont(), "utf-8"));
 			java.text.SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
@@ -1499,6 +1503,5 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			//
 		}
 		//
-
 	}
 }

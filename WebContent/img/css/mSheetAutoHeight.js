@@ -1,48 +1,49 @@
 // JavaScript Document
 
-$(window)
-		.on(
-				"load",
-				function(e) {
-					$("#nameCard ")[0].style.height = ($("#nameCard div")[0].scrollHeight - 178)
-							+ "px";
+$(window).on("load", function(e) {
+	setheight();
+}
 
-					if (navigator.appVersion.indexOf("MSIE 8.") != -1
-							|| navigator.appVersion.indexOf("MSIE 9.") != -1) {// Older
-																				// IE
+);
+var setheight = function() {
 
-						$(".mVsheet").toggleClass("mVsheetIE89");
-						$(".mVsheet").toggleClass("mVsheet");
+	$("#nameCard ")[0].style.height = ($("#nameCard div")[0].scrollHeight - 178)
+			+ "px";
 
-						$(".mVsheetIE89")
-								.bind(
-										"scroll",
-										null,
-										function() {
-											jQuery(this).children(
-													"div.ScrollToView")[0].style.left = this.scrollLeft
-													+ 600 + "px"
-										})
-						$(".ScrollToView").bind("click", null, function() {
-							$(this).parent(".mVsheetIE89")[0].scrollIntoView();
-						});
+	if (navigator.appVersion.indexOf("MSIE 8.") != -1
+			|| navigator.appVersion.indexOf("MSIE 9.") != -1) {// Older
+		// IE
 
-						$('#vs').scroll(function(e) {
-							e.stopPropagation();
-							e.preventDefault();
-							e.returnValue = false;
+		$(".mVsheet").toggleClass("mVsheetIE89");
+		$(".mVsheet").toggleClass("mVsheet");
+
+		$(".mVsheetIE89")
+				.bind(
+						"scroll",
+						null,
+						function() {
+							jQuery(this).children("div.ScrollToView")[0].style.left = this.scrollLeft
+									+ 600 + "px"
 						})
+		$(".ScrollToView").bind("click", null, function() {
+			$(this).parent(".mVsheetIE89")[0].scrollIntoView();
+		});
 
-					} else { // newer IE webkit
+		$('#vs').scroll(function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			e.returnValue = false;
+		})
 
-						for (i = 0; i < $(".mVsheet").length; i++) {
+	} else { // newer IE webkit
 
-							$(".mVsheet")[i].style.height = $(".mVsheet")[i].scrollHeight
-									+ "px";
-						}
+		for (i = 0; i < $(".mVsheet").length; i++) {
 
-						$(".ScrollToView").css("display", "none")
-					}
-				}
+			$(".mVsheet")[i].style.height = $(".mVsheet")[i].scrollHeight
+					+ "px";
+		}
 
-		);
+		$(".ScrollToView").css("display", "none")
+	}
+
+}

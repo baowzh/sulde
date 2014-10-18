@@ -4,7 +4,7 @@
  * @param {}
  *            pageurl
  */
-var openpage = function(index, currentuserid, type, neebarlocation) {
+var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 	var querurl = 'pagingsharedoc.do';
 	if (type == 1) {
 		querurl = 'pagingdoc.do';
@@ -25,7 +25,7 @@ var openpage = function(index, currentuserid, type, neebarlocation) {
 					if (neebarlocation) {
 						var sheetheight = $(".mVsheet").css("height");
 						if (sheetheight == undefined) {
-							//return;
+							// return;
 						} else {
 							var pxindex = sheetheight.indexOf('px');
 							sheetheight = sheetheight.substring(0, pxindex);
@@ -50,13 +50,24 @@ var openpage = function(index, currentuserid, type, neebarlocation) {
 					var htmlstrr = "";
 					for (i in data.doclist) {
 						if (type == 1) {
-							htmlstrr = htmlstrr
-									+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'
-									+ '<a '
-									+ 'href=\"getuserdocdetail.do?docid='
-									+ data.doclist[i].docid + '\">'
-									+ data.doclist[i].doctitle + '</a>&nbsp;'
-									+ '</div>';
+							if (pagetype == 1) {
+								htmlstrr = htmlstrr
+										+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'
+										+ '<a '
+										+ 'href=\"getuserdocdetail.do?docid='
+										+ data.doclist[i].docid + '\">'
+										+ data.doclist[i].doctitle
+										+ '</a>&nbsp;' + '</div>';
+							} else {
+								htmlstrr = htmlstrr
+										+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'
+										+ '<a '
+										+ 'href=\"javascript:readdoc(\''
+										+ data.doclist[i].docid + '\');\">'
+										+ data.doclist[i].doctitle
+										+ '</a>&nbsp;' + '</div>';
+							}
+
 						} else if (type == 2) {
 							htmlstrr = htmlstrr
 									+ '<div class=\"sharenwsl1\"><div class="title" style="height:230px;">'
@@ -82,34 +93,24 @@ var openpage = function(index, currentuserid, type, neebarlocation) {
 
 					}
 					if (type == 1) {
+						$("#docpagelist").html(data.pagingstr);
 						// 设置当前 连接的
-						$(".spanstyle").each(function(i, o) {
-							$(o).removeClass("curspanstyle");
-							$(o).addClass("spanstyle");
-
-						});
-						$(".curspanstyle").each(function(i, o) {
-							$(o).removeClass("curspanstyle");
-							$(o).addClass("spanstyle");
-
-						});
-						$(".spanstyle#page" + index).addClass("curspanstyle")
-								.removeClass("spanstyle");
 					} else if (type == 2) {
 						// 设置当前 连接的
-						$(".sharespanstyle").each(function(i, o) {
-							$(o).removeClass("cursharespanstyle");
-							$(o).addClass("sharespanstyle");
-
-						});
-						$(".cursharespanstyle").each(function(i, o) {
-							$(o).removeClass("cursharespanstyle");
-							$(o).addClass("sharespanstyle");
-
-						});
-						$(".sharespanstyle#page" + index).addClass(
-								"cursharespanstyle").removeClass(
-								"sharespanstyle");
+						$("#sharedoclist").html(data.pagingstr);
+						// $(".sharespanstyle").each(function(i, o) {
+						// $(o).removeClass("cursharespanstyle");
+						// $(o).addClass("sharespanstyle");
+						//
+						// });
+						// $(".cursharespanstyle").each(function(i, o) {
+						// $(o).removeClass("cursharespanstyle");
+						// $(o).addClass("sharespanstyle");
+						//
+						// });
+						// $(".sharespanstyle#page" + index).addClass(
+						// "cursharespanstyle").removeClass(
+						// "sharespanstyle");
 					}
 
 				}
@@ -252,8 +253,7 @@ var receivemessage = function() {
 	 * data.receiveMess[i].sendtime + '<br><a href=\"javascript:addfriends(\'' +
 	 * data.receiveMess[i].messagesenderid + '\',1,\'' +
 	 * data.receiveMess[i].messageid + '\')\" style=\"color:#f00;\"></a> 
-	 * <a href=\"\" style=\"color:#f00;\"> </a>'; } else {
-	 *  }
+	 * <a href=\"\" style=\"color:#f00;\"> </a>'; } else { }
 	 * 
 	 * innerHTML = innerHTML + kindstr + ' </div>' + ' <div class=\"m1ln\"
 	 * style=\"height: 350px;width:100px;\" >' + messstr + '</div>' + '</div>' + '</div>'; }

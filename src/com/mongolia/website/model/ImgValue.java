@@ -22,6 +22,7 @@ public class ImgValue {
 	private Integer markcount = new Integer(0);
 	private Integer readcount = new Integer(0);
 	private Integer commcount = new Integer(0);
+	private String oldid;
 
 	public String getImgid() {
 		return imgid;
@@ -173,6 +174,14 @@ public class ImgValue {
 
 	public void setCrtimestr(String crtimestr) {
 		this.crtimestr = crtimestr;
+	}
+
+	public String getOldid() {
+		return oldid;
+	}
+
+	public void setOldid(String oldid) {
+		this.oldid = oldid;
 	}
 
 }

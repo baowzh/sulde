@@ -74,6 +74,7 @@ public class DocumentValue {
 	private Integer ireadcount;
 	private String chnaname;
 	private String compiler;
+	private String oldid;
 	private SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
 	public String getDocid() {
@@ -644,5 +645,14 @@ public class DocumentValue {
 	public void setCompiler(String compiler) {
 		this.compiler = compiler;
 	}
+
+	public String getOldid() {
+		return oldid;
+	}
+
+	public void setOldid(String oldid) {
+		this.oldid = oldid;
+	}
+	
 	
 }

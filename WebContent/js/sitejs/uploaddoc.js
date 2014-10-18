@@ -25,7 +25,7 @@ $(document).ready(
 			});
 
 			// 如果是修改
-			if ($('#opertype').val() == 2) {
+			if ($('#opertype').val() == 2 || $('#opertype').val() == 3) {
 				$.ajax({
 					async : false,
 					cache : false,
@@ -43,6 +43,7 @@ $(document).ready(
 						$('#editor1').val(data.documentValue.htmlstr);
 						$('#doctitle').val(data.documentValue.doctitle);
 						$('#docabstract').val(data.documentValue.docabstract);
+						$('#userid').val(data.documentValue.userid);
 					}
 				});
 			}
@@ -84,6 +85,9 @@ var openimgwindow = function() {
 			error : function() {// 请求失败处理函数
 				alert('请求失败');
 			},
+			data : {
+				userid : $('#userid').val()
+			},
 			success : function(data) { // 请求成功后处理函数。
 				// 设置相册信息
 				var albumlistHtml = "";
@@ -103,8 +107,7 @@ var openimgwindow = function() {
 							+ '</div>' + '<div class=\"time\">2014-03-08</div>'
 							+ '</div>';
 				}
-				albumlistinitialize=true;
-				//$("#photoalbum").css("display", "block");
+				albumlistinitialize = true;
 				if ($("#albumlist").children().length == 1) {
 					$("#albumlist").append(albumlistHtml);
 					$("#selectimg").append($("#photoalbum"));
@@ -222,7 +225,8 @@ var openPhotoAlbum = function(imggroupid) {
 				dataType : "json",
 				url : "getphotoList.do",
 				data : {
-					opergroupid : imggroupid
+					opergroupid : imggroupid,
+					userid : $("#userid").val()
 				},
 				error : function() {// 请求失败处理函数
 					alert('请求失败');
