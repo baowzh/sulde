@@ -1653,13 +1653,20 @@ public class BlogManagerAction {
 			classname = "sharespanstyle";
 			currentclass = "cursharespanstyle";
 		}
+		String pagetype = "1";
+		String processbar = "false";
+		if (!"1".equalsIgnoreCase(pagingModel.getPagetype())) {
+			pagetype = "0";
+			processbar = "true";
+		}
 		List<PagingIndex> pagse = new ArrayList<PagingIndex>();
 		PagingIndex firestPagingIndex = new PagingIndex();
 		firestPagingIndex.setPageindex(1);
 		firestPagingIndex.setShowstr("<<");
+
 		firestPagingIndex.setLink("javascript:openpage('1','"
-				+ pagingModel.getUserid() + "'," + type
-				+ ",1);switchclass('pagefist');");
+				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
+				+ processbar + ");switchclass('pagefist');");
 		firestPagingIndex.setId("firest");
 		pagse.add(firestPagingIndex);
 		PagingIndex previousPagingIndex = new PagingIndex();
@@ -1670,8 +1677,8 @@ public class BlogManagerAction {
 		previousPagingIndex.setShowstr("<");
 		previousPagingIndex.setLink("javascript:openpage('"
 				+ previousPagingIndex.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type
-				+ ",1);switchclass('previous');");
+				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
+				+ processbar + ");switchclass('previous');");
 		previousPagingIndex.setId("previous");
 		pagse.add(previousPagingIndex);
 		int index1 = 0;
@@ -1697,7 +1704,8 @@ public class BlogManagerAction {
 				+ previousPagingIndex1.getPageindex());
 		previousPagingIndex1.setLink("javascript:openpage('"
 				+ previousPagingIndex1.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type + ",1);switchclass('"
+				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
+				+ processbar + ");switchclass('"
 				+ previousPagingIndex1.getPageindex() + "');");
 		previousPagingIndex1
 				.setId("page" + previousPagingIndex1.getPageindex());
@@ -1709,8 +1717,8 @@ public class BlogManagerAction {
 		currentpage.setShowstr("" + currentpage.getPageindex());
 		currentpage.setLink("javascript:openpage('"
 				+ currentpage.getPageindex() + "','" + pagingModel.getUserid()
-				+ "'," + type + ",1);switchclass('" + currentpage.getPageindex()
-				+ "');");
+				+ "'," + type + "," + pagetype + "," + processbar
+				+ ");switchclass('" + currentpage.getPageindex() + "');");
 		currentpage.setId("page" + currentpage.getPageindex());
 		pagse.add(currentpage);
 		currentpage.setCurrent(1);
@@ -1720,8 +1728,9 @@ public class BlogManagerAction {
 		nextpage1.setPageindex(index3);
 		nextpage1.setShowstr("" + nextpage1.getPageindex());
 		nextpage1.setLink("javascript:openpage('" + nextpage1.getPageindex()
-				+ "','" + pagingModel.getUserid() + "'," + type
-				+ ",1);switchclass('" + nextpage1.getPageindex() + "');");
+				+ "','" + pagingModel.getUserid() + "'," + type + ","
+				+ pagetype + "," + processbar + ");switchclass('"
+				+ nextpage1.getPageindex() + "');");
 		nextpage1.setId("page" + nextpage1.getPageindex());
 		pagse.add(nextpage1);
 		//
@@ -1733,8 +1742,8 @@ public class BlogManagerAction {
 		}
 		nextPagingIndex.setLink("javascript:openpage('"
 				+ nextPagingIndex.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type
-				+ ",1);switchclass('next');");
+				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
+				+ processbar + ");switchclass('next');");
 		nextPagingIndex.setId("next");
 		pagse.add(nextPagingIndex);
 		PagingIndex lastPagingIndex = new PagingIndex();
@@ -1742,8 +1751,8 @@ public class BlogManagerAction {
 		lastPagingIndex.setShowstr(">>");
 		lastPagingIndex.setLink("javascript:openpage('"
 				+ lastPagingIndex.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type
-				+ ",1);switchclass('last');");
+				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
+				+ processbar + ");switchclass('last');");
 		lastPagingIndex.setId("last");
 		pagse.add(lastPagingIndex);
 		String pagestr = "";

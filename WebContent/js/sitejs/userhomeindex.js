@@ -41,7 +41,8 @@ var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 				},
 				data : {
 					userid : currentuserid,
-					pageindex : index
+					pageindex : index,
+					pagetype:pagetype
 				},
 				complete : function() {
 					$(".loadingbox").hide();

@@ -51,7 +51,7 @@ public class PaingModel {
 	 */
 	private String username;
 	/**
-	 * 资源状态 
+	 * 资源状态
 	 */
 	private Integer docstatus;
 	/**
@@ -66,7 +66,8 @@ public class PaingModel {
 	 * 图片列表
 	 */
 	private String imggroupid;
-	
+	private String pagetype;
+
 	private List<DocumentValue> docList;
 
 	public Integer getPagesize() {
@@ -188,4 +189,13 @@ public class PaingModel {
 	public void setImggroupid(String imggroupid) {
 		this.imggroupid = imggroupid;
 	}
+
+	public String getPagetype() {
+		return pagetype;
+	}
+
+	public void setPagetype(String pagetype) {
+		this.pagetype = pagetype;
+	}
+
 }
