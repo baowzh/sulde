@@ -125,4 +125,5 @@ public class StaticConstants {
 	public static String sitename1 = "sulde";
 
 	public static String sitename2 = "altanhurd";
+	public static String downimgurl = "http://www.altanhurd.com/Upfiles/";
 }

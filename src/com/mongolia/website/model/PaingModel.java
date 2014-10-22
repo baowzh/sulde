@@ -8,7 +8,7 @@ import java.util.List;
  * @author baowzh
  * 
  */
-public class PaingModel {
+public class PaingModel<E> {
 	/**
 	 * 每页大小
 	 */
@@ -66,9 +66,9 @@ public class PaingModel {
 	 * 图片列表
 	 */
 	private String imggroupid;
-	private String pagetype;
 
-	private List<DocumentValue> docList;
+	private List<E> modelList;
+	private String pagetype;
 
 	public Integer getPagesize() {
 		return pagesize;
@@ -134,16 +134,24 @@ public class PaingModel {
 		this.username = username;
 	}
 
-	public List<DocumentValue> getDocList() {
-		return docList;
-	}
-
-	public void setDocList(List<DocumentValue> docList) {
-		this.docList = docList;
-	}
+	// public List<E> getDocList() {
+	// return docList;
+	// }
+	//
+	// public void setDocList(List<E> docList) {
+	// this.docList = docList;
+	// }
 
 	public Integer getPreviousindex() {
 		return previousindex;
+	}
+
+	public List<E> getModelList() {
+		return modelList;
+	}
+
+	public void setModelList(List<E> modelList) {
+		this.modelList = modelList;
 	}
 
 	public void setPreviousindex(Integer previousindex) {

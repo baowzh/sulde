@@ -19,6 +19,7 @@ public class MessageValue {
 	private Integer messtype;
 	private Integer hidden;
 	private Integer status;
+	private String oldid;
 
 	public String getMessageid() {
 		return messageid;
@@ -146,6 +147,14 @@ public class MessageValue {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getOldid() {
+		return oldid;
+	}
+
+	public void setOldid(String oldid) {
+		this.oldid = oldid;
 	}
 
 }

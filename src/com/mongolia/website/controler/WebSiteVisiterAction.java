@@ -24,12 +24,13 @@ import com.mongolia.website.manager.interfaces.ChannelManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
 import com.mongolia.website.model.Channel;
+import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
-import com.mongolia.website.model.PaingUser;
 import com.mongolia.website.model.QueryDocForm;
 import com.mongolia.website.model.QueryUserForm;
 import com.mongolia.website.model.TopDocumentValue;
+import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.StaticConstants;
 
 @Controller
@@ -81,14 +82,14 @@ public class WebSiteVisiterAction {
 	 */
 	@RequestMapping("/pagingquery.do")
 	public ModelAndView pagingquerydoc(HttpServletRequest request,
-			PaingModel paingModel, ModelMap map) {
+			PaingModel<DocumentValue> paingModel, ModelMap map) {
 		try {
 			paingModel.setPagesize(StaticConstants.DEFAULT_PAGESIZE);
 			paingModel.setStartrow((paingModel.getPageindex() - 1)
 					* paingModel.getPagesize());
 			paingModel.setEndrow(paingModel.getPageindex()
 					* paingModel.getPagesize());
-			PaingModel pamodel = webSiteVisitorManager
+			PaingModel<DocumentValue> pamodel = webSiteVisitorManager
 					.pagingquerydoc(paingModel);
 			map.put("paingModel", pamodel);
 			// /
@@ -182,9 +183,10 @@ public class WebSiteVisiterAction {
 
 	@RequestMapping("/pagingquerydoc.do")
 	public ModelAndView pagingQueryDoc(HttpServletRequest request,
-			ModelMap map, PaingModel paingmodel) throws IOException {
+			ModelMap map, PaingModel<DocumentValue> paingmodel)
+			throws IOException {
 		try {
-			PaingModel paingresult = this.webSiteVisitorManager
+			PaingModel<DocumentValue> paingresult = this.webSiteVisitorManager
 					.pagingquerydoc(paingmodel);
 			map.put("paingresult", paingresult);
 		} catch (Exception ex) {
@@ -202,12 +204,13 @@ public class WebSiteVisiterAction {
 			}
 			queryUserForm.setUsername(queryUserForm.getSearchtext());
 			queryUserForm.setPagesize(6);
-			PaingUser paingUser = this.webSiteManager.getUsers(queryUserForm);
-			map.put("users", paingUser.getUsers());
-			map.put("usercount", paingUser.getUsercount());
+			PaingModel<UserValue> paingUser = this.webSiteManager
+					.getUsers(queryUserForm);
+			map.put("users", paingUser.getModelList());
+			map.put("usercount", paingUser.getRowcount());
 			map.put("queryform", queryUserForm);
 			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
-			for (int i = 0; i < paingUser.getPageCount(); i++) {
+			for (int i = 0; i < paingUser.getPagecount(); i++) {
 				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
 				pagingIndex.setPageindex(i + 1);
 				if (i + 1 == queryUserForm.getPageindex().intValue()) {
@@ -216,7 +219,7 @@ public class WebSiteVisiterAction {
 				if (i == 0) {
 					indexs.add(pagingIndex);
 					pagingIndex.setDoc(0);
-				} else if (i == paingUser.getPageCount() - 1) {
+				} else if (i == paingUser.getPagecount() - 1) {
 					indexs.add(pagingIndex);
 					pagingIndex.setDoc(0);
 				} else if (i + 1 == queryUserForm.getPageindex().intValue()) {
@@ -224,13 +227,13 @@ public class WebSiteVisiterAction {
 
 				} else if (i == queryUserForm.getPageindex()) {
 					indexs.add(pagingIndex);
-					if (i + 2 != paingUser.getPageCount() && i != 1) {
+					if (i + 2 != paingUser.getPagecount() && i != 1) {
 						pagingIndex.setDoc(1);
 						pagingIndex.setFront(0);
 					}
 				} else if (i == queryUserForm.getPageindex() - 2) {
 					indexs.add(pagingIndex);
-					if (i != 1 && i + 1 != paingUser.getPageCount()
+					if (i != 1 && i + 1 != paingUser.getPagecount()
 							&& i + 1 != queryUserForm.getPageindex()) {
 						pagingIndex.setDoc(1);
 						pagingIndex.setFront(1);

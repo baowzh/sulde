@@ -18,6 +18,7 @@ public class ImgGrpupValue {
 	private String comm;
 	private Date createdtime;
 	private String  createdtimestr;
+	private String oldid;
 
 	public String getImggroupid() {
 		return imggroupid;
@@ -83,6 +84,14 @@ public class ImgGrpupValue {
 
 	public void setCreatedtimestr(String createdtimestr) {
 		this.createdtimestr = createdtimestr;
+	}
+
+	public String getOldid() {
+		return oldid;
+	}
+
+	public void setOldid(String oldid) {
+		this.oldid = oldid;
 	}
 	
 

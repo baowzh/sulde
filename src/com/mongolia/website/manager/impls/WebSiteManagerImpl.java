@@ -23,6 +23,7 @@ import com.mongolia.website.model.Channel;
 import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.MenuValue;
 import com.mongolia.website.model.OpinionValue;
+import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.PaingUser;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
@@ -285,7 +286,7 @@ public class WebSiteManagerImpl implements WebSiteManager {
 	}
 
 	@Override
-	public PaingUser getUsers(QueryUserForm queryUserForm) throws Exception {
+	public PaingModel<UserValue> getUsers(QueryUserForm queryUserForm) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> queryparams = new HashMap<String, Object>();
 		if (queryUserForm.getQx() != null
@@ -325,16 +326,15 @@ public class WebSiteManagerImpl implements WebSiteManager {
 				.getPageindex() - 1));
 		queryparams.put("startindex", startindex);
 		queryparams.put("fetchcount", queryUserForm.getPagesize());
-		PaingUser paingUser = new PaingUser();
-
-		paingUser.setUsers(this.userManagerDao.paingQueryUser(queryparams));
+		PaingModel<UserValue> paingUser = new PaingModel<UserValue>();
+		paingUser.setModelList(this.userManagerDao.paingQueryUser(queryparams));
 		Integer userCount = this.userManagerDao.paingUserCount(queryparams);
 		int pageCount = userCount / queryUserForm.getPagesize();
-		paingUser.setUsercount(userCount);
+		paingUser.setRowcount(userCount.toString());
 		if (userCount % queryUserForm.getPagesize() > 0) {
 			pageCount = pageCount + 1;
 		}
-		paingUser.setPageCount(pageCount);
+		paingUser.setPagecount(pageCount);
 		return paingUser;
 	}
 

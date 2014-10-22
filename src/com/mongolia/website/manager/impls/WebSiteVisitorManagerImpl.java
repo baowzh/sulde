@@ -67,7 +67,8 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 	}
 
 	@Override
-	public PaingModel pagingquerydoc(PaingModel paingModel) throws Exception {
+	public PaingModel<DocumentValue> pagingquerydoc(
+			PaingModel<DocumentValue> paingModel) throws Exception {
 		// TODO Auto-generated method stub
 		// 组织查询参数进行查询
 		paingModel.setStartrow((paingModel.getPageindex() - 1)
@@ -75,7 +76,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		paingModel.setEndrow(paingModel.getPagesize());
 		List<DocumentValue> documents = this.webSiteVisitorDao
 				.pagingquerydoc(paingModel);
-		paingModel.setDocList(documents);
+		paingModel.setModelList(documents);
 		Integer rowCount = this.webSiteVisitorDao.getRowCount(paingModel);
 		paingModel.setRowcount("" + rowCount);
 		int pageCount = rowCount / paingModel.getPagesize();
@@ -121,7 +122,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		Date endDate = new Date();
 		int fechtime = 0;
 		List<UserValue> topUsers = new ArrayList<UserValue>();
-		while (fechtime < 30 && topUsers.size() <= 12) {
+		while (fechtime < 30 && topUsers.size() <= 10) {
 			Calendar calendar = java.util.Calendar.getInstance();
 			calendar.setTime(new Date());
 			calendar.add(Calendar.WEEK_OF_YEAR, 0 - fechtime);

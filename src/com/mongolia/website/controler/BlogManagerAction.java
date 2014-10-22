@@ -58,11 +58,11 @@ import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
-import com.mongolia.website.model.PaingVoteResult;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.model.VoteDetailForm;
 import com.mongolia.website.model.VoteDetailValue;
 import com.mongolia.website.model.VoteResultDetailValue;
+import com.mongolia.website.model.VoteResultValue;
 import com.mongolia.website.model.VoteValue;
 import com.mongolia.website.util.ImgeUtil;
 import com.mongolia.website.util.StaticConstants;
@@ -729,7 +729,7 @@ public class BlogManagerAction {
 					.getImgGroupList(params);
 			map.put("albumValue", imgGroups.get(0));
 			map.putAll(this.getBlogInfo(request));
-			PaingModel paingModel = new PaingModel();
+			PaingModel<DocumentValue> paingModel = new PaingModel<DocumentValue>();
 			paingModel.setDoctype(StaticConstants.DOCTYPE_IMG);
 			if (pageindex == null) {
 				paingModel.setPageindex(1);
@@ -741,13 +741,14 @@ public class BlogManagerAction {
 			paingModel.setEndrow(paingModel.getPagesize());
 			paingModel.setPagesize(24);
 			paingModel.setImggroupid(opergroupid);
-			PaingModel pageModel = webSiteVisitorManager
+			PaingModel<DocumentValue> pageModel = webSiteVisitorManager
 					.pagingquerydoc(paingModel);
-			map.put("imgList", pageModel.getDocList());
+			map.put("imgList", pageModel.getModelList());
 			String idAndIndexrel = "";
-			for (int i = 0; i < pageModel.getDocList().size(); i++) {
+			List<DocumentValue> docs = pageModel.getModelList();
+			for (int i = 0; i < docs.size(); i++) {
 				idAndIndexrel = idAndIndexrel + (i + 1) + ","
-						+ pageModel.getDocList().get(i).getDocid() + "#";
+						+ docs.get(i).getDocid() + "#";
 			}
 			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
 			for (int i = 0; i < paingModel.getPagecount(); i++) {
@@ -854,6 +855,9 @@ public class BlogManagerAction {
 			if (imgList != null && !imgList.isEmpty()) {
 				// 获取本相册所有照片
 				Map<String, Object> getimgParmas = new HashMap<String, Object>();
+				if (imggroupid == null) {
+					imggroupid = imgList.get(0).getImggroupid();
+				}
 				getimgParmas.put("imggroupid", imggroupid);
 				List<ImgValue> imgs = this.webResourceManager
 						.getImgList(getimgParmas);
@@ -1605,14 +1609,15 @@ public class BlogManagerAction {
 	 * @return
 	 */
 	@RequestMapping("/pagingdoc.do")
-	public ModelAndView pagingdoc(PaingModel pagingModel, ModelMap map) {
+	public ModelAndView pagingdoc(PaingModel<DocumentValue> pagingModel,
+			ModelMap map) {
 		try {
 			pagingModel.setPagesize(24);
 			pagingModel.setDoctype(StaticConstants.DOCTYPE_DOC);
 			pagingModel.setDocstatus(StaticConstants.DOCSTATUS2);
-			PaingModel paingModel1 = this.webSiteVisitorManager
+			PaingModel<DocumentValue> paingModel1 = this.webSiteVisitorManager
 					.pagingquerydoc(pagingModel);
-			List<DocumentValue> doclist = paingModel1.getDocList();
+			List<DocumentValue> doclist = paingModel1.getModelList();
 			map.put("doclist", doclist);
 			String pagestr = getPagingLink(pagingModel, 1);
 			map.put("pagingstr", pagestr);
@@ -1630,10 +1635,10 @@ public class BlogManagerAction {
 			pagingModel.setDoctype(StaticConstants.DOCTYPE_DOC);
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("userid", pagingModel.getUserid());
-			PaingModel paingModel1 = this.webResourceManager
+			PaingModel<DocumentValue> paingModel1 = this.webResourceManager
 					.pagingQuerySharedDocs(params, StaticConstants.DOCTYPE_DOC,
 							pagingModel.getPageindex(), 24);
-			List<DocumentValue> doclist = paingModel1.getDocList();
+			List<DocumentValue> doclist = paingModel1.getModelList();
 			map.put("doclist", doclist);
 			String pagestr = getPagingLink(pagingModel, 2);
 			map.put("pagingstr", pagestr);
@@ -2060,17 +2065,17 @@ public class BlogManagerAction {
 		} else {
 			pageindex = Integer.parseInt(index);
 		}
-		PaingVoteResult paingModel = this.webResourceManager
+		PaingModel<VoteResultValue> paingModel = this.webResourceManager
 				.pagingqueryVoteResult(voteid, questionid, pageindex);
 		//
 		List<PagingIndex> indexs = new ArrayList<PagingIndex>();
-		for (int i = 0; i < paingModel.getPageCount(); i++) {
+		for (int i = 0; i < paingModel.getPagecount(); i++) {
 			PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
 			pagingIndex.setPageindex(i + 1);
 			if (i == 0) {
 				indexs.add(pagingIndex);
 				pagingIndex.setDoc(0);
-			} else if (i == paingModel.getPageCount() - 1) {
+			} else if (i == paingModel.getPagecount() - 1) {
 				indexs.add(pagingIndex);
 				pagingIndex.setDoc(0);
 			} else if (i + 1 == paingModel.getPageindex()) {
@@ -2078,13 +2083,13 @@ public class BlogManagerAction {
 				pagingIndex.setCurrent(1);
 			} else if (i == paingModel.getPageindex()) {
 				indexs.add(pagingIndex);
-				if (i + 2 != paingModel.getPageCount() && i != 1) {
+				if (i + 2 != paingModel.getPagecount() && i != 1) {
 					pagingIndex.setDoc(1);
 					pagingIndex.setFront(0);
 				}
 			} else if (i == paingModel.getPageindex() - 2) {
 				indexs.add(pagingIndex);
-				if (i != 1 && i + 1 != paingModel.getPageCount()
+				if (i != 1 && i + 1 != paingModel.getPagecount()
 						&& i + 1 != paingModel.getPageindex()) {
 					pagingIndex.setDoc(1);
 					pagingIndex.setFront(1);

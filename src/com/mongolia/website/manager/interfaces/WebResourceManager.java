@@ -8,15 +8,14 @@ import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgValue;
-import com.mongolia.website.model.MessagePaingModel;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PaingModel;
-import com.mongolia.website.model.PaingVoteResult;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.model.VisitorValue;
 import com.mongolia.website.model.VoteDetailForm;
 import com.mongolia.website.model.VoteDetailValue;
 import com.mongolia.website.model.VoteResultDetailValue;
+import com.mongolia.website.model.VoteResultValue;
 import com.mongolia.website.model.VoteValue;
 
 public interface WebResourceManager {
@@ -425,7 +424,7 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public PaingVoteResult pagingqueryVoteResult(String voteid,
+	public PaingModel<VoteResultValue> pagingqueryVoteResult(String voteid,
 			String questionid, Integer pageindex) throws Exception;
 
 	/**
@@ -434,7 +433,7 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public PaingModel pagingQuerySharedDocs(Map<String, Object> params,
+	public PaingModel<DocumentValue> pagingQuerySharedDocs(Map<String, Object> params,
 			int doctype, int pageindex, int pagesize) throws Exception;
 
 	/**
@@ -448,8 +447,16 @@ public interface WebResourceManager {
 	 * @param params
 	 * @throws Exception
 	 */
-	public MessagePaingModel paingQueryComment(
+	public PaingModel<MessageValue> paingQueryComment(
 			Map<String, Object> queryDocForm, Integer rowCount,
 			Integer pageindex) throws Exception;
+
+	public void synOldUser() throws Exception;
+
+	public void synOldDoc() throws Exception;
+
+	public void synOldMess() throws Exception;
+
+	public void synOldImg() throws Exception;
 
 }

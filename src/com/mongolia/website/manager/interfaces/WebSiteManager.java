@@ -5,15 +5,15 @@ import java.util.Map;
 
 import com.mongolia.website.controler.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.model.Channel;
-import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.MenuValue;
 import com.mongolia.website.model.OpinionValue;
-import com.mongolia.website.model.PaingUser;
+import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.model.QueryOpinionFrom;
 import com.mongolia.website.model.QueryUserForm;
 import com.mongolia.website.model.TopDocumentValue;
+import com.mongolia.website.model.UserValue;
 
 public interface WebSiteManager {
 	/**
@@ -122,7 +122,7 @@ public interface WebSiteManager {
 	 * @param queryUserForm
 	 * @throws Exception
 	 */
-	public PaingUser getUsers(QueryUserForm queryUserForm)throws Exception;
+	public PaingModel<UserValue> getUsers(QueryUserForm queryUserForm)throws Exception;
 	/**
 	 * 查询意见建议
 	 * @param queryOpinionFrom

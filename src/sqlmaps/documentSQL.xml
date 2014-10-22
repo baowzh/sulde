@@ -41,7 +41,8 @@
 		ATTACHPIC ,
 		DOCFILENAME ,
 		DOCSOURCENAME,
-		userid
+		userid,
+		oldid
 		) values( #docid#,
 		#docchannel#,
 		#doctype#,
@@ -67,7 +68,8 @@
 		#attachpic#,
 		#docfilename#,
 		#docsourcename#,
-		#userid#
+		#userid#,
+		#oldid#
 		)
 	</insert>
 	<select id="getUserDocList" parameterClass="java.util.Map"
@@ -292,7 +294,8 @@
 		messtime,
 		messtype,
 		received,
-		hidden
+		hidden,
+		oldid
 		)values(
 		#messageid#,
 		#messagesenderid#,
@@ -305,7 +308,8 @@
 		#messtime#,
 		#messtype#,
 		0,
-		#hidden#
+		#hidden#,
+		#oldid#
 		)
 	</insert>
 	<select id="getResourceCommentList" parameterClass="java.util.Map"

@@ -3,6 +3,7 @@ package com.mongolia.website.manager.interfaces;
 import java.util.List;
 import java.util.Map;
 
+import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
@@ -27,7 +28,7 @@ public interface WebSiteVisitorManager extends BaseManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public PaingModel pagingquerydoc(PaingModel paingModel)throws Exception;
+	public PaingModel<DocumentValue> pagingquerydoc(PaingModel<DocumentValue> paingModel)throws Exception;
 	/**
 	 * index
 	 * @return

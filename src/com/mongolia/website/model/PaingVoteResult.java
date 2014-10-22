@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaingVoteResult {
-	List<VoteResultValue> results = new ArrayList<VoteResultValue>();
+	//List<VoteResultValue> results = new ArrayList<VoteResultValue>();
+	List<?> results = new ArrayList<VoteResultValue>();
 	private Integer pageCount;
 	private Integer pageindex;
 	private Integer resultcount;
@@ -33,11 +34,11 @@ public class PaingVoteResult {
 		this.resultcount = resultcount;
 	}
 
-	public List<VoteResultValue> getResults() {
+	public List<?> getResults() {
 		return results;
 	}
 
-	public void setResults(List<VoteResultValue> results) {
+	public void setResults(List<?> results) {
 		this.results = results;
 	}
 	

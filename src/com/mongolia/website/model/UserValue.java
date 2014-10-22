@@ -72,6 +72,8 @@ public class UserValue implements UserDetails {
 	private Integer blogclass;
 	private String professioncode;
 	private String professionname;
+	private String imguser;
+	private String oldid;
 
 	public String getLastip() {
 		return lastip;
@@ -603,5 +605,22 @@ public class UserValue implements UserDetails {
 	public void setProfessionname(String professionname) {
 		this.professionname = professionname;
 	}
+
+	public String getImguser() {
+		return imguser;
+	}
+
+	public void setImguser(String imguser) {
+		this.imguser = imguser;
+	}
+
+	public String getOldid() {
+		return oldid;
+	}
+
+	public void setOldid(String oldid) {
+		this.oldid = oldid;
+	}
+	
 
 }

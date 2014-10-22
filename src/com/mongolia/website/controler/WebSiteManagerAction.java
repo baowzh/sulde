@@ -29,12 +29,12 @@ import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebResourceManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
+import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.MenuValue;
-import com.mongolia.website.model.MessagePaingModel;
+import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.OpinionValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
-import com.mongolia.website.model.PaingUser;
 import com.mongolia.website.model.QueryDocForm;
 import com.mongolia.website.model.QueryOpinionFrom;
 import com.mongolia.website.model.QueryUserForm;
@@ -48,7 +48,7 @@ import com.mongolia.website.util.StaticConstants;
  * @author baowzh
  */
 @Controller
-public class WebSiteManagerAction implements PaingActionIA {
+public class WebSiteManagerAction  {
 	@Autowired
 	private WebSiteManager webSiteManager;
 	@Autowired
@@ -306,21 +306,21 @@ public class WebSiteManagerAction implements PaingActionIA {
 		return new ModelAndView("sitemanager/sitemanagerindex", map);
 	}
 
-	@RequestMapping("/pagingdata.do")
-	@Override
-	public ModelAndView pagingData(PaingModel model, ModelMap map) {
-		// TODO Auto-generated method stub
-		System.out.println(" 分页查询方法1");
-		return new ModelAndView("jsonView", map);
-	}
-
-	@RequestMapping("/refreshdata.do")
-	@Override
-	public ModelAndView refreshData(PaingModel model, ModelMap map) {
-		// TODO Auto-generated method stub
-		System.out.println(" 分页查询方法2");
-		return new ModelAndView("jsonView", map);
-	}
+//	@RequestMapping("/pagingdata.do")
+//	@Override
+//	public ModelAndView pagingData(PaingModel model, ModelMap map) {
+//		// TODO Auto-generated method stub
+//		System.out.println(" 分页查询方法1");
+//		return new ModelAndView("jsonView", map);
+//	}
+//
+//	@RequestMapping("/refreshdata.do")
+//	@Override
+//	public ModelAndView refreshData(PaingModel model, ModelMap map) {
+//		// TODO Auto-generated method stub
+//		System.out.println(" 分页查询方法2");
+//		return new ModelAndView("jsonView", map);
+//	}
 
 	/**
 	 * 审核内容
@@ -391,12 +391,13 @@ public class WebSiteManagerAction implements PaingActionIA {
 				queryUserForm.setPageindex(1);
 			}
 			queryUserForm.setPagesize(6);
-			PaingUser paingUser = this.webSiteManager.getUsers(queryUserForm);
-			map.put("users", paingUser.getUsers());
-			map.put("usercount", paingUser.getUsercount());
+			PaingModel<UserValue> paingUser = this.webSiteManager
+					.getUsers(queryUserForm);
+			map.put("users", paingUser.getModelList());
+			map.put("usercount", paingUser.getRowcount());
 			map.put("queryform", queryUserForm);
 			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
-			for (int i = 0; i < paingUser.getPageCount(); i++) {
+			for (int i = 0; i < paingUser.getPagecount(); i++) {
 				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
 				pagingIndex.setPageindex(i + 1);
 				if (i + 1 == queryUserForm.getPageindex().intValue()) {
@@ -405,7 +406,7 @@ public class WebSiteManagerAction implements PaingActionIA {
 				if (i == 0) {
 					indexs.add(pagingIndex);
 					pagingIndex.setDoc(0);
-				} else if (i == paingUser.getPageCount() - 1) {
+				} else if (i == paingUser.getPagecount() - 1) {
 					indexs.add(pagingIndex);
 					pagingIndex.setDoc(0);
 				} else if (i + 1 == queryUserForm.getPageindex()) {
@@ -413,13 +414,13 @@ public class WebSiteManagerAction implements PaingActionIA {
 					pagingIndex.setCurrent(1);
 				} else if (i == queryUserForm.getPageindex()) {
 					indexs.add(pagingIndex);
-					if (i + 2 != paingUser.getPageCount() && i != 1) {
+					if (i + 2 != paingUser.getPagecount() && i != 1) {
 						pagingIndex.setDoc(1);
 						pagingIndex.setFront(0);
 					}
 				} else if (i == queryUserForm.getPageindex() - 2) {
 					indexs.add(pagingIndex);
-					if (i != 1 && i + 1 != paingUser.getPageCount()
+					if (i != 1 && i + 1 != paingUser.getPagecount()
 							&& i + 1 != queryUserForm.getPageindex()) {
 						pagingIndex.setDoc(1);
 						pagingIndex.setFront(1);
@@ -625,7 +626,7 @@ public class WebSiteManagerAction implements PaingActionIA {
 	public ModelAndView pagingImgList(HttpServletRequest request, ModelMap map) {
 		try {
 			String pageindex = request.getParameter("pageindex");
-			PaingModel paingModel = new PaingModel();
+			PaingModel<DocumentValue> paingModel = new PaingModel<DocumentValue>();
 			paingModel.setDoctype(StaticConstants.DOCTYPE_IMG);
 			if (pageindex == null) {
 				paingModel.setPageindex(1);
@@ -637,18 +638,19 @@ public class WebSiteManagerAction implements PaingActionIA {
 			paingModel.setEndrow(paingModel.getPagesize());
 			paingModel.setPagesize(24);
 			paingModel.setDocstatus(StaticConstants.DOCSTATUS1);
-			PaingModel pageModel = webSiteVisitorManager
+			PaingModel<DocumentValue> pageModel = webSiteVisitorManager
 					.pagingquerydoc(paingModel);
-			map.put("imgList", pageModel.getDocList());
-			if (pageModel.getDocList().isEmpty()) {
+			map.put("imgList", pageModel.getModelList());
+			if (pageModel.getModelList().isEmpty()) {
 				map.put("isempty", 1);
 			} else {
 				map.put("isempty", 0);
 			}
 			String idAndIndexrel = "";
-			for (int i = 0; i < pageModel.getDocList().size(); i++) {
+			List<DocumentValue> docs = pageModel.getModelList();
+			for (int i = 0; i < docs.size(); i++) {
 				idAndIndexrel = idAndIndexrel + (i + 1) + ","
-						+ pageModel.getDocList().get(i).getDocid() + "#";
+						+ docs.get(i).getDocid() + "#";
 			}
 			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
 			for (int i = 0; i < paingModel.getPagecount(); i++) {
@@ -700,13 +702,28 @@ public class WebSiteManagerAction implements PaingActionIA {
 			queryParams.put("status", queryDocForm.getStatus());
 			queryParams.put("strcrtime", queryDocForm.getStrcrtime());
 			queryParams.put("endcrtime", queryDocForm.getEndcrtime());
-			MessagePaingModel messagePaingModel = this.webResourceManager
-					.paingQueryComment(queryParams, 30,queryDocForm.getPageindex());
+			PaingModel<MessageValue> messagePaingModel = this.webResourceManager
+					.paingQueryComment(queryParams, 30,
+							queryDocForm.getPageindex());
 			map.put("messagePaingModel", messagePaingModel);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return new ModelAndView("sitemanager/commentlist", map);
+	}
+
+	// @RequestMapping("/synuserdata.do")
+	public ModelAndView synuserdata(HttpServletRequest request, ModelMap map,
+			QueryDocForm queryDocForm) {
+		try {
+			// this.webResourceManager.synOldUser();
+			// this.webResourceManager.synOldDoc();
+			// this.webResourceManager.synOldMess();
+			this.webResourceManager.synOldImg();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return new ModelAndView("redirect:index.do", map);
 	}
 
 }

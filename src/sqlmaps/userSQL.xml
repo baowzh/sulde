@@ -115,7 +115,8 @@
 		hsien,
 		nowhsien,
 		professioncode,
-		blogclass
+		blogclass,
+		oldid
 		)
 		values
 		(
@@ -147,7 +148,8 @@
 		#hsien#,
 		#nowhsien#,
 		#professioncode#,
-		#blogclass#
+		#blogclass#,
+		#oldid#
 		)
 	</insert>
 
@@ -374,7 +376,7 @@
 		retnum from document where <![CDATA[CRTIME>=#startDate#]]>
 		and
 	<![CDATA[ CRTIME<=#endDate#]]>
-		GROUP BY userid) b where a.userid=b.userid order by retnum desc
+		GROUP BY userid) b where a.userid=b.userid order by retnum desc limit 0,9
 	</select>
 	<select id="getRecentRegistUsers" parameterClass="java.util.Map"
 		resultClass="UserValue">

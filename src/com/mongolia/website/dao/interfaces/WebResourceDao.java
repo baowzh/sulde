@@ -13,6 +13,7 @@ import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MarkedResourceValue;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.ShareResourceValue;
+import com.mongolia.website.model.UserValue;
 import com.mongolia.website.model.VisitorValue;
 import com.mongolia.website.model.VoteDetailValue;
 import com.mongolia.website.model.VoteResultDetailValue;
@@ -672,5 +673,15 @@ public interface WebResourceDao extends BaseDao {
 	 */
 	public Integer getCommentCount(Map<String, Object> queryParams)
 			throws Exception;
+
+	public List<UserValue> getOldUsers() throws Exception;
+
+	public List<DocumentValue> getOldDocs() throws Exception;
+
+	public List<ImgValue> getOldImgs() throws Exception;
+
+	public List<MessageValue> getOldMess() throws Exception;
+
+	public List<ImgGrpupValue> getOldImgGroup() throws Exception;
 
 }
