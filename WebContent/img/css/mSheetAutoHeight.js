@@ -1,10 +1,13 @@
 // JavaScript Document
 
-$(window).on("load", function(e) {
-	setheight();
-}
+$(window)
+		.on(
+				"load",
+				function(e) {
+					setheight();	
+				}
 
-);
+		);
 var setheight = function() {
 
 	$("#nameCard ")[0].style.height = ($("#nameCard div")[0].scrollHeight - 178)

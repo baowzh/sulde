@@ -83,7 +83,8 @@
 						</c:if>
 						<input type="hidden" name="opertype" id="opertype"
 							value="<c:out value="${opertype}" />" /> <input type="hidden"
-							name="docid" id="docid" value="<c:out value="${docid}" />" />
+							name="docid" id="docid" value="<c:out value="${docid}" />" /> <input
+							type="hidden" name="userid" id="userid" value="" />
 						<div class="inputHolder">
 							<select name="docchannel" id="docchannel"
 								style="writing-mode: tb-rl; -webkit-writing-mode: vertical-lr; height: 210">
@@ -162,14 +163,13 @@
 						style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; height: 100px; width: 18px;" /></td>
 				</tr>
 			</table>
-			<br>
-			<br>
-			<div class="mnlist"
-				style="width: 20px; height: 200px; text-align: center;">
-				<a href="javascript:submit();"></a>&nbsp;&nbsp; <a
-					href="javascript:openemfacewindow">&nbsp;&nbsp; </a>
+			<br> <br>
+					<div class="mnlist"
+						style="width: 20px; height: 200px; text-align: center;">
+						<a href="javascript:submit();"></a>&nbsp;&nbsp; <a
+							href="javascript:openemfacewindow">&nbsp;&nbsp; </a>
 
-			</div>
+					</div>
 		</div>
 		<%@ include file="dochiddendiv.jsp"%>
 	</form>
@@ -212,14 +212,14 @@
 		// 		}
 		// 		document.getElementById("addnews").submit();
 	}
-	function submit(){
-		
-		if ($('#opertype').val() == 2) {
-					$('#addnews')[0].action = "updatedoc.do";
-				} else {
-					$('#addnews')[0].action = "adddoc.do";
-				}
-				document.getElementById("addnews").submit();
+	function submit() {
+
+		if ($('#opertype').val() == 2 || $('#opertype').val() == 3) {
+			$('#addnews')[0].action = "updatedoc.do";
+		} else {
+			$('#addnews')[0].action = "adddoc.do";
+		}
+		document.getElementById("addnews").submit();
 	}
 </SCRIPT>
 </html>

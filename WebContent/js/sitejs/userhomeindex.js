@@ -6,6 +6,7 @@
  */
 var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 	var querurl = 'pagingsharedoc.do';
+	pagetype=1;
 	if (type == 1) {
 		querurl = 'pagingdoc.do';
 	} else if (type == 2) {
@@ -51,6 +52,7 @@ var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 					var htmlstrr = "";
 					for (i in data.doclist) {
 						if (type == 1) {
+							
 							if (pagetype == 1) {
 								htmlstrr = htmlstrr
 										+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'

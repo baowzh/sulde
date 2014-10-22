@@ -151,7 +151,7 @@
 
 								</div>
 								<div class="artclList" id="shareartclList">
-									<c:forEach items="${sharePaingModel.docList}"
+									<c:forEach items="${sharePaingModel.modelList}"
 										var="documentValue" varStatus="status">
 										<div class="sharenwsl1">
 											<div class="title" style="height: 230px;">

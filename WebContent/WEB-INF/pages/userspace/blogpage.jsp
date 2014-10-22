@@ -40,7 +40,7 @@
 					<!--  <div class="m1ln">       </div>-->
 					<div class="m1ln">
 						  
-						<c:out value="${user.nowprovince}" default="  " />
+						<c:out value="${user.nowprovincename}" default="  " />
 					</div>
 					<!--  <div class="m1ln">   2010-1-1</div>-->
 					<div class="m1ln">

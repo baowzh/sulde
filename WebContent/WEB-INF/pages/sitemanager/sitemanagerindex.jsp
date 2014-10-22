@@ -29,6 +29,9 @@
 			<a href="userlist.do">   </a>
 		</div>
 		<div class="mnlist">
+			<a href="commentlist.do"> </a>
+		</div>
+		<div class="mnlist">
 			<a href="getopinions.do"> </a>
 		</div>
 		<div class="mnlist">

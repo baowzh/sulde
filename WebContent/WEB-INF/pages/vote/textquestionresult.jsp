@@ -10,7 +10,7 @@
 <body>
 	<div class="lmainR"
 		style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr; width: 210px; height: 400px;">
-		<c:forEach items="${paingModel.results}" var="voteResultValue"
+		<c:forEach items="${paingModel.modelList}" var="voteResultValue"
 			varStatus="status">
 			<div class="mnlist">
 			<c:out value="${voteResultValue.artname}" /> :<c:out value="${voteResultValue.questiondesc}" />
@@ -43,7 +43,7 @@
 
 			<span id="picbtn1"
 				style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&lt;</a>&nbsp;
-			</span> (<c:out value="${paingModel.resultcount}" default="0" />)
+			</span> (<c:out value="${paingModel.rowcount}" default="0" />)
 		</div>
 	</div>
 

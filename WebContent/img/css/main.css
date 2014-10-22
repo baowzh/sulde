@@ -6,8 +6,10 @@
  
  */
 @font-face {
-	font-family: MenksoftQagan;
-	src: url(../../font/MenksoftScnin.ttf);
+	/* 	font-family: "Menksoft  "; */
+	font-family: "MenksoftQagan";
+/* 	font-family: "MenksoftQagan"; */
+	src: url(../../font/MenksoftQagan_cn.ttf);
 }
 
 /*
@@ -57,8 +59,10 @@ a:hover {
 
 body {
 	margin: 0;
-	font-family: MenksoftQagan;
-	font-size: 15px;
+/* 	font-family: "Menksoft  "; */
+	font-family: "MenksoftQagan"; 
+/* 	font-family: "MenksoftQagan"; */
+	font-size: 16px;
 	line-height: 100%;
 }
 

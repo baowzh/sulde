@@ -77,9 +77,9 @@
 									</span> 
 								</div>
 								<!--    -->
-								<div id="doccontent">
+<!-- 								<div id="doccontent"> -->
 									<c:out value="${documentValue.htmlstr}" escapeXml="false" />
-								</div>
+<!-- 								</div> -->
 								<!--    -->
 								<br>
 								<!--        -->
@@ -234,31 +234,32 @@
 								<c:forEach items="${docList}" var="documentValue"
 									varStatus="status">
 									<div class="m1ln">
-										<a><img src="img/dot.gif"></a> <a
+										<a><img src="img/dot.gif"></a>
+										<!-- <a
 											href="javascript:readdoc('<c:out value="${documentValue.docid}" />');"><c:out
-												value="${documentValue.doctitle}" escapeXml="false" /> </a>
-										<!--  
+												value="${documentValue.doctitle}" escapeXml="false" /> </a>-->
+										
 										<a
 											href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}" />"><c:out
 												value="${documentValue.doctitle}" escapeXml="false" /> </a>
-												-->
+												
 									</div>
 								</c:forEach>
 							</div>
 							<div class="paginationArea">
 								<div class="pagination" id="docpagelist">
 									<a class="first disabled" id="firsta"
-										href="javascript:openpage('1','<c:out value="${user.userid}" />',1);switchclass('first');">
+										href="javascript:openpage('1','<c:out value="${user.userid}" />',1,0,true);switchclass('first');">
 										<span id="pagefirst" class="spanstyle">&lt;&lt; </span>
 									</a> <a class="first disabled" id="previousa"
-										href="javascript:openpage('<c:out value="${previousindex}" />','<c:out value="${user.userid}" />',1);switchclass('pageprevious');">
+										href="javascript:openpage('<c:out value="${previousindex}" />','<c:out value="${user.userid}" />',1,0,true);switchclass('pageprevious');">
 										<span id="pageprevious" class="spanstyle">&nbsp;&lt;&nbsp;
 									</span>
 									</a>
 									<c:forEach items="${docpageIndexs}" var="pagingIndex"
 										varStatus="status">
 										<a class="first disabled"
-											href="javascript:openpage('<c:out value="${pagingIndex.pageindex}" />','<c:out value="${user.userid}" />',1,true);switchclass('page<c:out value="${pagingIndex.pageindex}" />');">
+											href="javascript:openpage('<c:out value="${pagingIndex.pageindex}" />','<c:out value="${user.userid}" />',0,true);switchclass('page<c:out value="${pagingIndex.pageindex}" />');">
 											<c:if test="${status.index==0}">
 												<span id="page<c:out value="${pagingIndex.pageindex}" />"
 													class="curspanstyle">&nbsp;<c:out
@@ -273,11 +274,11 @@
 										</a>
 									</c:forEach>
 									<a class="first disabled" id="nexta"
-										href="javascript:openpage('2','<c:out value="${user.userid}" />',1);switchclass('pagenext');">
+										href="javascript:openpage('2','<c:out value="${user.userid}" />',1,0,true);switchclass('pagenext');">
 										<span id="pagenext" class="spanstyle">&nbsp;&gt;&nbsp;
 									</span>
 									</a> <a class="first disabled" id="lasta"
-										href="javascript:openpage('<c:out value="${pageCount}" />','<c:out value="${user.userid}" />',1);switchclass('pagelast');">
+										href="javascript:openpage('<c:out value="${pageCount}" />','<c:out value="${user.userid}" />',1,0,true);switchclass('pagelast');">
 										<span id="pagelast" class="spanstyle">&gt;&gt; </span>
 									</a>
 								</div>
