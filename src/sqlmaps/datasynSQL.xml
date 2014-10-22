@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="datasyn">
+	<typeAlias alias="DocumentValue" type="com.mongolia.website.model.DocumentValue" />
+	<typeAlias alias="MessageValue" type="com.mongolia.website.model.MessageValue" />
+	<typeAlias alias="User" type="com.mongolia.website.model.UserValue" />
+	<typeAlias alias="ImgValue" type="com.mongolia.website.model.ImgValue" />
+	<typeAlias alias="ImgGrpupValue" type="com.mongolia.website.model.ImgGrpupValue" />
+
+	<select id="oldDocList" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
+		select article_info.unid as oldid,content as htmlstr,title
+		as doctitle,classid as docchannel, writer as
+		docauthor,article_info.intime as docreltime,hits as readcount ,(select
+		article_user.Unid from article_user where
+		article_user.nebterehunere=article_info.writer)
+		as userid from
+		article_info,article_user
+		where
+		article_info.writer=article_user.nebterehunere
+	</select>
+	<select id="olduserList" parameterClass="java.util.Map"
+		resultClass="User">
+		select a.Unid as oldid,a.huisu as sex,a.nebterehunere as
+		username ,a.bcdvtainere as artname ,a.jahidal as email,a.tcgtamalvtasv
+		as qq,a.garvtasv as phone,a.urguge as blogname, a.seguder as imguser
+		,a.Intime as regdate,a.password from article_user a
+	</select>
+	<select id="oldimgList" parameterClass="java.util.Map"
+		resultClass="ImgValue">
+		select a.id as oldid, (select imggroupid from imggroup
+		where imggroup.oldid=a.habisv_id) as imggroupid ,a.jirvg_id
+		as
+		imgurl,a.tailbvri as imgname ,a.qag as docreltime,(select Unid from
+		article_user where article_user.nebterehunere=a.nere_n) as userid from
+		jirvg a
+	</select>
+	<select id="oldmess" parameterClass="java.util.Map" resultClass="MessageValue">
+		select a.unid as oldid,a.articleID as resourceid, a.content as
+		contenthtml,a.Intime as sendtime,(select unid from article_user where
+		article_user.nebterehunere=a.nere) as messagesenderid, (select unid
+		from article_user where article_user.nebterehunere=a.jchiyagqi_id) as
+		userid from article_remark a
+	</select>
+	<select id="oldimggroup" parameterClass="java.util.Map"
+		resultClass="ImgGrpupValue">
+		select a.unid as oldid ,a.title as imggroupname ,'1'
+		as
+		imggroupkind , (select userid from user where oldid in ( select unid
+		from article_user where
+		article_user.nebterehunere=a.writer) ) as
+		userid,a.Intime as
+		createdtime from article_info a where a.content is
+		null
+		and EXISTS (select 1 from jirvg where jirvg.habisv_id=a.Unid )
+	</select>
+
+</sqlMap>
