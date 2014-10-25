@@ -62,7 +62,8 @@
 					</div>
 					<div class="m1ln">
 						<a
-							href="javascript:writemessage('<c:out value="${user.userid}" />');"> &nbsp;&nbsp;&nbsp;</a>
+							href="javascript:writemessage('<c:out value="${user.userid}" />');">
+							&nbsp;&nbsp;&nbsp;</a>
 						<c:if test="${self==1}">
 							<a href="javascript:receivemessage();">(<c:out
 									value="${messageCount}" />)
@@ -70,34 +71,32 @@
 						</c:if>
 					</div>
 					<div class="m1ln">
-					<!--  
+						<!--  
 						<a
 							href="doedituserinifo.do?userid=<c:out value="${user.userid}" />">
 							  &nbsp;&nbsp;&nbsp; </a>
 							-->
-							
-							<c:if test="${self==1}">
+
+						<c:if test="${self==1}">
+							<a href="doedituserinifo.do">   &nbsp;&nbsp;&nbsp;
+							</a>
+							<a>   </a>
+						</c:if>
+						<c:if test="${self==0}">
 							<a
-							href="doedituserinifo.do">
-							  &nbsp;&nbsp;&nbsp; </a>
-							</c:if>
-							<c:if test="${self==0}">
-							<a
-							href="javascript:showuserinfo('<c:out value="${user.userid}" />');">
-							  &nbsp;&nbsp;&nbsp; </a>
-							</c:if>
-						
-							
+								href="javascript:showuserinfo('<c:out value="${user.userid}" />');">
+								  &nbsp;&nbsp;&nbsp; </a>
+						</c:if>
+
+
 						<c:if test="${self==0}">
 							<!--  
 							<a
 								href="javascript:addfriends('<c:out value="${user.userid}" />');">
 								 </a>
 								-->
-							<a
-								href="javascript:openaddfrienddl();">
-								 </a>
-								
+							<a href="javascript:openaddfrienddl();">  </a>
+
 						</c:if>
 					</div>
 					<div class="frt" style="width: 0px; height: 0px;">
@@ -109,16 +108,15 @@
 		<div class="frt blgNav blgNavC" style="width: 20px;">
 			<div class=" m1ln " style="padding-top: 8px;">
 				<a href="gouserindex.do?userid=<c:out value="${user.userid}" />">
-					<c:if test="${self==1}"> </c:if>
-					<c:if test="${self==0}">  </c:if>
+					<c:if test="${self==1}"> </c:if> <c:if test="${self==0}">  </c:if>
 				</a> 
 
 				<!--							  <a href="#">  </a>   -->
 				<!--							  <a href="#">   </a>   -->
 
 				<a href="photoAlbumList.do?userid=<c:out value="${user.userid}" />"></a>
-				 <a href="friendlist.do?userid=<c:out value="${user.userid}" />"></a>  <a href="index.html"> 
-				</a>
+				 <a href="friendlist.do?userid=<c:out value="${user.userid}" />"></a>
+				 <a href="index.html">  </a>
 			</div>
 		</div>
 		<div class=" flt"

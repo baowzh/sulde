@@ -41,7 +41,6 @@ import com.mongolia.website.model.MarkedResourceValue;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
-import com.mongolia.website.model.PaingVoteResult;
 import com.mongolia.website.model.QuestionValue;
 import com.mongolia.website.model.ShareResourceValue;
 import com.mongolia.website.model.TopDocumentValue;
@@ -52,6 +51,7 @@ import com.mongolia.website.model.VoteDetailValue;
 import com.mongolia.website.model.VoteResultDetailValue;
 import com.mongolia.website.model.VoteResultValue;
 import com.mongolia.website.model.VoteValue;
+import com.mongolia.website.util.PageUtil;
 import com.mongolia.website.util.StaticConstants;
 import com.mongolia.website.util.UUIDMaker;
 
@@ -297,8 +297,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 
 	@Override
 	public Map<String, Object> getBlogInfo(UserValue blogUser,
-			UserValue sessionUser, Integer self, String docchannel)
-			throws ManagerException {
+			UserValue sessionUser, Integer self, String docchannel,
+			Integer pageindex) throws ManagerException {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -317,7 +317,11 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			} else {
 				pagingModel.setPagesize(24);
 			}
-			pagingModel.setPageindex(1);
+			if (pageindex != null) {
+				pagingModel.setPageindex(pageindex);
+			} else {
+				pagingModel.setPageindex(1);
+			}
 			pagingModel.setDocchannel(docchannel);
 			PaingModel<DocumentValue> pagingModel1 = webSiteVisitorManager
 					.pagingquerydoc(pagingModel);
@@ -343,6 +347,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			}
 			int pageCount = pagingModel1.getPagecount();
 			map.put("docpagecount", pageCount);
+			String pagingstr = PageUtil.getPagingLink(pagingModel1, 1);
+			map.put("pagingstr", pagingstr);
 			// 组织首页分页连接
 			List<PagingIndex> pageIndexs = new ArrayList<PagingIndex>();
 			for (int i = 0; i < pageCount && i < 3; i++) {
@@ -350,9 +356,9 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				pagingIndex.setPageindex(i + 1);
 				pageIndexs.add(pagingIndex);
 			}
-			// if (pageIndexs.size() > 1) {
-			map.put("docpageIndexs", pageIndexs);
-			// }
+			if (pageIndexs.size() > 1) {
+				map.put("docpageIndexs", pageIndexs);
+			}
 			map.put("pageCount", pageCount);
 			// 获取用户朋友列表 只显示8个
 			List<FriendValue> fvalues = this.getFriendValues(null,
@@ -488,11 +494,46 @@ public class WebResourceManagerImpl implements WebResourceManager {
 						groupi = groupi.substring(2, groupi.length() - 2);
 						String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
 								+ groupi
-								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"480\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
+								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
 						mati.appendReplacement(bufferi, embed);
 					}
 					mati.appendTail(bufferi);
 					docContent = bufferi.toString();
+					//
+					matchStr = "\\[FLASH=http:\\//(player.ku6.com|player.youku.com|www.tudou.com|v.ifeng.com|you.video.sina.com.cn){1}(/\\w+[.[\\w|\\W]+]*)+(/(\\s)*\\w+.swf){1}\\]";
+					destStri = Pattern.compile(matchStr);// ^
+					mati = destStri.matcher(docContent);
+					bufferi = new StringBuffer();
+					while (mati.find()) {
+						String groupi = mati.group(0);
+						groupi = groupi.substring(1, groupi.length() - 1);
+						String flashurl = groupi.split("=")[1];
+						flashurl = flashurl.replaceAll(" ", "");
+						String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+								+ flashurl
+								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
+						mati.appendReplacement(bufferi, embed);
+					}
+					mati.appendTail(bufferi);
+					docContent = bufferi.toString();
+
+					matchStr = "\\[FLASH=http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?\\]";
+					destStri = Pattern.compile(matchStr);// ^
+					mati = destStri.matcher(docContent);
+					bufferi = new StringBuffer();
+					while (mati.find()) {
+						String groupi = mati.group(0);
+						groupi = groupi.substring(1, groupi.length() - 1);
+						String flashurl = groupi.split("=")[1];
+						flashurl = flashurl.replaceAll(" ", "");
+						String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+								+ flashurl
+								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
+						mati.appendReplacement(bufferi, embed);
+					}
+					mati.appendTail(bufferi);
+					docContent = bufferi.toString();
+					//
 					documentValue.setHtmlstr(docContent);
 				}
 				// 添加读者次数
@@ -917,26 +958,32 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public Map<String, Object> pagingQueryFriends(String userid,
-			Integer pageIndex, Integer pageSize) throws ManagerException {
+	public PaingModel<FriendValue> pagingQueryFriends(
+			PaingModel<FriendValue> pagingmodel) throws ManagerException {
 		// TODO Auto-generated method stub
-		Map<String, Object> returnMap = new HashMap<String, Object>();
+		// Map<String, Object> returnMap = new HashMap<String, Object>();
 		try {
 			Integer startIndex = 0;
-			startIndex = (pageIndex - 1) * 40;
+			startIndex = (pagingmodel.getPageindex() - 1)
+					* pagingmodel.getPagesize();
 			List<FriendValue> friends = this.webResourceDao.pagingQueryFriends(
-					userid, startIndex, pageSize);
-			Integer count = this.webResourceDao.getFriendCount(userid);
-			int pageCount = count / 40;
-			if (count % 40 > 0) {
+					pagingmodel.getUserid(), startIndex,
+					pagingmodel.getPagesize());
+			Integer count = this.webResourceDao.getFriendCount(pagingmodel
+					.getUserid());
+			int pageCount = count / pagingmodel.getPagesize();
+			if (count % pagingmodel.getPagesize() > 0) {
 				pageCount = pageCount + 1;
 			}
-			returnMap.put("friends", friends);
-			returnMap.put("friendCount", pageCount);
+			pagingmodel.setModelList(friends);
+			pagingmodel.setPagecount(pageCount);
+			pagingmodel.setRowcount(""+count);
+			// returnMap.put("friends", friends);
+			// returnMap.put("friendCount", pageCount);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return returnMap;
+		return pagingmodel;
 	}
 
 	@Override

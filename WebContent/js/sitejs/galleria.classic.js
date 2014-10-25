@@ -98,8 +98,8 @@ Galleria.addTheme({
         this.bind('image', function(e) {
         	// 当图片切换时候写相应的数据
         	refreshdata(e.index);
-            Galleria.log(this) // the galleria instance
-            Galleria.log(e.imageTarget); // the displayed Image element
+           // Galleria.log(this) // the galleria instance
+           //Galleria.log(e.imageTarget); // the displayed Image element
         });
         
     }

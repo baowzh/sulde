@@ -53,6 +53,7 @@ import com.mongolia.website.manager.interfaces.WebResourceManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
 import com.mongolia.website.model.DocumentValue;
+import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MessageValue;
@@ -65,6 +66,7 @@ import com.mongolia.website.model.VoteResultDetailValue;
 import com.mongolia.website.model.VoteResultValue;
 import com.mongolia.website.model.VoteValue;
 import com.mongolia.website.util.ImgeUtil;
+import com.mongolia.website.util.PageUtil;
 import com.mongolia.website.util.StaticConstants;
 import com.mongolia.website.util.UUIDMaker;
 import com.sun.image.codec.jpeg.JPEGCodec;
@@ -126,7 +128,7 @@ public class BlogManagerAction {
 			}
 			map.put("self", self);
 			Map<String, Object> bologInfos = this.webResourceManager
-					.getBlogInfo(user, sessionUser, self, docchannel);
+					.getBlogInfo(user, sessionUser, self, docchannel, 1);
 			map.putAll(bologInfos);
 			map.put("previousindex", 1);
 			map.put("currentindex", 1);
@@ -178,7 +180,8 @@ public class BlogManagerAction {
 			HttpServletResponse response, ModelMap map) {
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
-			List docList = this.webResourceManager.getDocList(params);
+			List<DocumentValue> docList = this.webResourceManager
+					.getDocList(params);
 			map.put("docList", docList);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -203,6 +206,11 @@ public class BlogManagerAction {
 					.getAttribute("user");
 			Integer self = new Integer(0);
 			String docid = request.getParameter("docid");
+			String pageindex = request.getParameter("pageindex");
+			Integer pindex = 1;
+			if (pageindex != null && !pageindex.equalsIgnoreCase("")) {
+				pindex = Integer.parseInt(pageindex);
+			}
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("docid", docid);
 			String userid = null;
@@ -241,7 +249,7 @@ public class BlogManagerAction {
 			}
 			map.put("self", self);
 			Map<String, Object> bologInfos = this.webResourceManager
-					.getBlogInfo(user, sessionUser, self, null);
+					.getBlogInfo(user, sessionUser, self, null, pindex);
 			map.putAll(bologInfos);
 			setHiddenFlg(user, sessionUser, comments);
 			showemotion(comments);
@@ -276,7 +284,8 @@ public class BlogManagerAction {
 			String opertype = request.getParameter("opertype");
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("docid", docid);
-			List docList = this.webResourceManager.getDocList(params);
+			List<DocumentValue> docList = this.webResourceManager
+					.getDocList(params);
 			if (docList != null && !docList.isEmpty()) {
 				DocumentValue documentValue = (DocumentValue) docList.get(0);
 				if (documentValue.getDoctype().intValue() == StaticConstants.RESOURCE_TYPE_DOC) {
@@ -539,7 +548,7 @@ public class BlogManagerAction {
 			String path = request.getSession().getServletContext()
 					.getRealPath("/img");
 			Set<String> set = file.keySet();
-			Iterator iterator = set.iterator();
+			Iterator<String> iterator = set.iterator();
 			ImgValue tempImgValue = new ImgValue();
 			ImgValue imgValue = new ImgValue();
 			while (iterator.hasNext()) {
@@ -665,7 +674,7 @@ public class BlogManagerAction {
 			String path = request.getSession().getServletContext()
 					.getRealPath("/html/img");
 			Set<String> set = file.keySet();
-			Iterator iterator = set.iterator();
+			Iterator<String> iterator = set.iterator();
 			ImgValue tempImgValue = null;
 			while (iterator.hasNext()) {
 				String name = (String) iterator.next();
@@ -723,6 +732,7 @@ public class BlogManagerAction {
 		try {
 			String opergroupid = request.getParameter("imggroupid");
 			String pageindex = request.getParameter("pageindex");
+			String userid = request.getParameter("userid");
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("imggroupid", opergroupid);
 			List<ImgGrpupValue> imgGroups = this.webResourceManager
@@ -730,6 +740,7 @@ public class BlogManagerAction {
 			map.put("albumValue", imgGroups.get(0));
 			map.putAll(this.getBlogInfo(request));
 			PaingModel<DocumentValue> paingModel = new PaingModel<DocumentValue>();
+			paingModel.setUserid(userid);
 			paingModel.setDoctype(StaticConstants.DOCTYPE_IMG);
 			if (pageindex == null) {
 				paingModel.setPageindex(1);
@@ -750,39 +761,31 @@ public class BlogManagerAction {
 				idAndIndexrel = idAndIndexrel + (i + 1) + ","
 						+ docs.get(i).getDocid() + "#";
 			}
-			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
-			for (int i = 0; i < paingModel.getPagecount(); i++) {
-				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
-				pagingIndex.setPageindex(i + 1);
-				if (Integer.parseInt(pageindex) == i + 1) {
-					pagingIndex.setCurrent(1);
-				}
-				if (i == 0) {
-					indexs.add(pagingIndex);
-					pagingIndex.setDoc(0);
-				} else if (i == paingModel.getPagecount() - 1) {
-					indexs.add(pagingIndex);
-					pagingIndex.setDoc(0);
-				} else if (i + 1 == paingModel.getPageindex()) {
-					indexs.add(pagingIndex);
-					pagingIndex.setCurrent(1);
-				} else if (i == paingModel.getPageindex()) {
-					indexs.add(pagingIndex);
-					if (i + 2 != paingModel.getPagecount() && i != 1) {
-						pagingIndex.setDoc(1);
-						pagingIndex.setFront(0);
-					}
-				} else if (i == paingModel.getPageindex() - 2) {
-					indexs.add(pagingIndex);
-					if (i != 1 && i + 1 != paingModel.getPagecount()
-							&& i + 1 != paingModel.getPageindex()) {
-						pagingIndex.setDoc(1);
-						pagingIndex.setFront(1);
-					}
-				}
-
-			}
-			map.put("pagingindexs", indexs);
+			String pagingimgStr = PageUtil.getPagingImgLink(paingModel, 1);
+			/*
+			 * List<PagingIndex> indexs = new ArrayList<PagingIndex>(); for (int
+			 * i = 0; i < paingModel.getPagecount(); i++) { PagingIndex
+			 * pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
+			 * pagingIndex.setPageindex(i + 1); if (Integer.parseInt(pageindex)
+			 * == i + 1) { pagingIndex.setCurrent(1); } if (i == 0) {
+			 * indexs.add(pagingIndex); pagingIndex.setDoc(0); } else if (i ==
+			 * paingModel.getPagecount() - 1) { indexs.add(pagingIndex);
+			 * pagingIndex.setDoc(0); } else if (i + 1 ==
+			 * paingModel.getPageindex()) { indexs.add(pagingIndex);
+			 * pagingIndex.setCurrent(1); } else if (i ==
+			 * paingModel.getPageindex()) { indexs.add(pagingIndex); if (i + 2
+			 * != paingModel.getPagecount() && i != 1) { pagingIndex.setDoc(1);
+			 * pagingIndex.setFront(0); } } else if (i ==
+			 * paingModel.getPageindex() - 2) { indexs.add(pagingIndex); if (i
+			 * != 1 && i + 1 != paingModel.getPagecount() && i + 1 !=
+			 * paingModel.getPageindex()) { pagingIndex.setDoc(1);
+			 * pagingIndex.setFront(1); } }
+			 * 
+			 * }
+			 * 
+			 * map.put("pagingindexs", indexs);
+			 */
+			map.put("pagingimgStr", pagingimgStr);
 			map.put("imgcount", pageModel.getRowcount());
 			map.put("imggroupid", opergroupid);
 			map.put("idAndIndexrel", idAndIndexrel);
@@ -1274,26 +1277,30 @@ public class BlogManagerAction {
 
 	@RequestMapping("/friendlist.do")
 	public ModelAndView getFriendList(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) {
+			PaingModel<FriendValue> pagingModel, HttpServletResponse response,
+			ModelMap map) {
 		try {
-			String userid = request.getParameter("userid");
-			String pageIndex = request.getParameter("pageIndex");
-			Integer index = 0;
-			if (pageIndex == null || pageIndex.equalsIgnoreCase("")) {
-				index = new Integer(1);
-			} else {
-				index = Integer.parseInt(pageIndex);
-			}
+			// String userid = request.getParameter("userid");
+			// String pageIndex = pagingModel.getPageindex();
+			// Integer index = 0;
+			// if (pageIndex == null || pageIndex.equalsIgnoreCase("")) {
+			// index = new Integer(1);
+			// } else {
+			// index = Integer.parseInt(pageIndex);
+			// }
 			map.putAll(this.getBlogInfo(request));
-			Map<String, Object> friendsMap = this.webResourceManager
-					.pagingQueryFriends(userid, index, 50);
-			map.put("friendList", friendsMap.get("friends"));
-			Integer friendCount = (Integer) friendsMap.get("friendCount");
-			List<String> pageindexs = new ArrayList<String>();
-			for (int i = 0; i < friendCount; i++) {
-				pageindexs.add(String.valueOf(i + 1));
-			}
-			map.put("pageindexs", pageindexs);
+			pagingModel.setPagesize(40);
+			pagingModel = this.webResourceManager
+					.pagingQueryFriends(pagingModel);
+			map.put("friendList", pagingModel.getModelList());
+			Integer friendCount = Integer.parseInt(pagingModel.getRowcount());
+			String pagestr = PageUtil.getPagingFriendLink(pagingModel, 1);
+			// List<String> pageindexs = new ArrayList<String>();
+			// for (int i = 0; i < friendCount; i++) {
+			// pageindexs.add(String.valueOf(i + 1));
+			// }
+			// map.put("pageindexs", pageindexs);
+			map.put("pagestr", pagestr);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -1325,7 +1332,7 @@ public class BlogManagerAction {
 		map.put("self", self);
 		try {
 			Map<String, Object> bologInfos = this.webResourceManager
-					.getBlogInfo(user, sessionUser, self, null);
+					.getBlogInfo(user, sessionUser, self, null, 1);
 			map.putAll(bologInfos);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -1619,7 +1626,8 @@ public class BlogManagerAction {
 					.pagingquerydoc(pagingModel);
 			List<DocumentValue> doclist = paingModel1.getModelList();
 			map.put("doclist", doclist);
-			String pagestr = getPagingLink(pagingModel, 1);
+			// String pagestr = getPagingLink(pagingModel, 1);
+			String pagestr = PageUtil.getPagingLink(pagingModel, 1);
 			map.put("pagingstr", pagestr);
 			// 设置分页栏
 		} catch (Exception ex) {
@@ -1629,7 +1637,8 @@ public class BlogManagerAction {
 	}
 
 	@RequestMapping("/pagingsharedoc.do")
-	public ModelAndView pagingsharedoc(PaingModel pagingModel, ModelMap map) {
+	public ModelAndView pagingsharedoc(PaingModel<DocumentValue> pagingModel,
+			ModelMap map) {
 		try {
 			pagingModel.setPagesize(24);
 			pagingModel.setDoctype(StaticConstants.DOCTYPE_DOC);
@@ -1640,145 +1649,13 @@ public class BlogManagerAction {
 							pagingModel.getPageindex(), 24);
 			List<DocumentValue> doclist = paingModel1.getModelList();
 			map.put("doclist", doclist);
-			String pagestr = getPagingLink(pagingModel, 2);
+			// String pagestr = getPagingLink(pagingModel, 2);
+			String pagestr = PageUtil.getPagingLink(pagingModel, 2);
 			map.put("pagingstr", pagestr);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return new ModelAndView("jsonView", map);
-	}
-
-	private String getPagingLink(PaingModel pagingModel, int type) {
-		String classname = "";
-		String currentclass = "";
-		if (type == 1) {
-			classname = "spanstyle";
-			currentclass = "curspanstyle";
-		} else {
-			classname = "sharespanstyle";
-			currentclass = "cursharespanstyle";
-		}
-		String pagetype = "1";
-		String processbar = "false";
-		if (!"1".equalsIgnoreCase(pagingModel.getPagetype())) {
-			pagetype = "0";
-			processbar = "true";
-		}
-		List<PagingIndex> pagse = new ArrayList<PagingIndex>();
-		PagingIndex firestPagingIndex = new PagingIndex();
-		firestPagingIndex.setPageindex(1);
-		firestPagingIndex.setShowstr("<<");
-
-		firestPagingIndex.setLink("javascript:openpage('1','"
-				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
-				+ processbar + ");switchclass('pagefist');");
-		firestPagingIndex.setId("firest");
-		pagse.add(firestPagingIndex);
-		PagingIndex previousPagingIndex = new PagingIndex();
-		previousPagingIndex.setPageindex(pagingModel.getPageindex() - 1);
-		if (pagingModel.getPageindex() - 1 <= 1) {
-			previousPagingIndex.setPageindex(1);
-		}
-		previousPagingIndex.setShowstr("<");
-		previousPagingIndex.setLink("javascript:openpage('"
-				+ previousPagingIndex.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
-				+ processbar + ");switchclass('previous');");
-		previousPagingIndex.setId("previous");
-		pagse.add(previousPagingIndex);
-		int index1 = 0;
-		int index2 = 0;
-		int index3 = 0;
-		if (pagingModel.getPageindex() == 1) {
-			index1 = 1;
-			index2 = 2;
-			index3 = 3;
-		} else if (pagingModel.getPageindex() == pagingModel.getPagecount()
-				&& pagingModel.getPagecount() >= 3) {
-			index1 = pagingModel.getPagecount() - 2;
-			index2 = pagingModel.getPagecount() - 1;
-			index3 = pagingModel.getPagecount();
-		} else {
-			index1 = pagingModel.getPageindex() - 1;
-			index2 = pagingModel.getPageindex();
-			index3 = pagingModel.getPageindex() + 1;
-		}
-		PagingIndex previousPagingIndex1 = new PagingIndex();
-		previousPagingIndex1.setPageindex(index1);
-		previousPagingIndex1.setShowstr(""
-				+ previousPagingIndex1.getPageindex());
-		previousPagingIndex1.setLink("javascript:openpage('"
-				+ previousPagingIndex1.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
-				+ processbar + ");switchclass('"
-				+ previousPagingIndex1.getPageindex() + "');");
-		previousPagingIndex1
-				.setId("page" + previousPagingIndex1.getPageindex());
-		pagse.add(previousPagingIndex1);
-
-		//
-		PagingIndex currentpage = new PagingIndex();
-		currentpage.setPageindex(index2);
-		currentpage.setShowstr("" + currentpage.getPageindex());
-		currentpage.setLink("javascript:openpage('"
-				+ currentpage.getPageindex() + "','" + pagingModel.getUserid()
-				+ "'," + type + "," + pagetype + "," + processbar
-				+ ");switchclass('" + currentpage.getPageindex() + "');");
-		currentpage.setId("page" + currentpage.getPageindex());
-		pagse.add(currentpage);
-		currentpage.setCurrent(1);
-		//
-		//
-		PagingIndex nextpage1 = new PagingIndex();
-		nextpage1.setPageindex(index3);
-		nextpage1.setShowstr("" + nextpage1.getPageindex());
-		nextpage1.setLink("javascript:openpage('" + nextpage1.getPageindex()
-				+ "','" + pagingModel.getUserid() + "'," + type + ","
-				+ pagetype + "," + processbar + ");switchclass('"
-				+ nextpage1.getPageindex() + "');");
-		nextpage1.setId("page" + nextpage1.getPageindex());
-		pagse.add(nextpage1);
-		//
-		PagingIndex nextPagingIndex = new PagingIndex();
-		nextPagingIndex.setShowstr(">");
-		nextPagingIndex.setPageindex(pagingModel.getPageindex() + 1);
-		if (pagingModel.getPageindex() + 1 >= pagingModel.getPagecount()) {
-			nextPagingIndex.setPageindex(pagingModel.getPagecount());
-		}
-		nextPagingIndex.setLink("javascript:openpage('"
-				+ nextPagingIndex.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
-				+ processbar + ");switchclass('next');");
-		nextPagingIndex.setId("next");
-		pagse.add(nextPagingIndex);
-		PagingIndex lastPagingIndex = new PagingIndex();
-		lastPagingIndex.setPageindex(pagingModel.getPagecount());
-		lastPagingIndex.setShowstr(">>");
-		lastPagingIndex.setLink("javascript:openpage('"
-				+ lastPagingIndex.getPageindex() + "','"
-				+ pagingModel.getUserid() + "'," + type + "," + pagetype + ","
-				+ processbar + ");switchclass('last');");
-		lastPagingIndex.setId("last");
-		pagse.add(lastPagingIndex);
-		String pagestr = "";
-		for (PagingIndex pagingIndexi : pagse) {
-			if (pagingIndexi.getCurrent() != null
-					&& pagingIndexi.getCurrent().intValue() == 1) {
-				pagestr = pagestr + "<a class=\"first disabled\"  " + "id=\""
-						+ pagingIndexi.getId() + "\"  href=\""
-						+ pagingIndexi.getLink() + "\"><span id=\"page"
-						+ pagingIndexi.getId() + "\" class=\"" + currentclass
-						+ "\">" + pagingIndexi.getShowstr() + "</span></a>";
-			} else {
-				pagestr = pagestr + "<a class=\"first disabled\"  " + "id=\""
-						+ pagingIndexi.getId() + "\"  href=\""
-						+ pagingIndexi.getLink() + "\"><span id=\"page"
-						+ pagingIndexi.getId() + "\" class=\"" + classname
-						+ "\">" + pagingIndexi.getShowstr() + "</span></a>";
-			}
-
-		}
-		return pagestr;
 	}
 
 	@RequestMapping("/readmessage.do")
@@ -1823,6 +1700,7 @@ public class BlogManagerAction {
 	@RequestMapping("/updvote.do")
 	public ModelAndView updvote(HttpServletRequest request, ModelMap map) {
 		String voteid = request.getParameter("voteid");
+		String redirecturl = request.getParameter("redirecturl");
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("voteid", voteid);
@@ -1832,11 +1710,16 @@ public class BlogManagerAction {
 				map.put("voteid", votes.get(0).getVoteid());
 				map.put("votevalue", votes.get(0));
 			}
-
+			map.put("redirecturl", redirecturl);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		// if (redirecturl != null && !redirecturl.equalsIgnoreCase("")) {
+		// return new ModelAndView("redirect:" + redirecturl);
+		// } else {
 		return new ModelAndView("vote/votedesign");
+		// }
+
 	}
 
 	@RequestMapping("/savevote.do")
@@ -1900,6 +1783,29 @@ public class BlogManagerAction {
 	public ModelAndView joinvote(HttpServletRequest request, ModelMap map) {
 		String voteid = request.getParameter("voteid");
 		try {
+			// joinvote.do?redirecturl
+			String redirecturl = request.getParameter("redirecturl");
+			Integer self = new Integer(0);
+			UserValue sessionUser = (UserValue) request.getSession()
+					.getAttribute("user");
+			UserValue user = null;
+			String userid = request.getParameter("userid");
+			if (userid == null || userid.equalsIgnoreCase("")) {
+				user = (UserValue) request.getSession().getAttribute("user");// 在线session
+				self = new Integer(1);
+			} else {
+				List<UserValue> uservalues = this.userManager.getUsers(userid,
+						null);// 被浏览用户
+				user = uservalues.get(0);
+				if (sessionUser != null
+						&& sessionUser.getUserid().equalsIgnoreCase(
+								user.getUserid())) {
+					self = new Integer(1);
+				} else {
+					self = new Integer(0);
+				}
+			}
+			map.put("self", self);
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("voteid", voteid);
 			List<VoteValue> votes = this.webResourceManager.getVoteList(params);
@@ -1912,6 +1818,7 @@ public class BlogManagerAction {
 			JSONObject json = new JSONObject();
 			json.put("vote", votes);
 			map.put("jsonvote", json.toString());
+			map.put("redirecturl", redirecturl);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -40,13 +40,14 @@
 					<div style="width: 690px; margin: 0px 10px 10px 10px;">
 						<div class="flt glryBox">
 							<div class="m0a"
-								style="width: 660px; height: 700px; margin: 0px;">
+								style="width: 660px; height: 900px; margin: 0px;">
 								<c:if test="${self==1}">
 									<div class="addNewAlbum">
 										<div class="m1ln borderOuter" style="height: 90px;">
 											<a href="javascript:writemessage()">  </a>
 										</div>
-										<div class="m1ln borderOuter" style="height: 80px;background: #eee url(img/delete.png) center top no-repeat;">
+										<div class="m1ln borderOuter"
+											style="height: 80px; background: #eee url(img/delete.png) center top no-repeat;">
 											<a href="javascript:delfriend()"> </a>
 										</div>
 									</div>
@@ -83,6 +84,8 @@
 
 							</div>
 							<div class=" pagenav">
+								<c:out value="${pagestr}" escapeXml="false" />
+								<!--  
 								<c:forEach items="${pageindexs}" var="index" varStatus="status">
 									<a
 										href="getimglist.do?userid=<c:out value="${user.userid}" />&imggroupid=<c:out value="${imggroupid}" />&pageindex=<c:out value="${index}" />">
@@ -100,6 +103,7 @@
 										</c:if>
 									</a>
 								</c:forEach>
+								-->
 								<input type="hidden" name="userid" id="userid"
 									value="<c:out value="${user.userid}" />" />
 							</div>

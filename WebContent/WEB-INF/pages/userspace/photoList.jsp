@@ -76,6 +76,9 @@
 								</c:forEach>
 							</div>
 							<div class=" pagenav">
+
+								<c:out value="${pagingimgStr}" escapeXml="false" />
+								<!--  
 								<c:forEach items="${pagingindexs}" var="pagingindex"
 									varStatus="status">
 									<a
@@ -101,6 +104,7 @@
 									</a>
 
 								</c:forEach>
+								-->
 								<%-- 								( <a class="photo-page-nav"><c:out value="${imgcount}" --%>
 								<%-- 										default="0" /></a> ) --%>
 								<input type="hidden" name="userid" id="userid"

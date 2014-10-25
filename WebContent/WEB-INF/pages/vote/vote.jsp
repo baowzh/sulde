@@ -78,16 +78,20 @@
 							name="textquestionrel" id="textquestionrel" /> <input
 							type="hidden" name="multiquestionrel" id="multiquestionrel" /> <input
 							type="hidden" name="voteid" id="voteid"
-							value="<c:out value="${votevalue.voteid}" />" />
+							value="<c:out value="${votevalue.voteid}" />" /> <input
+							type="hidden" name="redirecturl" id="redirecturl"
+							value="<c:out value="${redirecturl}" />">
 					</div>
 				</div>
 				<div class="mnlist"
 					style="width: 30px; height: 500px; text-align: center;">
-					<!-- 			<a -->
-					<%-- 				href="viewvoteresult.do?voteid=<c:out value="${votevalue.voteid}" />"> --%>
-					<!-- 				   dung  </a> -->
 					<a href="javascript:checkdate();">   
 						 </a>
+					<c:if test="${self==1}">
+						  <a
+							href="javascript:updvote('<c:out value="${votevalue.voteid}" />');">
+							  </a>
+					</c:if>
 
 				</div>
 			</div>

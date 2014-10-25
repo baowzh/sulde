@@ -60,6 +60,7 @@ var savevote = function() {
 		success : function(data) { // 临时保存数据并把结果写入界面上的表格
 			if (data.success == '1') {
 				MessageWindow.showMess("    ");
+				window.location.href = $("#redirecturl").val();
 			} else {
 				MessageWindow.showMess("      ");
 			}
@@ -71,7 +72,7 @@ var savevote = function() {
  * 保存题目
  */
 var addquestion = function() {
-	var desc = $("[name='questiondesc']").val();
+	var desc = $("#questiondesc").text();
 	var type = $("#questiontype").val();
 	if (type == 3) {
 		desc = $("#textesc").val();
@@ -144,11 +145,15 @@ var addquestion = function() {
 										+ '\"><td><div class=\"voteDesc\" contentEditable=\"true\" style=\"width: 30px; height: 600px;\"></div></td></tr>';
 							}
 						}
-						trhtml = trhtml
-								+ '<tr name=\"'
-								+ trname
-								+ '\">'
-								+ "<td><a>      </a><a>     </></td></tr>";
+						trhtml = trhtml + '<tr name=\"' + trname + '\">'
+								+ '<td><a href=\"javascript:deletequestion('
+						'' + data.questions[i].questionid + ''
+						','
+								+ type
+								+ ');\">      </a><a href=\"javascript:deleteselection('
+						'' + data.questions[i].questionid + ''
+						',' + type
+								+ ');\">     </></td></tr>';
 					}
 					$("#questionlist").append($(trhtml));
 
@@ -235,6 +240,12 @@ var deleteselection = function(questionid, questiontype) {
 	}
 
 };
+var updvote = function(voteid) {
+	$("#voteid").val(voteid);
+	$("#calform").attr("action", "updvote.do")
+	$("#calform").submit();
+};
+
 var delselection = function(questionid, singglequestionrel) {
 	$.ajax({
 		async : false,

@@ -24,7 +24,6 @@ import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.MenuValue;
 import com.mongolia.website.model.OpinionValue;
 import com.mongolia.website.model.PaingModel;
-import com.mongolia.website.model.PaingUser;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.model.QueryOpinionFrom;

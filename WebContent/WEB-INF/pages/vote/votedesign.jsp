@@ -24,89 +24,113 @@
 		<img src="img/logo.png" width="980" />
 	</div>
 	<div class="lmainR ofh">
-	<div class="lmainR"
-		style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-		<div class="mnlist">   </div>
-		<div class="mnlist" style="width: 965px; height: 600px;">
-			<div class="voteDesc" contentEditable="true"
-				style="width: 100px; height: 600px;" id="commentdiv">
-				<c:if test="${votevalue!=null}">
-					<c:out value="${votevalue.topic}" />
-				</c:if>
-			</div>
-			<div class="voteList">
-				<table id="questionlist">
+		<div class="lmainR"
+			style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
+			<div class="mnlist">   </div>
+			<div class="mnlist" style="width: 940px; height: 600px;">
+				<div class="voteDesc" contentEditable="true"
+					style="width: 100px; height: 598px; border: 1px solid #00f;"
+					id="commentdiv">
 					<c:if test="${votevalue!=null}">
-						<c:forEach items="${votevalue.details}" var="voteDetailValue"
-							varStatus="status">
-							<tr
-								name="name<c:out
-										value="${voteDetailValue.questionid}" />">
-								<td class="title" style="height: 100%;"><c:out
-										value="${voteDetailValue.questiondesc}" /></td>
-							</tr>
-							<c:forEach items="${voteDetailValue.questionValues}"
-								var="questionValue" varStatus="status">
+						<c:out value="${votevalue.topic}" />
+					</c:if>
+					    
+				</div>
+				<div class="voteList">
+					<table id="questionlist">
+						<c:if test="${votevalue!=null}">
+							<c:forEach items="${votevalue.details}" var="voteDetailValue"
+								varStatus="status">
 								<tr
 									name="name<c:out
 										value="${voteDetailValue.questionid}" />">
-									<c:if test="${voteDetailValue.questiontype==1}">
-										<td><c:out value="${questionValue.charindex}" /> <input
-											type="radio"
-											name="sing<c:out value="${questionValue.questionid}" />"
-											id="<c:out value="${questionValue.answerid}" />"> <c:out
-												value="${questionValue.answername}" /></input></td>
-									</c:if>
-									<c:if test="${voteDetailValue.questiontype==2}">
-										<td><c:out value="${questionValue.charindex}" /><input
-											type="checkbox"
-											name="multi<c:out value="${questionValue.questionid}" />"
-											id="<c:out value="${questionValue.answerid}" />"> <c:out
-												value="${questionValue.answername}" /></input></td>
-									</c:if>
-									<c:if test="${voteDetailValue.questiontype==3}">
-										<td>
-											<div class="voteDesc" contentEditable="true"
-												style="width: 30px; height: 600px;" id="textanswer"></div>
-										</td>
-									</c:if>
+									<td class="title" style="height: 100%;"><c:out
+											value="${voteDetailValue.questiondesc}" /></td>
+								</tr>
+								<c:forEach items="${voteDetailValue.questionValues}"
+									var="questionValue" varStatus="status">
+									<tr
+										name="name<c:out
+										value="${voteDetailValue.questionid}" />">
+										<c:if test="${voteDetailValue.questiontype==1}">
+											<td><c:out value="${questionValue.charindex}" /> <input
+												type="radio"
+												name="sing<c:out value="${questionValue.questionid}" />"
+												id="<c:out value="${questionValue.answerid}" />"> <c:out
+													value="${questionValue.answername}" /></input></td>
+										</c:if>
+										<c:if test="${voteDetailValue.questiontype==2}">
+											<td><c:out value="${questionValue.charindex}" /><input
+												type="checkbox"
+												name="multi<c:out value="${questionValue.questionid}" />"
+												id="<c:out value="${questionValue.answerid}" />"> <c:out
+													value="${questionValue.answername}" /></input></td>
+										</c:if>
+										<c:if test="${voteDetailValue.questiontype==3}">
+											<td>
+												<div class="voteDesc" contentEditable="true"
+													style="width: 30px; height: 600px;" id="textanswer"></div>
+											</td>
+										</c:if>
+									</tr>
+								</c:forEach>
+								<tr
+									name="name<c:out
+										value="${voteDetailValue.questionid}" />">
+									<td><a
+										href="javascript:deletequestion('<c:out value="${voteDetailValue.questionid}" />',<c:out value="${voteDetailValue.questiontype}" />);">
+											   &nbsp;&nbsp;</a><a
+										href="javascript:deleteselection('<c:out value="${voteDetailValue.questionid}" />',<c:out value="${voteDetailValue.questiontype}" />);">&nbsp;&nbsp;
+											 </a></td>
 								</tr>
 							</c:forEach>
-							<tr
-								name="name<c:out
-										value="${voteDetailValue.questionid}" />">
-								<td><a
-									href="javascript:deletequestion('<c:out value="${voteDetailValue.questionid}" />',<c:out value="${voteDetailValue.questiontype}" />);">
-										   &nbsp;&nbsp;</a><a
-									href="javascript:deleteselection('<c:out value="${voteDetailValue.questionid}" />',<c:out value="${voteDetailValue.questiontype}" />);">&nbsp;&nbsp;
-										 </a></td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</table>
+						</c:if>
+					</table>
+				</div>
 			</div>
-		</div>
-		<div class="mnlist"
-			style="width: 30px; height: 500px; text-align: center;">
-			<a href="javascript:opensinquestionwin();">  
-				 </a> <a href="javascript:openmultquestionwin();">
-				  </a> <a href="javascript:openquestionwin();">
-				 </a>
-		</div>
-		<div class="mnlist"
-			style="width: 30px; height: 500px; text-align: center;">
-			<a href="javascript:savevote();"> </a>
-		</div>
+			<div class="mnlist"
+				style="width: 30px; height: 500px; text-align: center;">
+				<a href="javascript:opensinquestionwin();">  
+					 </a> <a href="javascript:openmultquestionwin();">
+					  </a> <a href="javascript:openquestionwin();">
+					 </a> <a href="javascript:savevote();">
+					</a>
+			</div>
+			<!-- 		<div class="mnlist" -->
+			<!-- 			style="width: 30px; height: 500px; text-align: center;"> -->
+			<!-- 			<a href="javascript:savevote();"> </a> -->
+			<!-- 		</div> -->
 
 
-	</div>
+		</div>
 	</div>
 	<div id="singquestionse"
 		style="-webkit-writing-mode: vertical-lr; important !; display: none">
-		<div class="mfl" style="float: left;">
-			<input type="text" value="        !"
-				name="questiondesc">
+		<!-- 		<div class="mfl" style="float: left;"> -->
+		<!-- 			<input type="text" value="        !" -->
+		<!-- 				name="questiondesc"> -->
+
+		<div class="flt mVsheet commentEdit"
+			style="width: 50px; height: 300px; border: 2px solid #00f;"
+			contentEditable="true" id="questiondesc" style="height: 400px;">
+			<c:if test="${votevalue!=null}">
+				<c:out value="${votevalue.topic}"
+					default="       " />
+			</c:if>
+			<c:if test="${votevalue==null}">
+					       
+			</c:if>
 		</div>
+
+		<!-- 			<div class="queDesc" contentEditable="true" -->
+		<!-- 				style="width: 50px; height:300px; border: 1px solid #00f;" -->
+		<!-- 				id="commentdiv"> -->
+		<%-- 				<c:if test="${votevalue!=null}"> --%>
+		<%-- 					<c:out value="${votevalue.topic}" /> --%>
+		<%-- 				</c:if> --%>
+		<!-- 				        -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
 		<div class="nwsls1">
 			<div class="nwsl1" style="width: 35px;">
 				<div class="mfl" style="width: 32px;">
@@ -151,7 +175,9 @@
 			<a id="savebutton" href="javascript:addquestion();"> </a>
 		</div>
 		<input type="hidden" name="voteid" value="<c:out value="${voteid}" />"
-			id="voteid">
+			id="voteid"> <input type="hidden" name="redirecturl"
+			value="<c:out value="${redirecturl}" />" id="redirecturl">
+
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
 		<div class="tailCard">

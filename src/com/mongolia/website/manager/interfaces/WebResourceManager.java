@@ -159,7 +159,7 @@ public interface WebResourceManager {
 	 * @throws ManagerException
 	 */
 	public Map<String, Object> getBlogInfo(UserValue blogUser,
-			UserValue sessionUser, Integer self, String docchannel)
+			UserValue sessionUser, Integer self, String docchannel,Integer pageindex)
 			throws ManagerException;
 
 	/**
@@ -302,8 +302,7 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws ManagerException
 	 */
-	public Map<String, Object> pagingQueryFriends(String userid,
-			Integer pageIndex, Integer pageSize) throws ManagerException;
+	PaingModel<FriendValue> pagingQueryFriends(PaingModel<FriendValue> pagingModel) throws ManagerException;
 
 	/**
 	 * 

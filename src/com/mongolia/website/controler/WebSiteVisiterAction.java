@@ -303,6 +303,7 @@ public class WebSiteVisiterAction {
 			Integer startindex = ((queryDocForm.getPageindex() - 1) * 30);
 			queryDocParams.put("displaydoccount", 30);
 			queryDocParams.put("startindex", startindex);
+			queryDocParams.put("doctype", 1);
 			Map<String, Object> result = this.webSiteManager
 					.getDocuments(queryDocParams);
 			map.put("docs", result.get("docs"));

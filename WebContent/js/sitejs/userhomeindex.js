@@ -58,7 +58,7 @@ var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 										+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'
 										+ '<a '
 										+ 'href=\"getuserdocdetail.do?docid='
-										+ data.doclist[i].docid + '\">'
+										+ data.doclist[i].docid + '&pageindex='+index+'\">'
 										+ data.doclist[i].doctitle
 										+ '</a>&nbsp;' + '</div>';
 							} else {

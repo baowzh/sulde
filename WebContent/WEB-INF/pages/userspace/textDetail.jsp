@@ -77,9 +77,9 @@
 									</span> 
 								</div>
 								<!--    -->
-<!-- 								<div id="doccontent"> -->
-									<c:out value="${documentValue.htmlstr}" escapeXml="false" />
-<!-- 								</div> -->
+								<!-- 								<div id="doccontent"> -->
+								<c:out value="${documentValue.htmlstr}" escapeXml="false" />
+								<!-- 								</div> -->
 								<!--    -->
 								<br>
 								<!--        -->
@@ -238,16 +238,18 @@
 										<!-- <a
 											href="javascript:readdoc('<c:out value="${documentValue.docid}" />');"><c:out
 												value="${documentValue.doctitle}" escapeXml="false" /> </a>-->
-										
+
 										<a
-											href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}" />"><c:out
+											href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}" />&pageindex=1"><c:out
 												value="${documentValue.doctitle}" escapeXml="false" /> </a>
-												
+
 									</div>
 								</c:forEach>
 							</div>
 							<div class="paginationArea">
 								<div class="pagination" id="docpagelist">
+									<c:out value="${pagingstr}" escapeXml="false" />
+									<!--  
 									<a class="first disabled" id="firsta"
 										href="javascript:openpage('1','<c:out value="${user.userid}" />',1,0,true);switchclass('first');">
 										<span id="pagefirst" class="spanstyle">&lt;&lt; </span>
@@ -281,6 +283,8 @@
 										href="javascript:openpage('<c:out value="${pageCount}" />','<c:out value="${user.userid}" />',1,0,true);switchclass('pagelast');">
 										<span id="pagelast" class="spanstyle">&gt;&gt; </span>
 									</a>
+									
+									-->
 								</div>
 							</div>
 						</div>
