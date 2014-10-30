@@ -71,12 +71,13 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 	}
 
 	@Override
-	public List<UserValue> getTopUsers(Date startDate, Date endDate)
+	public List<UserValue> getTopUsers(Date startDate, Date endDate,Integer fetchcount)
 			throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("startDate", startDate);
 		params.put("endDate", endDate);
+		params.put("fetchcount", fetchcount);
 		return this.getSqlMapClientTemplate().queryForList("getTopUsers",
 				params);
 	}

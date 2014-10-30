@@ -6,6 +6,7 @@ import java.util.Date;
 public class DocumentValue {
 	private String docid;
 	private String docchannel;
+	private String docchannelname;
 	private String docversion;
 	private Integer doctype;
 	private String doctitle;
@@ -652,6 +653,14 @@ public class DocumentValue {
 
 	public void setOldid(String oldid) {
 		this.oldid = oldid;
+	}
+
+	public String getDocchannelname() {
+		return docchannelname;
+	}
+
+	public void setDocchannelname(String docchannelname) {
+		this.docchannelname = docchannelname;
 	}
 	
 	

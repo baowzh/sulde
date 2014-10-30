@@ -15,4 +15,5 @@
 		<sqlMap resource="sqlmaps/userSQL.xml" />
 		<sqlMap resource="sqlmaps/opinionSQL.xml"/>
 		<sqlMap resource="sqlmaps/voteSQL.xml"/>
+		<sqlMap resource="sqlmaps/datasynSQL.xml"/>
 </sqlMapConfig>

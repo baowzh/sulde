@@ -9,6 +9,7 @@
 <script type="text/javascript" src="js/util/js/messageWindow.js"></script>
 <script type="text/javascript" src="js/sitejs/edituserinfo.js"></script>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
+<link href="img/css/selectpanel.css" type="text/css" rel="stylesheet" />
 <title>  </title>
 </head>
 <body>
@@ -130,7 +131,45 @@
 									<div class="m1ln h100"> </div>
 								</td>
 								<td style="height: 90px">
-									<div class="mfl">
+									<div class="preselpanel" style="z-index:8;">
+										<div class="changecity" style="width:24px;">
+											<a id="provincename"
+												href="javascript:showselpanel(true,'provinces')"> <c:out
+													value="${userinfo.provincename}" default=" " />
+											</a> <input type="hidden" id="province" name="province" value="" />
+											<!-- 选择住地（省）-->
+											<div class="channelpanel" id="provinces"
+												style="display: none">
+												<div class="paneltitle">
+													<a href="javascript:showselpanel(false,'provinces');"
+														style="cursor: pointer"> <img src="img/gbchange.png"
+														width="15" height="16"></a>
+												</div>
+												<div class="channellist">
+													<c:forEach items="${districts}" var="districtValue"
+														varStatus="status">
+														<div class="mnlist"
+															style="text-indent: 0px; height: 120px;">
+															<a
+																onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','province','provincename','provinces');loadChildDistrict('province',1);"
+																style="cursor: pointer" class=""><c:out
+																	value="${districtValue.districtname}" /> </a>
+														</div>
+													</c:forEach>
+
+													<div class="clear"></div>
+												</div>
+											</div>
+
+										</div>
+										
+										<!-- 										<div id="selprovince"> -->
+
+										<!-- 										</div> -->
+
+
+
+										<!-- 
 										<select name="province" id="province"
 											onchange="javascript:loadChildDistrict('province',1);"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;" />
@@ -151,8 +190,19 @@
 
 										</c:forEach>
 
+										</select>
+										 -->
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<!-- 										<div id="selhsien"> -->
+										<a id="hsienname"
+											href="javascript:showselpanel(true,'hsiens')"> <c:out
+												value="${userinfo.hsienname}" default=" " /></a>
+										<input type="hidden" id="hsien" name="hsien" value="" />
+										<!-- 										</div> -->
 
-										</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select
+
+										<!--  
+										<select
 											name="hsien" id="hsien"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
 
@@ -173,6 +223,7 @@
 											</c:forEach>
 
 										</select>
+										-->
 									</div>
 								</td>
 								<td></td>
@@ -184,6 +235,14 @@
 								</td>
 								<td>
 									<div class="mfl">
+										<a id="nowprovincename"
+											href="javascript:showselpanel(true,'nowprovinces')"> <c:out
+												value="${userinfo.nowprovincename}"
+												default=" " />
+										</a> <input type="hidden" id="nowprovince" name="nowprovince"
+											value="" /> <input type="hidden" id="nowprovince"
+											name="nowprovince" value="" />
+										<!-- 
 										<select name="nowprovince" id="nowprovince"
 											onchange="javascript:loadChildDistrict('nowprovince',2);"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
@@ -193,7 +252,15 @@
 													value="<c:out value="${districtValue.districtcode}"/>"><c:out
 														value="${districtValue.districtname}" /></option>
 											</c:forEach>
-										</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <select
+										</select>
+										 -->
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+											id="nowhsienname"
+											href="javascript:showselpanel(true,'nowhsiens')"><c:out
+												value="${userinfo.nowhsienname}" default=" " /></a>
+										<input type="hidden" id="nowhsien" name="nowhsien" value="" />
+										<!-- 
+                                        <select
 											name="nowhsien" id="nowhsien"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
 											<c:forEach items="${nowhsien}" var="districtValue"
@@ -213,6 +280,7 @@
 											</c:forEach>
 
 										</select>
+										 -->
 									</div>
 								</td>
 								<td></td>
@@ -236,6 +304,12 @@
 								</td>
 								<td colspan="3">
 									<div class="mfl">
+										<a id="professioncodename"
+											href="javascript:showselpanel(true,'professions')"><c:out
+												value="${userinfo.professionname}" default=" " /></a>
+										<input type="hidden" id="professioncode" name="professioncode"
+											value="" />
+										<!-- 
 										<select name="professioncode" id="professioncode"
 											onchange="javascript:loadChildDistrict('province',1);"
 											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;" />
@@ -256,6 +330,7 @@
 											</c:if>
 										</c:forEach>
 										</select>
+										 -->
 									</div>
 								</td>
 
@@ -266,8 +341,8 @@
 								</td>
 								<td colspan="3">
 									<div class="mfl">
-<!-- 										<input type="text" name="blogclass" id="blogclass" -->
-<%-- 											value="<c:out value="${userinfo.blogclass}"/>"></input> --%>
+										<!-- 										<input type="text" name="blogclass" id="blogclass" -->
+										<%-- 											value="<c:out value="${userinfo.blogclass}"/>"></input> --%>
 										<c:choose>
 											<c:when test="${userinfo.blogclass==1}">
 												<input type="radio" name="blogclass" checked="true"
@@ -443,9 +518,90 @@
 		</div>
 		<div class="cbt"></div>
 	</div>
+	<!-- 选择住地（旗县）-->
+	<div class="channelpanel" id="hsiens" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'hsiens');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div id="hsienlist" class="channellist">
+			<c:forEach items="${hsiens}" var="districtValue" varStatus="status">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','hsien','hsienname','hsiens');"
+						style="cursor: pointer" class=""><c:out
+							value="${districtValue.districtname}" /> </a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- 选择现在的住地（省份）-->
+	<div class="channelpanel" id="nowprovinces" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'nowprovinces');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div class="channellist">
+			<c:forEach items="${districts}" var="districtValue"
+				varStatus="status">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','nowprovince','nowprovincename','nowprovinces');loadChildDistrict('nowprovince',2)"
+						style="cursor: pointer" class=""><c:out
+							value="${districtValue.districtname}" /> </a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- 选择现在的住地（旗县）-->
+	<div class="channelpanel" id="nowhsiens" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'nowhsiens');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div id="nowhsienlist" class="channellist">
+			<c:forEach items="${nowhsien}" var="districtValue" varStatus="status">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','nowhsien','nowhsienname','nowhsiens')"
+						style="cursor: pointer" class=""><c:out
+							value="${districtValue.districtname}" /> </a>
+				</div>
+			</c:forEach>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- 选择职业 -->
+	<div class="channelpanel" id="professions" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'professions');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div class="channellist">
+			<c:forEach items="${professions}" var="professionValue"
+				varStatus="status">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${professionValue.professioncode}"/>','<c:out value="${professionValue.professionname}"/>','professioncode','professioncodename','professions')"
+						style="cursor: pointer" class=""><c:out
+							value="${professionValue.professionname}" /> </a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
 </body>
 <script>
-	var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
-	var professions = <c:out value="${professions}" escapeXml="false" />;
+var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
+//var professions = <c:out value="${professions}" escapeXml="false" />;
 </script>
 </html>

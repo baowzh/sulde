@@ -93,7 +93,6 @@ public class WebSiteVisiterAction {
 					.pagingquerydoc(paingModel);
 			map.put("paingModel", pamodel);
 			// /
-
 			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
 			for (int i = 0; i < pamodel.getPagecount(); i++) {
 				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面

@@ -74,7 +74,7 @@
 	</insert>
 	<select id="getUserDocList" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select * from document
+		select document.*,(select channel.CHNLNAME from channel where document.DOCCHANNEL=channel.CHANNELID ) as docchannelname from document
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docid">
 				docid=#docid#
@@ -727,7 +727,7 @@
 	</select>
 	<select id="getTopDocumentWithClickCount" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select * from document order by document.readcount desc
+		select * from document where doctype=1 order by document.readcount desc
 		limit
 		#startindex#,#fechcount#
 	</select>
@@ -780,5 +780,12 @@
 			</isNotNull>
 		</dynamic>
 	</select>
+	<select id="getRecentDocs" parameterClass="java.util.Map"
+		resultClass="DocumentValue">
+		select * from document where docstatus=2 and doctype=1  order by document.crtime desc
+		limit
+		0,#fechcount#
+	</select>
+	
 
 </sqlMap>

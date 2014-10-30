@@ -66,8 +66,8 @@ public interface WebSiteVisitorDao extends BaseDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<UserValue> getTopUsers(Date startDate, Date endDate)
-			throws Exception;
+	public List<UserValue> getTopUsers(Date startDate, Date endDate,
+			Integer fetchcount) throws Exception;
 
 	/**
 	 * 获取最近注册的用户列表

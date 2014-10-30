@@ -1,5 +1,10 @@
 package com.mongolia.website.manager.impls;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +30,8 @@ public class UserManagerImpl implements UserManager {
 	private UserManagerDao userManagerDao;
 	@Autowired
 	private WebResourceDao webResourceDao;
+	@Autowired
+	private SysConfig sysConfig;
 
 	@Override
 	public void doCreateUser(UserValue userValue) throws Exception {
@@ -61,6 +68,28 @@ public class UserManagerImpl implements UserManager {
 			throw new Exception("2");
 		}
 		UserValue sysUserValue = users.get(0);
+		//
+		if (sysConfig.getOnline().intValue() == 1
+				&& sysUserValue.getOldid() != null) {
+			String urlstr = "http://www.altanhurd.com/asp/pas.asp?pas="
+					+ userValue.getPassword();
+			URL url = new URL(urlstr);
+			URLConnection rulConnection = url.openConnection();
+			HttpURLConnection httpUrlConnection = (HttpURLConnection) rulConnection;
+			httpUrlConnection.connect();
+			InputStream iniputStream = httpUrlConnection.getInputStream();
+			byte reader[] = new byte[1024];
+			int length = 0;
+			ByteArrayOutputStream ooutStream = new ByteArrayOutputStream();
+			while ((length = iniputStream.read(reader)) != -1) {
+				ooutStream.write(reader, 0, length);
+			}
+			String encripedPass = ooutStream.toString();
+			userValue.setPassword(encripedPass);
+			ooutStream.close();
+			iniputStream.close();
+		}
+		//
 		if (userValue.getUsername()
 				.equalsIgnoreCase(sysUserValue.getUsername())) {
 			if (userValue.getPassword().equalsIgnoreCase(

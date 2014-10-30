@@ -10,6 +10,7 @@
 <link href="img/css/listpages.css" type="text/css" rel="stylesheet" />
 <link href="img/css/blog.css" type="text/css" rel="stylesheet" />
 <link href="img/css/createDoc.css" type="text/css" rel="stylesheet" />
+<link href="img/css/selectpanel.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="js/jqGrid/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/sitejs/uploaddoc.js"></script>
@@ -85,14 +86,23 @@
 							value="<c:out value="${opertype}" />" /> <input type="hidden"
 							name="docid" id="docid" value="<c:out value="${docid}" />" /> <input
 							type="hidden" name="userid" id="userid" value="" />
-						<div class="inputHolder">
+						<!-- 						<div class="inputHolder"> -->
+						<div class=selectchannel>
+							<div id="channel" class="channel"></div>
+							<div class="selch">
+								<a href="javascript:showselePanel(true);"></a>
+							</div>
+						</div>
+						<input type="hidden" id="docchannel" name="docchannel" />
+						<!-- 
 							<select name="docchannel" id="docchannel"
 								style="writing-mode: tb-rl; -webkit-writing-mode: vertical-lr; height: 210">
 								<option>option 1</option>
 								<option>option 1</option>
 								<option>  </option>
 							</select>
-						</div>
+							 -->
+						<!-- 						</div> -->
 						<c:if test="${agentkind==1}">
 							<div class="inputHolder">
 								<input name="docabstract" id="docabstract" class="title"
@@ -173,6 +183,28 @@
 		</div>
 		<%@ include file="dochiddendiv.jsp"%>
 	</form>
+	<!-- 	<div style="display: none;"> -->
+	<div class="channelpanel" id="citys" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselePanel(false);" style="cursor: pointer">
+				<img src="img/gbchange.png" width="15" height="16">
+			</a>
+		</div>
+		<div class="channellist">
+
+			<c:forEach items="${chanels}" var="channel" varStatus="status">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+					<a
+						onclick="javascript:changeCity('<c:out value="${channel.channelid}"/>','<c:out value="${channel.chnlname}"/>')"
+						style="cursor: pointer" class=""><c:out
+							value="${channel.chnlname}" /></a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- 	</div> -->
 </body>
 <SCRIPT LANGUAGE="JAVASCRIPT">
 	function checkAndSubmit() {

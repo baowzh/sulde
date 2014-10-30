@@ -854,4 +854,23 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 		return this.getSqlMapClientTemplate().queryForList("oldimggroup");
 	}
 
+	@Override
+	public List<DocumentValue> getRecentDocs(Integer count) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("fechcount", count);
+		return this.getSqlMapClientTemplate().queryForList("getRecentDocs",
+				params);
+	}
+
+	@Override
+	public List<UserValue> getRecentActiveUsers(Integer count)
+			throws Exception {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("fechcount", count);
+		return this.getSqlMapClientTemplate().queryForList("getRecentActiveUsers",
+				params);
+	}
+	
+
 }

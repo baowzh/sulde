@@ -107,7 +107,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		Map<String, Object> indexPageContent = new HashMap<String, Object>();
 		for (int i = 0; i < relations.size(); i++) {
 			PageChannelRelationValue channel = relations.get(i);
-			PaingModel paingModel = new PaingModel();
+			PaingModel<DocumentValue> paingModel = new PaingModel<DocumentValue>();
 			paingModel.setDocchannel(channel.getChannelid());
 			paingModel.setPageindex(1);
 			paingModel.setPageindex(StaticConstants.INDEX_DOC_ROWCOUNT);
@@ -122,13 +122,13 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		Date endDate = new Date();
 		int fechtime = 0;
 		List<UserValue> topUsers = new ArrayList<UserValue>();
-		while (fechtime < 30 && topUsers.size() <= 10) {
+		while (fechtime < 30 && topUsers.size() < sysConfig.getTopusercount()) {
 			Calendar calendar = java.util.Calendar.getInstance();
 			calendar.setTime(new Date());
 			calendar.add(Calendar.WEEK_OF_YEAR, 0 - fechtime);
 			Date beginDate = calendar.getTime();
 			List<UserValue> users = this.webSiteVisitorDao.getTopUsers(
-					beginDate, endDate);
+					beginDate, endDate, sysConfig.getTopusercount());
 			List<UserValue> toDelUser = new ArrayList<UserValue>();
 			for (UserValue user : users) {
 				for (UserValue topUser : topUsers) {
@@ -158,10 +158,10 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		beginDate.setTime(beginTimee);
 		List<UserValue> newUsers = new ArrayList<UserValue>();
 		newUsers = this.webSiteVisitorDao.getRecentRegistUsers(beginDate,
-				endDate, 0, 12);
+				endDate, 0, sysConfig.getNewusercount());
 		indexPageContent.put("newUsers", newUsers);
 		// 获取最新10条图片文章
-		PaingModel paingModel = new PaingModel();
+		PaingModel<DocumentValue> paingModel = new PaingModel<DocumentValue>();
 		paingModel.setDoctype(StaticConstants.RESOURCE_TYPE_IMG);
 		paingModel.setStartrow(0);
 		paingModel.setEndrow(10);
@@ -207,6 +207,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray
 				.fromObject(imgNews);
 		indexPageContent.put("pics", jsonArray.toString());
+		indexPageContent.put("imgNews", imgNews);
 		String sitename = sysConfig.getSitename();
 		if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {// 如果是altanhurd
 			List<UserValue> recentLoginUsers = this.webSiteVisitorDao
@@ -218,6 +219,16 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 					StaticConstants.RESOURCE_TYPE_DOC,
 					StaticConstants.MESS_TYPE_COMM);
 			indexPageContent.put("recentDocComm", mess);
+			// 新增加的
+			List<DocumentValue> hotdocs = this.webResourceDao
+					.getTopDocuments(sysConfig.getHotdoccount());
+			indexPageContent.put("hotdocs", hotdocs);
+			List<DocumentValue> recentDocs = this.webResourceDao
+					.getRecentDocs(sysConfig.getRecentdoccount());
+			indexPageContent.put("recentDocs", recentDocs);
+			List<UserValue> activeusers = this.webResourceDao
+					.getRecentActiveUsers(sysConfig.getActiveusercount());
+			indexPageContent.put("activeusers", activeusers);
 		}
 		return indexPageContent;
 	}

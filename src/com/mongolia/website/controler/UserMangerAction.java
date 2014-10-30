@@ -44,6 +44,7 @@ import com.mongolia.website.util.UUIDMaker;
 public class UserMangerAction {
 	@Autowired
 	private UserManager userManager;
+	
 
 	/**
 	 * 获取用户信息
@@ -87,6 +88,7 @@ public class UserMangerAction {
 			if (!validcode.equalsIgnoreCase(sessioncheckcode)) {
 				throw new Exception("1");
 			}
+			// 调用服务密码加密
 			success = this.userManager.doLogin(userValue);
 			if (success == true) {
 				List<UserValue> userValues = this.userManager.getUsers(

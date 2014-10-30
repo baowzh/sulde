@@ -196,7 +196,7 @@
 								<div style="">
 									<div class="flt" style="width: 680px">
 										<div style="height: 410px; margin: 10px;">
-											<c:forEach items="${paingModel.docList}" var="documentValue"
+											<c:forEach items="${paingModel.modelList}" var="documentValue"
 												varStatus="status">
 												<div class="nwsl1" style="height: 410px;">
 													<div class="title" style="height: 320px;">

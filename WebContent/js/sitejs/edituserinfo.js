@@ -71,20 +71,50 @@ var onChange = function(mess, obj, length) {
  */
 var loadChildDistrict = function(selid, type) {
 	var selectedcode = $("#" + selid).val();
-	var optionhtml = '<option value="99"></option>';
+	var optionhtml = '';
 	for (district in districtsdata.districts) {
 		if (selectedcode == districtsdata.districts[district].parentcode) {
-			optionhtml = optionhtml + '<option value="'
-					+ districtsdata.districts[district].districtcode + '">'
-					+ districtsdata.districts[district].districtname
-					+ '</option>'
+			if (type == 1) {
+				optionhtml = optionhtml
+						+ '<div  class=\"mnlist\" style=\"text-indent: 0px; height: 120px;\"><a onclick=\"javascript:changeSel(\''
+						+ districtsdata.districts[district].districtcode
+						+ '\',\''
+						+ districtsdata.districts[district].districtname
+						+ '\',\'hsien\',\'hsienname\',\'hsiens\')\"	style=\"cursor: pointer\" >'
+						+ districtsdata.districts[district].districtname
+						+ '</a></div>';
+			} else {
+				optionhtml = optionhtml
+						+ '<div  class=\"mnlist\" style=\"text-indent: 0px; height: 120px;\"><a onclick=\"javascript:changeSel(\''
+						+ districtsdata.districts[district].districtcode
+						+ '\',\''
+						+ districtsdata.districts[district].districtname
+						+ '\',\'nowhsien\',\'nowhsienname\',\'nowhsiens\')\"	style=\"cursor: pointer\" >'
+						+ districtsdata.districts[district].districtname
+						+ '</a></div>';
+			}
 		}
 	}
 	if (type == 1) {
-		$("#hsien").html(optionhtml);
+		$("#hsienlist").html('');
+		$("#hsienlist").html(optionhtml);
 
 	} else {
-		$("#nowhsien").html(optionhtml);
+		$("#nowhsienlist").html('');
+		$("#nowhsienlist").html(optionhtml);
 	}
 
 };
+var showselpanel = function(show, divid) {
+	if (show) {
+		$("#" + divid).show();
+	} else {
+		$("#" + divid).hide();
+	}
+
+};
+var changeSel = function(code, name, codeid, nameid, divid) {
+	$("#" + nameid).text(name);
+	$("#" + codeid).val(code);
+	$('#' + divid).hide();
+}

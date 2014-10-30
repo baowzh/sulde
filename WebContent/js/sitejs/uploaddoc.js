@@ -20,7 +20,7 @@ $(document).ready(
 								+ data.treeNodes[i].channelid + "\">"
 								+ data.treeNodes[i].chnlname + "</option>";
 					}
-					$('#docchannel').html(options);
+					// $('#docchannel').html(options);
 				}
 			});
 
@@ -44,6 +44,7 @@ $(document).ready(
 						$('#doctitle').val(data.documentValue.doctitle);
 						$('#docabstract').val(data.documentValue.docabstract);
 						$('#userid').val(data.documentValue.userid);
+						$('#channel').val(data.documentValue.docchannelname);
 					}
 				});
 			}
@@ -209,6 +210,18 @@ var addemotion = function(face) {
 	CKEDITOR.instances.editor1.insertHtml(img);
 	$("#addemface").dialog("close");
 
+}
+var showselePanel = function(show, event) {
+	if (show) {
+		$("#citys").show(300);
+	} else {
+		$("#citys").hide();
+	}
+
+}
+var changeCity = function(channelid, channelname) {
+	$("#channel").text(channelname);
+	$("#docchannel").val(channelid);
 }
 /**
  * 隐藏相册对话框并显示图片列表

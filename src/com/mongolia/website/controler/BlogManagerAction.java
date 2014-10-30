@@ -48,10 +48,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mongolia.website.controler.ckeditor.SamplePostData;
 import com.mongolia.website.manager.ManagerException;
+import com.mongolia.website.manager.interfaces.ChannelManager;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebResourceManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
+import com.mongolia.website.model.Channel;
 import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.FriendValue;
 import com.mongolia.website.model.ImgGrpupValue;
@@ -88,6 +90,8 @@ public class BlogManagerAction {
 	private WebSiteVisitorManager webSiteVisitorManager;
 	@Autowired
 	private WebSiteManager webSiteManager;
+	@Autowired
+	private ChannelManager channelManager;
 
 	/**
 	 * 进入个人主页
@@ -157,6 +161,8 @@ public class BlogManagerAction {
 			HttpServletResponse response, ModelMap map) {
 		map.put("opertype", "1");
 		Integer agentkind = 0;
+		List<Channel> chanels = this.channelManager
+				.getChannelList(new HashMap<String, Object>());
 		String user_agent_kind = request.getHeader("user-agent");
 		if (user_agent_kind.indexOf("Chrome") > 0) {
 			agentkind = 1;
@@ -164,6 +170,7 @@ public class BlogManagerAction {
 			agentkind = 0;
 		}
 		map.put("agentkind", agentkind);
+		map.put("chanels", chanels);
 		return new ModelAndView("userspace/createDoc", map);
 	}
 
@@ -441,7 +448,12 @@ public class BlogManagerAction {
 		} else {
 			agentkind = 0;
 		}
+
+		List<Channel> chanels = this.channelManager
+				.getChannelList(new HashMap<String, Object>());
 		map.put("agentkind", agentkind);
+		map.put("chanels", chanels);
+		//
 		return new ModelAndView("userspace/createDoc", map);
 	}
 
@@ -806,7 +818,7 @@ public class BlogManagerAction {
 	 */
 	@RequestMapping("/pagingqueryimg.do")
 	public ModelAndView pagingqueryimg(HttpServletRequest request,
-			ModelMap map, PaingModel paingModel) {
+			ModelMap map, PaingModel<DocumentValue> paingModel) {
 		try {
 			String opergroupid = request.getParameter("imggroupid");
 			Map<String, Object> params = new HashMap<String, Object>();
@@ -820,7 +832,7 @@ public class BlogManagerAction {
 			paingModel.setStartrow((Integer.parseInt(pageindex) - 1) * 12 + 1);
 			paingModel.setEndrow(12);
 			paingModel.setImggroupid(opergroupid);
-			PaingModel pageModel = webSiteVisitorManager
+			PaingModel<DocumentValue> pageModel = webSiteVisitorManager
 					.pagingquerydoc(paingModel);
 			map.put("imgList", pageModel);
 		} catch (Exception ex) {
@@ -1142,7 +1154,7 @@ public class BlogManagerAction {
 	public ModelAndView markUserresource(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
 		String resourceid = request.getParameter("resouceid");
-		String resoucekind = request.getParameter("resoucekind");
+		// String resoucekind = request.getParameter("resoucekind");
 		UserValue userValue = (UserValue) request.getSession().getAttribute(
 				"user");// 在线session
 		try {
@@ -1293,7 +1305,8 @@ public class BlogManagerAction {
 			pagingModel = this.webResourceManager
 					.pagingQueryFriends(pagingModel);
 			map.put("friendList", pagingModel.getModelList());
-			Integer friendCount = Integer.parseInt(pagingModel.getRowcount());
+			// Integer friendCount =
+			// Integer.parseInt(pagingModel.getRowcount());
 			String pagestr = PageUtil.getPagingFriendLink(pagingModel, 1);
 			// List<String> pageindexs = new ArrayList<String>();
 			// for (int i = 0; i < friendCount; i++) {
@@ -1489,7 +1502,7 @@ public class BlogManagerAction {
 		try {
 			//
 			String docid = request.getParameter("docid");
-			String groupid = request.getParameter("imggroupid");
+			// String groupid = request.getParameter("imggroupid");
 			String idAndIndexrel = request.getParameter("idAndIndexrel");
 			String[] idAndIndexrels = idAndIndexrel.split("#");
 			String index = "";
@@ -1548,7 +1561,7 @@ public class BlogManagerAction {
 		try {
 			//
 			String docid = request.getParameter("docid");
-			String groupid = request.getParameter("imggroupid");
+			// String groupid = request.getParameter("imggroupid");
 			String idAndIndexrel = request.getParameter("idAndIndexrel");
 			String[] idAndIndexrels = idAndIndexrel.split("#");
 			String index = "";
@@ -1947,6 +1960,7 @@ public class BlogManagerAction {
 			int length = inputStream.available();
 			readerr = new byte[length];
 			inputStream.read(readerr);
+			inputStream.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
