@@ -16,7 +16,7 @@
 	<div class="lmainR ofh" style="text-align: center; height: 64px;">
 		<img src="img/logo.png" width="982" />
 	</div>
-	<div class="lmainR ofh" style="text-align: center;">
+	<div class="lmainR ofh" style="text-align: center; height: 510px;">
 		<form action="edituserinfo.do" id="userinfoform" method="post"
 			enctype="multipart/form-data">
 			<div class="lmainR">
@@ -32,7 +32,7 @@
 					  </div>
 
 				<!-- 				<hr> -->
-				<div class="  lcell" style="width: 890px; height: 478px;">
+				<div class="  lcell" style="width: 890px; height: 510px;">
 					<div class="lcell userinfotab" style="width: 890px; height: 100%;">
 						<table class="m1ln h100">
 
@@ -131,38 +131,17 @@
 									<div class="m1ln h100"> </div>
 								</td>
 								<td style="height: 90px">
-									<div class="preselpanel" style="z-index:8;">
-										<div class="changecity" style="width:24px;">
-											<a id="provincename"
-												href="javascript:showselpanel(true,'provinces')"> <c:out
-													value="${userinfo.provincename}" default=" " />
-											</a> <input type="hidden" id="province" name="province" value="" />
-											<!-- 选择住地（省）-->
-											<div class="channelpanel" id="provinces"
-												style="display: none">
-												<div class="paneltitle">
-													<a href="javascript:showselpanel(false,'provinces');"
-														style="cursor: pointer"> <img src="img/gbchange.png"
-														width="15" height="16"></a>
-												</div>
-												<div class="channellist">
-													<c:forEach items="${districts}" var="districtValue"
-														varStatus="status">
-														<div class="mnlist"
-															style="text-indent: 0px; height: 120px;">
-															<a
-																onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','province','provincename','provinces');loadChildDistrict('province',1);"
-																style="cursor: pointer" class=""><c:out
-																	value="${districtValue.districtname}" /> </a>
-														</div>
-													</c:forEach>
+									<!-- 									<div class="preselpanel" style="z-index: 8;"> -->
+									<!-- 										<div class="changecity" style="width: 24px;"> -->
+									<div class="mfl">
+										<a id="provincename"
+											href="javascript:showselpanel(true,'provinces')"> <c:out
+												value="${userinfo.provincename}" default=" " />
+										</a> <input type="hidden" id="province" name="province" value="" />
 
-													<div class="clear"></div>
-												</div>
-											</div>
 
-										</div>
-										
+										<!-- 										</div> -->
+
 										<!-- 										<div id="selprovince"> -->
 
 										<!-- 										</div> -->
@@ -224,6 +203,7 @@
 
 										</select>
 										-->
+										<!-- 									</div> -->
 									</div>
 								</td>
 								<td></td>
@@ -518,6 +498,27 @@
 		</div>
 		<div class="cbt"></div>
 	</div>
+	<!-- 选择住地（省）-->
+	<div class="channelpanel" id="provinces" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'provinces');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div class="channellist">
+			<c:forEach items="${districts}" var="districtValue"
+				varStatus="status">
+				<div class="mnlist" style="text-indent: 0px; height: 98px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','province','provincename','provinces');loadChildDistrict('province',1);"
+						style="cursor: pointer" class=""><c:out
+							value="${districtValue.districtname}" /> </a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
 	<!-- 选择住地（旗县）-->
 	<div class="channelpanel" id="hsiens" style="display: none">
 		<div class="paneltitle">
@@ -601,7 +602,7 @@
 	</div>
 </body>
 <script>
-var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
-//var professions = <c:out value="${professions}" escapeXml="false" />;
+	var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
+	//var professions = <c:out value="${professions}" escapeXml="false" />;
 </script>
 </html>

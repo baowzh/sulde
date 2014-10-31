@@ -1,14 +1,14 @@
 @charset "utf-8";
 .changecity {
 float: left;
-width: 202px;
+width: 300px;
 height:90px;
 position: relative;
 z-index: 19;
 }
 .channelpanel {
-	width: 200px;
-	height:400px;
+	width: 300px;
+	height:198px;
 	border: 1px solid #f90;
 	background: #fff;
 	padding: 1px;
@@ -16,6 +16,7 @@ z-index: 19;
 	left: 24px;
 	top: 10px;
 	z-index: 20;
+	overflow: hidden;
 }
 
 .paneltitle {
@@ -36,6 +37,7 @@ z-index: 19;
 /* 	padding: 15px 5px 10px; */
 	float: left;
 	text-align: center;
+	height:198px;
 }
 
 .channellist a {

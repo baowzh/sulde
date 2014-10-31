@@ -8,7 +8,7 @@
 @font-face {
 	/* 	font-family: "Menksoft  "; */
 	font-family: "MenksoftQagan";
-/* 	font-family: "MenksoftQagan"; */
+	/* 	font-family: "MenksoftQagan"; */
 	src: url(../../font/MenksoftQagan_cn.ttf);
 }
 
@@ -59,9 +59,9 @@ a:hover {
 
 body {
 	margin: 0;
-/* 	font-family: "Menksoft  "; */
-	font-family: "MenksoftQagan"; 
-/* 	font-family: "MenksoftQagan"; */
+	/* 	font-family: "Menksoft  "; */
+	font-family: "MenksoftQagan";
+	/* 	font-family: "MenksoftQagan"; */
 	font-size: 16px;
 	line-height: 100%;
 }
@@ -272,7 +272,8 @@ body.alag {
 .mfl input, button {
 	-webkit-transform: rotate(90deg); /* Safari and Chrome */
 	-webkit-transform-origin: 10px 10px;
-	font-family: "Menksoft  ";
+	/* 	font-family: "Menksoft  "; */
+	font-family: "MenksoftQagan";
 	writing-mode: tb-lr;
 }
 
@@ -285,7 +286,8 @@ body.alag {
 .search input, button {
 	-webkit-transform: rotate(90deg); /* Safari and Chrome */
 	-webkit-transform-origin: 10px 10px;
-	font-family: "Menksoft  ";
+	/* 	font-family: "Menksoft  "; */
+	font-family: "MenksoftQagan";
 	writing-mode: tb-lr;
 }
 
@@ -605,7 +607,8 @@ body.alag {
 .regform input, button {
 	-webkit-transform: rotate(90deg); /* Safari and Chrome */
 	-webkit-transform-origin: 10px 10px;
-	font-family: "Menksoft  ";
+	/* 	font-family: "Menksoft  "; */
+	font-family: "MenksoftQagan";
 	writing-mode: tb-lr;
 }
 
