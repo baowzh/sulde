@@ -106,9 +106,11 @@ var loadChildDistrict = function(selid, type) {
 
 };
 var showselpanel = function(show, divid) {
-	alert(x);
-	alert(y);
+	// alert(x);
+	// alert(y);
 	if (show) {
+		$("#" + divid).css("left", document.body.scrollLeft + x);
+		$("#" + divid).css("top", document.body.scrollTop + y);
 		$("#" + divid).show();
 	} else {
 		$("#" + divid).hide();

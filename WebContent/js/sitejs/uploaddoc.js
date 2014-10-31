@@ -1,3 +1,5 @@
+var positionx = 0;
+var positiony = 0;
 var albumlistinitialize = false;
 $(document).ready(
 		function() {
@@ -57,6 +59,11 @@ $(document).ready(
 				left : -27
 			});
 			//
+			$(document).mousemove(function(event) {
+				// alert(event);
+				positionx = event.clientX;
+				positiony = event.clientY;
+			});
 
 		});
 /**
@@ -213,6 +220,9 @@ var addemotion = function(face) {
 }
 var showselePanel = function(show, event) {
 	if (show) {
+		$('#citys').css("width", 400);
+		$('#citys').css("left", document.body.scrollLeft + positionx);
+		$('#citys').css("top", document.body.scrollTop + positiony);
 		$("#citys").show(300);
 	} else {
 		$("#citys").hide();
@@ -222,6 +232,7 @@ var showselePanel = function(show, event) {
 var changeCity = function(channelid, channelname) {
 	$("#channel").text(channelname);
 	$("#docchannel").val(channelid);
+	$("#citys").hide();
 }
 /**
  * 隐藏相册对话框并显示图片列表
@@ -274,3 +285,4 @@ var openPhotoAlbum = function(imggroupid) {
 			});
 
 }
+//
