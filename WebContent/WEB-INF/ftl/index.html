@@ -28,11 +28,15 @@
 			</div>
 			<!--对联广告的html代码结构-->
 			<div class="duilian duilian_left">
-				<div class="duilian_con"><img src="img/hdoh.gif"></div>
+				<div class="duilian_con">
+					<img src="img/hdoh.gif">
+				</div>
 				<a href="#" class="duilian_close">X</a>
 			</div>
 			<div class="duilian duilian_right">
-				<div class="duilian_con"><img src="img/odonbater.gif"></div>
+				<div class="duilian_con">
+					<img src="img/odonbater.gif">
+				</div>
 				<a href="#" class="duilian_close">X</a>
 			</div>
 			<!-- -->
@@ -205,37 +209,23 @@
 		<div class="cbt"></div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 90px; height: 700px;">
-			<div
-				style="width: 80px; height: 690px; background: url(img/huhsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
-		</div>
-		<div class="  lcell" style="width: 900px;">
-			<div class="lcell cell2" style="width: 490px;">
-				<div class="cardt2" style="width: 486px;">
-					<div style="width: 480px; height: 330px; padding: 5px;">
+		<div class="  lcell" style="width: 998x;">
+			<div class="lcell cell2" style="width: 390px;">
+				<div class="cardt2" style="width: 380px;">
+					<div style="width: 380px; height: 330px; padding: 5px;">
 						<div class="sldrFrm" id="picplayer"
-							style="width: 475px; height: 330px;">
-							<!-- <div class="sldrFrm" id="slider101">-->
-							<!-- 
-						<div class="wndL"><a href="#"><img src="img/5.jpg" width="600" height="400" /></a><a href="#"><img src="img/6.jpg" width="600" height="400" /></a><a href="#"><img src="img/7.jpg" width="600" height="400" /></a> </div>
-						<div class="wndR">
-							<div class="wndThmb"><img src="img/5.jpg" width="600" height="400" /></div>
-							<div class="wndThmb"><img src="img/6.jpg" width="600" height="400" /></div>
-							<div class="wndThmb"><img src="img/7.jpg" width="600" height="400" /></div>
-						</div>
-						-->
-						</div>
-						<!--  <script>var slider1=new cls_photoslider("slider101",10,40,4000,330);</script> -->
+							style="width: 375px; height: 330px;"></div>
 					</div>
 				</div>
 			</div>
-			<div class="lcell cell1" style="width: 400px;">
-				<div class="   cardt1  " style="width: 398px;">
-					<div class="ttl1 m1ln">
-						<a href="javascript:void();">    </a>
-					</div>
+			<!-- 			<div class="lcell cell1" style="width: 598px;"> -->
+			<div class="   cardt1  " style="width: 592px;">
+				<div class="ttl1 m1ln">
+					<a href="javascript:void();">  </a>
+				</div>
+				<!--  
 					<div class="nwsls1 msheet  "
-						style="text-align: justify; text-justify: newspaper;">
+						style="text-align: justify; text-justify: newspaper; width: 440px;">
 
 						<a href="javascript:;" class=" vdrtgalSuld">   : </a> <a
 							href="#sonin"> </a>  <a href="#svrgal">
@@ -266,105 +256,48 @@
 							</a> 
 
 					</div>
-					<div class="ttl1 m1ln">
-						<a href="javascript:void();"></a>
-					</div>
-					<div class="mnlist" style="width: 10px;"></div>
-					<div class="mnlist" style="width: 70px;">
-						<form id="searchform" method="post">
-							<div class="search">
-								<input type="text" name="searchtext" id="searchtext" />
-							</div>
-
-							<div class="mnlist"
-								style="width: 40px; padding-left: 10px; text-align: center;">
-								<a id="searchbloga" href="javascript:search('searchblog.do');">
-									 </a>  <a id="searchdoca"
-									href="javascript:search('searchdoc.do');">  </a>
-							</div>
-						</form>
-
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="sonin"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
-							 </a>
-					</div>
-					<div class="nwsls1">
-						<#if indexPageContent.newsarts??> <#list indexPageContent.newsarts
-						as documentValue>
-						<div class="nwsl1">
-							<div class="title">
-								<a href="getuserdocdetail.do?docid=${documentValue.docid}">${documentValue.doctitle}
-								</a>
-							</div>
-							<div class="author">
-								<a href="gouserindex.do?userid=${documentValue.userid}">
-									${documentValue.docauthor}</a>
-							</div>
+					-->
+				<div class="nwsls1" style="width: 430px;">
+					<#if indexPageContent.newsarts??> <#list indexPageContent.newsarts
+					as documentValue>
+					<div class="nwsl1">
+						<div class="title">
+							<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+								${documentValue.doctitle} </a>
 						</div>
-						</#list> </#if>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="svrgal"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=11111111111111">
-							 </a>
-					</div>
-					<div class="nwsls1">
-						<#if indexPageContent.educationarts??> <#list
-						indexPageContent.educationarts as documentValue>
-						<div class="nwsl1">
-							<div class="title">
-								<a href="getuserdocdetail.do?docid=${documentValue.docid}">${documentValue.doctitle}
-								</a>
-							</div>
-							<div class="author">
-								<a href="gouserindex.do?userid=${documentValue.userid}">
-									${documentValue.docauthor}</a>
-							</div>
+						<div class="author">
+							<a href="gouserindex.do?userid=${documentValue.userid}">
+								${documentValue.docauthor} </a>
 						</div>
-						</#list> </#if>
 					</div>
+					</#list></#if>
 				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1" style="background: #ffffff">
-					<a name="tuuh"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=11111111111112"> 
-						</a>
-					</div>
-					<div class="nwsls1">
-						<#if indexPageContent.historyarts??> <#list
-						indexPageContent.historyarts as documentValue>
-						<div class="nwsl1">
-							<div class="title">
-								<a href="getuserdocdetail.do?docid=${documentValue.docid}">${documentValue.doctitle}
-								</a>
-							</div>
-							<div class="author">
-								<a href="gouserindex.do?userid=${documentValue.userid}">
-									${documentValue.docauthor}</a>
-							</div>
+				<div class="ttl1 m1ln">
+					<a href="javascript:void();"></a>
+				</div>
+				<div class="mnlist" style="width: 10px;"></div>
+				<div class="mnlist" style="width: 70px;">
+					<form id="searchform" method="post">
+						<div class="search">
+							<input type="text" name="searchtext" id="searchtext" />
 						</div>
-						</#list> </#if>
 
-					</div>
+						<div class="mnlist"
+							style="width: 40px; padding-left: 10px; text-align: center;">
+							<a id="searchbloga" href="javascript:search('searchblog.do');">
+								 </a> &nbsp;&nbsp; <a id="searchdoca"
+								href="javascript:search('searchdoc.do');">  </a>
+						</div>
+					</form>
+
 				</div>
 			</div>
+			<!-- 			</div> -->
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 150px; height: 660px;">
-			<div class="lcell cardlogin" style="height: 300px;">
+		<div class="  lcell" style="width: 150px; height: 315px;">
+			<div class="lcell cardlogin" id="logindiv" style="height: 315px;">
 				<form id="loginform">
 					<table border="0" style="margin: 1em auto;">
 						<tr>
@@ -415,119 +348,195 @@
 					</table>
 				</form>
 			</div>
-			<div class="lcell cardlogin"
-				style="background: white; margin-top: 3px">
-				<img src="img/8.jpg" width="600" height="400" />
-			</div>
+			<!-- 			<div class="lcell cardlogin" -->
+			<!-- 				style="background: white; margin-top: 3px"> -->
+			<!-- 				<img src="img/8.jpg" width="600" height="400" /> -->
+			<!-- 			</div> -->
 		</div>
-		<div class="  lcell" style="width: 840px;">
-			<div class="lcell " style="width: 840px; height: 310px;">
-				<div class="cardt5" style="height: 300px;">
-					<div class="ttl1 m1ln">
-						<a href="#">  </a>
-					</div>
-					<div style="width: 810px; margin: 10px; height: 300px">
+		<div class="lcell " style="width: 840px; height: 315px;">
+			<div class="cardt5" style="height: 308px;">
+				<div class="ttl1 m1ln" style="height: 308px;">
+					<a href="#">  </a>
+				</div>
+				<div style="width: 720px; margin: 5px; height: 300px;">
+					<#if indexPageContent.topUsers??> <#list indexPageContent.topUsers
+					as userValue>
+					<div class="xldgurg" style="height: 70px;">
+						<div class="avtr">
+							<a href="gouserindex.do?userid=${userValue.userid}"><img
+								src="getsmheadimge.do?userid=${userValue.userid}" width="570"
+								height="447" /></a>
+							<div class="frt" style="width: 20px; text-align: center;">
+								<div class="m1ln" style="text-align: center;">
+									<a href="gouserindex.do?userid=${userValue.userid}"> &nbsp;
+										${userValue.artname} </a>
+								</div>
 
-						<#if indexPageContent.topUsers??> <#list indexPageContent.topUsers
-						as userValue>
-						<div class="xldgurg">
-							<div class="avtr">
-								<a href="gouserindex.do?userid=${userValue.userid}"><img
-									src="getsmheadimge.do?userid=${userValue.userid}" width="570"
-									height="447" /></a>
-							</div>
-							<div class="desc  ">
-								<div class="m1ln">
-									<a href="gouserindex.do?userid=${userValue.userid}">
-										  </a>
-								</div>
-								<div class="m1ln">
-									<a href="gouserindex.do?userid=${userValue.userid}">level:</a>
-									❤❤
-								</div>
-								<div class="m1ln">
-									<a href="gouserindex.do?userid=${userValue.userid}">${userValue.artname}
-										:${userValue.regdateStr}</a>
-								</div>
 							</div>
 						</div>
-						</#list> </#if>
 					</div>
-				</div>
-			</div>
-			<div class="lcell " style="height: 350px; width: 240px;">
-				<div class="cardt3">
-					<a name="sinljilge"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332223">
-							 </a>
-					</div>
-					<div class="nwsls1" style="width: 180px;">
-						<#if indexPageContent.sciencearts??> <#list
-						indexPageContent.sciencearts as documentValue>
-						<div class="nwsl1">
-							<div class="title">
-								<a href="getuserdocdetail.do?docid=${documentValue.docid}">${documentValue.doctitle}
-								</a>
-							</div>
-							<div class="author">
-								<a href="gouserindex.do?userid=${documentValue.userid}">
-									${documentValue.docauthor}</a>
-							</div>
-						</div>
-						</#list> </#if>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="onol"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332224">
-							 </a>
-					</div>
-					<div class="nwsls1">
-						<#if indexPageContent.theoryarts??> <#list
-						indexPageContent.theoryarts as documentValue>
-						<div class="nwsl1">
-							<div class="title">
-								<a href="getuserdocdetail.do?docid=${documentValue.docid}">${documentValue.doctitle}
-								</a>
-							</div>
-							<div class="author">
-								<a href="gouserindex.do?userid=${documentValue.userid}">
-									${documentValue.docauthor}</a>
-							</div>
-						</div>
-						</#list> </#if>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="hebshmel"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
-							 </a>
-					</div>
-					<div class="nwsls1">
-						<#if indexPageContent.sayingarts??> <#list
-						indexPageContent.sayingarts as documentValue>
-						<div class="nwsl1">
-							<div class="title">
-								<a href="getuserdocdetail.do?docid=${documentValue.docid}">${documentValue.doctitle}
-								</a>
-							</div>
-							<div class="author">
-								<a href="gouserindex.do?userid=${documentValue.userid}">
-									${documentValue.docauthor}</a>
-							</div>
-						</div>
-						</#list> </#if>
-					</div>
+					</#list></#if>
+
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="lmainR">
+		<div class="  lcell" style="width: 90px; height: 700px;">
+			<div
+				style="width: 80px; height: 690px; background: url(img/huhsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="sonin"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=32222233332222"> 
+					</a>
+				</div>
+				<div class="nwsls1">				
+					<#if indexPageContent.newsarts??> <#list indexPageContent.newsarts
+					as documentValue>
+					<div class="nwsl1">
+						<div class="title">
+							<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+								${documentValue.doctitle} </a>
+						</div>
+						<div class="author">
+							<a href="gouserindex.do?userid=${documentValue.userid}">
+								${documentValue.docauthor} </a>
+						</div>
+					</div>
+					</#list></#if>
+				</div>
+			</div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="svrgal"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=11111111111111">
+						 </a>
+				</div>
+				<div class="nwsls1">
+					<#if indexPageContent.educationarts??> <#list
+					indexPageContent.educationarts as documentValue>
+					<div class="nwsl1">
+						<div class="title">
+							<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+								${documentValue.doctitle} </a>
+				</div>
+				<div class="author">
+					<a href="gouserindex.do?userid=${documentValue.userid}">
+						${documentValue.docauthor} </a>
+				</div>
+			</div>
+			</#list></#if>
+		</div>
+	</div>
+	</div>
+	<div class="lcell cell1">
+		<div class="cardt1" style="background: #fffff">
+			<a name="tuuh"></a>
+			<div class="ttl1 m1ln">
+				<a href="pagingquery.do?docchannel=11111111111112">  </a>
+			</div>
+			<div class="nwsls1">
+				<#if indexPageContent.historyarts??> <#list
+				indexPageContent.historyarts as documentValue>
+				<div class="nwsl1">
+					<div class="title">
+						<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+							${documentValue.doctitle} </a>
+					</div>
+					<div class="author">
+						<a href="gouserindex.do?userid=${documentValue.userid}">
+							${documentValue.docauthor} </a>
+					</div>
+				</div>
+				</#list></#if>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- 	<div class="lmainR"> -->
+
+	<!-- 		<div class="  lcell" style="width: 750px;"> -->
+
+	<div class="lcell cell1">
+		<div class="cardt1">
+			<a name="sinljilge"></a>
+			<div class="ttl1 m1ln">
+				<a href="pagingquery.do?docchannel=32222233332223">
+					 </a>
+			</div>
+			<div class="nwsls1" style="width: 180px;">
+				<#if indexPageContent.sciencearts??> <#list
+				indexPageContent.sciencearts as documentValue>
+				<div class="nwsl1">
+					<div class="title">
+						<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+							${documentValue.doctitle} </a>
+					</div>
+					<div class="author">
+						<a href="gouserindex.do?userid=${documentValue.userid}">
+							${documentValue.docauthor} </a>
+					</div>
+				</div>
+				</#list></#if>
+			</div>
+		</div>
+	</div>
+	<div class="lcell cell1">
+		<div class="cardt1">
+			<a name="onol"></a>
+			<div class="ttl1 m1ln">
+				<a href="pagingquery.do?docchannel=32222233332224">
+					 </a>
+			</div>
+			<div class="nwsls1">
+				<#if indexPageContent.theoryarts??> <#list
+				indexPageContent.theoryarts as documentValue>
+				<div class="nwsl1">
+					<div class="title">
+						<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+							${documentValue.doctitle} </a>
+					</div>
+					<div class="author">
+						<a href="gouserindex.do?userid=${documentValue.userid}">
+							${documentValue.docauthor} </a>
+					</div>
+				</div>
+				</#list></#if>
+			</div>
+		</div>
+	</div>
+	<div class="lcell cell1">
+		<div class="cardt1">
+			<a name="hebshmel"></a>
+			<div class="ttl1 m1ln">
+				<a href="pagingquery.do?docchannel=32222233332222"> 
+				</a>
+			</div>
+			<div class="nwsls1">
+				<#if indexPageContent.sayingarts??> <#list
+				indexPageContent.sayingarts as documentValue>
+				<div class="nwsl1">
+					<div class="title">
+						<a href="getuserdocdetail.do?docid=${documentValue.docid}">
+							${documentValue.doctitle} </a>
+					</div>
+					<div class="author">
+						<a href="gouserindex.do?userid=${documentValue.userid}">
+							${documentValue.docauthor} </a>
+					</div>
+				</div>
+				</#list></#if>
+			</div>
+		</div>
+	</div>
+	<!-- 		</div> -->
 	</div>
 	<div class="lmainR">
 		<div class="  lcell" style="width: 90px; height: 700px;">
@@ -680,12 +689,32 @@
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 990px;height: 310px;">
+		<div class="  lcell" style="width: 990px; height: 310px;">
 			<div class="lcell " style="width: 990px; height: 310px;">
 				<div class="cardt4" style="height: 300px;">
 					<div class="ttl1 m1ln">
 						<a href="#">  </a>
 					</div>
+					<div style="width: 948px; margin: 0px; height: 320px" class="ofh">
+						<#if indexPageContent.newUsers??> <#list indexPageContent.newUsers
+						as userValue>
+						<div class="xldgurg" style="height: 70px;">
+							<div class="avtr">
+								<a href="gouserindex.do?userid=${userValue.userid}"><img
+									src="getsmheadimge.do?userid=${userValue.userid}" width="570"
+									height="447" /></a>
+								<div class="frt" style="width: 20px; text-align: center;">
+									<div class="m1ln" style="text-align: center;">
+										<a href="gouserindex.do?userid=${userValue.userid}">
+											&nbsp; ${userValue.artname} </a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						</#list> </#if>
+					</div>
+					<!--  -
 					<div style="width: 948px; margin: 0px; height: 300px" class="ofh">
 						<#if indexPageContent.newUsers??> <#list indexPageContent.newUsers
 						as userValue>
@@ -712,6 +741,7 @@
 						</div>
 						</#list> </#if>
 					</div>
+					-->
 				</div>
 			</div>
 		</div>
