@@ -302,6 +302,7 @@
 				visitor.visitortype=#visitortype#
 			</isNotNull>
 		</dynamic>
+		order by visitdate desc limit 0,20
 	</select>
 
 	<select id="getTotalVisitorCount" parameterClass="java.util.Map"
@@ -589,7 +590,13 @@
 	<select id="getRecentActiveUsers" parameterClass="java.util.Map"
 		resultClass="UserValue">
 		select DISTINCT user.* from user,document where
-		user.userid=document.userid and document.DOCTYPE=1 order by document.CRTIME desc limit 0,#fechcount#
+		user.userid=document.userid and document.DOCTYPE=1 order by
+		document.CRTIME desc limit 0,#fechcount#
+	</select>
+	<select id="getVisitTime" parameterClass="java.util.Map"
+		resultClass="VisitorValue">
+		select visitorid,max(visitdate) as visitdate from visitor where visitorid
+		in($instr$ ) group by visitorid
 	</select>
 
 </sqlMap>

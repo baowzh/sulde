@@ -24,19 +24,19 @@ function initPicPlayer(pics, w, h) {
 	var p = $('#picplayer');
 	p.text('');
 	p
-			.append('<div id=\"piccontent\" style=\"width:475px;height:330px;-webkit-writing-mode: vertical-lr;writing-mode: tb-lr;\"><div id="imgcontent" style=\"width:455px;height:310px;" ></div><div id="title" style="width:30px;color:#454545;height:330px;padding:5px;" class="mnlist">dddd</div></div>');
+			.append('<div id=\"piccontent\" style=\"width:375px;height:330px;-webkit-writing-mode: vertical-lr;writing-mode: tb-lr;\"><div id="imgcontent" style=\"width:355px;height:310px;" ></div><div id="title" style="width:30px;color:#454545;height:330px;padding:5px;" class="mnlist">dddd</div></div>');
 	var c = $('#imgcontent');
 	for (var i = 0; i < pics.length; i++) {
 		// 添加图片到容器中
 		c.append('<a href=\"' + pics[i].link
 				+ '\" target=\"_blank\"><img id=\"picitem' + i
 				+ '\" style=\"display: none;z-index:' + i
-				+ ';height:330px;width:455px;height:330px;\" src=\"'
+				+ ';height:330px;width:355px;height:330px;\" src=\"'
 				+ pics[i].url + '\" /></a>');
 	}
 	// 按钮容器，绝对定位在右下角
 	p.append('<div id=\"picbtnHolder\" style=\"position:absolute;top:' + (538)
-			+ 'px;width:435px;height:20px;z-index:88;\"></div>');
+			+ 'px;width:365px;height:20px;z-index:88;\"></div>');
 	//
 	var btnHolder = $('#picbtnHolder');
 	btnHolder

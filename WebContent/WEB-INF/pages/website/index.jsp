@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Blog</title>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
+<link href="img/css/blog.css" type="text/css" rel="stylesheet" />
 <link href="img/css/huh.css" type="text/css" rel="stylesheet" />
 <link href="img/css/imgSlider.css" type="text/css" rel="stylesheet" />
 <link href="img/css/login.css" type="text/css" rel="stylesheet" />
@@ -21,7 +22,7 @@
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 <style>
-<c:if test="${agentkind==0}">
+<c:if test ="${ agentkind==0}">
 body {
 	font-size: 16px;
 }
@@ -222,26 +223,27 @@ body {
 		<div class="cbt"></div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 90px; height: 700px;">
-			<div
-				style="width: 80px; height: 690px; background: url(img/huhsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
-		</div>
-		<div class="  lcell" style="width: 900px;">
-			<div class="lcell cell2" style="width: 490px;">
-				<div class="cardt2" style="width: 486px;">
-					<div style="width: 480px; height: 330px; padding: 5px;">
+		<!-- 		<div class="  lcell" style="width: 90px; height: 700px;"> -->
+		<!-- 			<div -->
+		<!-- 				style="width: 80px; height: 690px; background: url(img/huhsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div> -->
+		<!-- 		</div> -->
+		<div class="  lcell" style="width: 998x;">
+			<div class="lcell cell2" style="width: 390px;">
+				<div class="cardt2" style="width: 380px;">
+					<div style="width: 380px; height: 330px; padding: 5px;">
 						<div class="sldrFrm" id="picplayer"
-							style="width: 475px; height: 330px;"></div>
+							style="width: 375px; height: 330px;"></div>
 					</div>
 				</div>
 			</div>
-			<div class="lcell cell1" style="width: 400px;">
-				<div class="   cardt1  " style="width: 398px;">
+<!-- 			<div class="lcell cell1" style="width: 598px;"> -->
+				<div class="   cardt1  " style="width: 592px;">
 					<div class="ttl1 m1ln">
-						<a href="javascript:void();">    </a>
+						<a href="javascript:void();">  </a>
 					</div>
+					<!--  
 					<div class="nwsls1 msheet  "
-						style="text-align: justify; text-justify: newspaper;">
+						style="text-align: justify; text-justify: newspaper; width: 440px;">
 
 						<a href="javascript:;" class=" vdrtgalSuld">   : </a> <a
 							href="#sonin"> </a>  <a href="#svrgal">
@@ -272,35 +274,8 @@ body {
 							</a> 
 
 					</div>
-					<div class="ttl1 m1ln">
-						<a href="javascript:void();"></a>
-					</div>
-					<div class="mnlist" style="width: 10px;"></div>
-					<div class="mnlist" style="width: 70px;">
-						<form id="searchform" method="post">
-							<div class="search">
-								<input type="text" name="searchtext" id="searchtext" />
-							</div>
-
-							<div class="mnlist"
-								style="width: 40px; padding-left: 10px; text-align: center;">
-								<a id="searchbloga" href="javascript:search('searchblog.do');">
-									 </a>  <a id="searchdoca"
-									href="javascript:search('searchdoc.do');">  </a>
-							</div>
-						</form>
-
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="sonin"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
-							 </a>
-					</div>
-					<div class="nwsls1">
+					-->
+					<div class="nwsls1" style="width:430px;">
 
 						<c:forEach items="${indexPageContent.newsarts}"
 							var="documentValue" varStatus="status">
@@ -320,68 +295,32 @@ body {
 						</c:forEach>
 
 					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="svrgal"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=11111111111111">
-							 </a>
+						<a href="javascript:void();"></a>
 					</div>
-					<div class="nwsls1">
-						<c:forEach items="${indexPageContent.educationarts}"
-							var="documentValue" varStatus="status">
-							<div class="nwsl1">
-								<div class="title">
-									<a
-										href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-											value="${documentValue.doctitle}" /> </a>
-								</div>
-								<div class="author">
-									<a
-										href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
-										<c:out value="${documentValue.docauthor}" />
-									</a>
-								</div>
+					<div class="mnlist" style="width: 10px;"></div>
+					<div class="mnlist" style="width: 70px;">
+						<form id="searchform" method="post">
+							<div class="search">
+								<input type="text" name="searchtext" id="searchtext" />
 							</div>
-						</c:forEach>
+
+							<div class="mnlist"
+								style="width: 40px; padding-left: 10px; text-align: center;">
+								<a id="searchbloga" href="javascript:search('searchblog.do');">
+									 </a> &nbsp;&nbsp; <a id="searchdoca"
+									href="javascript:search('searchdoc.do');">  </a>
+							</div>
+						</form>
+
 					</div>
 				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1" style="background: #fffff">
-					<a name="tuuh"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=11111111111112"> 
-						</a>
-					</div>
-					<div class="nwsls1">
-						<c:forEach items="${indexPageContent.historyarts}"
-							var="documentValue" varStatus="status">
-							<div class="nwsl1">
-								<div class="title">
-									<a
-										href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-											value="${documentValue.doctitle}" /> </a>
-								</div>
-								<div class="author">
-									<a
-										href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
-										<c:out value="${documentValue.docauthor}" />
-									</a>
-								</div>
-							</div>
-						</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
+<!-- 			</div> -->
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 150px; height: 660px;">
-			<div class="lcell cardlogin" id="logindiv" style="height: 300px;">
+		<div class="  lcell" style="width: 150px; height: 315px;">
+			<div class="lcell cardlogin" id="logindiv" style="height: 315px;">
 				<form id="loginform">
 					<table border="0" style="margin: 1em auto;">
 						<tr>
@@ -432,139 +371,223 @@ body {
 					</table>
 				</form>
 			</div>
-			<div class="lcell cardlogin"
-				style="background: white; margin-top: 3px">
-				<img src="img/8.jpg" width="600" height="400" />
-			</div>
+			<!-- 			<div class="lcell cardlogin" -->
+			<!-- 				style="background: white; margin-top: 3px"> -->
+			<!-- 				<img src="img/8.jpg" width="600" height="400" /> -->
+			<!-- 			</div> -->
 		</div>
-		<div class="  lcell" style="width: 840px;">
-			<div class="lcell " style="width: 840px; height: 310px;">
-				<div class="cardt5" style="height: 300px;">
-					<div class="ttl1 m1ln">
-						<a href="#">  </a>
-					</div>
-					<div style="width: 810px; margin: 10px; height: 300px;">
-						<c:forEach items="${indexPageContent.topUsers}" var="userValue"
-							varStatus="status">
-							<div class="xldgurg">
-								<div class="avtr">
-									<a
-										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
-										src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
-										width="570" height="447" /></a>
-								</div>
-								<div class="desc  ">
-									<div class="m1ln">
-										<a
-											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><c:out
-												value="${userValue.artname}" /> : <c:out
-												value="${userValue.regdateStr}" /></a>
-									</div>
-									<div class="m1ln">
+		<div class="lcell " style="width: 840px; height: 315px;">
+			<div class="cardt5" style="height: 308px;">
+				<div class="ttl1 m1ln" style="height: 308px;">
+					<a href="#">  </a>
+				</div>
+				<div style="width: 720px; margin: 5px; height: 300px;">
+					<c:forEach items="${indexPageContent.topUsers}" var="userValue"
+						varStatus="status">
+						<div class="xldgurg" style="height: 70px;">
+							<div class="avtr">
+								<a
+									href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
+									src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
+									width="570" height="447" /></a>
+								<div class="frt" style="width: 20px; text-align: center;">
+									<div class="m1ln" style="text-align: center;">
 										<a
 											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
-											<c:out value="${userValue.weeke}" /> 
+											&nbsp;<c:out value="${userValue.artname}" />
 										</a>
 									</div>
-									<div class="m1ln">
-										<a
-											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
-											   </a>
-										<c:out value="${userValue.retnum}" />
-									</div>
 
 								</div>
 							</div>
-						</c:forEach>
+						</div>
+					</c:forEach>
 
-					</div>
-				</div>
-			</div>
-			<div class="lcell " style="height: 350px; width: 240px;">
-				<div class="cardt3">
-					<a name="sinljilge"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332223">
-							 </a>
-					</div>
-					<div class="nwsls1" style="width: 180px;">
-						<c:forEach items="${indexPageContent.sciencearts}"
-							var="documentValue" varStatus="status">
-							<div class="nwsl1">
-								<div class="title">
-									<a
-										href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-											value="${documentValue.doctitle}" /> </a>
-								</div>
-								<div class="author">
-									<a
-										href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
-										<c:out value="${documentValue.docauthor}" />
-									</a>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="onol"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332224">
-							 </a>
-					</div>
-					<div class="nwsls1">
-						<c:forEach items="${indexPageContent.theoryarts}"
-							var="documentValue" varStatus="status">
-							<div class="nwsl1">
-								<div class="title">
-									<a
-										href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-											value="${documentValue.doctitle}" /> </a>
-								</div>
-								<div class="author">
-									<a
-										href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
-										<c:out value="${documentValue.docauthor}" />
-									</a>
-								</div>
-							</div>
-						</c:forEach>
-
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<a name="hebshmel"></a>
-					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
-							 </a>
-					</div>
-					<div class="nwsls1">
-						<c:forEach items="${indexPageContent.sayingarts}"
-							var="documentValue" varStatus="status">
-							<div class="nwsl1">
-								<div class="title">
-									<a
-										href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-											value="${documentValue.doctitle}" /> </a>
-								</div>
-								<div class="author">
-									<a
-										href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
-										<c:out value="${documentValue.docauthor}" />
-									</a>
-								</div>
-							</div>
-						</c:forEach>
-
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="lmainR">
+		<div class="  lcell" style="width: 90px; height: 700px;">
+			<div
+				style="width: 80px; height: 690px; background: url(img/huhsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="sonin"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=32222233332222"> 
+					</a>
+				</div>
+				<div class="nwsls1">
+
+					<c:forEach items="${indexPageContent.newsarts}" var="documentValue"
+						varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
+							</div>
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+
+				</div>
+			</div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="svrgal"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=11111111111111">
+						 </a>
+				</div>
+				<div class="nwsls1">
+					<c:forEach items="${indexPageContent.educationarts}"
+						var="documentValue" varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
+							</div>
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1" style="background: #fffff">
+				<a name="tuuh"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=11111111111112"> 
+					</a>
+				</div>
+				<div class="nwsls1">
+					<c:forEach items="${indexPageContent.historyarts}"
+						var="documentValue" varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
+							</div>
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- 		</div> -->
+		<!-- 	</div> -->
+		<!-- 	<div class="lmainR"> -->
+
+		<!-- 		<div class="  lcell" style="width: 750px;"> -->
+
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="sinljilge"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=32222233332223">
+						 </a>
+				</div>
+				<div class="nwsls1" style="width: 180px;">
+					<c:forEach items="${indexPageContent.sciencearts}"
+						var="documentValue" varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
+							</div>
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="onol"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=32222233332224">
+						 </a>
+				</div>
+				<div class="nwsls1">
+					<c:forEach items="${indexPageContent.theoryarts}"
+						var="documentValue" varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
+							</div>
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+
+				</div>
+			</div>
+		</div>
+		<div class="lcell cell1">
+			<div class="cardt1">
+				<a name="hebshmel"></a>
+				<div class="ttl1 m1ln">
+					<a href="pagingquery.do?docchannel=32222233332222"> 
+					</a>
+				</div>
+				<div class="nwsls1">
+					<c:forEach items="${indexPageContent.sayingarts}"
+						var="documentValue" varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
+							</div>
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+
+				</div>
+			</div>
+		</div>
+		<!-- 		</div> -->
+	</div>
+
 	<div class="lmainR">
 		<div class="  lcell" style="width: 90px; height: 700px;">
 			<div
@@ -740,13 +763,35 @@ body {
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 990px; height: 310px;">
-			<div class="lcell " style="width: 990px; height: 310px;">
-				<div class="cardt4" style="height: 300px;">
+		<div class="  lcell" style="width: 990px; height: 330px;">
+			<div class="lcell " style="width: 990px; height: 330px;">
+				<div class="cardt4" style="height: 320px;">
 					<div class="ttl1 m1ln">
 						<a href="#">  </a>
 					</div>
-					<div style="width: 948px; margin: 0px; height: 300px" class="ofh">
+					<div style="width: 948px; margin: 0px; height: 320px" class="ofh">
+
+						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
+							varStatus="status">
+							<div class="xldgurg" style="height: 70px;">
+								<div class="avtr">
+									<a
+										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
+										src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
+										width="570" height="447" /></a>
+									<div class="frt" style="width: 20px; text-align: center;">
+										<div class="m1ln" style="text-align: center;">
+											<a
+												href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
+												&nbsp;<c:out value="${userValue.artname}" />
+											</a>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						<!--  
 						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
 							varStatus="status">
 							<div class="xldgurg">
@@ -788,6 +833,7 @@ body {
 								</div>
 							</div>
 						</c:forEach>
+						-->
 
 					</div>
 				</div>

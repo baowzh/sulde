@@ -13,6 +13,7 @@ public class VisitorValue {
 	private String visitobjid;
 	private String headimgsm;
 	private Integer visitortype;
+	private String visitdatestr;
 
 	public String getVisitorid() {
 		return visitorid;
@@ -93,6 +94,13 @@ public class VisitorValue {
 	public void setVisitortype(Integer visitortype) {
 		this.visitortype = visitortype;
 	}
-	
+
+	public String getVisitdatestr() {
+		return visitdatestr;
+	}
+
+	public void setVisitdatestr(String visitdatestr) {
+		this.visitdatestr = visitdatestr;
+	}
 
 }

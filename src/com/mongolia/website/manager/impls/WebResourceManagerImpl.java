@@ -377,6 +377,12 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			map.put("currentDateVisitCount", currentDateVisitCount);
 			List<VisitorValue> visitors = this.webResourceDao.getVisitorValues(
 					null, blogUser.getUserid(), null);
+			for (VisitorValue visitorValue : visitors) {
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+						"yyyy-MM-dd");
+				visitorValue.setVisitdatestr(simpleDateFormat
+						.format(visitorValue.getVisitdate()));
+			}
 			map.put("visitors", visitors);
 			// 获取当前博客用户好友最近发表的文章（最近10天的前10条）
 			List<DocumentValue> friendDocList = this.webResourceDao
@@ -977,7 +983,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			}
 			pagingmodel.setModelList(friends);
 			pagingmodel.setPagecount(pageCount);
-			pagingmodel.setRowcount(""+count);
+			pagingmodel.setRowcount("" + count);
 			// returnMap.put("friends", friends);
 			// returnMap.put("friendCount", pageCount);
 		} catch (Exception ex) {

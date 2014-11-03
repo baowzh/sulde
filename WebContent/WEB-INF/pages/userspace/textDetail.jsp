@@ -59,11 +59,12 @@
 									<c:out value="${documentValue.doctitle}" />
 
 								</h1>
-								<input type="hidden" id="hiddensharecount"
+								<br> <input type="hidden" id="hiddensharecount"
 									value="<c:out value="${documentValue.sharecount}" />">
 								<div class="shareBookmark">
-									<a href="javascript:sharedocument()"> </a> <span
-										id="sharecount"><c:out
+									  <c:out value="${documentValue.docchannelname}" />
+									<br> <a href="javascript:sharedocument()"> </a>
+									<span id="sharecount"><c:out
 											value="${documentValue.sharecount}" default="0" /></span>   <a
 										href="javascript:markdocument()">  </a> <span
 										id="markcount"><c:out

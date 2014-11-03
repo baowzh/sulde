@@ -139,8 +139,31 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 		params.put("userid", userid);
 		params.put("visitorname", visitorname);
 		params.put("visitortype", StaticConstants.VISITOR_TYPE_REG);
-		return this.getSqlMapClientTemplate().queryForList("getVisitorList",
-				params);
+		List<VisitorValue> visitors = this.getSqlMapClientTemplate()
+				.queryForList("getVisitorList", params);
+		// 获取这20个用户访问时间
+		String inStr = "";
+		for (VisitorValue visitorValue : visitors) {
+			inStr = inStr + "'" + visitorValue.getVisitorid() + "',";
+		}
+		if (!inStr.equalsIgnoreCase("")) {
+			inStr = inStr.substring(0, inStr.length() - 1);
+		}
+		if(inStr.equalsIgnoreCase("")){
+			inStr="''";	
+		}
+		params.put("instr", inStr);
+		List<VisitorValue> visitortimes = this.getSqlMapClientTemplate()
+				.queryForList("getVisitTime", params);
+		for (VisitorValue visitorValue : visitors) {
+			for (VisitorValue time : visitortimes) {
+				if (time.getVisitorid().equalsIgnoreCase(
+						visitorValue.getVisitorid())) {
+					visitorValue.setVisitdate(time.getVisitdate());
+				}
+			}
+		}
+		return visitors;
 	}
 
 	@Override
@@ -864,13 +887,11 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 	}
 
 	@Override
-	public List<UserValue> getRecentActiveUsers(Integer count)
-			throws Exception {
+	public List<UserValue> getRecentActiveUsers(Integer count) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("fechcount", count);
-		return this.getSqlMapClientTemplate().queryForList("getRecentActiveUsers",
-				params);
+		return this.getSqlMapClientTemplate().queryForList(
+				"getRecentActiveUsers", params);
 	}
-	
 
 }

@@ -176,7 +176,13 @@
 									<c:out value="${visitorValue.visitorname}" />
 								</a>
 							</div>
+
 						</div>
+<!-- 						<div class="time" -->
+<!-- 							style="width: 52px; height: 15px; position: relative; left: 0px; top: 70px; font-size: 10px;float:left;"> -->
+							 <font
+								size="1px;"><c:out value="${visitorValue.visitdatestr}" /></font>
+<!-- 						</div> -->
 					</div>
 				</div>
 			</c:forEach>

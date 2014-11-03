@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mongolia.website.manager.interfaces.ChannelManager;
+import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
 import com.mongolia.website.model.Channel;
+import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.DocumentValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
@@ -41,6 +45,8 @@ public class WebSiteVisiterAction {
 	private ChannelManager channelManager;
 	@Autowired
 	private WebSiteManager webSiteManager;
+	@Autowired
+	UserManager userManager;
 
 	/**
 	 * 进入系统主页
@@ -208,6 +214,16 @@ public class WebSiteVisiterAction {
 			map.put("users", paingUser.getModelList());
 			map.put("usercount", paingUser.getRowcount());
 			map.put("queryform", queryUserForm);
+			//
+			List<DistrictValue> districts = this.userManager.getDistrictValues(
+					null, null, "top");
+			JSONObject json = new JSONObject();
+			map.put("districts", districts);
+			List<DistrictValue> districts1 = this.userManager
+					.getDistrictValues(null, null, null);
+			json.put("districts", districts1);
+			map.put("districtsdata", json.toString());
+			//
 			List<PagingIndex> indexs = new ArrayList<PagingIndex>();
 			for (int i = 0; i < paingUser.getPagecount(); i++) {
 				PagingIndex pagingIndex = new PagingIndex();// 就显示首页，末页和当前页，当前页前面，后面
