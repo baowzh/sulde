@@ -43,14 +43,14 @@
 								<a id="provincename"
 									href="javascript:showselpanel(true,'provinces')"> 
 									 </a> <input type="hidden" id="district" name="district"
-									value="" /> 
+									 /> 
 								<!-- 								<select id="district" name="district" -->
 								<!-- 									style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr; height: 70px"> -->
 								<!-- 									<option value="#"></option> -->
 								<!-- 								</select>  -->
 
 								<a id="hsienname" href="javascript:showselpanel(true,'hsiens')"></a>
-								<input type="hidden" id="qx" name="qx" value="" />
+								<input type="hidden" id="qx" name="qx"  />
 								<!--  
 								<select id="qx" name="qx"
 									style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr; height: 70px">

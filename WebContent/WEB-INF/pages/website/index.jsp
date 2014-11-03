@@ -355,7 +355,7 @@ body {
 											</td>
 											<td style="height: 70px; width: 20px; align: center"><input
 												type="text" name="validcode"
-												style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; height: 15px; width: 60px;" />
+												style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; height: 15px; width: 56px;" />
 											</td>
 										</tr>
 									</table>

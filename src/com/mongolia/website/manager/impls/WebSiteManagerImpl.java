@@ -289,21 +289,25 @@ public class WebSiteManagerImpl implements WebSiteManager {
 		// TODO Auto-generated method stub
 		Map<String, Object> queryparams = new HashMap<String, Object>();
 		if (queryUserForm.getQx() != null
-				&& queryUserForm.getQx().equalsIgnoreCase("#")) {
-			queryparams.put("qx", null);
-		} else {
+				&& !queryUserForm.getQx().equalsIgnoreCase("")) {
 			queryparams.put("qx", queryUserForm.getQx());
 		}
+		if(queryUserForm.getQx() != null
+				&& queryUserForm.getQx().equalsIgnoreCase("#")){
+			queryparams.put("qx",null);
+		}
 		if (queryUserForm.getDistrict() != null
-				&& queryUserForm.getDistrict().equalsIgnoreCase("#")) {
-			queryparams.put("district", null);
-		} else {
+				&& !queryUserForm.getDistrict().equalsIgnoreCase("")) {
 			queryparams.put("district", queryUserForm.getDistrict());
 		}
-		queryparams.put("likeusername", queryUserForm.getUsername());
+		if(queryUserForm.getDistrict() != null
+				&& queryUserForm.getDistrict().equalsIgnoreCase("#")){
+			queryparams.put("district",null);
+		}
+		
 		if (queryUserForm.getUsername() != null
-				&& queryUserForm.getUsername().equalsIgnoreCase("")) {
-			queryparams.put("likeusername", null);
+				&& !queryUserForm.getUsername().equalsIgnoreCase("")) {
+			queryparams.put("likeusername", queryUserForm.getUsername());
 		}
 		queryparams.put("strregtime", queryUserForm.getStrregtime());
 		if (queryUserForm.getStrregtime() != null

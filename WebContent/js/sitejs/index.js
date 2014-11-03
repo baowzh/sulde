@@ -107,7 +107,7 @@ $(document)
 												+ '</div>'
 												+ '</td>'
 												+ '<td style=\"height:70px;width:20px;align:center\">	'
-												+ '<input type=\"text\" name=\"validcode\"  style=\"-webkit-writing-mode: vertical-lr; writing-mode: tb-lr;height:55px;width:15px;\" />'
+												+ '<input type=\"text\" name=\"validcode\"  style=\"-webkit-writing-mode: vertical-lr; writing-mode: tb-lr;height:40px;width:15px;\" />'
 												+ '</td>'
 												+ '</tr>'
 												+ '</table>');
