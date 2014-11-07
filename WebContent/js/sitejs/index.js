@@ -44,12 +44,12 @@ var login = function() {
 					var imgurl = 'getsmheadimge.do';
 					var homdurl = 'gouserindex.do';
 					if (data.success == 'true') {
-						var innerHTML = '<div class=\"loin\">'
+						var innerHTML = '<div class=\"loin\" style=\"padding-left:10px;\">'
 								+ '<div class=\"avtr\"><img src=\"'
 								+ imgurl
 								+ '?userid='
 								+ data.userinfo.userid
-								+ '\" width=\"570\" height=\"447\" /></div>'
+								+ '\"  style=\"width:80px;\" /></div>'
 								+ '<div class=\"desc  \" style=\"width:120px\">'
 								+ '<div class=\"m1ln\">   '
 								+ data.userinfo.artname
@@ -63,7 +63,9 @@ var login = function() {
 								+ '<div class=\"m1ln\"><a href=\"#\">     : '
 								+ data.userinfo.logindate + '</a></div>'
 								+ '</div>' + '</div>';
-						$("#loginform").html(innerHTML);
+						//$("#loginform").html(innerHTML);
+						$("#logindiv").html(innerHTML);
+						
 					} else {
 						if (data.mess == '1') {
 							MessageWindow
@@ -140,12 +142,12 @@ $(document)
 									if (data.userinfo == null) {
 										return;
 									}
-									var innerHTML = '<div class=\"loin\">'
+									var innerHTML = '<div class=\"loin\" style=\"padding-left:10px;\">'
 											+ '<div class=\"avtr\"><img src=\"'
 											+ imgurl
 											+ '?userid='
 											+ data.userinfo.userid
-											+ '\" width=\"570\" height=\"447\" /></div>'
+											+ '\"  style=\"width:80px;\" /></div>'
 											+ '<div class=\"desc  \" style=\"width:120px\">'
 											+ '<div class=\"m1ln\">  '
 											+ data.userinfo.artname
@@ -159,7 +161,8 @@ $(document)
 											+ '<div class=\"m1ln\">   : '
 											+ data.userinfo.logindate
 											+ '</div>' + '</div>' + '</div>';
-									$("#loginform").html(innerHTML);
+									//$("#loginform").html(innerHTML);
+									$("#logindiv").html(innerHTML);
 
 								}
 							});

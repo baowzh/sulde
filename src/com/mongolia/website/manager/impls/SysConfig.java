@@ -29,6 +29,8 @@ public class SysConfig {
 	private Integer activeusercount;
 	@Value("${online}")
 	private Integer online;
+	@Value("${siteaddress}")
+	private String siteaddress;
 
 	public String getSitename() {
 		return sitename;
@@ -116,6 +118,14 @@ public class SysConfig {
 
 	public void setOnline(Integer online) {
 		this.online = online;
+	}
+
+	public String getSiteaddress() {
+		return siteaddress;
+	}
+
+	public void setSiteaddress(String siteaddress) {
+		this.siteaddress = siteaddress;
 	}
 
 }

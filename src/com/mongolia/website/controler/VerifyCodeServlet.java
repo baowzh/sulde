@@ -90,7 +90,7 @@ public class VerifyCodeServlet extends HttpServlet {
 		//		codeY = height - 8;			   //生成随机数的垂直距离
 
 		xx = height / (codeCount + 2); //生成随机数的垂直距离
-		fontHeight = width - 12; //生成随机数的数字宽度
+		fontHeight = width - 10; //生成随机数的数字宽度
 		codeY = height - 8; //生成随机数的垂直距离
 
 	}
@@ -111,7 +111,7 @@ public class VerifyCodeServlet extends HttpServlet {
 		gd.fillRect(0, 0, width, height);
 
 		// 创建字体，字体的大小应该根据图片的高度来定。
-		Font font = new Font("Fixedsys", Font.PLAIN, fontHeight);
+		Font font = new Font("Fixedsys", Font.PLAIN, 18);
 		// 设置字体。
 		gd.setFont(font);
 

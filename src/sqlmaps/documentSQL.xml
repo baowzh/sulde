@@ -524,7 +524,7 @@
 
 	<select id="getTopDocuments" parameterClass="java.util.Map"
 		resultClass="TopDocumentValue">
-		select a.*,b.doctitle as title from topdocument a,document b where
+		select a.*,b.doctitle as title,b.docauthor  from topdocument a,document b where
 		a.docid=b.docid
 		<dynamic prepend="and">
 			<isNotNull prepend="and" property="type">

@@ -213,6 +213,9 @@ public class BlogManagerAction {
 					.getAttribute("user");
 			Integer self = new Integer(0);
 			String docid = request.getParameter("docid");
+			if(docid!=null&&docid.indexOf("?")>0){
+				docid=docid.split("\\?")[0];	
+			}
 			String pageindex = request.getParameter("pageindex");
 			Integer pindex = 1;
 			if (pageindex != null && !pageindex.equalsIgnoreCase("")) {

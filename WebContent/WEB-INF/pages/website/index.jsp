@@ -321,6 +321,26 @@ body {
 	<div class="lmainR">
 		<div class="  lcell" style="width: 150px; height: 315px;">
 			<div class="lcell cardlogin" id="logindiv" style="height: 315px;">
+			<div class="content" style="padding-left: 8px;">
+					<form class="mglForm" action="checkandlogin.do" id="loginform" method="post">
+						<div class="label">  </div>
+						<div class="label">  </div>
+						<div class="label">   <a href="javascript:replaceverifycode();"></a> :</div>
+						<div class="label"><img src="verifyCodeServlet" id="varifyimg" width="18" height="100"></div>
+						<div class="inputHolder" style="height:9em;"><input name="username" id="username" value="" ></div>
+						<div class="inputHolder" style="height:9em;"><input name="password" id="password" type="password" ></div>
+						<div class="inputHolder" style="height:9em;"><input name="validcode" id="varifycode" value="" ></div>
+						<div class="inputHolder" style="height:9em;">
+						<div class="m1ln h100">
+									<a href="registe.do"> </a> &nbsp;&nbsp;&nbsp;&nbsp;<a
+										href="javascript:login();"> </a>									
+								</div>
+<!-- 						<input type="button" onclick="javascript:dosubmit();" value=" "> -->
+<!-- 						<input type="button" onclick="registe.do;" value=""> -->
+						</div>
+					</form>
+				</div>
+			<!--  
 				<form id="loginform">
 					<table border="0" style="margin: 1em auto;">
 						<tr>
@@ -331,8 +351,7 @@ body {
 									  <a href="javascript:replaceverifycode();"></a>
 									
 								</div></td>
-							<td><div class="m1ln h100">
-									<!--									<a href="registe.do"> </a>-->
+							<td><div class="m1ln h100">								
 								</div></td>
 						</tr>
 						<tr>
@@ -363,18 +382,13 @@ body {
 							</td>
 							<td><div class="m1ln h100">
 									<a href="registe.do"> </a> &nbsp;&nbsp;&nbsp;&nbsp;<a
-										href="javascript:login();"> </a>
-									<!--									<input type="button" value=" "-->
-									<!--										onclick="javascript:login();" />-->
+										href="javascript:login();"> </a>									
 								</div></td>
 						</tr>
 					</table>
 				</form>
+				-->
 			</div>
-			<!-- 			<div class="lcell cardlogin" -->
-			<!-- 				style="background: white; margin-top: 3px"> -->
-			<!-- 				<img src="img/8.jpg" width="600" height="400" /> -->
-			<!-- 			</div> -->
 		</div>
 		<div class="lcell " style="width: 840px; height: 315px;">
 			<div class="cardt5" style="height: 308px;">

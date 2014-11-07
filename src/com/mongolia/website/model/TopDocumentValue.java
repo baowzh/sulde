@@ -1,8 +1,10 @@
 package com.mongolia.website.model;
 
 import java.util.Date;
+
 /**
  * 优秀内容
+ * 
  * @author Administrator
  *
  */
@@ -37,6 +39,7 @@ public class TopDocumentValue {
 	private String checkuserid;
 	private String groupid;
 	private String title;
+	private String docauthor;
 
 	public String getDocid() {
 		return docid;
@@ -109,6 +112,13 @@ public class TopDocumentValue {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
+	public String getDocauthor() {
+		return docauthor;
+	}
+
+	public void setDocauthor(String docauthor) {
+		this.docauthor = docauthor;
+	}
 
 }

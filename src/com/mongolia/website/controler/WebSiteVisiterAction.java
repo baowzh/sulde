@@ -7,11 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.tree.DefaultCDATA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +27,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongolia.website.manager.impls.SysConfig;
 import com.mongolia.website.manager.interfaces.ChannelManager;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
@@ -33,6 +39,7 @@ import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.QueryDocForm;
 import com.mongolia.website.model.QueryUserForm;
+import com.mongolia.website.model.RssItem;
 import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.StaticConstants;
@@ -47,6 +54,8 @@ public class WebSiteVisiterAction {
 	private WebSiteManager webSiteManager;
 	@Autowired
 	UserManager userManager;
+	@Resource(name = "configInfo")
+	private SysConfig sysConfig;
 
 	/**
 	 * 进入系统主页
@@ -364,4 +373,68 @@ public class WebSiteVisiterAction {
 		return new ModelAndView("website/artlist");
 	}
 
+	@RequestMapping("/siterss.do")
+	ResponseEntity<String> siterss(ModelMap model) throws IOException {
+		//
+		String returnstr = "";
+		try {
+			List<TopDocumentValue> tops = this.webSiteVisitorManager
+					.getTopDocuments(StaticConstants.TOP_TYPE1, null, 7);
+			List<RssItem> rssItems = new ArrayList<RssItem>();
+			for (TopDocumentValue topDocumentValue : tops) {
+				RssItem n = new RssItem();
+				n.setTitle(topDocumentValue.getTitle());
+				n.setDescription(topDocumentValue.getTitle());
+				n.setLink(sysConfig.getSiteaddress()
+						+ "getuserdocdetail.do?docid="
+						+ topDocumentValue.getDocid());
+				n.setAuthor(topDocumentValue.getDocauthor());
+				n.setDatepublished(topDocumentValue.getStartdate());
+				rssItems.add(n);
+			}
+			Document document = DocumentHelper.createDocument();
+			document.setXMLEncoding("UTF-8");
+			Element root = document.addElement("rss");
+			root.addAttribute("version", "2.0");
+			Element channelele = root.addElement("channel");
+			Element titleEle = channelele.addElement("title");
+			titleEle.setText("blog");
+			Element linkEle = channelele.addElement("link");
+			DefaultCDATA conTblOprCdata = new DefaultCDATA(
+					sysConfig.getSiteaddress());
+			linkEle.add(conTblOprCdata);
+			Element descriptionEle = channelele.addElement("description");
+			descriptionEle.addCDATA("blog");
+			Element lastBuildDateEle = channelele.addElement("lastBuildDate");
+			lastBuildDateEle.addCDATA((new Date()).toString());
+			for (RssItem rssItem : rssItems) {
+				Element itemele = channelele.addElement("item");
+				Element tileelei = itemele.addElement("title");
+				tileelei.addCDATA(rssItem.getTitle());
+				Element linki = itemele.addElement("link");
+				linki.addCDATA(rssItem.getLink());
+				Element descriptioni = itemele.addElement("description");
+				descriptioni.addCDATA(rssItem.getDescription());
+				Element authori = itemele.addElement("author");
+				authori.addCDATA(rssItem.getAuthor());
+				Element pubDatei = itemele.addElement("pubDate");
+				pubDatei.addCDATA(rssItem.getDatepublished().toString());
+				Element guidi = itemele.addElement("guid");
+				guidi.addCDATA(rssItem.getLink());
+			}
+			returnstr = document.asXML();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setContentType(MediaType.TEXT_XML);
+		responseHeaders.setContentLength(returnstr.getBytes().length);
+		responseHeaders
+				.setCacheControl("no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+		responseHeaders.setPragma("no-cache");
+		return new ResponseEntity<String>(returnstr, responseHeaders,
+				HttpStatus.OK);
+		// return new ModelAndView("rssView");
+	}
 }
