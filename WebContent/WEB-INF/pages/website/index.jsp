@@ -22,11 +22,24 @@
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 <style>
-<c:if test ="${ agentkind==0}">
+<
+c
+:if
+ 
+test
+ 
+="${
+agentkind
+==0
+}
+">
 body {
 	font-size: 16px;
 }
-</c:if>
+</
+c
+:if
+>
 </style>
 </head>
 <body>
@@ -85,9 +98,9 @@ body {
 				<a href="pagingquery.do?docchannel=32222233332222"> 
 				</a>
 			</div>
-			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=11111111111123"></a>
-			</div>
+			<!-- 			<div class="m1ln navl"> -->
+			<!-- 				<a href="pagingquery.do?docchannel=11111111111123"></a> -->
+			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -111,9 +124,9 @@ body {
 			<div class="m1ln navl">
 				<a href="pagingquery.do?docchannel=11111111111129"> </a>
 			</div>
-			<div class="m1ln navl">
-				<a href="#"></a>
-			</div>
+			<!-- 			<div class="m1ln navl"> -->
+			<!-- 				<a href="#"></a> -->
+			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -139,9 +152,9 @@ body {
 				<a href="pagingquery.do?docchannel=11111111111135"> 
 				</a>
 			</div>
-			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222"></a>
-			</div>
+			<!-- 			<div class="m1ln navl"> -->
+			<!-- 				<a href="pagingquery.do?docchannel=32222233332222"></a> -->
+			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -167,6 +180,9 @@ body {
 				<a href="pagingquery.do?docchannel=11111111111118"> 
 					 </a>
 			</div>
+			<div class="m1ln nav2">
+				<a href="javascript:;">    </a>
+			</div>
 			<div class="m1ln navl">
 				<a href="pagingquery.do?docchannel=11111111111119"> 
 				</a>
@@ -191,9 +207,9 @@ body {
 				<a href="pagingquery.do?docchannel=32222233332222">
 					  </a>
 			</div>
-			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222"></a>
-			</div>
+			<!-- 			<div class="m1ln navl"> -->
+			<!-- 				<a href="pagingquery.do?docchannel=32222233332222"></a> -->
+			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -236,12 +252,12 @@ body {
 					</div>
 				</div>
 			</div>
-<!-- 			<div class="lcell cell1" style="width: 598px;"> -->
-				<div class="   cardt1  " style="width: 592px;">
-					<div class="ttl1 m1ln">
-						<a href="javascript:void();">  </a>
-					</div>
-					<!--  
+			<!-- 			<div class="lcell cell1" style="width: 598px;"> -->
+			<div class="   cardt1  " style="width: 592px;">
+				<div class="ttl1 m1ln">
+					<a href="javascript:void();">  </a>
+				</div>
+				<!--  
 					<div class="nwsls1 msheet  "
 						style="text-align: justify; text-justify: newspaper; width: 440px;">
 
@@ -275,72 +291,87 @@ body {
 
 					</div>
 					-->
-					<div class="nwsls1" style="width:430px;">
+				<div class="nwsls1" style="width: 430px;">
 
-						<c:forEach items="${indexPageContent.newsarts}"
-							var="documentValue" varStatus="status">
-							<div class="nwsl1">
-								<div class="title">
-									<a
-										href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-											value="${documentValue.doctitle}" /> </a>
-								</div>
-								<div class="author">
-									<a
-										href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
-										<c:out value="${documentValue.docauthor}" />
-									</a>
-								</div>
+					<c:forEach items="${indexPageContent.newsarts}" var="documentValue"
+						varStatus="status">
+						<div class="nwsl1">
+							<div class="title">
+								<a
+									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
+										value="${documentValue.doctitle}" /> </a>
 							</div>
-						</c:forEach>
-
-					</div>
-					<div class="ttl1 m1ln">
-						<a href="javascript:void();"></a>
-					</div>
-					<div class="mnlist" style="width: 10px;"></div>
-					<div class="mnlist" style="width: 70px;">
-						<form id="searchform" method="post">
-							<div class="search">
-								<input type="text" name="searchtext" id="searchtext" />
+							<div class="author">
+								<a
+									href="gouserindex.do?userid=<c:out value="${documentValue.userid}" />">
+									<c:out value="${documentValue.docauthor}" />
+								</a>
 							</div>
+						</div>
+					</c:forEach>
 
-							<div class="mnlist"
-								style="width: 40px; padding-left: 10px; text-align: center;">
-								<a id="searchbloga" href="javascript:search('searchblog.do');">
-									 </a> &nbsp;&nbsp; <a id="searchdoca"
-									href="javascript:search('searchdoc.do');">  </a>
-							</div>
-						</form>
-
-					</div>
 				</div>
-<!-- 			</div> -->
+				<div class="ttl1 m1ln">
+					<a href="javascript:void();"></a>
+				</div>
+				<div class="mnlist" style="width: 10px;"></div>
+				<div class="mnlist" style="width: 70px;">
+					<form id="searchform" method="post">
+						<div class="search">
+							<input type="text" name="searchtext" id="searchtext" />
+						</div>
+
+						<div class="mnlist"
+							style="width: 40px; padding-left: 10px; text-align: center;">
+							<a id="searchbloga" href="javascript:search('searchblog.do');">
+								 </a> &nbsp;&nbsp; <a id="searchdoca"
+								href="javascript:search('searchdoc.do');">  </a>
+						</div>
+					</form>
+
+				</div>
+			</div>
+			<!-- 			</div> -->
 		</div>
 	</div>
 	<div class="lmainR">
 		<div class="  lcell" style="width: 150px; height: 315px;">
 			<div class="lcell cardlogin" id="logindiv" style="height: 315px;">
-			<div class="content" style="padding-left: 8px;">
-					<form class="mglForm" action="checkandlogin.do" id="loginform" method="post">
+				<div class="content" style="padding-left: 8px;">
+					<form class="mglForm" action="checkandlogin.do" id="loginform"
+						method="post">
 						<div class="label">  </div>
 						<div class="label">  </div>
-						<div class="label">   <a href="javascript:replaceverifycode();"></a> :</div>
-						<div class="label"><img src="verifyCodeServlet" id="varifyimg" width="18" height="100"></div>
-						<div class="inputHolder" style="height:9em;"><input name="username" id="username" value="" ></div>
-						<div class="inputHolder" style="height:9em;"><input name="password" id="password" type="password" ></div>
-						<div class="inputHolder" style="height:9em;"><input name="validcode" id="varifycode" value="" ></div>
-						<div class="inputHolder" style="height:9em;">
-						<div class="m1ln h100">
-									<a href="registe.do"> </a> &nbsp;&nbsp;&nbsp;&nbsp;<a
-										href="javascript:login();"> </a>									
-								</div>
-<!-- 						<input type="button" onclick="javascript:dosubmit();" value=" "> -->
-<!-- 						<input type="button" onclick="registe.do;" value=""> -->
+						<div class="label">
+							  <a href="javascript:replaceverifycode();"></a>
+							:
+						</div>
+						<div class="label">
+							<img src="verifyCodeServlet" id="varifyimg" width="18"
+								height="100">
+						</div>
+						<div class="inputHolder" style="height: 9em;">
+							<input name="username" id="username" value="">
+						</div>
+						<div class="inputHolder" style="height: 9em;">
+							<input name="password" id="password" type="password">
+						</div>
+						<div class="inputHolder" style="height: 9em;">
+							<input name="validcode" id="varifycode" value="">
+						</div>
+						<div class="inputHolder" style="height: 9em;">
+							<div class="m1ln h100" style="height:150px;">
+								<a id="registlink" href="registe.do"> &nbsp;&nbsp;&nbsp;&nbsp;</a> 
+								
+								<a
+									href="javascript:login();"> </a>
+							</div>
+							<!-- 						<input type="button" onclick="javascript:dosubmit();" value=" "> -->
+							<!-- 						<input type="button" onclick="registe.do;" value=""> -->
 						</div>
 					</form>
 				</div>
-			<!--  
+				<!--  
 				<form id="loginform">
 					<table border="0" style="margin: 1em auto;">
 						<tr>

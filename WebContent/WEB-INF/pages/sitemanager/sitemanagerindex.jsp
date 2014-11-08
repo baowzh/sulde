@@ -130,7 +130,7 @@
 			dataType : "json",
 			url : "modifyuserpass.do",// 请求的action路径
 			data : {
-				username : $("#username").val(),
+// 				username : $("#username").val(),
 				pass : $("#password").val(),
 				oldpass : $("#oldpass").val()
 			},

@@ -44,7 +44,6 @@
 					<div class="blgmain bglMainC" id="blgMain">
 						<div style="width: 690px; margin: 0px 10px 10px 10px;">
 							<div class="loadingbox" style="display: none"></div>
-
 							<div class="flt txtBlogList" style="display: block;"
 								id="doclistidv">
 								<c:if test="${self==1}">
@@ -55,21 +54,31 @@
 										</div>
 									</div>
 								</c:if>
-								<div class="m1ln ttltxtblg ttltxtblgC">
+								<div class="m1ln ttltxtblg " style="padding-left: 0px;">
 
 									<c:if test="${currentchannel!=null}">
-										<c:out value="${currentchannel.chnlname}" />
+										<div class="artclassdiv">
+											<c:out value="${currentchannel.chnlname}" />
+										</div>
 									</c:if>
 									<c:if test="${currentchannel==null}">
-										<a
-											onMouseOver="javascript:showdiv('doclistidv','sharedoclistidv','mklistidv');">
-											 </a>
-										<a
-											onMouseOver="javascript:showdiv('sharedoclistidv','doclistidv','mklistidv');">&nbsp;
-											&nbsp; </a>
-										<a
-											onMouseOver="javascript:showdiv('mklistidv','sharedoclistidv','doclistidv');">
-											&nbsp; &nbsp; </a>
+										<div class="artclassdiv" style="height: 100px;">
+											<a
+												onMouseOver="javascript:showdiv('doclistidv','sharedoclistidv','mklistidv');">
+												 </a>
+										</div>
+
+										<div class="artclassdiv" style="height: 120px;">
+											<a
+												onMouseOver="javascript:showdiv('sharedoclistidv','doclistidv','mklistidv');">
+												</a>
+										</div>
+
+										<div class="artclassdiv" style="height: 70px;">
+											<a
+												onMouseOver="javascript:showdiv('mklistidv','sharedoclistidv','doclistidv');">
+												</a>
+										</div>
 									</c:if>
 
 								</div>
@@ -132,21 +141,29 @@
 								<c:if test="${self==1}">
 									<div class="addNewArtcl"></div>
 								</c:if>
-								<div class="m1ln ttltxtblg ttltxtblgC">
+								<div class="m1ln ttltxtblg " style="padding-left: 0px;">
 
 									<c:if test="${currentchannel!=null}">
 										<c:out value="${currentchannel.chnlname}" />
 									</c:if>
 									<c:if test="${currentchannel==null}">
-										<a
-											onMouseOver="javascript:showdiv('doclistidv','sharedoclistidv','mklistidv');">
-											 </a>
-										<a
-											onMouseOver="javascript:showdiv('sharedoclistidv','doclistidv','mklistidv');">&nbsp;
-											&nbsp; </a>
-										<a
-											onMouseOver="javascript:showdiv('mklistidv','sharedoclistidv','doclistidv');">
-											&nbsp; &nbsp; </a>
+										<div class="artclassdiv" style="height: 100px;">
+											<a
+												onMouseOver="javascript:showdiv('doclistidv','sharedoclistidv','mklistidv');">
+												 </a>
+										</div>
+
+										<div class="artclassdiv" style="height: 120px;">
+											<a
+												onMouseOver="javascript:showdiv('sharedoclistidv','doclistidv','mklistidv');">
+												</a>
+										</div>
+
+										<div class="artclassdiv" style="height: 70px;">
+											<a
+												onMouseOver="javascript:showdiv('mklistidv','sharedoclistidv','doclistidv');">
+												</a>
+										</div>
 									</c:if>
 
 								</div>
@@ -220,21 +237,29 @@
 										</div>
 									</div>
 								</c:if>
-								<div class="m1ln ttltxtblg ttltxtblgC">
+								<div class="m1ln ttltxtblg " style="padding-left: 0px;">
 
 									<c:if test="${currentchannel!=null}">
 										<c:out value="${currentchannel.chnlname}" />
 									</c:if>
 									<c:if test="${currentchannel==null}">
-										<a
-											onMouseOver="javascript:showdiv('doclistidv','sharedoclistidv','mklistidv');">
-											 </a>
-										<a
-											onMouseOver="javascript:showdiv('sharedoclistidv','doclistidv','mklistidv');">&nbsp;
-											&nbsp; </a>
-										<a
-											onMouseOver="javascript:showdiv('mklistidv','sharedoclistidv','doclistidv');">
-											&nbsp; &nbsp; </a>
+										<div class="artclassdiv" style="height: 100px;">
+											<a
+												onMouseOver="javascript:showdiv('doclistidv','sharedoclistidv','mklistidv');">
+												 </a>
+										</div>
+
+										<div class="artclassdiv" style="height: 120px;">
+											<a
+												onMouseOver="javascript:showdiv('sharedoclistidv','doclistidv','mklistidv');">
+												</a>
+										</div>
+
+										<div class="artclassdiv" style="height: 70px;">
+											<a
+												onMouseOver="javascript:showdiv('mklistidv','sharedoclistidv','doclistidv');">
+												</a>
+										</div>
 									</c:if>
 
 								</div>
@@ -454,5 +479,33 @@
 	<script type="text/javascript"
 		src="http://v1.ujian.cc/code/ujian.js?type=slide"></script>
 	<!-- UJian Button END -->
+	<div class="content" id="updpassdiv"
+		style="padding-left: 8px; display: none;">
+		<form class="mglForm" action="#" id="loginform"
+			method="post">
+			<div class="label"> </div>
+			<div class="inputHolder" style="height: 9em;">
+				<input name="oldpassword" id="oldpassword" type="password">
+			</div>
+			<div class="label">   </div>
+			<div class="inputHolder" style="height: 9em;">
+				<input name="password" id="password" type="password">
+			</div>
+			<div class="label">
+				  <a href="javascript:replaceverifycode();"></a> :
+			</div>
+			<div class="label">
+				<img src="verifyCodeServlet" id="varifyimg" width="18" height="100">
+			</div>
+			<div class="inputHolder" style="height: 9em;">
+				<input name="validcode" id="varifycode">
+			</div>
+			<div class="inputHolder" style="height: 9em;">
+				<div class="m1ln h100" style="text-align: center;">
+					<a href="javascript:modifypass();">  </a>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

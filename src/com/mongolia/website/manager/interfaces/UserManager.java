@@ -77,7 +77,7 @@ public interface UserManager {
 	 * @param pass
 	 * @throws Exception
 	 */
-	public void doModifyPass(String userid, String username, String pass,
+	public void doModifyPass(String userid, String pass,
 			String oldpass) throws Exception;
 
 	/**
@@ -108,4 +108,11 @@ public interface UserManager {
 	 */
 	public List<ProfessionValue> getProfessionValues(String professioncode,
 			String professionname) throws Exception;
+	/**
+	 * 获取邮箱登陆字符串
+	 * @param username
+	 * @return
+	 * @throws Exception
+	 */
+	public String getmaillogincode(String username) throws Exception;
 }

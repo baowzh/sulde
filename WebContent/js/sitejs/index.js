@@ -61,11 +61,12 @@ var login = function() {
 								+ 'javascript:logout();'
 								+ '\"> </a></div>'
 								+ '<div class=\"m1ln\"><a href=\"#\">     : '
-								+ data.userinfo.logindate + '</a></div>'
+								+ data.userinfo.logindate
+								+ '</a></div>'
 								+ '</div>' + '</div>';
-						//$("#loginform").html(innerHTML);
+						// $("#loginform").html(innerHTML);
 						$("#logindiv").html(innerHTML);
-						
+
 					} else {
 						if (data.mess == '1') {
 							MessageWindow
@@ -77,8 +78,15 @@ var login = function() {
 											'<div style=\"writing-mode: tb-lr; -webkit-writing-mode: vertical-lr\"> <br>&nbsp;&nbsp; &nbsp;          '
 													+ '<br><a href=\"registe.do\">&nbsp;&nbsp; &nbsp&nbsp;&nbsp; &nbsp </a>   </div>');
 						} else if (data.mess == '3') {
+
 							MessageWindow
 									.showMess('            ');
+							$('#registlink').attr('href',
+									"javascript:getpass();")
+							$('#registlink')
+									.html(
+											'<font color="#f00"> </font>');
+
 						} else {
 							//
 						}
@@ -161,14 +169,14 @@ $(document)
 											+ '<div class=\"m1ln\">   : '
 											+ data.userinfo.logindate
 											+ '</div>' + '</div>' + '</div>';
-									//$("#loginform").html(innerHTML);
+									// $("#loginform").html(innerHTML);
 									$("#logindiv").html(innerHTML);
 
 								}
 							});
 					// 显示顶部广告
-					//displaytoad();
-					//showsideadver();
+					// displaytoad();
+					// showsideadver();
 
 				}));
 /**
@@ -237,4 +245,30 @@ var showsideadver = function() {
 		$(this).parent().hide();
 		return false;
 	});
+};
+/**
+ * 通过邮箱找回密码
+ */
+var getpass = function() {
+	$.ajax({
+		async : false,
+		cache : false,
+		type : 'POST',
+		dataType : "json",
+		url : 'getpasswithmail.do',// 请求的action路径
+		data:{
+		  username : $("input[name='username']").val(),
+		  validcode : $("input[name='validcode']").val()
+		},
+		error : function() {// 请求失败处理函数
+			MessageWindow.showMess('    ');
+		},
+		success : function(data) { // 请求成功后处理函数。
+			// window.location.href = 'index.html';
+			if(data.mess==1){
+				MessageWindow.showMess('    email:'+data.mailaddress+'   ');	
+			}
+		}
+	});
+
 };

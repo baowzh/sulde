@@ -44,7 +44,6 @@ import com.mongolia.website.util.UUIDMaker;
 public class UserMangerAction {
 	@Autowired
 	private UserManager userManager;
-	
 
 	/**
 	 * 获取用户信息
@@ -730,16 +729,14 @@ public class UserMangerAction {
 		try {
 			UserValue sessionUser = (UserValue) request.getSession()
 					.getAttribute("user");// 在线session
-			String userid = sessionUser.getUserid();
-			String username = request.getParameter("username");
-			String pass = request.getParameter("pass");
-			String oldpass = request.getParameter("oldpass");
-			if (!sessionUser.getUsername().equalsIgnoreCase(username)) {
+			if (sessionUser == null) {
 				map.put("mess", "3");
 				return new ModelAndView("jsonView", map);
-			} else {// 修改用户密码
-				this.userManager.doModifyPass(userid, username, pass, oldpass);
 			}
+			String userid = sessionUser.getUserid();
+			String pass = request.getParameter("pass");
+			String oldpass = request.getParameter("oldpass");
+			this.userManager.doModifyPass(userid, pass, oldpass);
 			map.put("mess", "1");
 		} catch (Exception ex) {
 			map.put("mess", ex.getMessage());
@@ -782,4 +779,38 @@ public class UserMangerAction {
 		}
 
 	}
+
+	@RequestMapping("/getpasswithmail.do")
+	public ModelAndView getpasswith(HttpServletRequest request, ModelMap map) {
+		try {
+			String username = request.getParameter("username");
+			String validcode = request.getParameter("validcode");
+			if (username == null || username.equalsIgnoreCase("")) {
+				map.put("mess", "2");
+				return new ModelAndView("jsonView", map);
+			}
+			if (validcode == null || validcode.equalsIgnoreCase("")) {
+				map.put("mess", "3");
+				return new ModelAndView("jsonView", map);
+			}
+			String maillogincode = this.userManager.getmaillogincode(username);
+			request.getServletContext().setAttribute(maillogincode, username);
+			request.getServletContext().setAttribute(username + "time",
+					System.currentTimeMillis());
+			// 如果用户维护了email地址给用户发送邮件
+			map.put("mess", "1");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			map.put("mess", ex.getMessage());
+		}
+		return new ModelAndView("jsonView", map);
+	}
+
+	@RequestMapping("/loginmail.do")
+	public ModelAndView loginmail(HttpServletRequest request, ModelMap map) {
+		String id = request.getParameter("id");
+		System.out.println(id);
+		return new ModelAndView("redirect:index.do");
+	}
+
 }

@@ -4,9 +4,9 @@
  * @param {}
  *            pageurl
  */
-var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
+var openpage = function(index, currentuserid, type, pagetype, neebarlocation) {
 	var querurl = 'pagingsharedoc.do';
-	pagetype=1;
+	pagetype = 1;
 	if (type == 1) {
 		querurl = 'pagingdoc.do';
 	} else if (type == 2) {
@@ -43,7 +43,7 @@ var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 				data : {
 					userid : currentuserid,
 					pageindex : index,
-					pagetype:pagetype
+					pagetype : pagetype
 				},
 				complete : function() {
 					$(".loadingbox").hide();
@@ -52,13 +52,14 @@ var openpage = function(index, currentuserid, type, pagetype,neebarlocation) {
 					var htmlstrr = "";
 					for (i in data.doclist) {
 						if (type == 1) {
-							
+
 							if (pagetype == 1) {
 								htmlstrr = htmlstrr
 										+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'
 										+ '<a '
 										+ 'href=\"getuserdocdetail.do?docid='
-										+ data.doclist[i].docid + '&pageindex='+index+'\">'
+										+ data.doclist[i].docid + '&pageindex='
+										+ index + '\">'
 										+ data.doclist[i].doctitle
 										+ '</a>&nbsp;' + '</div>';
 							} else {
@@ -486,3 +487,83 @@ var showdiv = function(id1, id2, id3) {
 	$("#" + id2).css("display", "none");
 	$("#" + id3).css("display", "none");
 };
+var showpassdialog = function() {
+	$('#updpassdiv').dialog({// addfriendmess 13347126631
+		resizable : false,
+		modal : true
+	});
+};
+var modifypass = function() {
+	// 校验工作及修改都放后台了
+	var oldpass = $("#oldpassword").val();
+	if (oldpass == null || oldpass == '') {
+		MessageWindow.showMess("     ");
+		return;
+	}
+	var password = $("#password").val();
+	if (password == null || password == '') {
+		MessageWindow.showMess("      ");
+		return;
+	}
+	var varifycode = $("#varifycode").val();
+	if (varifycode == null || varifycode == '') {
+		MessageWindow.showMess("    ");
+		return;
+	}
+
+	$
+			.ajax({
+				async : false,
+				cache : false,
+				type : 'POST',
+				dataType : "json",
+				url : "modifyuserpass.do",// 请求的action路径
+				data : {
+					// username : $("#username").val(),
+					pass : $("#password").val(),
+					oldpass : $("#oldpassword").val(),
+					varifycode : $("#varifycode").val()
+				},
+				error : function() {// 请求失败处理函数
+					alert('请求失败');
+				},
+				success : function(data) { // 请求成功后处理函数。
+					if (data.mess == '1') {
+						MessageWindow.showMess("   ");
+						$("#updpassdiv").dialog("close");
+
+					} else if (data.mess == '2') {
+						MessageWindow
+						.showMess("       ");
+
+					} else if (data.mess == '3') {
+
+						MessageWindow
+								.showMess("        ");
+					}
+				}
+			});
+};
+
+/**
+ * 更新验证码
+ */
+var replaceverifycode = function() {
+	var imgSrc = $("#varifyimg");
+	var src = imgSrc.attr("src");
+	imgSrc.attr("src", chgUrl(src));
+
+};
+// 时间戳
+// 为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
+function chgUrl(url) {
+	var timestamp = (new Date()).valueOf();
+	url = url.substring(0, 17);
+	if ((url.indexOf("&") >= 0)) {
+		url = url + "¡Átamp=" + timestamp;
+	} else {
+		url = url + "?timestamp=" + timestamp;
+	}
+	return url;
+};
+

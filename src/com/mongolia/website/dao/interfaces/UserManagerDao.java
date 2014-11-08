@@ -71,7 +71,7 @@ public interface UserManagerDao extends BaseDao {
 	 * @param pass
 	 * @throws Exception
 	 */
-	public void modifyUserPass(String userid, String username, String pass)
+	public void modifyUserPass(String userid, String pass)
 			throws Exception;
 
 	/**

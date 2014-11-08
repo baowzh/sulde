@@ -34,10 +34,10 @@
 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=32222233332222">
 			 </a>
 	</div>
-	<div class="m1ln navl">
-		<a
-			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=11111111111123"></a>
-	</div>
+	<!-- 	<div class="m1ln navl"> -->
+	<!-- 		<a -->
+	<%-- 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=11111111111123"></a> --%>
+	<!-- 	</div> -->
 	<div class="m1ln nav2">
 		<a href="javascript:;">  </a>
 	</div>
@@ -71,9 +71,9 @@
 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=11111111111129">
 		</a>
 	</div>
-	<div class="m1ln navl">
-		<a href="#"></a>
-	</div>
+	<!-- 	<div class="m1ln navl"> -->
+	<!-- 		<a href="#"></a> -->
+	<!-- 	</div> -->
 	<div class="m1ln nav2">
 		<a href="javascript:;">  </a>
 	</div>
@@ -107,10 +107,10 @@
 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=11111111111135">
 			 </a>
 	</div>
-	<div class="m1ln navl">
-		<a
-			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=32222233332222"></a>
-	</div>
+	<!-- 	<div class="m1ln navl"> -->
+	<!-- 		<a -->
+	<%-- 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=32222233332222"></a> --%>
+	<!-- 	</div> -->
 	<div class="m1ln nav2">
 		<a href="javascript:;">  </a>
 	</div>
@@ -144,6 +144,9 @@
 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=11111111111118">
 			  </a>
 	</div>
+	<div class="m1ln nav2">
+		<a href="javascript:;">    </a>
+	</div>
 	<div class="m1ln navl">
 		<a
 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=11111111111119">
@@ -174,10 +177,10 @@
 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=32222233332222">
 			  </a>
 	</div>
-	<div class="m1ln navl">
-		<a
-			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=32222233332222"></a>
-	</div>
+	<!-- 	<div class="m1ln navl"> -->
+	<!-- 		<a -->
+	<%-- 			href="gouserindex.do?userid=<c:out value="${user.userid}" />&docchannel=32222233332222"></a> --%>
+	<!-- 	</div> -->
 	<div class="m1ln nav2">
 		<a href="javascript:;">  </a>
 	</div>

@@ -17,12 +17,13 @@ a img {
 }
 
 .nav2 {
-	width: 20px;
+	width: 22px;
 	height: 80px;
 	float: left;
 	text-align: center;
 	background: #C90;
 	border-radius: 5px;
+	padding-left: 5px;
 }
 
 .nav2 a {
@@ -356,7 +357,7 @@ a img {
 	display: inline-block;
 	color: rgb(0, 0, 0);
 	background-color: rgb(238, 238, 238);
-	line-height:18px;
+	line-height: 18px;
 	width: 22px;
 }
 
@@ -366,7 +367,7 @@ a img {
 	display: inline-block;
 	color: rgb(0, 0, 0);
 	background: #0078b6;
-	line-height:18px;
+	line-height: 18px;
 	width: 22px;
 }
 
@@ -376,7 +377,7 @@ a img {
 	display: inline-block;
 	color: rgb(0, 0, 0);
 	background-color: rgb(f, f, f);
-	line-height:18px;
+	line-height: 18px;
 	width: 22px;
 }
 
@@ -386,7 +387,7 @@ a img {
 	display: inline-block;
 	color: rgb(0, 0, 0);
 	background-color: #0078b6;
-	line-height:18px;
+	line-height: 18px;
 	width: 22px;
 }
 
@@ -414,4 +415,18 @@ a img {
 	border-radius: 10px;
 	background: #666 url(../loading2.gif) no-repeat center;
 	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.artclassdiv {
+	width: 16px;
+	height: 90px;
+	float: left;
+	/* 	text-align: center; */
+	background: #C90;
+	border-radius: 5px;
+	padding-left: 3px;
+}
+
+.artclassdiv a {
+	color: #fff;
 }

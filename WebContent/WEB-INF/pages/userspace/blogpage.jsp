@@ -80,7 +80,7 @@
 						<c:if test="${self==1}">
 							<a href="doedituserinifo.do">   &nbsp;&nbsp;&nbsp;
 							</a>
-							<a>   </a>
+							<a href="javascript:showpassdialog();">   </a>
 						</c:if>
 						<c:if test="${self==0}">
 							<a

@@ -68,7 +68,7 @@ public class UserManagerDaoImpl extends BaseDaoiBatis implements UserManagerDao 
 	}
 
 	@Override
-	public void modifyUserPass(String userid, String username, String pass)
+	public void modifyUserPass(String userid, String pass)
 			throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> updparams = new HashMap<String, Object>();

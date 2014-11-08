@@ -62,7 +62,8 @@
 								<br> <input type="hidden" id="hiddensharecount"
 									value="<c:out value="${documentValue.sharecount}" />">
 								<div class="shareBookmark">
-									  <c:out value="${documentValue.docchannelname}" />
+									 
+									<c:out value="${documentValue.docchannelname}" />
 									<br> <a href="javascript:sharedocument()"> </a>
 									<span id="sharecount"><c:out
 											value="${documentValue.sharecount}" default="0" /></span>   <a
@@ -227,9 +228,27 @@
 							<!-- 调整位置 -->
 
 						</div>
-						<div class="flt txtBlogList">
+						<!-- 博主作文列表-->
+						<div class="flt txtBlogList" id="myartdiv" style="display: block;">
 							<!-- 进度条 -->
 							<div class="loadingbox" style="display: none;"></div>
+							<div class="m1ln ttltxtblg" style="padding-left: 0px;">
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('myartdiv','hotartdiv','montthartdiv');">
+										 </a>
+								</div>
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('hotartdiv','myartdiv','montthartdiv');">
+										  </a>
+								</div>
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('montthartdiv','myartdiv','hotartdiv');">
+										   </a>
+								</div>
+							</div>
 							<!--  进度条-->
 							<div class="artclList" id="artclList">
 								<c:forEach items="${docList}" var="documentValue"
@@ -250,43 +269,83 @@
 							<div class="paginationArea">
 								<div class="pagination" id="docpagelist">
 									<c:out value="${pagingstr}" escapeXml="false" />
-									<!--  
-									<a class="first disabled" id="firsta"
-										href="javascript:openpage('1','<c:out value="${user.userid}" />',1,0,true);switchclass('first');">
-										<span id="pagefirst" class="spanstyle">&lt;&lt; </span>
-									</a> <a class="first disabled" id="previousa"
-										href="javascript:openpage('<c:out value="${previousindex}" />','<c:out value="${user.userid}" />',1,0,true);switchclass('pageprevious');">
-										<span id="pageprevious" class="spanstyle">&nbsp;&lt;&nbsp;
-									</span>
-									</a>
-									<c:forEach items="${docpageIndexs}" var="pagingIndex"
-										varStatus="status">
-										<a class="first disabled"
-											href="javascript:openpage('<c:out value="${pagingIndex.pageindex}" />','<c:out value="${user.userid}" />',0,true);switchclass('page<c:out value="${pagingIndex.pageindex}" />');">
-											<c:if test="${status.index==0}">
-												<span id="page<c:out value="${pagingIndex.pageindex}" />"
-													class="curspanstyle">&nbsp;<c:out
-														value="${pagingIndex.pageindex}" />&nbsp;
-												</span>
-											</c:if> <c:if test="${status.index!=0}">
-												<span id="page<c:out value="${pagingIndex.pageindex}" />"
-													class="spanstyle">&nbsp;<c:out
-														value="${pagingIndex.pageindex}" />&nbsp;
-												</span>
-											</c:if>
-										</a>
-									</c:forEach>
-									<a class="first disabled" id="nexta"
-										href="javascript:openpage('2','<c:out value="${user.userid}" />',1,0,true);switchclass('pagenext');">
-										<span id="pagenext" class="spanstyle">&nbsp;&gt;&nbsp;
-									</span>
-									</a> <a class="first disabled" id="lasta"
-										href="javascript:openpage('<c:out value="${pageCount}" />','<c:out value="${user.userid}" />',1,0,true);switchclass('pagelast');">
-										<span id="pagelast" class="spanstyle">&gt;&gt; </span>
-									</a>
-									
-									-->
 								</div>
+							</div>
+						</div>
+						<!-- 热门文章 -->
+						<div class="flt txtBlogList" id="hotartdiv" style="display: none;">
+							<!-- 进度条 -->
+							<div class="m1ln ttltxtblg " style="padding-left: 0px;">
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('myartdiv','hotartdiv','montthartdiv');">
+										 </a>
+								</div>
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('hotartdiv','myartdiv','montthartdiv');">
+										  </a>
+								</div>
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('montthartdiv','myartdiv','hotartdiv');">
+										   </a>
+								</div>
+							</div>
+							<!--  进度条-->
+							<div class="artclList" id="hotartclList">
+								<c:forEach items="${docList}" var="documentValue"
+									varStatus="status">
+									<div class="m1ln">
+										<a><img src="img/temdeg.gif"></a>
+										<!-- <a
+											href="javascript:readdoc('<c:out value="${documentValue.docid}" />');"><c:out
+												value="${documentValue.doctitle}" escapeXml="false" /> </a>-->
+
+										<a
+											href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}" />&pageindex=1"><c:out
+												value="${documentValue.doctitle}" escapeXml="false" /> </a>
+
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+						<!-- 本月优秀作品 -->
+						<div class="flt txtBlogList" id="montthartdiv"
+							style="display: none;">
+							<div class="m1ln ttltxtblg " style="padding-left:0px;">
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('myartdiv','hotartdiv','montthartdiv');">
+										 </a>
+								</div>
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('hotartdiv','myartdiv','montthartdiv');">
+										  </a>
+								</div>
+								<div class="artclassdiv" style="height: 100px;">
+									<a
+										onMouseOver="javascript:showdiv('montthartdiv','myartdiv','hotartdiv');">
+										   </a>
+								</div>
+							</div>
+							<!--  进度条-->
+							<div class="artclList" id="monthartclList">
+								<c:forEach items="${docList}" var="documentValue"
+									varStatus="status">
+									<div class="m1ln">
+										<a><img src="img/wzt.gif"></a>
+										<!-- <a
+											href="javascript:readdoc('<c:out value="${documentValue.docid}" />');"><c:out
+												value="${documentValue.doctitle}" escapeXml="false" /> </a>-->
+
+										<a
+											href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}" />&pageindex=1"><c:out
+												value="${documentValue.doctitle}" escapeXml="false" /> </a>
+
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div style="height: 10px; width: 100%; float: left"></div>
