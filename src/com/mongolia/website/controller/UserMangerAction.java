@@ -1,4 +1,4 @@
-package com.mongolia.website.controler;
+package com.mongolia.website.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -810,7 +810,7 @@ public class UserMangerAction {
 	public ModelAndView loginmail(HttpServletRequest request, ModelMap map) {
 		String id = request.getParameter("id");
 		System.out.println(id);
-		return new ModelAndView("redirect:index.do");
+		return new ModelAndView("redirect:index.html");
 	}
 
 }

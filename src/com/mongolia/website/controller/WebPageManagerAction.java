@@ -1,4 +1,4 @@
-package com.mongolia.website.controler;
+package com.mongolia.website.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.mongolia.website.controler;
+package com.mongolia.website.controller;
 
 import java.beans.PropertyEditor;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.mongolia.website.controler;
+package com.mongolia.website.controller;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;

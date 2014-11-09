@@ -19,7 +19,7 @@
 		</property>
 	</bean>
 	<bean name="jsonWriter"
-		class="com.mongolia.website.controler.json.OwnSojoJsonStringWriter"
+		class="com.mongolia.website.controller.json.OwnSojoJsonStringWriter"
 		scope="prototype">
 		<property name="convertAllMapValues">
 			<value>true</value>

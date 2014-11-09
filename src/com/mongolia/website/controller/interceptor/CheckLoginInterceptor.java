@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.interceptor;
+package com.mongolia.website.controller.interceptor;
 
 import java.util.List;
 

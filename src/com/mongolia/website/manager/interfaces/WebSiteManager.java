@@ -3,7 +3,7 @@ package com.mongolia.website.manager.interfaces;
 import java.util.List;
 import java.util.Map;
 
-import com.mongolia.website.controler.freemarker.CustomFreeMarkerConfigurer;
+import com.mongolia.website.controller.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.model.Channel;
 import com.mongolia.website.model.MenuValue;
 import com.mongolia.website.model.OpinionValue;

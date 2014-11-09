@@ -14,7 +14,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mongolia.website.controler.freemarker.CustomFreeMarkerConfigurer;
+import com.mongolia.website.controller.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.dao.interfaces.UserManagerDao;
 import com.mongolia.website.dao.interfaces.WebSiteManagerDao;
 import com.mongolia.website.manager.interfaces.WebSiteManager;

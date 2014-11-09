@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.tag;
+package com.mongolia.website.controller.tag;
 
 import java.io.IOException;
 import java.util.HashMap;

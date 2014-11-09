@@ -1,4 +1,4 @@
-package com.mongolia.website.controler;
+package com.mongolia.website.controller;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -46,7 +46,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mongolia.website.controler.ckeditor.SamplePostData;
+import com.mongolia.website.controller.ckeditor.SamplePostData;
 import com.mongolia.website.manager.ManagerException;
 import com.mongolia.website.manager.interfaces.ChannelManager;
 import com.mongolia.website.manager.interfaces.UserManager;

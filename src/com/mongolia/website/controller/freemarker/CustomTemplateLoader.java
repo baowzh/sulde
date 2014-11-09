@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.freemarker;
+package com.mongolia.website.controller.freemarker;
 
 import java.io.IOException;
 import java.io.Reader;

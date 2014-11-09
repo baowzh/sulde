@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.tag;
+package com.mongolia.website.controller.tag;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,7 +18,7 @@ import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.util.StaticConstants;
 
 /**
- * µü´úÍøÕ¾Ö÷Ò³À¸Ä¿±êÇ©
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ò³ï¿½ï¿½Ä¿ï¿½ï¿½Ç©
  * 
  * @author baowzh
  * 
@@ -63,7 +63,7 @@ public class ProgramTag extends TagSupport {
 	}
 
 	/**
-	 * ´´½¨À¸Ä¿
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
 	 * 
 	 * @param programValue
 	 * @return
@@ -95,7 +95,7 @@ public class ProgramTag extends TagSupport {
 	}
 
 	/**
-	 * À¸Ä¿Ã÷Ï¸
+	 * ï¿½ï¿½Ä¿ï¿½ï¿½Ï¸
 	 * 
 	 * @param programValue
 	 * @return

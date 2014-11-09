@@ -1,4 +1,4 @@
-﻿package com.mongolia.website.controler;
+﻿package com.mongolia.website.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,8 +23,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mongolia.website.controler.ckeditor.SamplePostData;
-import com.mongolia.website.controler.freemarker.CustomFreeMarkerConfigurer;
+import com.mongolia.website.controller.ckeditor.SamplePostData;
+import com.mongolia.website.controller.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebResourceManager;
 import com.mongolia.website.manager.interfaces.WebSiteManager;

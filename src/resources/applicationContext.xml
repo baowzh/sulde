@@ -68,12 +68,12 @@
 		<property name="location" value="classpath:/resources/freemarker.properties" />
 	</bean>
 	<bean id="templateLoader"
-		class="com.mongolia.website.controler.freemarker.CustomTemplateLoader" />
+		class="com.mongolia.website.controller.freemarker.CustomTemplateLoader" />
 
 	<!-- 配置freeMarker的模板路径 -->
 	<!--<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"> -->
 	<bean id="freemarkerConfig"
-		class="com.mongolia.website.controler.freemarker.CustomFreeMarkerConfigurer">
+		class="com.mongolia.website.controller.freemarker.CustomFreeMarkerConfigurer">
 		<property name="freemarkerSettings" ref="freemarkerConfiguration" />
 		<property name="freemarkerVariables">
 			<map>

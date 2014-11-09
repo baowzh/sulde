@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.ckeditor;
+package com.mongolia.website.controller.ckeditor;
 
 import java.util.Enumeration;
 

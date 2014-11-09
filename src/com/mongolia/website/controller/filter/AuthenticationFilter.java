@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.filter;
+package com.mongolia.website.controller.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;

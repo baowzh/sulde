@@ -1,4 +1,4 @@
-package com.mongolia.website.controler.json;
+package com.mongolia.website.controller.json;
 
 import java.beans.PropertyEditor;
 import java.util.Date;
