@@ -15,7 +15,7 @@
 导航与网尾 */
 .tailCard {
 	height: 100px;
-	padding: 25px 80px;
+	/* 	padding: 25px 80px; */
 	margin: 0 5px;
 	border: solid 1px #eee;
 	border-bottom: none;
@@ -659,5 +659,73 @@ body.alag {
 	font-size: 13px;
 	color: #555555;
 	text-decoration: none;
+}
+/****页脚****/
+#footer {
+	background: #f8f8f8;
+	border-top: 1px solid #ccc;
+}
+
+.footer-sec {
+	width: 189px;
+	height: 130px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	float: left;
+	overflow: hidden;
+	padding: 10px 0 0 10px;
+}
+
+.ie_all .footer-sec .mglc {
+	
+}
+
+.footer-sec h3 a {
+	color: #000;
+}
+
+.bor-none {
+	border-right: none;
+}
+
+.footer-sec a {
+	color: #555;
+}
+
+.footer-sec a:hover {
+	color: #d80000;
+}
+/*黑线*/
+#footer .line5 {
+	clear: both;
+	background: #333;
+}
+/*页脚信息*/
+.foot-info {
+	width: 100%;
+	line-height: 26px;
+	color: #666;
+	font-size: 12px;
+}
+
+.foot-info a {
+	color: #666;
+}
+
+.copyright {
+	float: left;
+	width: 300px;
+	font-family: arial, "宋体";
+	padding: 10px;
+}
+
+.contact {
+	width: 430px;
+	float: right;
+	padding: 8px;
+}
+
+.contact span {
+	margin-left: 25px
 }
 /*以下对联广告的css代码*/

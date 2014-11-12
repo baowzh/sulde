@@ -296,7 +296,7 @@
 									</c:if>
 									<div class="folder photoAlbumC">
 										<div style="width: 80px; margin: 4em 2em;">
-											<div class=" msheet">
+											<div class=" msheet" style="font-size:16px;">
 												<a href="#"> <br /><br /> <br /> 
 													<br><br /></a>
 											</div>
@@ -305,7 +305,7 @@
 
 									<c:forEach items="${imggroupValues}" var="imgGrpupValue"
 										varStatus="status">
-										<div class="folder">
+										<div class="folder" style="font-size:16px;">
 											<a
 												href="javascript:openPhotoList('<c:out value="${imgGrpupValue.imggroupid}"/>')">
 												<img width="600" height="400"
@@ -389,12 +389,12 @@
 			type="hidden" name="userid" id="userid"
 			value="<c:out value="${user.userid}" />"></input>
 		<div class="lmainR ofh" style="text-align: center;">
-			<div class="tailCard">
-				<div class="msheet" style="height: 100px; width: 800px;">
+<!-- 			<div class="tailCard"> -->
+<!-- 				<div class="msheet" style="height: 100px; width: 800px;"> -->
 
 					<%@ include file="../website/tail.jsp"%>
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="cbt"></div>
 		</div>
 	</form>

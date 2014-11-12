@@ -124,7 +124,7 @@
 			<div class="friendL">
 				<div class="i">
 					<div class="m0a" style="width: 40px;">
-						<div class=" msheet" style="padding-top: 10px;">
+						<div class=" msheet" style="padding-top: 10px;font-size:16px;">
 							<a href="#"> <br />   :
 							</a>
 						</div>
@@ -139,7 +139,7 @@
 							src="getsmheadimge.do?userid=<c:out value="${friendValue.friendid}" />"
 							width="334" height="446" /></a>
 						<div class="frt" style="width: 20px;">
-							<div class="m1ln">
+							<div class="m1ln" style="font-size:16px;">
 								<a
 									href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />">
 									<c:out value="${friendValue.friendname}" />
@@ -155,7 +155,7 @@
 			<div class="friendL">
 				<div class="i">
 					<div class="m0a" style="width: 40px;">
-						<div class=" msheet" style="padding-top: 10px;">
+						<div class=" msheet" style="padding-top: 10px;font-size:16px;">
 							<a href="#"> <br />  :
 							</a>
 						</div>
@@ -169,7 +169,7 @@
 						<img
 							src="getsmheadimge.do?userid=<c:out value="${visitorValue.visitorid}" />"
 							width="334" height="446" />
-						<div class="frt" style="width: 20px;">
+						<div class="frt" style="width: 20px;font-size:16px;">
 							<div class="m1ln">
 								<a
 									href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">

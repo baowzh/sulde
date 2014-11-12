@@ -117,9 +117,9 @@
 		</div>
 		<div class="lmainR ofh" style="text-align: center;">
 			<div class="tailCard">
-				<div class="msheet" style="height: 100px; width: 800px;"><%@ include
+<%-- 				<div class="msheet" style="height: 100px; width: 800px;"><%@ include --%>
 						file="../website/tail.jsp"%></div>
-			</div>
+<!-- 			</div> -->
 			<div class="cbt"></div>
 		</div>
 		<%@ include file="bloghiddendiv.jsp"%>

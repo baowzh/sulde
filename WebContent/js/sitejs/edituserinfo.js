@@ -76,7 +76,7 @@ var loadChildDistrict = function(selid, type) {
 		if (selectedcode == districtsdata.districts[district].parentcode) {
 			if (type == 1) {
 				optionhtml = optionhtml
-						+ '<div  class=\"mnlist\" style=\"text-indent: 0px; height: 120px;\"><a onclick=\"javascript:changeSel(\''
+						+ '<div  class=\"mnlist\" style=\"text-indent: 0px; height: 120px;width:22px;\"><a onclick=\"javascript:changeSel(\''
 						+ districtsdata.districts[district].districtcode
 						+ '\',\''
 						+ districtsdata.districts[district].districtname
@@ -85,7 +85,7 @@ var loadChildDistrict = function(selid, type) {
 						+ '</a></div>';
 			} else {
 				optionhtml = optionhtml
-						+ '<div  class=\"mnlist\" style=\"text-indent: 0px; height: 120px;\"><a onclick=\"javascript:changeSel(\''
+						+ '<div  class=\"mnlist\" style=\"text-indent: 0px; height: 120px;width:22px;\"><a onclick=\"javascript:changeSel(\''
 						+ districtsdata.districts[district].districtcode
 						+ '\',\''
 						+ districtsdata.districts[district].districtname

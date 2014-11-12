@@ -24,12 +24,132 @@
 <style>
 <
 c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ="${
 agentkind
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ==0
 }
 ">
@@ -38,6 +158,36 @@ body {
 }
 </
 c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :if
 >
 </style>
@@ -337,34 +487,33 @@ c
 	<div class="lmainR">
 		<div class="  lcell" style="width: 150px; height: 315px;">
 			<div class="lcell cardlogin" id="logindiv" style="height: 315px;">
-				<div class="content" style="padding-left: 8px;">
+				<div class="content" style="padding-left: 14px;">
 					<form class="mglForm" action="checkandlogin.do" id="loginform"
 						method="post">
-						<div class="label">  </div>
-						<div class="label">  </div>
-						<div class="label">
+						<div class="label" style="width: 27px;">  </div>
+						<div class="label" style="width: 27px;">  </div>
+						<div class="label" style="width: 27px;">
 							  <a href="javascript:replaceverifycode();"></a>
 							:
 						</div>
-						<div class="label">
+						<div class="label" style="width: 27px;">
 							<img src="verifyCodeServlet" id="varifyimg" width="18"
 								height="100">
 						</div>
-						<div class="inputHolder" style="height: 9em;">
+						<div class="inputHolder" style="height: 7em; width: 27px;">
 							<input name="username" id="username" value="">
 						</div>
-						<div class="inputHolder" style="height: 9em;">
+						<div class="inputHolder" style="height: 7em; width: 27px;">
 							<input name="password" id="password" type="password">
 						</div>
-						<div class="inputHolder" style="height: 9em;">
+						<div class="inputHolder" style="height: 7em; width: 27px;">
 							<input name="validcode" id="varifycode" value="">
 						</div>
-						<div class="inputHolder" style="height: 9em;">
-							<div class="m1ln h100" style="height:150px;">
-								<a id="registlink" href="registe.do"> &nbsp;&nbsp;&nbsp;&nbsp;</a> 
-								
-								<a
-									href="javascript:login();"> </a>
+						<div class="inputHolder" style="height: 7em; width: 27px;">
+							<div class="m1ln h100" style="height: 150px;">
+								<a id="registlink" href="registe.do">
+									&nbsp;&nbsp;&nbsp;&nbsp;</a> <a href="javascript:login();">
+								</a>
 							</div>
 							<!-- 						<input type="button" onclick="javascript:dosubmit();" value=" "> -->
 							<!-- 						<input type="button" onclick="registe.do;" value=""> -->
@@ -436,7 +585,7 @@ c
 									src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
 									width="570" height="447" /></a>
 								<div class="frt" style="width: 20px; text-align: center;">
-									<div class="m1ln" style="text-align: center;">
+									<div class="m1ln" style="text-align: center; font-size: 16px;">
 										<a
 											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
 											&nbsp;<c:out value="${userValue.artname}" />
@@ -818,14 +967,14 @@ c
 
 						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
 							varStatus="status">
-							<div class="xldgurg" style="height: 70px;">
-								<div class="avtr">
+							<div class="xldgurg" style="height: 70px; width: 68px;">
+								<div class="avtr" style="width: 85px;">
 									<a
 										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
 										src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
-										width="570" height="447" /></a>
+										style="width: 47px;" /></a>
 									<div class="frt" style="width: 20px; text-align: center;">
-										<div class="m1ln" style="text-align: center;">
+										<div class="m1ln" style="text-align: center; font-size: 16px;height:80px;">
 											<a
 												href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
 												&nbsp;<c:out value="${userValue.artname}" />
@@ -1847,18 +1996,9 @@ c
 		</div>
 	</div>
 
-	<div class="lmainR ofh" style="text-align: center;">
-		<div class="tailCard">
-			<div class="msheet" style="height: 100px; width: 800px;">
-				        
-				         
-				         
-				          
-				         
-				       
-				          
-				   </div>
-		</div>
+	<div class="lmainR ofh">
+		<!-- 尾部 -->
+		<%@ include file="../website/tail.jsp"%>
 		<div class="cbt"></div>
 	</div>
 	<!-- JiaThis Button BEGIN -->

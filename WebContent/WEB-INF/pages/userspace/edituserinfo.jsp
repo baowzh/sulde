@@ -493,9 +493,9 @@
 		</form>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
-		<div class="tailCard">
-			<%@ include file="../website/tail.jsp"%>
-		</div>
+		<!-- 		<div class="tailCard"> -->
+		<%@ include file="../website/tail.jsp"%>
+		<!-- 		</div> -->
 		<div class="cbt"></div>
 	</div>
 	<!-- 选择住地（省）-->
@@ -508,7 +508,7 @@
 		<div class="channellist">
 			<c:forEach items="${districts}" var="districtValue"
 				varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 98px;">
+				<div class="mnlist" style="text-indent: 0px; height: 98px;width:22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','province','provincename','provinces');loadChildDistrict('province',1);"
 						style="cursor: pointer" class=""><c:out
@@ -528,7 +528,7 @@
 		</div>
 		<div id="hsienlist" class="channellist">
 			<c:forEach items="${hsiens}" var="districtValue" varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;width:22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','hsien','hsienname','hsiens');"
 						style="cursor: pointer" class=""><c:out
@@ -549,7 +549,8 @@
 		<div class="channellist">
 			<c:forEach items="${districts}" var="districtValue"
 				varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 120px; width: 22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','nowprovince','nowprovincename','nowprovinces');loadChildDistrict('nowprovince',2)"
 						style="cursor: pointer" class=""><c:out
@@ -569,7 +570,8 @@
 		</div>
 		<div id="nowhsienlist" class="channellist">
 			<c:forEach items="${nowhsien}" var="districtValue" varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 120px; width: 22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','nowhsien','nowhsienname','nowhsiens')"
 						style="cursor: pointer" class=""><c:out
@@ -589,7 +591,8 @@
 		<div class="channellist">
 			<c:forEach items="${professions}" var="professionValue"
 				varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 120px; width: 22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${professionValue.professioncode}"/>','<c:out value="${professionValue.professionname}"/>','professioncode','professioncodename','professions')"
 						style="cursor: pointer" class=""><c:out

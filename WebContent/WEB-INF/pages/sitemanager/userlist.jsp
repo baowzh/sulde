@@ -212,9 +212,9 @@
 		</form>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
-		<div class="tailCard">
+<!-- 		<div class="tailCard"> -->
 			<%@ include file="../website/tail.jsp"%>
-		</div>
+<!-- 		</div> -->
 		<div class="cbt"></div>
 	</div>
 </body>

@@ -153,10 +153,10 @@
 			</div>
 		</div>
 		<div class="lmainR ofh" style="text-align: center;">
-			<div class="tailCard">
+<!-- 			<div class="tailCard"> -->
 				<div class="msheet" style="height: 100px; width: 800px;">
 					<%@ include file="../website/tail.jsp"%></div>
-			</div>
+<!-- 			</div> -->
 			<div class="cbt"></div>
 		</div>
 		<div id="validcodediv" class="mnlist"
@@ -193,7 +193,7 @@
 		<div class="channellist">
 
 			<c:forEach items="${chanels}" var="channel" varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;width:22px;">
 					<a
 						onclick="javascript:changeCity('<c:out value="${channel.channelid}"/>','<c:out value="${channel.chnlname}"/>')"
 						style="cursor: pointer" class=""><c:out
