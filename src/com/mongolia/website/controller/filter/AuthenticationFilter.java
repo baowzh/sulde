@@ -41,13 +41,19 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1,
 			FilterChain arg2) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
+		Object licensekey = request.getServletContext().getAttribute(
+				"licensekey");
+		if (licensekey == null) {
+			System.exit(0);
+		}
 		boolean tologin = false;
 		for (String url : authurls) {
 			if (request.getRequestURI().endsWith(url)) {
 				Object obj = request.getSession().getAttribute("user");
 				if (obj == null) {// 是否只有登录才能访问
 					tologin = true;
-					request.getSession().setAttribute("directurl", request.getRequestURI());
+					request.getSession().setAttribute("directurl",
+							request.getRequestURI());
 					break;
 				} else {
 					// 校验是否只有管理员才能访问
@@ -57,7 +63,7 @@ public class AuthenticationFilter implements Filter {
 							if (request.getRequestURI().endsWith(uri)) {// 权限不足
 								tologin = true;
 								// 把目标url保存住用于登录以后跳转
-								
+
 								break;
 							}
 						}

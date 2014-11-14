@@ -104,4 +104,15 @@
     <error-code>500</error-code>
     <location>/error.jsp</location>
   </error-page>
+  <servlet>
+    <description></description>
+    <display-name>LicenseServlet</display-name>
+    <servlet-name>LicenseServlet</servlet-name>
+    <servlet-class>com.mongolia.website.controller.license.LicenseServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LicenseServlet</servlet-name>
+    <url-pattern>/licenseServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
