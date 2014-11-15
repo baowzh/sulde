@@ -495,10 +495,14 @@ var showpassdialog = function() {
 };
 var modifypass = function() {
 	// 校验工作及修改都放后台了
-	var oldpass = $("#oldpassword").val();
-	if (oldpass == null || oldpass == '') {
-		MessageWindow.showMess("     ");
-		return;
+	var maillogin = $("#maillogin").val();
+	var oldpass = '';
+	if (maillogin == 0) {
+		oldpass = $("#oldpassword").val();
+		if (oldpass == null || oldpass == '') {
+			MessageWindow.showMess("     ");
+			return;
+		}
 	}
 	var password = $("#password").val();
 	if (password == null || password == '') {
@@ -534,7 +538,7 @@ var modifypass = function() {
 
 					} else if (data.mess == '2') {
 						MessageWindow
-						.showMess("       ");
+								.showMess("       ");
 
 					} else if (data.mess == '3') {
 

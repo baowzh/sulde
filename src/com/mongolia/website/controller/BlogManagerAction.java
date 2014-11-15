@@ -117,6 +117,7 @@ public class BlogManagerAction {
 			Integer self = new Integer(0);
 			if (userid == null || userid.equalsIgnoreCase("")) {
 				user = (UserValue) request.getSession().getAttribute("user");// 在线session
+				map.put("maillogin", sessionUser.getMaillogin());
 				self = new Integer(1);
 			} else {
 				List<UserValue> uservalues = this.userManager.getUsers(userid,
@@ -126,6 +127,7 @@ public class BlogManagerAction {
 						&& sessionUser.getUserid().equalsIgnoreCase(
 								user.getUserid())) {
 					self = new Integer(1);
+					map.put("maillogin", sessionUser.getMaillogin());
 				} else {
 					self = new Integer(0);
 				}
@@ -213,8 +215,8 @@ public class BlogManagerAction {
 					.getAttribute("user");
 			Integer self = new Integer(0);
 			String docid = request.getParameter("docid");
-			if(docid!=null&&docid.indexOf("?")>0){
-				docid=docid.split("\\?")[0];	
+			if (docid != null && docid.indexOf("?") > 0) {
+				docid = docid.split("\\?")[0];
 			}
 			String pageindex = request.getParameter("pageindex");
 			Integer pindex = 1;

@@ -83,9 +83,10 @@ var login = function() {
 									.showMess('            ');
 							$('#registlink').attr('href',
 									"javascript:getpass();")
+							$('#registlink').attr('style', 'font-size:10px;');
 							$('#registlink')
 									.html(
-											'<font color="#f00"> </font>');
+											'<font color="#f00">  </font>');
 
 						} else {
 							//
@@ -256,17 +257,18 @@ var getpass = function() {
 		type : 'POST',
 		dataType : "json",
 		url : 'getpasswithmail.do',// 请求的action路径
-		data:{
-		  username : $("input[name='username']").val(),
-		  validcode : $("input[name='validcode']").val()
+		data : {
+			username : $("input[name='username']").val(),
+			validcode : $("input[name='validcode']").val()
 		},
 		error : function() {// 请求失败处理函数
 			MessageWindow.showMess('    ');
 		},
 		success : function(data) { // 请求成功后处理函数。
 			// window.location.href = 'index.html';
-			if(data.mess==1){
-				MessageWindow.showMess('    email:'+data.mailaddress+'   ');	
+			if (data.mess == 1) {
+				MessageWindow.showMess('    email:'
+						+ data.mailaddress + '   ');
 			}
 		}
 	});

@@ -130,7 +130,7 @@
 	<div class="contact">
 		<p>
 			蒙ICP备00000000号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>E-mail</b>：<a
-				href="mailto:altanhurd@163.com">altanhurd@163.com</a><span>☎</span>：158-0000-0000
+				href="mailto:altanhurd@163.com">baowzh@163.com</a><span>☎</span>：158-0000-0000
 		</p>
 	</div>
 	<div class="clear"></div>

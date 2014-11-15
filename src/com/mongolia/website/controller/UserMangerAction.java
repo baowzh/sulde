@@ -736,7 +736,8 @@ public class UserMangerAction {
 			String userid = sessionUser.getUserid();
 			String pass = request.getParameter("pass");
 			String oldpass = request.getParameter("oldpass");
-			this.userManager.doModifyPass(userid, pass, oldpass);
+			this.userManager.doModifyPass(userid, pass, oldpass,
+					sessionUser.getMaillogin());
 			map.put("mess", "1");
 		} catch (Exception ex) {
 			map.put("mess", ex.getMessage());
@@ -793,11 +794,13 @@ public class UserMangerAction {
 				map.put("mess", "3");
 				return new ModelAndView("jsonView", map);
 			}
-			String maillogincode = this.userManager.getmaillogincode(username);
+			UserValue uservalue = this.userManager.getmaillogincode(username);
+			String maillogincode = uservalue.getMailloginid();
 			request.getServletContext().setAttribute(maillogincode, username);
 			request.getServletContext().setAttribute(username + "time",
 					System.currentTimeMillis());
-			// 如果用户维护了email地址给用户发送邮件
+			request.getServletContext().setAttribute(username, username);
+			map.put("mailaddress", uservalue.getEmail());
 			map.put("mess", "1");
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -809,8 +812,35 @@ public class UserMangerAction {
 	@RequestMapping("/loginmail.do")
 	public ModelAndView loginmail(HttpServletRequest request, ModelMap map) {
 		String id = request.getParameter("id");
-		System.out.println(id);
-		return new ModelAndView("redirect:index.html");
+		Object username = request.getServletContext().getAttribute(id);
+		if (username == null) {
+			return new ModelAndView("redirect:tologin.do");
+		} else {
+			Long createtime = (Long) request.getServletContext().getAttribute(
+					username + "time");
+			if (System.currentTimeMillis() - createtime > 2 * 60 * 60 * 1000) {// 超过2小时则不让登录
+				return new ModelAndView("redirect:tologin.do");
+			} else {
+				String username_name = (String) request.getServletContext()
+						.getAttribute("" + username);
+				List<UserValue> users = this.userManager.getUsers(null,
+						username_name);
+				if (users == null || users.isEmpty()) {
+					return new ModelAndView("redirect:tologin.do");
+				} else {
+					UserValue sessionUserValue = users.get(0);
+					sessionUserValue.setLogindate(new Date());
+					sessionUserValue.setMaillogin(1);
+					request.getSession().setAttribute("user", sessionUserValue);// 在线session
+					// 清楚mail登录秘钥
+					//request.getServletContext().removeAttribute(id);
+					return new ModelAndView("redirect:gouserindex.do?userid="
+							+ sessionUserValue.getUserid());
+				}
+
+			}
+		}
+
 	}
 
 }

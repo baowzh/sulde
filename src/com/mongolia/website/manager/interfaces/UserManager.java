@@ -78,7 +78,7 @@ public interface UserManager {
 	 * @throws Exception
 	 */
 	public void doModifyPass(String userid, String pass,
-			String oldpass) throws Exception;
+			String oldpass,Integer maillogin) throws Exception;
 
 	/**
 	 * 解除朋友关系
@@ -114,5 +114,5 @@ public interface UserManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getmaillogincode(String username) throws Exception;
+	public UserValue getmaillogincode(String username) throws Exception;
 }

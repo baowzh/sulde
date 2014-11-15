@@ -41,11 +41,6 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1,
 			FilterChain arg2) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
-		Object licensekey = request.getServletContext().getAttribute(
-				"licensekey");
-		if (licensekey == null) {
-			System.exit(0);
-		}
 		boolean tologin = false;
 		for (String url : authurls) {
 			if (request.getRequestURI().endsWith(url)) {

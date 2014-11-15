@@ -29,6 +29,7 @@ public class UserValue implements UserDetails {
 	private SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 	private Integer retnum;
 	private Integer weeke;
+	private Integer maillogin = 0;
 	/**
 	 * 用户头像
 	 */
@@ -132,6 +133,7 @@ public class UserValue implements UserDetails {
 	private boolean credentialsNonExpired = true; //
 	private boolean enabled = true; // 是否可用
 	private Collection<? extends GrantedAuthority> authorities; // 权限集合
+	private String mailloginid;
 
 	public String getUsername() {
 		return username;
@@ -621,6 +623,21 @@ public class UserValue implements UserDetails {
 	public void setOldid(String oldid) {
 		this.oldid = oldid;
 	}
-	
+
+	public Integer getMaillogin() {
+		return maillogin;
+	}
+
+	public void setMaillogin(Integer maillogin) {
+		this.maillogin = maillogin;
+	}
+
+	public String getMailloginid() {
+		return mailloginid;
+	}
+
+	public void setMailloginid(String mailloginid) {
+		this.mailloginid = mailloginid;
+	}
 
 }

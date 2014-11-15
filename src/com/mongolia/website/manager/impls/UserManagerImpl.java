@@ -194,16 +194,18 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public void doModifyPass(String userid, String pass, String oldpass)
-			throws Exception {
+	public void doModifyPass(String userid, String pass, String oldpass,
+			Integer maillogin) throws Exception {
 		// TODO Auto-generated method stub
 		List<UserValue> users = this.getUsers(userid, null);
 		if (users == null || users.isEmpty()) {
 			throw new ManagerException("用户不存在");
 		} else {
-			UserValue userValue = users.get(0);
-			if (!oldpass.equalsIgnoreCase(userValue.getPassword())) {
-				throw new ManagerException("2");
+			if (maillogin.intValue() == 0) {
+				UserValue userValue = users.get(0);
+				if (!oldpass.equalsIgnoreCase(userValue.getPassword())) {
+					throw new ManagerException("2");
+				}
 			}
 			this.userManagerDao.modifyUserPass(userid, pass);
 		}
@@ -233,7 +235,7 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public String getmaillogincode(String username) throws Exception {
+	public UserValue getmaillogincode(String username) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("username", username);
@@ -256,19 +258,21 @@ public class UserManagerImpl implements UserManager {
 		prop.put("mail.smtp.auth", "true"); // 将这个参数设为true，让服务器进行认证,认证用户名和密码是否正确
 		prop.put("mail.smtp.timeout", "25000");
 		mailSender.setJavaMailProperties(prop);
-		MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage);
+		MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage,true,"utf-8");
 		messageHelper.setTo(userValue.getEmail());
-		messageHelper.setSubject("测试HTML邮件！");
+		messageHelper.setSubject(this.sysConfig.getSitename() + "找回密码提示");
 		String uuid = UUIDMaker.getUUID();
 		messageHelper
 				.setFrom(new InternetAddress(this.mailSender.getUsername()));
-		String mailstr="<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><body><h1>hello!!spring html Mail<a href=\"http://127.0.0.1:8080/website/loginmail.do?id="
-				+ uuid + "\">点击这里登陆系统</a></h1></body></html>";
-		messageHelper
-				.setText(
-						mailstr, true);
+		String mailstr = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><body><h1>>您好！请在2个小时之内点击<a href=\""
+				+ this.sysConfig.getSiteaddress()
+				+ "/loginmail.do?id="
+				+ uuid
+				+ "\"这里</a>登陆系统，并修改密码</h1></body></html>";
+		messageHelper.setText(mailstr, true);
 		mailSender.send(mailMessage);
-		return uuid;
+		userValue.setMailloginid(uuid);
+		return userValue;
 	}
 
 }
