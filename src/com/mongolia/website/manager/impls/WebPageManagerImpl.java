@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.WebPageManagerDao;
 import com.mongolia.website.manager.ManagerException;
@@ -14,6 +15,7 @@ import com.mongolia.website.model.PageChannelRelationValue;
 import com.mongolia.website.model.WebPageValue;
 
 @Service("webPageManager")
+@Transactional(rollbackFor = Exception.class)
 public class WebPageManagerImpl implements WebPageManager {
 	@Autowired
 	private WebPageManagerDao webPageManagerDao;

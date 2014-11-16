@@ -14,8 +14,6 @@
 			</list>
 		</property>
 	</bean>
-	<!-- <util:properties id="remoteSettings" location="classpath:/resources/config.properties" 
-		/> -->
 	<!--数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.ChannelManagerDao;
 import com.mongolia.website.manager.interfaces.ChannelManager;
@@ -12,6 +13,7 @@ import com.mongolia.website.model.Channel;
 import com.mongolia.website.util.UUIDMaker;
 
 @Service("channelManager")
+@Transactional(rollbackFor = Exception.class)
 public class ChannelManagerImpl implements ChannelManager {
 
 	@Autowired

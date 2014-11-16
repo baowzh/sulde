@@ -28,20 +28,6 @@
 			<bean class="com.mongolia.website.controller.BindingInitializer" />
 		</property>
 	</bean>
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/sitemanager/*.do" />
-			<bean id="interceptor1"
-				class="com.mongolia.website.controller.interceptor.CheckLoginInterceptor">
-				<property name="excludedUrls">
-					<list>
-						<value>/website/*.do</value>
-					</list>
-				</property>
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
-
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.TemplateManagerDao;
 import com.mongolia.website.manager.ManagerException;
@@ -12,6 +13,7 @@ import com.mongolia.website.manager.interfaces.WebTemplateManager;
 import com.mongolia.website.model.TemplateValue;
 
 @Service("webTemplateManager")
+@Transactional(rollbackFor = Exception.class)
 public class WebTemplateManagerImpl implements WebTemplateManager {
 	@Autowired
 	private TemplateManagerDao templateManagerDao;

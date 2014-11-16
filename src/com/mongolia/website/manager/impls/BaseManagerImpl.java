@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.BaseDao;
 import com.mongolia.website.manager.interfaces.BaseManager;
@@ -15,6 +16,7 @@ import com.mongolia.website.manager.interfaces.BaseManager;
  * @author zeting
  */
 @Service("baseManager")
+@Transactional(rollbackFor = Exception.class)
 public class BaseManagerImpl implements BaseManager {
 
 	protected final Log log = LogFactory.getLog(getClass());

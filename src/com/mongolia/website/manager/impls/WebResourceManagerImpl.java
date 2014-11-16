@@ -25,6 +25,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.ChannelManagerDao;
 import com.mongolia.website.dao.interfaces.WebResourceDao;
@@ -56,6 +57,7 @@ import com.mongolia.website.util.StaticConstants;
 import com.mongolia.website.util.UUIDMaker;
 
 @Service("webResourceManager")
+@Transactional(rollbackFor = Exception.class)
 public class WebResourceManagerImpl implements WebResourceManager {
 	@Autowired
 	private WebResourceDao webResourceDao;

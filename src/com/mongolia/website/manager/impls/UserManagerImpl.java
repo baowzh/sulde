@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.UserManagerDao;
 import com.mongolia.website.dao.interfaces.WebResourceDao;
@@ -31,6 +32,7 @@ import com.mongolia.website.util.StaticConstants;
 import com.mongolia.website.util.UUIDMaker;
 
 @Service("userManager")
+@Transactional(rollbackFor = Exception.class)
 public class UserManagerImpl implements UserManager {
 	@Autowired
 	private UserManagerDao userManagerDao;
