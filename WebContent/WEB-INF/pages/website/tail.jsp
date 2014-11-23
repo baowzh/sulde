@@ -8,35 +8,36 @@
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.solongonews.mn/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>   </a>
+			<a href="http://mongol.kerqin.gov.cn/">   </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>   </a>
+			<a href="http://www.nmgkjbks.com/">  
+				</a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>    </a>
+			<a href="http://bj.mongol.cn/">    </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>    </a>
+			<a href="http://www.oturchid.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.mgyxw.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>    </a>
+			<a href="http://www.hlberb.com/">    </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a> </a>
+			<a href="http://www.altanhurd.com/"> </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
@@ -44,31 +45,31 @@
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.mongol.cn/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a> </a>
+			<a href="http://www.tangsug.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a> </a>
+			<a href="http://www.mgyyw.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a> </a>
+			<a href="http://www.duu5.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.qinggis.net/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a></a>
+			<a href="http://www.burgud.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.wendusi.net/Default.aspx"> </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
@@ -76,23 +77,23 @@
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>     </a>
+			<a href="http://www.borhansoyol.net/">     </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a> </a>
+			<a href="http://www.mgl9.com/"> </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.huritai.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>    </a>
+			<a href="http://www.mglblog.net/"> </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>    </a>
+			<a href="http://www.qeqen.com/">    </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
@@ -100,27 +101,29 @@
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>   </a>
+			<a href="http://imofif.com/">   </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>     </a>
+			<a href="http://mgl.surag.net/">     </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>      </a>
+			<a href="http://www.jlsmch.com/">     
+				</a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.soyol.com/">  </a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>    </a>
+			<a href="http://www.cfmgzzx.com/">   
+				</a>
 		</div>
 		<div class="mnlist"
 			style="height: 190px; width: 25px; text-indent: 8px;">
-			<a>  </a>
+			<a href="http://www.holvoo.net/index.do"> </a>
 		</div>
 
 	</div>

@@ -227,7 +227,7 @@
 		<div class="channellist">
 			<c:forEach items="${districts}" var="districtValue"
 				varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 98px;">
+				<div class="mnlist" style="text-indent: 0px; height: 98px;width:25px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','district','provincename','provinces');loadChildDistrict('district',1);"
 						style="cursor: pointer" class=""><c:out
@@ -248,7 +248,7 @@
 		<div id="hsienlist" class="channellist">
 			<c:forEach items="${districts}" var="districtValue"
 				varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;">
+				<div class="mnlist" style="text-indent: 0px; height: 120px;width:25px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','qx','hsienname','hsiens');"
 						style="cursor: pointer" class=""><c:out
