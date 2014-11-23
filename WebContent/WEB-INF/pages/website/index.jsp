@@ -245,7 +245,7 @@ c
 					 </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222"> 
+				<a href="pagingquery.do?docchannel=11111111111114"> 
 				</a>
 			</div>
 			<!-- 			<div class="m1ln navl"> -->
@@ -320,7 +320,7 @@ c
 				</a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=11111111111116"> </a>
+				<a href="pagingquery.do?docchannel=11111111111113"> </a>
 			</div>
 			<div class="m1ln navl">
 				<a href="pagingquery.do?docchannel=11111111111117"> 
@@ -354,7 +354,7 @@ c
 					 </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222">
+				<a href="pagingquery.do?docchannel=11111111111123">
 					  </a>
 			</div>
 			<!-- 			<div class="m1ln navl"> -->
@@ -364,26 +364,26 @@ c
 				<a href="javascript:;">  </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222"> 
+				<a href="pagingquery.do?docchannel=32222233312222"> 
 					 </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222"> 
+				<a href="pagingquery.do?docchannel=32222233312223"> 
 				</a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222">
+				<a href="pagingquery.do?docchannel=32222233312224">
 					 </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222">  </a>
+				<a href="pagingquery.do?docchannel=32222233312225">  </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222">
+				<a href="pagingquery.do?docchannel=32222233312226">
 					 </a>
 			</div>
 			<div class="m1ln navl">
-				<a href="pagingquery.do?docchannel=32222233332222">  </a>
+				<a href="pagingquery.do?docchannel=32222233312227">  </a>
 			</div>
 		</div>
 		<div class="cbt"></div>
@@ -407,40 +407,6 @@ c
 				<div class="ttl1 m1ln">
 					<a href="javascript:void();">  </a>
 				</div>
-				<!--  
-					<div class="nwsls1 msheet  "
-						style="text-align: justify; text-justify: newspaper; width: 440px;">
-
-						<a href="javascript:;" class=" vdrtgalSuld">   : </a> <a
-							href="#sonin"> </a>  <a href="#svrgal">
-							</a>  <a href="#tuuh"> </a>  <a href="#sinljilge">
-							</a>  <a href="#onol"> </a>  <a
-							href="#hebshmel"> </a>  <br /> <a href="#chagan"
-							class="vdrtgalSuld">  :</a> <a href="#nairag">
-							</a>  <a href="#dvv"> </a>  <a href="#kino">
-							</a>  <a href="#nairvvlal"></a>  <a href="#uglel"></a>
-						 <a href="#tvvjis"></a>  <br /> <a href="#nogoon"
-							class="vdrtgalSuld">  :</a> <a href="#edin">
-							</a>  <a href="#idgen"> </a>  <a href="#eruul">
-							</a>  <a href="#vrgmal">  </a>  <a
-							href="#amitan">  </a>  <a href="#domog">
-							</a>  <br /> <a href="#alag" class="vdrtgalSuld">
-							 :</a> <a href="#shog"> </a>  <a href="#vyvn">
-							 </a>  <a href="#haqin"> </a>  <a
-							href="#temdeglel"></a>  <a href="#xaxin">
-							</a>  <a href="#eren">  </a>  <a href="#biqilge">
-							</a>  <a href="#svrvgch">  </a>  <a
-							href="#asvvlt"> </a>  <a href="#nair">
-							</a>  <a href="#sodlol"> </a>  <a
-							href="#busgui">  </a>  <br /> <a href="#har"
-							class="vdrtgalSuld">  :</a> <a href="#hvvl">
-							 </a>  <a href="#mergjil"> </a>  <a
-							href="#niigem"> </a>  <a href="#qirig">
-							</a>  <a href="#bolbson"> </a>  <a href="#nom">
-							</a> 
-
-					</div>
-					-->
 				<div class="nwsls1" style="width: 430px;">
 
 					<c:forEach items="${indexPageContent.newsarts}" var="documentValue"
@@ -1568,7 +1534,7 @@ c
 				<div class="cardt1">
 					<a name="temdeglel"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=11111111111116"> </a>
+						<a href="pagingquery.do?docchannel=11111111111113"> </a>
 					</div>
 					<div class="nwsls1">
 						<c:forEach items="${indexPageContent.logarts}" var="documentValue"
@@ -1798,7 +1764,7 @@ c
 				<div class="cardt1" style="background: #ffffff">
 					<a name="busgui"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
+						<a href="pagingquery.do?docchannel=11111111111123">
 							  </a>
 					</div>
 					<div class="nwsls1">
@@ -1834,7 +1800,7 @@ c
 				<div class="cardt1">
 					<a name="hvvl"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222"> 
+						<a href="pagingquery.do?docchannel=32222233312222"> 
 							 </a>
 					</div>
 					<div class="nwsls1">
@@ -1861,7 +1827,7 @@ c
 				<div class="cardt1">
 					<a name="mergjil"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
+						<a href="pagingquery.do?docchannel=32222233312223">
 							 </a>
 					</div>
 					<div class="nwsls1">
@@ -1888,7 +1854,7 @@ c
 				<div class="   cardt1  " style="background: #ffffff">
 					<a name="niigem"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
+						<a href="pagingquery.do?docchannel=32222233312224">
 							 </a>
 					</div>
 					<div class="nwsls1">
@@ -1915,7 +1881,7 @@ c
 				<div class="cardt1">
 					<a name="qirig"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222"> 
+						<a href="pagingquery.do?docchannel=32222233312225"> 
 						</a>
 					</div>
 					<div class="nwsls1">
@@ -1943,7 +1909,7 @@ c
 				<div class="cardt1">
 					<a name="bolbson"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">
+						<a href="pagingquery.do?docchannel=32222233312226">
 							 </a>
 					</div>
 					<div class="nwsls1">
@@ -1971,7 +1937,7 @@ c
 				<div class="cardt1" style="background: #ffffff">
 					<a name="nom"></a>
 					<div class="ttl1 m1ln">
-						<a href="pagingquery.do?docchannel=32222233332222">  </a>
+						<a href="pagingquery.do?docchannel=32222233312227">  </a>
 					</div>
 					<div class="nwsls1">
 						<c:forEach items="${indexPageContent.bookarts}"

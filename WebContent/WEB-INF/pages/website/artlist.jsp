@@ -23,9 +23,9 @@
 		<img src="img/logo.png" width="980" />
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
-		<div class="navCard ">
+<!-- 		<div class="navCard "> -->
 			<%@ include file="head.jsp"%>
-		</div>
+<!-- 		</div> -->
 		<div class="cbt"></div>
 	</div>
 	<div class="lmainR ofh">

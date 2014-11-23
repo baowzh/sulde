@@ -57,7 +57,7 @@
 								<div class="m1ln ttltxtblg " style="padding-left: 0px;">
 
 									<c:if test="${currentchannel!=null}">
-										<div class="artclassdiv">
+										<div class="artclassdiv" style="height:110px;">
 											<c:out value="${currentchannel.chnlname}" />
 										</div>
 									</c:if>
