@@ -728,4 +728,23 @@ body.alag {
 .contact span {
 	margin-left: 25px
 }
+
+#mk_ft {
+	float: left;
+	width: 1003px;
+	height: 130px;
+	background: url(img/mk_vcp.jpg) no-repeat top center;
+	text-align: center;
+	font-size: 13px;
+}
+
+#mk_fs_lk {
+	float: left;
+	width: 1003px;
+	height: 70pk;;
+	margin: 6px 0 6px 0;
+	clear: both;
+	overflow: hidden;
+}
+
 /*以下对联广告的css代码*/
