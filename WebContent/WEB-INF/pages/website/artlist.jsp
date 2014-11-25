@@ -53,9 +53,9 @@
 								<div class="inputHolder">
 									<select name="status" id="status"
 										style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-										<option value="2"> </option>
-										<option value="1"> </option>
-										<option value="0" selected="true"></option>
+<!-- 										<option value="2"> </option> -->
+<!-- 										<option value="1"> </option> -->
+										<option value="0" selected="true"></option>
 									</select>
 								</div>
 							</td>

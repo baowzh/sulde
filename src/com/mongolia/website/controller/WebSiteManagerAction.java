@@ -226,8 +226,8 @@ public class WebSiteManagerAction {
 					|| queryDocForm.getPageindex() == 0) {
 				queryDocForm.setPageindex(1);
 			}
-			Integer startindex = ((queryDocForm.getPageindex() - 1) * 30);
-			queryDocParams.put("displaydoccount", 30);
+			Integer startindex = ((queryDocForm.getPageindex() - 1) * 28);
+			queryDocParams.put("displaydoccount", 28);
 			queryDocParams.put("startindex", startindex);
 			queryDocParams.put("doctype", StaticConstants.DOCTYPE_DOC);
 			Map<String, Object> result = this.webSiteManager

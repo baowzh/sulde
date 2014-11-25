@@ -497,7 +497,10 @@
 				username=#username#
 			</isNotNull>
 			<isNotNull prepend="and" property="district">
-				username=#district#
+				province=#district#
+			</isNotNull>
+			<isNotNull prepend="and" property="qx">
+				hsien=#qx#
 			</isNotNull>
 			<isNotNull prepend="and" property="likeusername">
 			<![CDATA[( instr(artname,trim(#likeusername#))>0 or  artname like #likeusername#||'%'   ) ]]>
