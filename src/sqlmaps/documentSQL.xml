@@ -74,7 +74,9 @@
 	</insert>
 	<select id="getUserDocList" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select document.*,(select channel.CHNLNAME from channel where document.DOCCHANNEL=channel.CHANNELID ) as docchannelname from document
+		select document.*,(select channel.CHNLNAME from channel where
+		document.DOCCHANNEL=channel.CHANNELID ) as docchannelname from
+		document
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="docid">
 				docid=#docid#
@@ -100,7 +102,12 @@
 			<![CDATA[and #currentday#>= topdocument.startdate and  #currentday#<=topdocument.enddate]]>
 				)
 			</isNotNull>
-
+			<isNotNull prepend="and" property="toptypes">
+				exists(select 1 from
+				topdocument where
+				topdocument.docid=document.docid and
+				topdocument.type in ($toptypes$))
+			</isNotNull>
 			<isNotNull prepend="and" property="authorname">
 			<![CDATA[instr(DOCAUTHOR,trim(#authorname#))>0]]>
 			</isNotNull>
@@ -524,7 +531,8 @@
 
 	<select id="getTopDocuments" parameterClass="java.util.Map"
 		resultClass="TopDocumentValue">
-		select a.*,b.doctitle as title,b.docauthor  from topdocument a,document b where
+		select a.*,b.doctitle as title,b.docauthor from topdocument a,document
+		b where
 		a.docid=b.docid
 		<dynamic prepend="and">
 			<isNotNull prepend="and" property="type">
@@ -727,7 +735,8 @@
 	</select>
 	<select id="getTopDocumentWithClickCount" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select * from document where doctype=1 order by document.readcount desc
+		select * from document where doctype=1 order by
+		document.readcount desc
 		limit
 		#startindex#,#fechcount#
 	</select>
@@ -782,10 +791,17 @@
 	</select>
 	<select id="getRecentDocs" parameterClass="java.util.Map"
 		resultClass="DocumentValue">
-		select * from document where docstatus=2 and doctype=1  order by document.crtime desc
+		select * from document where docstatus=2 and doctype=1
+		order by document.crtime desc
 		limit
 		0,#fechcount#
 	</select>
-	
-
+	<update id="updtopdoc" parameterClass="java.util.Map">
+		update topdocument set
+		topdocument.startdate=#startdate#,topdocument.enddate=#enddate# where
+		docid=#docid#
+	</update>
+	<delete id="deletetopDoc" parameterClass="java.util.Map">
+		delete from topdocument where topdocument.docid in ($docids$)
+	</delete>
 </sqlMap>

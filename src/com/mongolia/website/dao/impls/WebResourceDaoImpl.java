@@ -894,4 +894,12 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 				"getRecentActiveUsers", params);
 	}
 
+	@Override
+	public void updTopDocument(Map<String, Object> params) throws Exception {
+		// TODO Auto-generated method stub
+		this.getSqlMapClientTemplate().update("updtopdoc", params);
+		
+	}
+	
+
 }

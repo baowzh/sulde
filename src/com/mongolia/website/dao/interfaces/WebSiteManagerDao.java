@@ -59,6 +59,7 @@ public interface WebSiteManagerDao extends BaseDao {
 
 	/**
 	 * 获取菜单
+	 * 
 	 * @param params
 	 * @return
 	 * @throws Exception
@@ -75,6 +76,7 @@ public interface WebSiteManagerDao extends BaseDao {
 	 */
 	public List<DocumentValue> getDocuments(Map<String, Object> params)
 			throws Exception;
+
 	/**
 	 * 
 	 * @param params
@@ -96,6 +98,7 @@ public interface WebSiteManagerDao extends BaseDao {
 
 	/**
 	 * 获取内容列表
+	 * 
 	 * @param channelid
 	 * @param docid
 	 * @throws Exception
@@ -104,6 +107,7 @@ public interface WebSiteManagerDao extends BaseDao {
 
 	/**
 	 * 获取栏目对应的内容
+	 * 
 	 * @param channelid
 	 * @return
 	 * @throws Exception
@@ -125,18 +129,30 @@ public interface WebSiteManagerDao extends BaseDao {
 	 */
 	public void createTopDocument(TopDocumentValue topDocumentValue)
 			throws Exception;
+
 	/**
 	 * 保存意见建议
+	 * 
 	 * @param opinionValue
 	 * @throws Exception
 	 */
-	public void addopinions(OpinionValue opinionValue)throws Exception;
+	public void addopinions(OpinionValue opinionValue) throws Exception;
+
 	/**
 	 * 获取意见建议
+	 * 
 	 * @param queryOpinionFrom
 	 * @return
 	 * @throws Exception
 	 */
-	public List<OpinionValue> getopinions(QueryOpinionFrom queryOpinionFrom)throws Exception;
- 
+	public List<OpinionValue> getopinions(QueryOpinionFrom queryOpinionFrom)
+			throws Exception;
+
+	/**
+	 * 
+	 * @param docids
+	 * @throws Exception
+	 */
+	public void deleteTopDocument(String docids) throws Exception;
+
 }

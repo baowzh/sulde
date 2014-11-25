@@ -48,7 +48,7 @@ import com.mongolia.website.util.StaticConstants;
  * @author baowzh
  */
 @Controller
-public class WebSiteManagerAction  {
+public class WebSiteManagerAction {
 	@Autowired
 	private WebSiteManager webSiteManager;
 	@Autowired
@@ -305,22 +305,6 @@ public class WebSiteManagerAction  {
 		}
 		return new ModelAndView("sitemanager/sitemanagerindex", map);
 	}
-
-//	@RequestMapping("/pagingdata.do")
-//	@Override
-//	public ModelAndView pagingData(PaingModel model, ModelMap map) {
-//		// TODO Auto-generated method stub
-//		System.out.println(" 分页查询方法1");
-//		return new ModelAndView("jsonView", map);
-//	}
-//
-//	@RequestMapping("/refreshdata.do")
-//	@Override
-//	public ModelAndView refreshData(PaingModel model, ModelMap map) {
-//		// TODO Auto-generated method stub
-//		System.out.println(" 分页查询方法2");
-//		return new ModelAndView("jsonView", map);
-//	}
 
 	/**
 	 * 审核内容
@@ -724,6 +708,39 @@ public class WebSiteManagerAction  {
 			ex.printStackTrace();
 		}
 		return new ModelAndView("redirect:index.do", map);
+	}
+
+	@RequestMapping("/addSelectedDocs.do")
+	public ModelAndView addSelectedDocs(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String docids = request.getParameter("docids");
+		String type = request.getParameter("type");
+		String ids[] = docids.split(",");
+		try {
+			this.webSiteManager.addSelectedDocs(ids, type);
+			map.put("success", 1);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			map.put("success", 0);
+			return new ModelAndView("error", map);
+		}
+		return new ModelAndView("jsonView", map);
+	}
+
+	@RequestMapping("/delSelectedDocs.do")
+	public ModelAndView delSelectedDocs(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String docids = request.getParameter("docids");
+		String ids[] = docids.split(",");
+		try {
+			this.webSiteManager.deleteTopDocument(ids);
+			map.put("success", 1);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			map.put("success", 0);
+			return new ModelAndView("error", map);
+		}
+		return new ModelAndView("jsonView", map);
 	}
 
 }

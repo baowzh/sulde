@@ -686,7 +686,13 @@ public interface WebResourceDao extends BaseDao {
 
 	public List<DocumentValue> getRecentDocs(Integer count) throws Exception;
 
-	public List<UserValue> getRecentActiveUsers(Integer count)
-			throws Exception;
+	public List<UserValue> getRecentActiveUsers(Integer count) throws Exception;
+
+	/**
+	 * 
+	 * @param params
+	 * @throws Exception
+	 */
+	public void updTopDocument(Map<String, Object> params) throws Exception;
 
 }

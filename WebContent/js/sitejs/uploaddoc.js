@@ -10,7 +10,7 @@ $(document).ready(
 				dataType : "json",
 				url : "gechannels.do",// 请求的action路径
 				data : {
-					menutype : 1
+					type : 2
 				},
 				error : function() {// 请求失败处理函数
 					alert('请求失败');

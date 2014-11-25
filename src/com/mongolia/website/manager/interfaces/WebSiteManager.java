@@ -36,6 +36,7 @@ public interface WebSiteManager {
 
 	/**
 	 * 添加新闻
+	 * 
 	 * @param item
 	 * @throws Exception
 	 */
@@ -43,6 +44,7 @@ public interface WebSiteManager {
 
 	/**
 	 * 添加栏目
+	 * 
 	 * @param programValue
 	 * @throws Exception
 	 */
@@ -50,6 +52,7 @@ public interface WebSiteManager {
 
 	/**
 	 * 删除栏目明细
+	 * 
 	 * @param params
 	 * @throws Exception
 	 */
@@ -72,11 +75,12 @@ public interface WebSiteManager {
 	 * @return
 	 * @throws Exception
 	 */
-	Map<String,Object> getDocuments(Map<String, Object> params)
+	Map<String, Object> getDocuments(Map<String, Object> params)
 			throws Exception;
 
 	/**
 	 * 获取文章列表
+	 * 
 	 * @param params
 	 * @return
 	 * @throws Exception
@@ -85,7 +89,8 @@ public interface WebSiteManager {
 			throws Exception;
 
 	/**
-	 *  对文章进行分组
+	 * 对文章进行分组
+	 * 
 	 * @param channelid
 	 * @param docids
 	 * @throws Exception
@@ -95,6 +100,7 @@ public interface WebSiteManager {
 
 	/**
 	 * 获取
+	 * 
 	 * @param channelid
 	 * @return
 	 * @throws Exception
@@ -105,38 +111,64 @@ public interface WebSiteManager {
 
 	/**
 	 * 审核文档
+	 * 
 	 * @param docids
 	 * @throws Exception
 	 */
-	public void doCheckDocument(String docids[],Integer status) throws Exception;
+	public void doCheckDocument(String docids[], Integer status)
+			throws Exception;
+
 	/**
 	 * 选取优秀作品
+	 * 
 	 * @param groupid
 	 * @param userid
 	 * @param docid
 	 * @throws Exception
 	 */
-	public void doCreateTopDocument(TopDocumentValue topDocumentValue) throws Exception;
+	public void doCreateTopDocument(TopDocumentValue topDocumentValue)
+			throws Exception;
+
 	/**
 	 * 根据一定条件博客用户
+	 * 
 	 * @param queryUserForm
 	 * @throws Exception
 	 */
-	public PaingModel<UserValue> getUsers(QueryUserForm queryUserForm)throws Exception;
+	public PaingModel<UserValue> getUsers(QueryUserForm queryUserForm)
+			throws Exception;
+
 	/**
 	 * 查询意见建议
+	 * 
 	 * @param queryOpinionFrom
 	 * @return
 	 * @throws Exception
 	 */
-	public List<OpinionValue> getopinions(QueryOpinionFrom queryOpinionFrom)throws Exception;
+	public List<OpinionValue> getopinions(QueryOpinionFrom queryOpinionFrom)
+			throws Exception;
+
 	/**
 	 * 保存意见建议
+	 * 
 	 * @param opinionValue
 	 * @throws Exception
 	 */
-	public void doAaddopinions(OpinionValue opinionValue)throws Exception;
-	
-	
+	public void doAaddopinions(OpinionValue opinionValue) throws Exception;
+
+	/**
+	 * 
+	 * @param ids
+	 * @throws Exception
+	 */
+	public void addSelectedDocs(String ids[],String type) throws Exception;
+
+	/**
+	 * 从selected 文章中删除
+	 * 
+	 * @param ids
+	 * @throws Exception
+	 */
+	public void deleteTopDocument(String ids[]) throws Exception;
 
 }

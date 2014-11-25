@@ -146,6 +146,7 @@ public class WebPageManagerAction {
 			webPageValue.setParentid("");
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("pageid", request.getParameter("pageid"));
+			params.put("type", request.getParameter("type"));
 			List<Channel> channels = this.channelManager.getChannelList(params);
 			channels.add(webPageValue);
 			map.put("success", "true");

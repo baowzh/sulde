@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.controller.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.dao.interfaces.UserManagerDao;
+import com.mongolia.website.dao.interfaces.WebResourceDao;
 import com.mongolia.website.dao.interfaces.WebSiteManagerDao;
 import com.mongolia.website.manager.interfaces.WebSiteManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
@@ -46,6 +48,8 @@ public class WebSiteManagerImpl implements WebSiteManager {
 	private WebSiteVisitorManager webSiteVisitorManager;
 	@Autowired
 	private UserManagerDao userManagerDao;
+	@Autowired
+	private WebResourceDao webResourceDao;
 
 	@Override
 	public List<ProgramItem> getProgramItemList(Map<String, Object> params)
@@ -143,35 +147,35 @@ public class WebSiteManagerImpl implements WebSiteManager {
 		File imgFile = new File(htmimgFile, "img");
 		htmimgFile.mkdir();
 		imgFile.mkdir();
-//		for (UserValue userValue : topUsers) {
-//			byte imgsm[] = userValue.getHeadimgsm();
-//			if(imgsm!=null){
-//				File imgFilei = new File(imgFile, userValue.getUserid() + ".jpg");
-//				FileOutputStream stream = new FileOutputStream(imgFilei);
-//				stream.write(imgsm);
-//				stream.close();
-//			}else{
-//				if(userValue.getSex()!=null&&userValue.getSex().intValue()==1){
-//				
-//					
-//				}else if(userValue.getSex()!=null&&userValue.getSex().intValue()==0){
-//					
-//					
-//				}
-//				
-//			}
-//			
-//		}
-//		for (UserValue userValue : newUsers) {
-//			byte imgsm[] = userValue.getHeadimgsm();
-//			File imgFilei = new File(imgFile, userValue.getUserid() + ".jpg");
-//			FileOutputStream stream = new FileOutputStream(imgFilei);
-//			if(imgsm!=null){
-//				stream.write(imgsm);
-//			}
-//			
-//			stream.close();
-//		}
+		// for (UserValue userValue : topUsers) {
+		// byte imgsm[] = userValue.getHeadimgsm();
+		// if(imgsm!=null){
+		// File imgFilei = new File(imgFile, userValue.getUserid() + ".jpg");
+		// FileOutputStream stream = new FileOutputStream(imgFilei);
+		// stream.write(imgsm);
+		// stream.close();
+		// }else{
+		// if(userValue.getSex()!=null&&userValue.getSex().intValue()==1){
+		//
+		//
+		// }else if(userValue.getSex()!=null&&userValue.getSex().intValue()==0){
+		//
+		//
+		// }
+		//
+		// }
+		//
+		// }
+		// for (UserValue userValue : newUsers) {
+		// byte imgsm[] = userValue.getHeadimgsm();
+		// File imgFilei = new File(imgFile, userValue.getUserid() + ".jpg");
+		// FileOutputStream stream = new FileOutputStream(imgFilei);
+		// if(imgsm!=null){
+		// stream.write(imgsm);
+		// }
+		//
+		// stream.close();
+		// }
 		Map<String, Object> jstempData = new HashMap<String, Object>();
 		jstempData.put("pics1", indexPageContent.get("pics"));
 		// 根据topdocuments 生成js脚本文件
@@ -222,7 +226,7 @@ public class WebSiteManagerImpl implements WebSiteManager {
 	@Override
 	public void doCheckDocument(String[] docids, Integer status)
 			throws Exception {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		for (int i = 0; i < docids.length; i++) {
 			Map<String, Object> queryParams = new HashMap<String, Object>();
 			queryParams.put("docid", docids[i]);
@@ -234,10 +238,10 @@ public class WebSiteManagerImpl implements WebSiteManager {
 				continue;
 			}
 			DocumentValue documentValue = doces.get(0);
-			//if (documentValue.getDocstatus().intValue() == 1) {
-				this.WebSiteManagerDao.checkDocument(documentValue.getDocid(),
-						status);
-			//}
+			// if (documentValue.getDocstatus().intValue() == 1) {
+			this.WebSiteManagerDao.checkDocument(documentValue.getDocid(),
+					status);
+			// }
 		}
 	}
 
@@ -287,26 +291,27 @@ public class WebSiteManagerImpl implements WebSiteManager {
 	}
 
 	@Override
-	public PaingModel<UserValue> getUsers(QueryUserForm queryUserForm) throws Exception {
+	public PaingModel<UserValue> getUsers(QueryUserForm queryUserForm)
+			throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> queryparams = new HashMap<String, Object>();
 		if (queryUserForm.getQx() != null
 				&& !queryUserForm.getQx().equalsIgnoreCase("")) {
 			queryparams.put("qx", queryUserForm.getQx());
 		}
-		if(queryUserForm.getQx() != null
-				&& queryUserForm.getQx().equalsIgnoreCase("#")){
-			queryparams.put("qx",null);
+		if (queryUserForm.getQx() != null
+				&& queryUserForm.getQx().equalsIgnoreCase("#")) {
+			queryparams.put("qx", null);
 		}
 		if (queryUserForm.getDistrict() != null
 				&& !queryUserForm.getDistrict().equalsIgnoreCase("")) {
 			queryparams.put("district", queryUserForm.getDistrict());
 		}
-		if(queryUserForm.getDistrict() != null
-				&& queryUserForm.getDistrict().equalsIgnoreCase("#")){
-			queryparams.put("district",null);
+		if (queryUserForm.getDistrict() != null
+				&& queryUserForm.getDistrict().equalsIgnoreCase("#")) {
+			queryparams.put("district", null);
 		}
-		
+
 		if (queryUserForm.getUsername() != null
 				&& !queryUserForm.getUsername().equalsIgnoreCase("")) {
 			queryparams.put("likeusername", queryUserForm.getUsername());
@@ -359,6 +364,63 @@ public class WebSiteManagerImpl implements WebSiteManager {
 			throws Exception {
 		// TODO Auto-generated method stub
 		return this.WebSiteManagerDao.getopinions(queryOpinionFrom);
+	}
+
+	@Override
+	public void addSelectedDocs(String[] ids, String type) throws Exception {
+		// TODO Auto-generated method stub
+		// 1.判断是否已经存在于选择作品列表，存在则修改选送时间
+		String docids = "";
+		String toptypes = "4";
+		for (String id : ids) {
+			docids = docids + "'" + id + "',";
+		}
+		if (!docids.equalsIgnoreCase("")) {
+			docids = docids.substring(0, docids.length() - 1);
+		}
+		Map<String, Object> checkparams = new HashMap<String, Object>();
+		checkparams.put("docids", docids);
+		checkparams.put("toptypes", toptypes);
+		List<DocumentValue> docs = this.webResourceDao.getDocList(checkparams);
+		// 已经存在的直接修改时间
+		List<String> filterids = new ArrayList<String>();
+		for (DocumentValue documentValue : docs) {
+			filterids.add(documentValue.getDocid());
+			Map<String, Object> updParams = new HashMap<String, Object>();
+			updParams.put("docid", documentValue.getDocid());
+			updParams.put("startdate", new Date());
+			Calendar calendar = java.util.Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, 7);
+			updParams.put("enddate", calendar.getTime());
+			this.webResourceDao.updTopDocument(updParams);
+		}
+		// 2.不存在则新建一个选送记录
+		for (String docid : ids) {
+			if (!filterids.contains(docid)) {
+				TopDocumentValue documentValue = new TopDocumentValue();
+				documentValue.setDocid(docid);
+				documentValue.setToptype(Integer.parseInt(type));
+				documentValue.setStartdate(new Date());
+				Calendar calendar = java.util.Calendar.getInstance();
+				calendar.add(Calendar.DAY_OF_MONTH, 7);
+				documentValue.setEnddate(calendar.getTime());
+				documentValue.setPlayindex(1);
+				this.WebSiteManagerDao.createTopDocument(documentValue);
+			}
+		}
+	}
+
+	@Override
+	public void deleteTopDocument(String[] ids) throws Exception {
+		// TODO Auto-generated method stub
+		String docids = "";
+		for (String id : ids) {
+			docids = docids + "'" + id + "',";
+		}
+		if (!docids.equalsIgnoreCase("")) {
+			docids = docids.substring(0, docids.length() - 1);
+		}
+		this.WebSiteManagerDao.deleteTopDocument(docids);
 	}
 
 }

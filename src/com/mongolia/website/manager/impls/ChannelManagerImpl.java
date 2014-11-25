@@ -28,6 +28,19 @@ public class ChannelManagerImpl implements ChannelManager {
 	@Override
 	public List<Channel> getChannelList(Map<String, Object> params) {
 		// TODO Auto-generated method stub
+		String types = "";
+		Object type = params.get("type");
+		if (type != null) {
+			String typestr = type.toString();
+			if (typestr.equalsIgnoreCase("1")) {
+				types = types + "1,2";
+			} else {
+				types = types + "2";
+			}
+		} else {
+			types = "2";
+		}
+		params.put("types", types);
 		return channelDao.getChannel(params);
 	}
 

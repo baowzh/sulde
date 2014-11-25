@@ -82,7 +82,8 @@ public class WebSiteManagerDaoImpl extends BaseDaoiBatis implements
 	public Integer getDocumentsCount(Map<String, Object> params)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return (Integer)this.getSqlMapClientTemplate().queryForObject("getUserDocCount", params);
+		return (Integer) this.getSqlMapClientTemplate().queryForObject(
+				"getUserDocCount", params);
 	}
 
 	@Override
@@ -135,6 +136,15 @@ public class WebSiteManagerDaoImpl extends BaseDaoiBatis implements
 		// TODO Auto-generated method stub
 		return this.getSqlMapClientTemplate().queryForList("getOpinions",
 				queryOpinionFrom);
+	}
+
+	@Override
+	public void deleteTopDocument(String docids) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("docids", docids);
+		this.getSqlMapClientTemplate().delete("deletetopDoc", params);
+
 	}
 
 }
