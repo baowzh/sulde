@@ -144,7 +144,8 @@ public class VerifyCodeServlet extends HttpServlet {
 			blue = random.nextInt(255);
 
 			// 用随机产生的颜色将验证码绘制到图像中。
-			gd.setColor(new Color(red, green, blue));
+			//gd.setColor(new Color(red, green, blue));
+			gd.setColor(new Color(255, 0, 0));
 			gd.drawString(strRand, 10, (i + 1) * 20);
 
 			// 将产生的四个随机数组合在一起。

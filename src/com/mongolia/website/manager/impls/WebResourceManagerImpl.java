@@ -451,16 +451,16 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			List<VoteValue> votelist = this.getVoteList(params);
 			map.put("votelist", votelist);
 			String sitename = sysConfig.getSitename();
-			if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {// 如果是altanhurd
+			//if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {// 如果是altanhurd
 				// 获取热门文章
 				List<DocumentValue> topDocuments = this.webResourceDao
 						.getTopDocuments(sysConfig.getTopdocumentcount());
 				map.put("topDocuments", topDocuments);
 				// 获取精选文章
 				List<TopDocumentValue> seleDocuments = this.webSiteVisitorManager
-						.getTopDocuments(StaticConstants.TOP_TYPE1, null, 7);
+						.getTopDocuments(StaticConstants.TOP_TYPE2, null, 24);
 				map.put("seleDocuments", seleDocuments);
-			}
+			//}
 
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());

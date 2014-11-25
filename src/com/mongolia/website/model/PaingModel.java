@@ -69,6 +69,7 @@ public class PaingModel<E> {
 
 	private List<E> modelList;
 	private String pagetype;
+	private Integer inindex;
 
 	public Integer getPagesize() {
 		return pagesize;
@@ -204,6 +205,14 @@ public class PaingModel<E> {
 
 	public void setPagetype(String pagetype) {
 		this.pagetype = pagetype;
+	}
+
+	public Integer getInindex() {
+		return inindex;
+	}
+
+	public void setInindex(Integer inindex) {
+		this.inindex = inindex;
 	}
 
 }

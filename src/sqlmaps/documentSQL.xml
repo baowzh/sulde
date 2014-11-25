@@ -251,6 +251,11 @@
 			<isNotNull prepend="and" property="userid">
 				userid=#userid#
 			</isNotNull>
+			<isNotNull prepend="and" property="inindex">
+				exists(select 1 from
+				topdocument where topdocument.docid=document.docid and
+				topdocument.type=5 )
+			</isNotNull>
 			<isNotNull prepend="and" property="imggroupid">
 				exists(select 1 from
 				imggroup,img where imggroup.imggroupid=img.imggroupid and
@@ -545,9 +550,9 @@
 				docid=#docid#
 			</isNotNull>
 			<isNotNull prepend=" " property="limit">
-				LIMIT 0, #limit#
+				order by startdate desc LIMIT 0, #limit#
 			</isNotNull>
-
+            
 		</dynamic>
 	</select>
 	<select id="getMessageList" parameterClass="java.util.Map"
@@ -802,6 +807,7 @@
 		docid=#docid#
 	</update>
 	<delete id="deletetopDoc" parameterClass="java.util.Map">
-		delete from topdocument where topdocument.docid in ($docids$)
+		delete from topdocument
+		where topdocument.docid in ($docids$)
 	</delete>
 </sqlMap>

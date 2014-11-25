@@ -409,13 +409,13 @@ c
 				</div>
 				<div class="nwsls1" style="width: 430px;">
 
-					<c:forEach items="${indexPageContent.newsarts}" var="documentValue"
+					<c:forEach items="${indexPageContent.selecteddocs}" var="documentValue"
 						varStatus="status">
 						<div class="nwsl1">
 							<div class="title">
 								<a
 									href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"><c:out
-										value="${documentValue.doctitle}" /> </a>
+										value="${documentValue.title}" /> </a>
 							</div>
 							<div class="author">
 								<a

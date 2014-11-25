@@ -116,6 +116,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 			paingModel.setStartrow(0);
 			paingModel.setEndrow(channel.getChanneldoccount());// fetchcount
 			paingModel.setDocstatus(2);
+			paingModel.setInindex(1);
 			List<DocumentValue> documents = this.webSiteVisitorDao
 					.pagingquerydoc(paingModel);
 			indexPageContent.put(channel.getVariablename(), documents);
@@ -232,6 +233,9 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 					.getRecentActiveUsers(sysConfig.getActiveusercount());
 			indexPageContent.put("activeusers", activeusers);
 		}
+		List<TopDocumentValue> selecteddocs = this.getTopDocuments(
+				StaticConstants.TOP_TYPE4, null, 15);
+		indexPageContent.put("selecteddocs", selecteddocs);
 		return indexPageContent;
 	}
 
@@ -266,14 +270,19 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		else if (type == StaticConstants.TOP_TYPE2) {
 			Calendar cal = Calendar.getInstance(java.util.Locale.CHINA);
 			Date fetchDate = cal.getTime();
-			while (topDocuments.size() == 0) {
+			int fetchtime = 0;
+			while (topDocuments.size() == 0 && fetchtime > 10) {
 				topDocuments.addAll(this.webSiteVisitorDao.getTopDocuments(
 						fetchDate, type, docid, limit));
 				Calendar calendar = java.util.Calendar.getInstance();
 				calendar.setTime(new Date());
 				calendar.add(Calendar.MONTH, -1);
 				fetchDate = calendar.getTime();
+				fetchtime++;
 			}
+		} else if (type == StaticConstants.TOP_TYPE4) {
+			topDocuments.addAll(this.webSiteVisitorDao.getTopDocuments(null,
+					type, docid, limit));
 		} else {
 			topDocuments.addAll(this.webSiteVisitorDao.getTopDocuments(
 					new Date(), type, docid, limit));

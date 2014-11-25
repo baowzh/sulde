@@ -40,6 +40,7 @@ public class TopDocumentValue {
 	private String groupid;
 	private String title;
 	private String docauthor;
+	private String userid;
 
 	public String getDocid() {
 		return docid;
@@ -119,6 +120,14 @@ public class TopDocumentValue {
 
 	public void setDocauthor(String docauthor) {
 		this.docauthor = docauthor;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 }

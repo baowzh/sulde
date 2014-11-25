@@ -294,7 +294,7 @@
 							</div>
 							<!--  进度条-->
 							<div class="artclList" id="hotartclList">
-								<c:forEach items="${docList}" var="documentValue"
+								<c:forEach items="${topDocuments}" var="documentValue"
 									varStatus="status">
 									<div class="m1ln">
 										<a><img src="img/temdeg.gif"></a>
@@ -332,7 +332,7 @@
 							</div>
 							<!--  进度条-->
 							<div class="artclList" id="monthartclList">
-								<c:forEach items="${docList}" var="documentValue"
+								<c:forEach items="${seleDocuments}" var="documentValue"
 									varStatus="status">
 									<div class="m1ln">
 										<a><img src="img/wzt.gif"></a>
