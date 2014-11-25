@@ -289,6 +289,7 @@ public class WebSiteVisiterAction {
 					&& queryDocForm.getChannel().equalsIgnoreCase("#")) {
 				queryDocParams.put("channelid", null);
 			} else {
+				
 				queryDocParams.put("channelid", queryDocForm.getChannel());
 			}
 			if (queryDocForm.getAuthorname() != null

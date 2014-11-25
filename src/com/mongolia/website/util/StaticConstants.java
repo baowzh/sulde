@@ -89,6 +89,10 @@ public class StaticConstants {
 	 */
 	public static Integer TOP_TYPE3 = 3;
 
+	public static Integer TOP_TYPE4 = 4;
+
+	public static Integer TOP_TYPE5 = 5;
+
 	public static Integer IMG_NEWS_FETCHNUM = 7;
 	/**
 	 * 消息类型-评论
@@ -126,4 +130,8 @@ public class StaticConstants {
 
 	public static String sitename2 = "altanhurd";
 	public static String downimgurl = "http://www.altanhurd.com/Upfiles/";
+	public static String SEL_TYPE90 = "90";
+	public static String SEL_TYPE91 = "91";
+	public static String SEL_TYPE92 = "92";
+	public static String SEL_TYPE93 = "93";
 }
