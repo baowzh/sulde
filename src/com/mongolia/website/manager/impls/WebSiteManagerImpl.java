@@ -371,7 +371,6 @@ public class WebSiteManagerImpl implements WebSiteManager {
 		// TODO Auto-generated method stub
 		// 1.判断是否已经存在于选择作品列表，存在则修改选送时间
 		String docids = "";
-		String toptypes = "4";
 		for (String id : ids) {
 			docids = docids + "'" + id + "',";
 		}
@@ -380,7 +379,7 @@ public class WebSiteManagerImpl implements WebSiteManager {
 		}
 		Map<String, Object> checkparams = new HashMap<String, Object>();
 		checkparams.put("docids", docids);
-		checkparams.put("toptypes", toptypes);
+		checkparams.put("toptypes", type);
 		List<DocumentValue> docs = this.webResourceDao.getDocList(checkparams);
 		// 已经存在的直接修改时间
 		List<String> filterids = new ArrayList<String>();
