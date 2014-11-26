@@ -124,7 +124,7 @@
 							</c:forEach>
 
 							<span id="picbtn1"
-								style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&lt;</a>&nbsp;
+								style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&gt;</a>&nbsp;
 							</span> (
 							<c:out value="${doccount}" default="0" />
 							)
