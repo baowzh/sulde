@@ -9,6 +9,7 @@
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
 <link href="img/css/doccheck.css" type="text/css" rel="stylesheet" />
 <link href="img/css/listpages.css" type="text/css" rel="stylesheet" />
+<link href="img/css/selectpanel.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/jqGrid/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/util/js/messageWindow.js"></script>
 <script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
@@ -34,6 +35,30 @@
 							<div class="m1ln h100">  </div>
 						</td>
 						<td>
+							<div class="m1ln h100" style="height: 160px">
+								<a id="provincename"
+									href="javascript:showselpanel(true,'provinces')"> 
+									 </a> <input type="hidden" id="district" name="district" />
+								
+								<!-- 								<select id="district" name="district" -->
+								<!-- 									style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr; height: 70px"> -->
+								<!-- 									<option value="#"></option> -->
+								<!-- 								</select>  -->
+
+								<a id="hsienname" href="javascript:showselpanel(true,'hsiens')"></a>
+								<input type="hidden" id="qx" name="qx" />
+								<!--  
+								<select id="qx" name="qx"
+									style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr; height: 70px">
+									<option value="#"></option>
+								</select>
+								-->
+
+
+							</div>
+						</td>
+						<!--  
+						<td>
 							<div class="inputHolder" style="height: 160px">
 								<select id="district" name="district"
 									style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr; height: 70px">
@@ -44,6 +69,7 @@
 								</select>
 							</div>
 						</td>
+						-->
 						<td>
 							<div class="m1ln h100"> </div>
 						</td>
@@ -212,10 +238,57 @@
 		</form>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
-<!-- 		<div class="tailCard"> -->
-			<%@ include file="../website/tail.jsp"%>
-<!-- 		</div> -->
+		<!-- 		<div class="tailCard"> -->
+		<%@ include file="../website/tail.jsp"%>
+		<!-- 		</div> -->
 		<div class="cbt"></div>
 	</div>
+	<!-- 选择住地（省）-->
+	<div class="channelpanel" id="provinces" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'provinces');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div class="channellist">
+			<c:forEach items="${districts}" var="districtValue"
+				varStatus="status">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 98px; width: 25px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','district','provincename','provinces');loadChildDistrict('district',1);"
+						style="cursor: pointer" class=""><c:out
+							value="${districtValue.districtname}" /> </a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!-- 选择住地（旗县）-->
+	<div class="channelpanel" id="hsiens" style="display: none">
+		<div class="paneltitle">
+			<a href="javascript:showselpanel(false,'hsiens');"
+				style="cursor: pointer"> <img src="img/gbchange.png" width="15"
+				height="16"></a>
+		</div>
+		<div id="hsienlist" class="channellist">
+			<c:forEach items="${districts}" var="districtValue"
+				varStatus="status">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 120px; width: 25px;">
+					<a
+						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','qx','hsienname','hsiens');"
+						style="cursor: pointer" class=""><c:out
+							value="${districtValue.districtname}" /> </a>
+				</div>
+			</c:forEach>
+
+			<div class="clear"></div>
+		</div>
+	</div>
 </body>
+<script>
+	var districtsdata = <c:out value="${districtsdata}" escapeXml="false" />;
+</script>
 </html>
