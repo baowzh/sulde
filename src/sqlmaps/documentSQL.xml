@@ -148,10 +148,13 @@
 			<isNotNull prepend="and" property="top">
 				exists(select 1 from topdocument where
 				topdocument.docid=document.docid and topdocument.type=#top#
-			<![CDATA[and #currentday#>= topdocument.startdate and  #currentday#<=topdocument.enddate]]>
 				)
 			</isNotNull>
-
+			<isNotNull prepend="and" property="toptype">
+				exists(select 1 from topdocument where
+				topdocument.docid=document.docid and topdocument.type=#toptype#
+				)
+			</isNotNull>
 			<isNotNull prepend="and" property="authorname">
 			<![CDATA[instr(DOCAUTHOR,trim(#authorname#))>0]]>
 			</isNotNull>
@@ -536,7 +539,8 @@
 
 	<select id="getTopDocuments" parameterClass="java.util.Map"
 		resultClass="TopDocumentValue">
-		select a.*,b.doctitle as title,b.docauthor,b.userid from topdocument a,document
+		select a.*,b.doctitle as title,b.docauthor,b.userid from topdocument
+		a,document
 		b where
 		a.docid=b.docid
 		<dynamic prepend="and">
@@ -550,9 +554,10 @@
 				docid=#docid#
 			</isNotNull>
 			<isNotNull prepend=" " property="limit">
-				order by startdate desc LIMIT 0, #limit#
+				order by startdate desc
+				LIMIT 0, #limit#
 			</isNotNull>
-            
+
 		</dynamic>
 	</select>
 	<select id="getMessageList" parameterClass="java.util.Map"

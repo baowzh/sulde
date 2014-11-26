@@ -290,7 +290,7 @@
 						</div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="inputHolder">
 							<select name="toptype" id="toptype"
 								style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
 								<option value="3">  </option>
@@ -306,9 +306,9 @@
 						</div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="inputHolder">
 							<input type="text" name="playindex" id="playindex"
-								style="height: 210px;"></input>
+								></input>
 						</div>
 					</td>
 					<td>

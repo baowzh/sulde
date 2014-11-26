@@ -176,18 +176,22 @@ public class WebSiteManagerAction {
 					&& queryDocForm.getChannel().equalsIgnoreCase("#")) {
 				queryDocParams.put("channelid", null);
 			} else {
-				if (queryDocForm.getChannel().equalsIgnoreCase(
-						StaticConstants.SEL_TYPE90)) {
-					queryDocParams.put("toptype", 1);
-				} else if (queryDocForm.getChannel().equalsIgnoreCase(
-						StaticConstants.SEL_TYPE91)) {
-					queryDocParams.put("toptype", 2);
-				} else if (queryDocForm.getChannel().equalsIgnoreCase(
-						StaticConstants.SEL_TYPE92)) {
-					queryDocParams.put("toptype", 3);
-				} else if (queryDocForm.getChannel().equalsIgnoreCase(
-						StaticConstants.SEL_TYPE93)) {
+				if (queryDocForm.getChannel() != null
+						&& queryDocForm.getChannel().equalsIgnoreCase(
+								StaticConstants.SEL_TYPE90)) {
 					queryDocParams.put("toptype", 4);
+				} else if (queryDocForm.getChannel() != null
+						&& queryDocForm.getChannel().equalsIgnoreCase(
+								StaticConstants.SEL_TYPE91)) {
+					queryDocParams.put("toptype", 1);
+				} else if (queryDocForm.getChannel() != null
+						&& queryDocForm.getChannel().equalsIgnoreCase(
+								StaticConstants.SEL_TYPE92)) {
+					queryDocParams.put("toptype", 2);
+				} else if (queryDocForm.getChannel() != null
+						&& queryDocForm.getChannel().equalsIgnoreCase(
+								StaticConstants.SEL_TYPE93)) {
+					queryDocParams.put("toptype", 3);
 				} else {
 					queryDocParams.put("channelid", queryDocForm.getChannel());
 				}
