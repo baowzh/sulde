@@ -43,6 +43,7 @@ import com.mongolia.website.model.QueryOpinionFrom;
 import com.mongolia.website.model.QueryUserForm;
 import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
+import com.mongolia.website.util.PageUtil;
 import com.mongolia.website.util.StaticConstants;
 
 /**
@@ -653,7 +654,7 @@ public class WebSiteManagerAction {
 			paingModel.setStartrow((paingModel.getPageindex() - 1) * 24);
 			paingModel.setEndrow(paingModel.getPagesize());
 			paingModel.setPagesize(24);
-			paingModel.setDocstatus(StaticConstants.DOCSTATUS1);
+			// paingModel.setDocstatus(StaticConstants.DOCSTATUS1);
 			PaingModel<DocumentValue> pageModel = webSiteVisitorManager
 					.pagingquerydoc(paingModel);
 			map.put("imgList", pageModel.getModelList());
@@ -702,6 +703,8 @@ public class WebSiteManagerAction {
 			map.put("pagingindexs", indexs);
 			map.put("imgcount", pageModel.getRowcount());
 			map.put("idAndIndexrel", idAndIndexrel);
+			String linkstr = PageUtil.getPagingImgLink(pageModel, 1);
+			map.put("linkstr", linkstr);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

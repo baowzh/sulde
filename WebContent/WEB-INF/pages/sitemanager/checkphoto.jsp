@@ -26,7 +26,7 @@
 		<div class="lmainR ofh">
 			<div class="flt glryBox" style="width: 986px; margin-top: 0px;">
 				<c:if test="${isempty==1}">
-                 <div class="mnlist">    </div>
+					<div class="mnlist">    </div>
 				</c:if>
 				<c:forEach items="${imgList}" var="imgValue" varStatus="status">
 					<div class="displayfolder"
@@ -35,8 +35,15 @@
 							href="javaScript:photoDetail('<c:out value="${imgValue.docid}" />')"><img
 							class="displayimg" style="width: 152px; height: 148px;"
 							src="getimg.do?imgid=<c:out value="${imgValue.docid}" />"></a>
-						<input type="checkbox" name="docnamecheckbox"
-							id="<c:out value="${imgValue.docid}" />">
+						<c:if test="${imgValue.docstatus==2}">
+							<input type="checkbox" name="docnamecheckbox"
+								id="<c:out value="${imgValue.docid}" />" checked="checked">
+						</c:if>
+						<c:if test="${imgValue.docstatus==1}">
+							<input type="checkbox" name="docnamecheckbox"
+								id="<c:out value="${imgValue.docid}" />" >
+						</c:if>
+
 					</div>
 
 				</c:forEach>
@@ -76,11 +83,14 @@
 						src="img/deleteimg.png" /></a></span> <span class="spanstyle"><a
 					href="sitemanagerindex.do"><img src="img/goindex.png" /></a></span>
 			</div>
+			<div class=" pagenav">
+			<c:out value="${linkstr}" escapeXml="false" />
+			</div>
 		</div>
 		<div class="lmainR ofh" style="text-align: center;">
-<!-- 			<div class="tailCard"> -->
-				<%@ include file="../website/tail.jsp"%>
-<!-- 			</div> -->
+			<!-- 			<div class="tailCard"> -->
+			<%@ include file="../website/tail.jsp"%>
+			<!-- 			</div> -->
 			<div class="cbt"></div>
 		</div>
 	</form>
