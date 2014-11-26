@@ -84,7 +84,7 @@
 							<div class="m1ln h100">  </div>
 						</td>
 						<td>
-							<div class="inputHolder">
+							<div class="inputHolder" style="padding-left:5px;">
 								<input type="text" name="strregtime" id="strregtime"
 									style="height: 40px;" class="modTxtTime" readonly="readonly"
 									onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /> - <input
