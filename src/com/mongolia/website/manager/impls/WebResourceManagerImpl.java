@@ -451,16 +451,17 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			List<VoteValue> votelist = this.getVoteList(params);
 			map.put("votelist", votelist);
 			String sitename = sysConfig.getSitename();
-			//if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {// 如果是altanhurd
-				// 获取热门文章
-				List<DocumentValue> topDocuments = this.webResourceDao
-						.getTopDocuments(sysConfig.getTopdocumentcount());
-				map.put("topDocuments", topDocuments);
-				// 获取精选文章
-				List<TopDocumentValue> seleDocuments = this.webSiteVisitorManager
-						.getTopDocuments(StaticConstants.TOP_TYPE2, null, 24);
-				map.put("seleDocuments", seleDocuments);
-			//}
+			// if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {//
+			// 如果是altanhurd
+			// 获取热门文章
+			List<DocumentValue> topDocuments = this.webResourceDao
+					.getTopDocuments(sysConfig.getTopdocumentcount());
+			map.put("topDocuments", topDocuments);
+			// 获取精选文章
+			List<TopDocumentValue> seleDocuments = this.webSiteVisitorManager
+					.getTopDocuments(StaticConstants.TOP_TYPE2, null, 24);
+			map.put("seleDocuments", seleDocuments);
+			// }
 
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
@@ -500,9 +501,13 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					while (mati.find()) {
 						String groupi = mati.group(0);
 						groupi = groupi.substring(2, groupi.length() - 2);
-						String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+						String embed = "<br><embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
 								+ groupi
-								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
+								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>"
+								+ "";
+
+						// String embed =
+						// "<iframe height=498 width=510 src=\"http://player.youku.com/embed/XODE0MDY0NzY4\" frameborder=0 allowfullscreen></iframe>";
 						mati.appendReplacement(bufferi, embed);
 					}
 					mati.appendTail(bufferi);
@@ -517,7 +522,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 						groupi = groupi.substring(1, groupi.length() - 1);
 						String flashurl = groupi.split("=")[1];
 						flashurl = flashurl.replaceAll(" ", "");
-						String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+						String embed = "<br><embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
 								+ flashurl
 								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
 						mati.appendReplacement(bufferi, embed);

@@ -140,6 +140,9 @@ body.alag {
 
 .mVsheetIE89 {
 	writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
 	line-height: 20px;
 	text-align: left;
 	overflow-x: scroll;
