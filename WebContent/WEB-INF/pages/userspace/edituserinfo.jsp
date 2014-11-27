@@ -9,6 +9,7 @@
 <script type="text/javascript" src="js/util/js/messageWindow.js"></script>
 <script type="text/javascript" src="js/sitejs/edituserinfo.js"></script>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
+<link href="img/css/login.css" type="text/css" rel="stylesheet" />
 <link href="img/css/selectpanel.css" type="text/css" rel="stylesheet" />
 <title>  </title>
 </head>
@@ -16,6 +17,85 @@
 	<div class="lmainR ofh" style="text-align: center; height: 64px;">
 		<img src="img/logo.png" width="982" />
 	</div>
+	<div class="lmainR  ">
+		<div class="loginSheet">
+			<!-- 			<div class="iconContainer"></div> -->
+			<div class="border" style="padding-left: 10px;">
+				<div class="loginWindow" style="width: 470px;">
+					<div class="content" style="width: 470px;">
+						<form class="mglForm" action="doregiste.do" id="userinfoform"
+							method="post">
+							<div class="label">  :</div>
+							<div class="label">:</div>
+							<div class="label"> </div>
+							<div class="label">  </div>
+							<div class="label"> </div>
+							<div class="label"> </div>
+							<div class="label"> </div>
+							<div class="label"> </div>
+							<div class="label">   </div>
+							<div class="label">  </div>
+							<div class="label">  </div>
+							<div class="label"> </div>
+							<div class="label"> </div>
+							<div class="label"> (Email) </div>
+							<div class="label">  </div>
+							<div class="inputHolder">
+								<input name="username" id="username" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="artname" id="artname" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="password" id="password" type="password" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="inputHolder">
+								<input name="varifycode" id="varifycode" value="" />
+							</div>
+							<div class="mnlist">
+								<a href="javascript:doregist();"> </a> 
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  
 	<div class="lmainR ofh" style="text-align: center; height: 510px;">
 		<form action="edituserinfo.do" id="userinfoform" method="post"
 			enctype="multipart/form-data">
@@ -30,8 +110,6 @@
 					       </div>
 				<div class="mnlist" style="height: 450px;"> 
 					  </div>
-
-				<!-- 				<hr> -->
 				<div class="  lcell" style="width: 890px; height: 510px;">
 					<div class="lcell userinfotab" style="width: 890px; height: 100%;">
 						<table class="m1ln h100">
@@ -131,79 +209,16 @@
 									<div class="m1ln h100"> </div>
 								</td>
 								<td style="height: 90px">
-									<!-- 									<div class="preselpanel" style="z-index: 8;"> -->
-									<!-- 										<div class="changecity" style="width: 24px;"> -->
+
 									<div class="mfl">
 										<a id="provincename"
 											href="javascript:showselpanel(true,'provinces')"> <c:out
 												value="${userinfo.provincename}" default=" " />
 										</a> <input type="hidden" id="province" name="province" value="" />
-
-
-										<!-- 										</div> -->
-
-										<!-- 										<div id="selprovince"> -->
-
-										<!-- 										</div> -->
-
-
-
-										<!-- 
-										<select name="province" id="province"
-											onchange="javascript:loadChildDistrict('province',1);"
-											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;" />
-										<c:forEach items="${districts}" var="districtValue"
-											varStatus="status">
-											<c:if test="${districtValue.districtcode==userinfo.province}">
-												<option
-													value="<c:out value="${districtValue.districtcode}"/>"
-													selected="selected"><c:out
-														value="${districtValue.districtname}" /></option>
-											</c:if>
-											<c:if test="${districtValue.districtcode!=userinfo.province}">
-												<option
-													value="<c:out value="${districtValue.districtcode}" />"><c:out
-														value="${districtValue.districtname}" /></option>
-											</c:if>
-
-
-										</c:forEach>
-
-										</select>
-										 -->
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<!-- 										<div id="selhsien"> -->
-										<a id="hsienname"
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="hsienname"
 											href="javascript:showselpanel(true,'hsiens')"> <c:out
 												value="${userinfo.hsienname}" default=" " /></a>
 										<input type="hidden" id="hsien" name="hsien" value="" />
-										<!-- 										</div> -->
-
-
-										<!--  
-										<select
-											name="hsien" id="hsien"
-											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-
-											<c:forEach items="${hsiens}" var="districtValue"
-												varStatus="status">
-												<c:if test="${districtValue.districtcode==userinfo.hsien}">
-													<option
-														value="<c:out value="${districtValue.districtcode}"/>"
-														selected="selected"><c:out
-															value="${districtValue.districtname}" /></option>
-												</c:if>
-												<c:if
-													test="${districtValue.districtcode!=userinfo.province}">
-													<option
-														value="<c:out value="${districtValue.districtcode}" />"><c:out
-															value="${districtValue.districtname}" /></option>
-												</c:if>
-											</c:forEach>
-
-										</select>
-										-->
-										<!-- 									</div> -->
 									</div>
 								</td>
 								<td></td>
@@ -222,45 +237,13 @@
 										</a> <input type="hidden" id="nowprovince" name="nowprovince"
 											value="" /> <input type="hidden" id="nowprovince"
 											name="nowprovince" value="" />
-										<!-- 
-										<select name="nowprovince" id="nowprovince"
-											onchange="javascript:loadChildDistrict('nowprovince',2);"
-											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-											<c:forEach items="${districts}" var="districtValue"
-												varStatus="status">
-												<option
-													value="<c:out value="${districtValue.districtcode}"/>"><c:out
-														value="${districtValue.districtname}" /></option>
-											</c:forEach>
-										</select>
-										 -->
+
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 											id="nowhsienname"
 											href="javascript:showselpanel(true,'nowhsiens')"><c:out
 												value="${userinfo.nowhsienname}" default=" " /></a>
 										<input type="hidden" id="nowhsien" name="nowhsien" value="" />
-										<!-- 
-                                        <select
-											name="nowhsien" id="nowhsien"
-											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-											<c:forEach items="${nowhsien}" var="districtValue"
-												varStatus="status">
-												<c:if test="${districtValue.districtcode==userinfo.hsien}">
-													<option
-														value="<c:out value="${districtValue.districtcode}"/>"
-														selected="selected"><c:out
-															value="${districtValue.districtname}" /></option>
-												</c:if>
-												<c:if
-													test="${districtValue.districtcode!=userinfo.province}">
-													<option
-														value="<c:out value="${districtValue.districtcode}" />"><c:out
-															value="${districtValue.districtname}" /></option>
-												</c:if>
-											</c:forEach>
 
-										</select>
-										 -->
 									</div>
 								</td>
 								<td></td>
@@ -289,28 +272,7 @@
 												value="${userinfo.professionname}" default=" " /></a>
 										<input type="hidden" id="professioncode" name="professioncode"
 											value="" />
-										<!-- 
-										<select name="professioncode" id="professioncode"
-											onchange="javascript:loadChildDistrict('province',1);"
-											style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;" />
-										<c:forEach items="${professions}" var="professionValue"
-											varStatus="status">
-											<c:if
-												test="${professionValue.professioncode==userinfo.professioncode}">
-												<option
-													value="<c:out value="${professionValue.professioncode}"/>"
-													selected="selected"><c:out
-														value="${professionValue.professionname}" /></option>
-											</c:if>
-											<c:if
-												test="${professionValue.professioncode!=userinfo.professioncode}">
-												<option
-													value="<c:out value="${professionValue.professioncode}" />"><c:out
-														value="${professionValue.professionname}" /></option>
-											</c:if>
-										</c:forEach>
-										</select>
-										 -->
+
 									</div>
 								</td>
 
@@ -321,8 +283,7 @@
 								</td>
 								<td colspan="3">
 									<div class="mfl">
-										<!-- 										<input type="text" name="blogclass" id="blogclass" -->
-										<%-- 											value="<c:out value="${userinfo.blogclass}"/>"></input> --%>
+
 										<c:choose>
 											<c:when test="${userinfo.blogclass==1}">
 												<input type="radio" name="blogclass" checked="true"
@@ -492,6 +453,7 @@
 			</div>
 		</form>
 	</div>
+	-->
 	<div class="lmainR ofh" style="text-align: center;">
 		<!-- 		<div class="tailCard"> -->
 		<%@ include file="../website/tail.jsp"%>
@@ -508,7 +470,8 @@
 		<div class="channellist">
 			<c:forEach items="${districts}" var="districtValue"
 				varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 98px;width:22px;">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 98px; width: 22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','province','provincename','provinces');loadChildDistrict('province',1);"
 						style="cursor: pointer" class=""><c:out
@@ -528,7 +491,8 @@
 		</div>
 		<div id="hsienlist" class="channellist">
 			<c:forEach items="${hsiens}" var="districtValue" varStatus="status">
-				<div class="mnlist" style="text-indent: 0px; height: 120px;width:22px;">
+				<div class="mnlist"
+					style="text-indent: 0px; height: 120px; width: 22px;">
 					<a
 						onclick="javascript:changeSel('<c:out value="${districtValue.districtcode}"/>','<c:out value="${districtValue.districtname}"/>','hsien','hsienname','hsiens');"
 						style="cursor: pointer" class=""><c:out

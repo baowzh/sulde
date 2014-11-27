@@ -19,7 +19,6 @@
 	<div class="lmainR ofh" style="text-align: center; height: 64px;">
 		<img src="img/logo.png" width="980" />
 	</div>
-	<!--  
 	<div class="lmainR ofh" style="text-align: center;">
 		<form action="doregiste.do" id="userinfoform" method="post">
 			<div class="lmainR"
@@ -105,52 +104,6 @@
 				</div>
 			</div>
 		</form>
-	</div>
-	-->
-	<div class="lmainR  ">
-		<div class="loginSheet">
-			<div class="iconContainer"></div>
-			<div class="border">
-				<div class="loginWindow">
-					<div class="content" style="width: 170px;">
-						<form class="mglForm" action="doregiste.do" id="userinfoform"
-							method="post">
-							<div class="label">  </div>
-							<div class="label">  :</div>
-							<div class="label">  </div>
-							<div class="label">
-								  <a href="javascript:replaceverifycode();"></a>
-								:
-							</div>
-							<div class="label">
-								<img src="verifyCodeServlet" id="varifyimg" width="18"
-									height="100" />
-							</div>
-							<div class="inputHolder">
-								<input name="username" id="username" value="" />
-							</div>
-							<div class="inputHolder">
-								<input name="artname" id="artname" value="" />
-							</div>
-							<div class="inputHolder">
-								<input name="password" id="password" type="password" />
-							</div>
-							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
-							</div>
-							<div class="mnlist" style="height: 210px; text-indent: 0px;">
-								<input name="agree" id="agree" type="checkbox"> 
-								    
-							</div>
-							<div class="mnlist">
-								<a href="javascript:doregist();"></a> &nbsp;&nbsp;<a
-									href="index.html"></a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
 		<!-- 		<div class="tailCard"> -->
