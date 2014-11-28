@@ -8,6 +8,7 @@
 <script type="text/javascript" src="js/jqGrid/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/util/js/messageWindow.js"></script>
 <script type="text/javascript" src="js/sitejs/edituserinfo.js"></script>
+<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
 <link href="img/css/login.css" type="text/css" rel="stylesheet" />
 <link href="img/css/selectpanel.css" type="text/css" rel="stylesheet" />
@@ -19,18 +20,18 @@
 	</div>
 	<div class="lmainR  ">
 		<div class="loginSheet">
-			<!-- 			<div class="iconContainer"></div> -->
+<!-- 						<div class="iconContainer"></div> -->
 			<div class="border" style="padding-left: 10px;">
-				<div class="loginWindow" style="width: 470px;">
-					<div class="content" style="width: 470px;">
-						<form class="mglForm" action="doregiste.do" id="userinfoform"
-							method="post">
+				<div class="loginWindow" style="width: 478px;">
+					<div class="content"
+						style="width: 478px; padding-left: 10px; padding-right: 10px;">
+						<form class="mglForm" action="edituserinfo.do" id="userinfoform"
+							method="post" enctype="multipart/form-data">
 							<div class="label">  :</div>
 							<div class="label">:</div>
 							<div class="label"> </div>
 							<div class="label">  </div>
 							<div class="label"> </div>
-							<div class="label"> </div>
 							<div class="label"> </div>
 							<div class="label"> </div>
 							<div class="label">   </div>
@@ -40,53 +41,141 @@
 							<div class="label"> </div>
 							<div class="label"> (Email) </div>
 							<div class="label">  </div>
+							<div class="label"> </div>
+
 							<div class="inputHolder">
-								<input name="username" id="username" value="" />
+								<input name="bolgname" id="bolgname"
+									value="<c:out value="${userinfo.bolgname}"/>" />
 							</div>
 							<div class="inputHolder">
-								<input name="artname" id="artname" value="" />
+								<input name="firstname" id="firstname"
+									value="<c:out value="${userinfo.bolgname}"/>" />
 							</div>
 							<div class="inputHolder">
-								<input name="password" id="password" type="password" />
+								<input name="artname" id="artname"
+									value="<c:out value="${userinfo.artname}"/>" />
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<input type="text" name="birthday" id="birthday"
+									value="<c:out value="${userinfo.birthday}"/>"
+									class="modTxtTime" readonly="readonly"
+									onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<div class="mnlist"
+									style="height: 210px; text-indent: 0px; width: 30px;">
+									<c:choose>
+										<c:when test="${userinfo.sex==1}">
+											<input type="radio" name="sex" checked="true" id="sex"></input>
+											<input type="radio" name="sex" id="sex"></input>
+											<input type="radio" name="sex" id="sex"></input>
+										</c:when>
+										<c:when test="${userinfo.sex==0}">
+											<input type="radio" name="sex id="sex"></input>
+											<input type="radio" name="sex" checked="true" id="sex"></input>
+											<input type="radio" name="sex" id="sex"></input>
+										</c:when>
+										<c:otherwise>
+											<input type="radio" name="sex" id="sex"></input>
+											<input type="radio" name="sex" id="sex"></input>
+											<input type="radio" name="sex" checked="true" id="sex"></input>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<input type="text" name="unit" id="unit"
+									value="<c:out value="${userinfo.unit}"/>" />
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<div class="mnlist" style="height: 210px; text-indent: 0px;">
+									<a id="provincename"
+										href="javascript:showselpanel(true,'provinces')"> <c:out
+											value="${userinfo.provincename}" default=" " />
+									</a> <input type="hidden" id="province" name="province" value="" />
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="hsienname"
+										href="javascript:showselpanel(true,'hsiens')"> <c:out
+											value="${userinfo.hsienname}" default=" " /></a> <input
+										type="hidden" id="hsien" name="hsien" value="" />
+								</div>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<div class="mnlist" style="height: 210px; text-indent: 0px;">
+									<a id="nowprovincename"
+										href="javascript:showselpanel(true,'nowprovinces')"> <c:out
+											value="${userinfo.nowprovincename}" default=" " />
+									</a> <input type="hidden" id="nowprovince" name="nowprovince"
+										value="" /> <input type="hidden" id="nowprovince"
+										name="nowprovince" value="" />
+
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="nowhsienname"
+										href="javascript:showselpanel(true,'nowhsiens')"><c:out
+											value="${userinfo.nowhsienname}" default=" " /></a>
+									<input type="hidden" id="nowhsien" name="nowhsien" value="" />
+
+								</div>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<input type="text" name="phone" id="phone"
+									value="<c:out value="${userinfo.phone}"/>"></input>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<div class="mnlist" style="height: 210px; text-indent: 0px;">
+									<a id="professioncodename"
+										href="javascript:showselpanel(true,'professions')"><c:out
+											value="${userinfo.professionname}" default=" " /></a>
+									<input type="hidden" id="professioncode" name="professioncode"
+										value="" />
+
+								</div>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<div class="mnlist"
+									style="height: 210px; text-indent: 0px; width: 30px;">
+
+									<c:choose>
+										<c:when test="${userinfo.blogclass==1}">
+											<input type="radio" name="blogclass" checked="true"
+												id="blogclass"></input>
+											<input type="radio" name="blogclass" id="blogclass">
+												</input>
+											<input type="radio" name="blogclass" id="blogclass"></input>
+										</c:when>
+										<c:when test="${userinfo.blogclass==0}">
+											<input type="radio" name="blogclass id="blogclass"></input>
+											<input type="radio" name="blogclass" checked="true"
+												id="blogclass"></input>
+											<input type="radio" name="blogclass" id="blogclass"></input>
+										</c:when>
+										<c:otherwise>
+											<input type="radio" name="blogclass" id="blogclass"></input>
+											<input type="radio" name="blogclass" id="blogclass"></input>
+											<input type="radio" name="blogclass" checked="true"
+												id="blogclass"></input>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<input type="text" name="qq" id="qq"
+									value="<c:out value="${userinfo.qq}"/>"></input>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<input type="text" name="email" id="email"
+									value="<c:out value="${userinfo.email}"/>"></input>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<div class="mnlist" style="height: 170px; text-indent: 0px;">
+									<img src="verifyCodeServlet" id="varifyimg" width="21"><input
+										type="text" name="varifycode" id="varifycode"></input>
+								</div>
 							</div>
 							<div class="inputHolder">
-								<input name="varifycode" id="varifycode" value="" />
+								<input type="file" name="img" id="img"></input>
 							</div>
 							<div class="mnlist">
-								<a href="javascript:doregist();"> </a> 
+								<a href="javascript:dosubmit();"> </a> &nbsp;&nbsp;<a
+									href="index.do"></a>
 							</div>
 
 						</form>
