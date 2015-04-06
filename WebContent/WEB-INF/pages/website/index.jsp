@@ -304,13 +304,14 @@
 								<a
 									href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
 									src="html/userhead/<c:out value="${userValue.headurl}" />" /></a>
-								<div class="frt" style="width: 20px; text-align: center;">
+								<div class="frt" style="width: 20px; text-align: center;float:right;margin-right:3px;">
 									<div class="m1ln" style="text-align: center; font-size: 16px;">
 										<a
 											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
 											&nbsp;<c:out value="${userValue.artname}" />
 										</a>
 									</div>
+									
 
 								</div>
 							</div>
@@ -685,7 +686,7 @@
 									<a
 										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
 										src="html/userhead/<c:out value="${userValue.headurl}" />" /></a>
-									<div class="frt" style="width: 20px; text-align: center;">
+									<div class="frt" style="width: 20px; text-align: center;margin-right:3px;">
 										<div class="m1ln"
 											style="text-align: center; font-size: 16px; height: 80px;">
 											<a
