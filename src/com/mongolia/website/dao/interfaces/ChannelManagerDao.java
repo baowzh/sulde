@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.mongolia.website.model.Channel;
 
-public interface ChannelManagerDao extends BaseDao {
+public interface ChannelManagerDao extends IBatisBaseDao {
 	/**
 	 * 
 	 * @param params
@@ -17,6 +17,19 @@ public interface ChannelManagerDao extends BaseDao {
 
 	public void deleteChannel(Map<String, String> params) throws Exception;
 
+	/**
+	 * 
+	 * @param channel
+	 * @throws Exception
+	 */
 	public void updateChannel(Channel channel) throws Exception;
+
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Channel> getRaceChannelList(Map<String, Object> params)
+			throws Exception;
 
 }

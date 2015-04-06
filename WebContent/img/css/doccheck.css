@@ -34,7 +34,8 @@
 }
 
 .label1 {
-	color: lightblue;
+	/* 	color: lightblue; */
+	color: #1b6dd2;
 }
 
 .inputHolder {
@@ -48,8 +49,7 @@
 	-webkit-transform: rotate(90deg);
 	-webkit-transform-origin: 10px 10px;
 	writing-mode: tb-lr;
-	font-family: "MenksoftQagan";
-	/* 	font-family: "Menksoft  "; */
+	font-family: "Menksoft  ";
 }
 
 .inputHolder input.title {
@@ -66,8 +66,7 @@
 	-webkit-transform: rotate(90deg);
 	-webkit-transform-origin: 10px 10px;
 	writing-mode: tb-lr;
-	font-family: "MenksoftQagan";
-	/* 	font-family: "Menksoft  "; */
+	font-family: "Menksoft  ";
 	/*height: 210px;*/
 }
 
@@ -148,6 +147,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	float: left;
+	background: url(../img/qig_1_v.png) center top no-repeat;
 	/*text-align:center;*/
 	/*background: url(../icon.png) no-repeat center 0px;*/
 }

@@ -16,4 +16,6 @@
 		<sqlMap resource="sqlmaps/opinionSQL.xml"/>
 		<sqlMap resource="sqlmaps/voteSQL.xml"/>
 		<sqlMap resource="sqlmaps/datasynSQL.xml"/>
+		<sqlMap resource="sqlmaps/bookSQL.xml"/>
+		<sqlMap resource="sqlmaps/raceSQL.xml"/>
 </sqlMapConfig>

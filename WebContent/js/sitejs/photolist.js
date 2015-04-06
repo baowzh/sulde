@@ -10,13 +10,14 @@ var photoDetail = function(imgid) {
 		return;
 	}
 	$("#imgid").val(imgid);
-	$("#openphotoform").submit();
+	// $("#openphotoform").submit();
+	window.location.href = "getimginfo.do?userid=" + userid + "&imgid=" + imgid;
 };
 var addnewimg = function() {
 	$("#addimg").dialog({
-		height : 410,
-		width : 230,
-		resizable : false
+		height : 390,
+		width : 360,
+		resizable : true
 	});
 }
 var uploadimg = function() {
@@ -33,4 +34,37 @@ var uploadimg = function() {
 	}
 
 	$("#addimgform")[0].submit();
+}
+
+var deleteimg = function() {
+	var boxes = $("input[name='selectedimg']");
+	var ids = "";
+	boxes.each(function() {
+		if (this.checked) {
+			ids = ids + $(this).attr("id") + ',';
+		}
+	});
+	if (ids == '') {
+		return;
+	}
+	$.ajax({
+		async : false,
+		cache : false,
+		type : 'POST',
+		dataType : "json",
+		url : "deleteimgs.do",// 请求的action路径
+		error : function() {// 请求失败处理函数
+			alert('请求失败');
+		},
+		data : {
+			imgids : ids
+		},
+		success : function(data) { // 请求成功后处理函数。
+			if (data.success == '1') {
+				window.location.href = 'getimglist.do?userid='
+						+ $('#userid').val();
+			}
+		}
+	});
+
 }

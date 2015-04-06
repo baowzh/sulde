@@ -9,19 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mongolia.website.dao.interfaces.BaseDao;
+import com.mongolia.website.dao.interfaces.IBatisBaseDao;
 import com.mongolia.website.manager.interfaces.BaseManager;
 
 /**
  * @author zeting
  */
 @Service("baseManager")
-@Transactional(rollbackFor = Exception.class)
 public class BaseManagerImpl implements BaseManager {
 
 	protected final Log log = LogFactory.getLog(getClass());
 	@Autowired
-	protected BaseDao baseDao;
+	protected IBatisBaseDao baseDao;
 
 	@SuppressWarnings("unchecked")
 	public Object get(Class clazz, Serializable id) {

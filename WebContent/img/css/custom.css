@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 body {
-	background: #69F url(../custom/SMEI-Blog-Header.png) center 210px
+	background:  url(../custom/SMEI-Blog-Header.png) center 210px
 		no-repeat;
 }
 
@@ -10,7 +10,7 @@ body {
 }
 
 .photoAlbumC {
-	background: url(../custom/photoAlbum1.png) no-repeat center;
+/* 	background: url(../custom/photoAlbum1.png) no-repeat center; */
 }
 
 .ttltxtblgC {
@@ -18,7 +18,7 @@ body {
 }
 
 .blogbodyC {
-	background: #FC9 url(../custom/beijing1.png;);
+/* 	background: #FC9 url(../custom/beijing1.png;); */
 }
 
 .name {
@@ -30,11 +30,11 @@ body {
 }
 
 .bglMainC {
-	background: #66F url(../custom/beijing2.png);
+/* 	background: #66F url(../custom/beijing2.png); */
 }
 
 .blgLC {
-	background: #66F url(../custom/beijing2.png);
+/* 	background: #66F url(../custom/beijing2.png); */
 }
 
 .blgNav a {

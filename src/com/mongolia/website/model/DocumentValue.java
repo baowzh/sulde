@@ -67,15 +67,18 @@ public class DocumentValue {
 	private String yinti;
 	private String htmlstr;
 	private String userid;
-	private Integer sharecount=new Integer(0);
-	private Integer markcount=new Integer(0);
-	private Integer readcount=new Integer(0);
-	private Integer commentCount=new Integer(0);;
+	private Integer sharecount = new Integer(0);
+	private Integer markcount = new Integer(0);
+	private Integer readcount = new Integer(0);
+	private Integer commentCount = new Integer(0);;
 	private Integer self = new Integer(0);
 	private Integer ireadcount;
 	private String chnaname;
 	private String compiler;
 	private String oldid;
+	private String flashurl;
+	private String facepath;
+	private String imgurl;
 	private SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
 	public String getDocid() {
@@ -662,6 +665,28 @@ public class DocumentValue {
 	public void setDocchannelname(String docchannelname) {
 		this.docchannelname = docchannelname;
 	}
-	
-	
+
+	public String getFlashurl() {
+		return flashurl;
+	}
+
+	public void setFlashurl(String flashurl) {
+		this.flashurl = flashurl;
+	}
+
+	public String getFacepath() {
+		return facepath;
+	}
+
+	public void setFacepath(String facepath) {
+		this.facepath = facepath;
+	}
+
+	public String getImgurl() {
+		return this.docid+".jpg";
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
 }

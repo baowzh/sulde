@@ -43,4 +43,5 @@ public interface RoleDao  {
 	 * @return int
 	 */
 	public int deleteRelation(Serializable userid, Serializable roleid);
+	
 }

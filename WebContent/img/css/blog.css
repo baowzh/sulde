@@ -24,7 +24,7 @@ a img {
 	background: #C90;
 	border-radius: 5px;
 	padding-left: 5px;
-	font-size:16px;
+	font-size: 16px;
 }
 
 .nav2 a {
@@ -33,11 +33,12 @@ a img {
 
 .navCard {
 	height: 100px;
-	padding: 25px 35px;
+	padding: 25px 30px;
 	margin: 0 5px;
 	border: solid 1px #06F;
-	border-radius: 0px 0px 5px 5px;;
-	background: url(../navbg.png) left top no-repeat
+	border-radius: 0px 0px 5px 5px;
+	background: #1b6dd2;
+	/* 	background: url(../navbg.png) left top no-repeat */
 }
 
 .contentArea h1 {
@@ -250,7 +251,7 @@ a img {
 }
 
 .txtBlogList .m1ln {
-	height: 300px;
+	height: 480px;
 	overflow: hidden;
 	/* 	background: url(../dot.gif) no-repeat center 0px; */
 	border-right: #cccccc 1px dashed;
@@ -355,19 +356,22 @@ a img {
 .spanstyle {
 	cursor: pointer;
 	border: 1px solid rgb(204, 204, 204);
+	border-radius: 8px;
 	display: inline-block;
-	color: rgb(0, 0, 0);
-	background-color: rgb(238, 238, 238);
-	line-height: 18px;
-	width: 22px;
+	color: #fff;
+	/* color: rgb(0, 0, 0); */
+	background-color: #c90;
+	/* background-color: rgb(238, 238, 238); */
+	line-height: 21px;
+	width: 30px;
 }
 
-.curspanstyle {
+.cursharespanstyle {
 	cursor: pointer;
 	border: 1px solid rgb(204, 204, 204);
 	display: inline-block;
 	color: rgb(0, 0, 0);
-	background: #0078b6;
+	background-color: #0078b6;
 	line-height: 18px;
 	width: 22px;
 }
@@ -378,6 +382,17 @@ a img {
 	display: inline-block;
 	color: rgb(0, 0, 0);
 	background-color: rgb(f, f, f);
+	line-height: 18px;
+	width: 22px;
+}
+
+.curspanstyle {
+	cursor: pointer;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 8px;
+	display: inline-block;
+	color: rgb(0, 0, 0);
+	background: #0078b6;
 	line-height: 18px;
 	width: 22px;
 }
@@ -430,5 +445,81 @@ a img {
 }
 
 .artclassdiv a {
+	color: #fff;
+}
+
+.channelname {
+	padding-top: 10px;
+	padding-left: 5px;
+	width: 22px;
+	height: 150px;
+	writing-mode: tb-rl;
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	border-radius: 5px;
+	border-color: #014886;
+	background-color: #c90;
+	float: left;
+}
+
+.channelname a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 18px;
+}
+
+.mln {
+	writing-mode: tb-rl;
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+}
+
+.mln a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.mglForm {
+	
+}
+
+.mglForm .label {
+	-webkit-writing-mode: vertical-lr;
+	-moz-writing-mode: vertical-lr;
+	-ms-writing-mode: vertical-lr;
+	-o-writing-mode: vertical-lr;
+	writing-mode: tb-lr;
+	line-height: 20px;
+	word-break: keep-all;
+	text-align: left;
+	-webkit-text-orientation: sideways-right;
+	-ms-text-orientation: sideways-right;
+	width: 30px;
+	text-align: left;
+	float: left;
+	height: 7em;
+	color: #014886;
+}
+
+.mglForm .inputHolder {
+	width: 30px;
+	height: 11em;
+	overflow: hidden;
+	float: left;
+}
+
+.inputHolder input {
+	/* -webkit-width: 6em; */
+	-webkit-transform: rotate(90deg);
+	-webkit-transform-origin: 10px 14px;
+	writing-mode: tb-lr;
+	font-family: "MenksoftQagan";
+	background-color: #00A1E9;
 	color: #fff;
 }

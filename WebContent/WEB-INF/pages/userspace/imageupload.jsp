@@ -59,7 +59,7 @@
 	name="txtUrlId">
 <table align="center">
 	<tr>
-		<td colspan="2"><input type="file" id="image" name="image"
+		<td colspan="2"><input type="file" id="img" name="img"
 			onchange="return fileChange(this)" /></td>
 	</tr>
 	<tr>

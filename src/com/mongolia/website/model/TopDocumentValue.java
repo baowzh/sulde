@@ -32,7 +32,8 @@ public class TopDocumentValue {
 	/**
 	 * 标签
 	 */
-	private byte[] docimg;
+	private String docimg;
+	private byte[] playimg;
 	/**
 	 * 审核用户id
 	 */
@@ -41,6 +42,7 @@ public class TopDocumentValue {
 	private String title;
 	private String docauthor;
 	private String userid;
+	private String videoid;
 
 	public String getDocid() {
 		return docid;
@@ -82,11 +84,11 @@ public class TopDocumentValue {
 		this.playindex = playindex;
 	}
 
-	public byte[] getDocimg() {
+	public String getDocimg() {
 		return docimg;
 	}
 
-	public void setDocimg(byte[] docimg) {
+	public void setDocimg(String docimg) {
 		this.docimg = docimg;
 	}
 
@@ -128,6 +130,22 @@ public class TopDocumentValue {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+
+	public String getVideoid() {
+		return videoid;
+	}
+
+	public void setVideoid(String videoid) {
+		this.videoid = videoid;
+	}
+
+	public byte[] getPlayimg() {
+		return playimg;
+	}
+
+	public void setPlayimg(byte[] playimg) {
+		this.playimg = playimg;
 	}
 
 }

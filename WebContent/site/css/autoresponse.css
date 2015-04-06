@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+table.dataintable {
+/* 	margin-top: 10px; */
+	border-collapse: collapse;
+	border: 1px solid #aaa;
+	width: 100%;
+	font-size: 13px;
+}
+
+table.dataintable th {
+	vertical-align: baseline;
+	padding: 2px 15px 2px 4px;
+	background-color: #d5d5d5;
+	border: 1px solid #aaa;
+	text-align: center;
+	font-size: 13px;
+}
+
+table.dataintable td {
+	vertical-align: text-top;
+	padding: 2px 15px 2px 4px;
+	background-color: #efefef;
+	border: 1px solid #aaa;
+	font-size: 13px;
+}

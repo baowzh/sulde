@@ -68,8 +68,7 @@ public class UserManagerDaoImpl extends BaseDaoiBatis implements UserManagerDao 
 	}
 
 	@Override
-	public void modifyUserPass(String userid, String pass)
-			throws Exception {
+	public void modifyUserPass(String userid, String pass) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> updparams = new HashMap<String, Object>();
 		updparams.put("userid", userid);
@@ -122,6 +121,14 @@ public class UserManagerDaoImpl extends BaseDaoiBatis implements UserManagerDao 
 		queryparams.put("professionname", professionname);
 		return this.getSqlMapClientTemplate().queryForList("getProfessions",
 				queryparams);
+	}
+
+	@Override
+	public void activateUser(String username) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> queryparams = new HashMap<String, Object>();
+		queryparams.put("username", username);
+		this.getSqlMapClientTemplate().update("activateUser", queryparams);
 	}
 
 }

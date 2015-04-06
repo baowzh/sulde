@@ -1,12 +1,128 @@
 @charset "utf-8";
 /* CSS Document */
+.sldrFrm {
+	width: 580px;
+	height: 330px;
+}
 
-.sldrFrm{width:580px; height:330px;  }
-.sldrFrm img{ border:none;}
-.sldrFrm .wndL{height:330px; width:443px;  float:left; overflow:hidden; background:#F60}
-.sldrFrm .wndL img{height:330px; width:440px;}
-.sldrFrm .wndR{float:right; width:135px; height:320px;  }
-.sldrFrm .wndThmb{width:137px; height:100px; overflow:hidden; text-align:right;   float:right;  padding-top:5px; padding-bottom:5px;}
- 
-.sldrFrm .wndThmb img{width:132px; height:100px; }
-.msOvrBg{ background:#F60}
+.sldrFrm img {
+	border: none;
+}
+
+.sldrFrm .wndL {
+	height: 330px;
+	width: 443px;
+	float: left;
+	overflow: hidden;
+	background: #F60
+}
+
+.sldrFrm .wndL img {
+	height: 330px;
+	width: 440px;
+}
+
+.sldrFrm .wndR {
+	float: right;
+	width: 135px;
+	height: 320px;
+}
+
+.sldrFrm .wndThmb {
+	width: 137px;
+	height: 100px;
+	overflow: hidden;
+	text-align: right;
+	float: right;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.sldrFrm .wndThmb img {
+	width: 132px;
+	height: 100px;
+}
+
+.msOvrBg {
+	background: #F60
+}
+
+.flex-direction-nav {
+	
+}
+
+.flex-direction-nav .flex-prev {
+	opacity: 0.8;
+	left: 20px;
+}
+
+.flex-direction-nav .flex-next {
+	background-position: 100% 0;
+	right: 20px;
+	opacity: 0.8;
+	/* 	left: 20px; */
+}
+
+.flex-direction-nav a {
+	width: 30px;
+	height: 30px;
+	margin: -20px 0 0;
+	display: block;
+	background: url(../bg_direction_nav.png) no-repeat 0 0;
+	position: absolute;
+	top: 50%;
+	cursor: pointer;
+	text-indent: -9999px;
+	opacity: 0;
+}
+
+div.photo-slider {
+	overflow: hidden;
+}
+
+div.photo-slider-wrapper {
+	position: relative;
+	float: none;
+	margin: 0px 0px 10px 0px;
+	overflow: hidden;
+	width: 840px;
+	height: 200px;
+}
+
+div.photo-slider-content {
+	position: absolute;
+	overflow: hidden;
+	height: 200px;
+	width: 1800px;
+}
+
+div.photo-slider-content div.photo-slider-item {
+	width: 130px;
+	height: auto;
+	overflow: hidden;
+	float: left;
+}
+
+div.photo-slider-controls {
+	width: 65px;
+	height: 31px;
+	overflow: hidden;
+	float: right;
+	background: url(../sprite.png) no-repeat -887px -245px;
+/* 	margin-right: 10px; */
+    margin:0 auto;
+}
+
+.photo-slider-controls a {
+	display: inline-block;
+	float: left;
+	width: 31px;
+	height: 25px;
+}
+
+div.photo-slider-content div.photo-slider-item a {
+	font-family: Arial;
+	font-size: 0.8em;
+	margin-bottom: 10px;
+	color: #393939;
+}

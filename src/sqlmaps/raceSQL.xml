@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="race">
+	<typeAlias alias="RaceModelValue" type="com.mongolia.website.model.RaceModelValue" />
+	<typeAlias alias="RaceScoreLogValue"
+		type="com.mongolia.website.model.RaceScoreLogValue" />
+	<typeAlias alias="RaceDocumentValue"
+		type="com.mongolia.website.model.RaceDocumentValue" />
+	<typeAlias alias="UserValue" type="com.mongolia.website.model.UserValue" />
+	<typeAlias alias="RaceRound" type="com.mongolia.website.model.RaceRound" />
+	<typeAlias alias="RaceUserModel" type="com.mongolia.website.model.RaceUserModel" />
+	<typeAlias alias="ImgValue" type="com.mongolia.website.model.ImgValue" />
+	<select id="getRaceModel" parameterClass="java.util.Map"
+		resultClass="RaceModelValue">
+		select * from racemodel
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="raceid">
+				raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="inactive">
+				inactive=#inactive#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getRaceUserModels" parameterClass="java.util.Map"
+		resultClass="RaceUserModel">
+		select * from raceuser
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="raceid">
+				raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				round=#round#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getRaceRounds" parameterClass="java.util.Map"
+		resultClass="RaceRound">
+		select * from raceround
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="raceid">
+				raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="raceround">
+				raceround=#raceround#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getRaceDocumentValue" parameterClass="java.util.Map"
+		resultClass="RaceDocumentValue">
+		select a.*,b.doctitle from racedocument a,document b where
+		a.docid=b.docid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				a.raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="docid">
+				a.docid=#docid#
+			</isNotNull>
+			<isNotNull prepend="and" property="inactive">
+				a.inactive=#inactive#
+			</isNotNull>
+			<isNotNull prepend="and" property="joinuserid">
+				a.joinuserid=#joinuserid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				a.raceround=#round#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getRaceScoreLogValue" parameterClass="java.util.Map"
+		resultClass="RaceScoreLogValue">
+		select * from racescorelog
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="raceid">
+				raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="docid">
+				docid=#docid#
+			</isNotNull>
+			<isNotNull prepend="and" property="usertype">
+				usertype=#usertype#
+			</isNotNull>
+			<isNotNull prepend="and" property="scoreuserid">
+				scoreuserid=#scoreuserid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				round=#round#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<insert id="addRaceDocumentValue" parameterClass="RaceDocumentValue">
+		insert into
+		RaceDocument(
+		raceid,
+		docid,
+		joindate,
+		nettotalscore,
+		netaveragescore,
+		spetotalscore,
+		speaveragescore,
+		finalscore,
+		joinuserid,
+		jointype,
+		raceround
+		) values(
+		#raceid#,
+		#docid#,
+		#joindate#,
+		#nettotalscore#,
+		#netaveragescore#,
+		#spetotalscore#,
+		#speaveragescore#,
+		#finalscore#,
+		#joinuserid#,
+		#jointype#,
+		#raceround#
+		)
+	</insert>
+	<delete id="delRaceDocumentValue" parameterClass="java.util.Map">
+		delete from
+		racedocument where raceid=#raceid# and
+		docid=#docid# and
+		joinuserid=#joinuserid#
+	</delete>
+	<insert id="addRaceScoreLogValue" parameterClass="RaceScoreLogValue">
+		insert into
+		RaceScoreLog(
+		raceid,
+		docid,
+		scoredate,
+		scoreuserid,
+		usertype,
+		score,
+		round
+		)
+		values(
+		#raceid#,
+		#docid#,
+		#scoredate#,
+		#scoreuserid#,
+		#usertype#,
+		#score#,
+		#round#
+		)
+	</insert>
+	<select id="getRaceUserList" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select distinct b.*,a.jointype from racedocument a,user b,racemodel c
+		where
+		a.joinuserid=b.userid and a.raceid=c.raceid
+		and ( c.round=1 or  exists (select 1 from raceuser where c.raceid=raceuser.raceid and raceuser.round=#round# and  raceuser.userid=a.joinuserid)  )
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				a.raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				c.round=#round#
+			</isNotNull>
+			<isNotNull prepend="and" property="jointype">
+				a.jointype=#jointype#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getRaceSumValue" parameterClass="java.util.Map"
+		resultClass="RaceDocumentValue">
+		select sum(a.score) nettotalscore,count(1) as
+		netscorecount,sum(a.score)/count(1) as netaveragescore,usertype ,round
+		as raceround from
+		racescorelog a where a.raceid=#raceid# and
+		a.docid=#docid# and round=#round#
+		GROUP BY
+		a.raceid,a.docid,a.usertype,round
+	</select>
+	<select id="getUserMaxScores" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select b.docid,b.joinuserid as
+		userid,netaveragescore*0.2+speaveragescore*0.8 as maxscore from (select
+		a.docid,a.joinuserid,sum(a.netaveragescore) as netaveragescore ,sum(a.speaveragescore) as speaveragescore  from (
+		select
+		a.docid as docid,b.joinuserid as joinuserid
+		,(sum(a.score)/count(1)) as netaveragescore,0 as speaveragescore
+		from racescorelog
+		a,racedocument b where a.raceid=b.raceid and
+		a.docid=b.docid and
+		a.usertype=1
+		and a.raceid=#raceid# and a.round=#round# and b.jointype=#jointype# GROUP BY  a.docid,b.joinuserid
+		union ALL
+		select
+		a.docid as docid,b.joinuserid as joinuserid ,0 as
+		netaveragescore,(sum(a.score)/count(1)) as speaveragescore from
+		racescorelog a,racedocument b where a.raceid=b.raceid and
+		a.docid=b.docid and a.usertype=2
+		and a.raceid=#raceid# and
+		a.round=#round# and b.jointype=#jointype#  GROUP BY a.docid,b.joinuserid
+		) a GROUP BY a.docid,a.joinuserid  ) b where <![CDATA[IFNULL(b.netaveragescore,0)+IFNULL(b.speaveragescore,0)<>0]]>
+		
+	</select>
+	<select id="getRaceChildList" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select distinct b.*,a.jointype from racedocument a,user b
+		where
+		a.joinuserid=b.userid and a.raceid=#raceid#
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				a.raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				a.raceround=#round#
+			</isNotNull>
+			<isNotNull prepend="and" property="jointype">
+				a.jointype=#jointype#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<insert id="addRaceUserModel" parameterClass="RaceUserModel">
+		insert into
+		raceuser(
+		raceid,
+		userid,
+		round
+		) values(
+		#raceid#,
+		#userid#,
+		#round#
+		)
+	</insert>
+	<select id="getRaceImgList" parameterClass="java.util.Map"
+		resultClass="ImgValue">
+		select img.*,b.startdate from
+		img,topdocument b where
+		img.imgid=b.docid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				img.raceid=#raceid#
+			</isNotNull>
+		</dynamic>
+		ORDER BY b.startdate desc LIMIT 0, #count#
+	</select>
+	<select id="pagingqueryscorelog" parameterClass="java.util.Map"
+		resultClass="RaceScoreLogValue">
+		select a.* from (select a.*,b.headurl,b.username as artname from racescorelog a, user b where
+		a.scoreuserid=b.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				a.raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="docid">
+				a.docid=#docid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				round=#round#
+			</isNotNull>
+		</dynamic>
+		) a order by a.usertype desc LIMIT #start#, #count#
+	</select>
+	<select id="racescorecount" parameterClass="java.util.Map"
+		resultClass="java.lang.Integer">
+		select count(1) from racescorelog a, user b where
+		a.scoreuserid=b.userid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				a.raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="docid">
+				a.docid=#docid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				a.round=#round#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="pagingqueryracedoc" parameterClass="com.mongolia.website.model.PaingModel"
+		resultClass="DocumentValue">
+		SELECT document.*,IFNULL(document.readcount,0) as ireadcount FROM
+		document 
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="docchannel">
+				docchannel=#docchannel#
+			</isNotNull>
+			<isNotNull prepend="and" property="doctype">
+				doctype=#doctype#
+			</isNotNull>
+			<isNotNull prepend="and" property="docstatus">
+				docstatus=#docstatus#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="inindex">
+				exists(select 1 from
+				topdocument where topdocument.docid=document.docid and
+				topdocument.type=5 )
+			</isNotNull>
+			<isNotNull prepend="and" property="imggroupid">
+				exists(select 1 from
+				imggroup,img where imggroup.imggroupid=img.imggroupid and
+				img.imgid=document.docid and imggroup.imggroupid=#imggroupid# )
+			</isNotNull>
+			<isNotNull prepend="and" property="flash">
+				flashurl is not null
+			</isNotNull>
+			<isNotNull prepend="and" property="raceid">
+				 exists(select 1 from racedocument where racedocument.docid=document.docid
+				and racedocument.raceid=#raceid# and racedocument.raceround=#round# )
+			</isNotNull>
+			
+		</dynamic>
+		ORDER BY document.DOCRELTIME desc LIMIT #startrow#, #endrow#
+	</select>
+	<select id="getRaceDocRowCount" parameterClass="com.mongolia.website.model.PaingModel"
+		resultClass="java.lang.Integer">
+		SELECT count(1) FROM document 
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="docchannel">
+				docchannel=#docchannel#
+			</isNotNull>
+			<isNotNull prepend="and" property="doctype">
+				doctype=#doctype#
+			</isNotNull>
+			<isNotNull prepend="and" property="userid">
+				userid=#userid#
+			</isNotNull>
+			<isNotNull prepend="and" property="docstatus">
+				docstatus=#docstatus#
+			</isNotNull>
+			<isNotNull prepend="and" property="imggroupid">
+				exists(select 1 from
+				imggroup,img where imggroup.imggroupid=img.imggroupid and
+				img.imgid=document.docid and imggroup.imggroupid=#imggroupid# )
+			</isNotNull>
+			<isNotNull prepend="and" property="flash">
+				flashurl is not null
+			</isNotNull>
+			<isNotNull prepend="and" property="raceid">
+				 exists(select 1 from racedocument where racedocument.docid=document.docid
+				and racedocument.raceid=#raceid# and racedocument.raceround=#round# )
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getRaceJoinUserList" parameterClass="java.util.Map"
+		resultClass="UserValue">
+		select distinct b.*,a.jointype from racedocument a,user b,racemodel c
+		where
+		a.joinuserid=b.userid and a.raceid=c.raceid
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="raceid">
+				a.raceid=#raceid#
+			</isNotNull>
+			<isNotNull prepend="and" property="round">
+				a.raceround=#round#
+			</isNotNull>
+			<isNotNull prepend="and" property="jointype">
+				a.jointype=#jointype#
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>

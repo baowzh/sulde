@@ -16,6 +16,7 @@ public class ImgValue {
 	private Integer width;
 	private Integer height;
 	private byte[] imgcontent;
+	private byte[] img;
 	private Date crtime;
 	private String crtimestr;
 	private Integer sharecount = new Integer(0);
@@ -23,6 +24,8 @@ public class ImgValue {
 	private Integer readcount = new Integer(0);
 	private Integer commcount = new Integer(0);
 	private String oldid;
+	private Integer forrace = new Integer(0);
+	private String raceid;
 
 	public String getImgid() {
 		return imgid;
@@ -182,6 +185,30 @@ public class ImgValue {
 
 	public void setOldid(String oldid) {
 		this.oldid = oldid;
+	}
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+
+	public Integer getForrace() {
+		return forrace;
+	}
+
+	public void setForrace(Integer forrace) {
+		this.forrace = forrace;
+	}
+
+	public String getRaceid() {
+		return raceid;
+	}
+
+	public void setRaceid(String raceid) {
+		this.raceid = raceid;
 	}
 
 }

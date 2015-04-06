@@ -21,14 +21,16 @@
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 </head>
 <body>
-	<div class="lmainR ofh" style="text-align: center; height: 64px;">
-		<img src="img/logo.png" width="980" />
+	<div style="background: #1b6dd2;">
+		<div class="lmainR" style="text-align: center;">
+			<img src="img/logo.png" width="990" height="64">
+		</div>
 	</div>
-	<div class="lmainR ofh">
+	<div class="lmainR ofh" style="width:990px;">
 		<form action="articlelist.do" id="Form" method="post">
 			<div class="lmainR"
 				style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-				<div style="height: 598px; border: solid 1px #eee;">
+				<div style="height: 730px; border: solid 1px #eee;">
 					<table style="padding-top: 2em;" valign="top">
 						<tr>
 							<td>
@@ -124,7 +126,7 @@
 					</table>
 				</div>
 				<div class="  artlistcell"
-					style="width: 840px; height: 630px; overflow: scroll;">
+					style="width: 840px; height: 730px; overflow: auto;border-bottom: solid 1px #eee;">
 					<div class="artListcell acell1">
 						<div class="anwsls1">
 							<table>
@@ -249,7 +251,7 @@
 					</div>
 				</div>
 
-				<div class="mnlist" style="text-align: center; height: 550px;">
+				<div class="mnlist" style="text-align: center; height: 730px;border-right: solid 1px #eee;border-bottom: solid 1px #eee;width:18px;">
 					<a href="javascript:checkdoc();"></a>&nbsp;&nbsp;<a
 						href="javascript:addselecteddoc();"></a>&nbsp;&nbsp;<a
 						href="javascript:delselecteddoc();"> </a>&nbsp;&nbsp;<a
@@ -307,8 +309,7 @@
 					</td>
 					<td>
 						<div class="inputHolder">
-							<input type="text" name="playindex" id="playindex"
-								></input>
+							<input type="text" name="playindex" id="playindex"></input>
 						</div>
 					</td>
 					<td>

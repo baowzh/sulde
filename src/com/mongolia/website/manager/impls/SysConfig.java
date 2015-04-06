@@ -8,7 +8,6 @@ public class SysConfig {
 
 	@Value("${sitename}")
 	private String sitename;
-
 	@Value("${recentlogusercount}")
 	private Integer recentlogusercount;
 	@Value("${recentcommcount}")
@@ -31,6 +30,11 @@ public class SysConfig {
 	private Integer online;
 	@Value("${siteaddress}")
 	private String siteaddress;
+	@Value("${selbookcount}")
+	private Integer selbookcount;
+	@Value("${checkpassurl}")
+	private String checkpassurl;
+	private String accountid;
 
 	public String getSitename() {
 		return sitename;
@@ -126,6 +130,30 @@ public class SysConfig {
 
 	public void setSiteaddress(String siteaddress) {
 		this.siteaddress = siteaddress;
+	}
+
+	public Integer getSelbookcount() {
+		return selbookcount;
+	}
+
+	public void setSelbookcount(Integer selbookcount) {
+		this.selbookcount = selbookcount;
+	}
+
+	public String getCheckpassurl() {
+		return checkpassurl;
+	}
+
+	public void setCheckpassurl(String checkpassurl) {
+		this.checkpassurl = checkpassurl;
+	}
+
+	public String getAccountid() {
+		return accountid;
+	}
+
+	public void setAccountid(String accountid) {
+		this.accountid = accountid;
 	}
 
 }

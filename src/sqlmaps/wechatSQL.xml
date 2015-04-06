@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="wechat">
+	<typeAlias alias="WechatDocValue" type="com.mongolia.website.model.WechatDocValue" />
+	<typeAlias alias="WechatReceiveMessValue" type="com.mongolia.website.model.WechatReceiveMessValue" />
+	<insert id="addWechatDocValue" parameterClass="WechatDocValue">
+		insert into
+		wechatdoc(
+		responseid,
+		docid,
+		docimg,
+		doctitle,
+		docabc,
+		seldate
+		)
+		values
+		(
+		#responseid#,
+		#docid#,
+		#docimg#,
+		#doctitle#,
+		#docabc#,
+		#seldate#
+		)
+	</insert>
+	<insert id="addWechatReceiveMessValue" parameterClass="WechatReceiveMessValue">
+		insert into wechatreceivemess(
+		messid,
+		tousername,
+		fromusername,
+		createtime,
+		messtype,
+		content
+		)
+		values
+		(
+		#messid#,
+		#tousername#,
+		#fromusername#,
+		#createtime#,
+		#messtype#,
+		#content#
+		)
+	</insert>
+	<select id="getWechatDocWithAutoResId" parameterClass="java.lang.String"
+		resultClass="bookStoreValue">
+		select * from wechatdoc where responseid=$resId$
+	</select>
+	<delete id="delAllAutoResDoc" parameterClass="java.lang.String">
+		delete from
+		wechatdoc where wechatdoc.responseid=$resId$
+	</delete>
+	<delete id="delWechatDoc" parameterClass="WechatDocValue">
+		delete from wechatdoc
+		where wechatdoc.responseid=#responseid#
+		and docid=#docid#
+	</delete>
+
+</sqlMap>

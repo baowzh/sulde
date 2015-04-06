@@ -12,6 +12,7 @@ import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MarkedResourceValue;
 import com.mongolia.website.model.MessageValue;
+import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.ShareResourceValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.model.VisitorValue;
@@ -20,7 +21,7 @@ import com.mongolia.website.model.VoteResultDetailValue;
 import com.mongolia.website.model.VoteResultValue;
 import com.mongolia.website.model.VoteValue;
 
-public interface WebResourceDao extends BaseDao {
+public interface WebResourceDao extends IBatisBaseDao {
 
 	public void adddoc(DocumentValue docValue) throws Exception;
 
@@ -397,9 +398,9 @@ public interface WebResourceDao extends BaseDao {
 	public List<FriendNews> getBlogNews(String userid, Date queryDate)
 			throws Exception;
 
-	public List<MessageValue> getMessList(String userid, Integer recorsend,
-			String messid, String desid, Integer pageIndex)
-			throws ManagerException;
+	public PaingModel<MessageValue> getMessList(String userid,
+			Integer recorsend, String messid, String desid, Integer pageIndex,
+			Integer rowcount) throws ManagerException;
 
 	public MessageValue getMessageValueContent(String messid) throws Exception;
 
@@ -694,5 +695,21 @@ public interface WebResourceDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public void updTopDocument(Map<String, Object> params) throws Exception;
+
+	/**
+	 * 
+	 * @param messid
+	 * @throws Exception
+	 */
+	public void delMessage(String messid) throws Exception;
+	/**
+	 * 
+	 * @param resourceid
+	 * @param fechtcount
+	 * @return
+	 * @throws Exception
+	 */
+	public List<VisitorValue> getVisitorList(String resourceid,
+			Integer fechtcount) throws Exception;
 
 }

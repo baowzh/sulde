@@ -5,6 +5,7 @@ public class ImgNew {
    private String url;
    private String title;
    private Integer time;
+   private Integer index;
 public String getLink() {
 	return link;
 }
@@ -29,6 +30,13 @@ public Integer getTime() {
 public void setTime(Integer time) {
 	this.time = time;
 }
+public Integer getIndex() {
+	return index;
+}
+public void setIndex(Integer index) {
+	this.index = index;
+}
+
    
    
 }

@@ -13,7 +13,6 @@ import com.mongolia.website.manager.interfaces.WebTemplateManager;
 import com.mongolia.website.model.TemplateValue;
 
 @Service("webTemplateManager")
-@Transactional(rollbackFor = Exception.class)
 public class WebTemplateManagerImpl implements WebTemplateManager {
 	@Autowired
 	private TemplateManagerDao templateManagerDao;

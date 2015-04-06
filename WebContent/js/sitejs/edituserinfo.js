@@ -2,46 +2,40 @@ var dosubmit = function() {
 	// 全部通过则保存用户信息
 	var bolgname = $("#bolgname").val();
 	if (bolgname == null || bolgname == '') {
-		MessageWindow.showMess("'  '      ");
+		MessageWindow.showMess("'  '      ");
 		return;
 	}
-	var firstname = $("#firstname").val();
-	if (firstname == null || firstname == '') {
-		MessageWindow.showMess("''      ");
-		return;
-	}
+	/*
+	 * var firstname = $("#firstname").val(); if (firstname == null || firstname ==
+	 * '') { MessageWindow.showMess("''   "); return; }
+	 */
 	var artname = $("#artname").val();
 	if (artname == null || artname == '') {
 		MessageWindow.showMess("''      ");
 		return;
 	}
-	/*
-	 * var birthday = $("#birthday")[0]; if (birthday.value == null ||
-	 * birthday.value == '') { MessageWindow.showMess("' ' 
-	 *  "); return; }
-	 */
+
+	var birthday = $("#birthday").val();
+	if (birthday == null || birthday == '') {
+		MessageWindow.showMess("' '   ");
+		return;
+	}
+
 	var sex = $("#sex").val();
 	if (sex == null || sex == '') {
 		MessageWindow.showMess("''      ");
 		return;
 	}
-	/*
-	 * var unit = $("#unit")[0]; if (unit.value == null || unit.value == '') {
-	 * MessageWindow.showMess("''   "); return; }
-	 */
-	/*
-	 * var province = $("#province")[0]; if (province.value == null ||
-	 * province.value == '') { MessageWindow.showMess("''  
-	 * "); return; } var nowprovince = $("#nowprovince")[0]; if
-	 * (nowprovince.value == null || nowprovince.value == '') {
-	 * MessageWindow.showMess("'  '   "); return; }
-	 * var phone = $("#phone")[0]; if (phone.value == null || phone.value == '') {
-	 * MessageWindow.showMess("' '   "); return; }
-	 * var qq = $("#qq")[0]; if (qq.value == null || qq.value == '') {
-	 * MessageWindow.showMess("'qq'   "); return; } var phone =
-	 * $("#phone")[0]; if (phone.value == null || phone.value == '') {
-	 * MessageWindow.showMess("' '   "); return; }
-	 */
+	var email = $('#email').val();
+	if (email == null || email == '') {
+		MessageWindow.showMess("'email'      ");
+		return;
+	}
+	var reg=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+	if(!reg.test(email)){
+		MessageWindow.showMess("'email'      ");
+		return;	
+	}
 	var varifycode = $("#varifycode").val();
 	if (varifycode == null || varifycode == '') {
 		MessageWindow.showMess("' '      ");
@@ -131,3 +125,16 @@ $(document).ready($(function() {
 		y = event.clientY;
 	});
 }));
+/**
+ * 
+ */
+var selectsex = function(seloption) {
+	$('#sexsel').val(seloption);
+}
+
+/**
+ * 
+ */
+var selectblogclass = function(seloption) {
+	$('#blogclasssel').val(seloption);
+}

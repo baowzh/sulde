@@ -13,109 +13,81 @@
 </head>
 <body>
 	<form action="pagingquery.do" id="queryForm" method="post">
-		<div class="lmainR ofh" style="text-align: center; height: 64px;">
-			<img src="img/logo.png" width="980" />
-		</div>
-		<div class="lmainR ofh" style="text-align: center;">
-<!-- 			<div class="navCard "> -->
-				<%@ include file="head.jsp"%>
-<!-- 			</div> -->
-			<div class="cbt"></div>
-		</div>
+		<%@ include file="head.jsp"%>
 		<form action="pagingquery.do" method="post">
-			<div class="lmainR">
-				<div class="  lcell" style="width: 990px;">
-					<div class="lcell " style="width: 990px;">
-						<div class=" listSheet">
-							<div class="ttl1 m1ln">
-								<a href="#"><c:out value="${channel.chnlname}" /></a>
-							</div>
-							<div style="width: 948px; margin: 0px;" class="ofh">
-								<div style="">
-									<div class="flt" style="width: 680px">
-										<div style="height: 410px; margin: 10px;">
-											<c:forEach items="${paingModel.modelList}" var="documentValue"
-												varStatus="status">
-												<div class="nwsl1" style="height: 410px;">
-													<div class="title" style="height: 320px;">
-														<a
-															href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"
-															style="color: #575a5b"><c:out
-																value="${documentValue.doctitle}" /> </a>
-													</div>
-													<div class="author">
-														<a
-															href="gouserindex.do?userid=<c:out value="${documentValue.userid}" /> "><c:out
-																value="${documentValue.docauthor}" /></a>
-													</div>
-												</div>
+			<div class=" listSheet">
+				<div class="ttl1 m1ln" style="height: 480px;">
+					<a href="#"><c:out value="${channel.chnlname}" /></a>
+				</div>
+				<div style="width: 958px; margin: 0px;" class="ofh">
 
-											</c:forEach>
-
-										</div>
-										<div class="cbt"></div>
-										<div class=" pagenav">
-
-											<span id="picbtn1"
-												style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 20px; width: 20px;">&nbsp;<a>&lt;</a>&nbsp;
-											</span>
-											<c:forEach items="${pagingindexs}" var="pagingindex"
-												varStatus="status">
-												<a
-													href="javascript:gotoPage(<c:out value="${pagingindex.pageindex}"
-										default="" />)"><c:if
-														test="${pagingindex.doc==1}">
-														<c:if test="${pagingindex.front==1}">									 
-									 ..									 
-									</c:if>
-													</c:if> <c:if test="${pagingindex.current==1}">
-														<span id="picbtn1"
-															style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(f, f, f); line-height: 20px; width: 20px;">&nbsp;<c:out
-																value="${pagingindex.pageindex}" default="" />&nbsp;
-														</span>
-													</c:if> <c:if test="${pagingindex.current==0}">
-														<span id="picbtn1"
-															style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 20px; width: 20px;">&nbsp;<c:out
-																value="${pagingindex.pageindex}" default="" />&nbsp;
-														</span>
-													</c:if> <c:if test="${pagingindex.doc==1}">
-														<c:if test="${pagingindex.front==0}">									 
-									 ..									 
-									</c:if>
-
-													</c:if> </a>
-											</c:forEach>
-
-											<span id="picbtn1"
-												style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 20px; width: 20px;">&nbsp;<a>&gt;</a>&nbsp;
-											</span> (
-											<c:out value="${paingModel.rowcount}" default="0" />
-											)
-										</div>
+					<div class="flt" style="width: 970px">
+						<div style="height: 410px; margin: 10px;">
+							<c:forEach items="${paingModel.modelList}" var="documentValue"
+								varStatus="status">
+								<div class="nwsl1" style="height: 410px;">
+									<div class="title" style="height: 320px;">
+										<a
+											href="getuserdocdetail.do?docid=<c:out value="${documentValue.docid}"/>"
+											style="color: #575a5b"><c:out
+												value="${documentValue.doctitle}" /> </a>
 									</div>
-									<div class="frt"
-										style="width: 260px; border: solid 1px #ccc; margin-right: 5px; margin-top: 5px;">
-										<div class="nwsls1" style="height: auto;">
-											<div class="ad">
-												<img src="img/6.jpg" width="240" />
-											</div>
-											<div class="ad">
-												<img src="img/14.jpg" width="240" />
-											</div>
-											<div class="ad">
-												<img src="img/14.jpg" width="240" />
-											</div>
-										</div>
+									<div class="author">
+										<a
+											href="gouserindex.do?userid=<c:out value="${documentValue.userid}" /> "><c:out
+												value="${documentValue.docauthor}" /></a>
 									</div>
-									<input type="hidden" name="docchannel" id="docchannel"
-										value="<c:out value="${paingModel.docchannel}"/>"> <input
-										type="hidden" name="pageindex" id="pageindex"
-										value="<c:out value="${paingModel.pageindex}"/>">
-											<div class="cbt"></div>
 								</div>
-							</div>
+
+							</c:forEach>
+
+						</div>
+						<div class="cbt"></div>
+						<div class=" pagenav">
+
+							<span id="picbtn1"
+								style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 20px; width: 20px;">&nbsp;<a>&lt;</a>&nbsp;
+							</span>
+							<c:forEach items="${pagingindexs}" var="pagingindex"
+								varStatus="status">
+								<a
+									href="javascript:gotoPage(<c:out value="${pagingindex.pageindex}"
+										default="" />)"><c:if
+										test="${pagingindex.doc==1}">
+										<c:if test="${pagingindex.front==1}">									 
+									 ..									 
+									</c:if>
+									</c:if> <c:if test="${pagingindex.current==1}">
+										<span id="picbtn1"
+											style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(f, f, f); line-height: 20px; width: 20px;">&nbsp;<c:out
+												value="${pagingindex.pageindex}" default="" />&nbsp;
+										</span>
+									</c:if> <c:if test="${pagingindex.current==0}">
+										<span id="picbtn1"
+											style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 20px; width: 20px;">&nbsp;<c:out
+												value="${pagingindex.pageindex}" default="" />&nbsp;
+										</span>
+									</c:if> <c:if test="${pagingindex.doc==1}">
+										<c:if test="${pagingindex.front==0}">									 
+									 ..									 
+									</c:if>
+
+									</c:if> </a>
+							</c:forEach>
+
+							<span id="picbtn1"
+								style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 20px; width: 20px;">&nbsp;<a>&gt;</a>&nbsp;
+							</span> (
+							<c:out value="${paingModel.rowcount}" default="0" />
+							)
 						</div>
 					</div>
+
+					<input type="hidden" name="docchannel" id="docchannel"
+						value="<c:out value="${paingModel.docchannel}"/>"> <input
+						type="hidden" name="pageindex" id="pageindex"
+						value="<c:out value="${paingModel.pageindex}"/>">
+							<div class="cbt"></div>
 				</div>
 			</div>
 		</form>

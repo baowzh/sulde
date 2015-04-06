@@ -43,7 +43,7 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws ManagerException
 	 */
-	public DocumentValue readUserDDocument(String docid, UserValue userValue)
+	public DocumentValue readUserDDocument(String docid, UserValue userValue,Integer clienttype)
 			throws ManagerException;
 
 	/**
@@ -109,14 +109,16 @@ public interface WebResourceManager {
 	 * @param imgValue
 	 * @throws ManagerException
 	 */
-	public void doAddImg(ImgValue imgValue) throws ManagerException;
+	public void doAddImg(ImgValue imgValue, String facepath)
+			throws ManagerException;
 
 	/**
 	 * 
 	 * @param imgId
 	 * @throws ManagerException
 	 */
-	public void doDeleteImg(String imgId) throws ManagerException;
+	public void doDeleteImg(String imgId, String userid)
+			throws ManagerException;
 
 	/**
 	 * 获取工具栏
@@ -159,8 +161,8 @@ public interface WebResourceManager {
 	 * @throws ManagerException
 	 */
 	public Map<String, Object> getBlogInfo(UserValue blogUser,
-			UserValue sessionUser, Integer self, String docchannel,Integer pageindex)
-			throws ManagerException;
+			UserValue sessionUser, Integer self, String docchannel,
+			Integer pageindex, Integer clienttype) throws ManagerException;
 
 	/**
 	 * 
@@ -256,8 +258,9 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws ManagerException
 	 */
-	public List<MessageValue> getReceMessList(String userid, String messid,
-			Integer pageIndex) throws ManagerException;
+	public PaingModel<MessageValue> getReceMessList(String userid,
+			String messid, Integer pageIndex, Integer rowcount)
+			throws ManagerException;
 
 	/**
 	 * 
@@ -267,8 +270,9 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws ManagerException
 	 */
-	public List<MessageValue> getSendMessList(String userid, String messid,
-			Integer pageIndex) throws ManagerException;
+	public PaingModel<MessageValue> getSendMessList(String userid,
+			String messid, Integer pageIndex, Integer rowcount)
+			throws ManagerException;
 
 	/**
 	 * 
@@ -302,7 +306,8 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws ManagerException
 	 */
-	PaingModel<FriendValue> pagingQueryFriends(PaingModel<FriendValue> pagingModel) throws ManagerException;
+	PaingModel<FriendValue> pagingQueryFriends(
+			PaingModel<FriendValue> pagingModel) throws ManagerException;
 
 	/**
 	 * 
@@ -432,8 +437,9 @@ public interface WebResourceManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public PaingModel<DocumentValue> pagingQuerySharedDocs(Map<String, Object> params,
-			int doctype, int pageindex, int pagesize) throws Exception;
+	public PaingModel<DocumentValue> pagingQuerySharedDocs(
+			Map<String, Object> params, int doctype, int pageindex, int pagesize)
+			throws Exception;
 
 	/**
 	 * 
@@ -450,12 +456,30 @@ public interface WebResourceManager {
 			Map<String, Object> queryDocForm, Integer rowCount,
 			Integer pageindex) throws Exception;
 
-	public void synOldUser() throws Exception;
+	public void synOldUser(String headimgpath) throws Exception;
 
 	public void synOldDoc() throws Exception;
 
 	public void synOldMess() throws Exception;
 
-	public void synOldImg() throws Exception;
+	public void synOldImg(String imgpath) throws Exception;
+
+	/**
+	 * 
+	 * @param userid
+	 * @param messid
+	 * @throws Exception
+	 */
+	public void delMessage(String userid, String messid) throws Exception;
+
+	/**
+	 * 
+	 * @param resourceid
+	 * @param fechtcount
+	 * @return
+	 * @throws Exception
+	 */
+	public List<VisitorValue> getVisitorList(String resourceid,
+			Integer fechtcount) throws Exception;
 
 }

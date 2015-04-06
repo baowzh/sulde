@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" uri="/css-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Blog Home</title>
+<t:font_css type="jquery,easyui,tools"></t:font_css>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
 <link href="img/css/listpages.css" type="text/css" rel="stylesheet" />
 <link href="img/css/blog.css" type="text/css" rel="stylesheet" />
@@ -52,20 +54,15 @@
 </head>
 <body>
 	<form id="upddocform" action="updatedoc.do" method="post">
-		<div class="lmainR ofh" style="text-align: center; height: 64px;">
-			<img src="img/logo.png" width="980" />
-		</div>
-		<div class="lmainR ofh" style="text-align: center;">
-			<%@ include file="bloghead.jsp"%>
-		</div>
+		<%@ include file="bloghead.jsp"%>
 		<div class="lmainR  ">
-			<div class="roundCornerFrame">
+			<div class="roundCornerFrame" style="width: 1000px; height: 600px; margin: 0px;">
 				<div class="content" id="contentdiv">
 
 					<div class="flt"
 						style="width: 90px; height: 600px; background: #def">
 						<div class="label">  </div>
-						<div class="label">   :</div>
+						<div class="label">   :</div>
 						<div class="label">   :</div>
 						<c:if test="${agentkind==1}">
 							<div class="inputHolder">
@@ -87,7 +84,7 @@
 								style="writing-mode: tb-rl; -webkit-writing-mode: vertical-lr">
 								<option>option 1</option>
 								<option>option 1</option>
-								<option>  </option>
+								<option>  </option>
 							</select>
 						</div>
 						<c:if test="${agentkind==1}">
@@ -156,12 +153,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="lmainR ofh" style="text-align: center;">
-<!-- 			<div class="tailCard"> -->
-<!-- 				<div class="msheet" style="height: 100px; width: 800px;"> -->
+		<div class="lmainR" style="text-align: center;">
+			<div class="tailCard">
+				<div class="msheet" style="height: 100px; width: 800px;">
 					<%@ include file="../website/tail.jsp"%>
-<!-- 				</div> -->
-<!-- 			</div> -->
+				</div>
+			</div>
 			<div class="cbt"></div>
 		</div>
 		<%@ include file="dochiddendiv.jsp"%>
@@ -182,7 +179,7 @@
 			return;
 		}
 		if (docchannel == null || docchannel == '') {
-			MessageWindow.showMess('         ');
+			MessageWindow.showMess('         ');
 			return;
 		}
 		var editor1 = CKEDITOR.instances.editor1.getData();

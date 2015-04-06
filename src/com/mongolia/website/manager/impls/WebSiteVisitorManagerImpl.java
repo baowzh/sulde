@@ -1,7 +1,6 @@
 package com.mongolia.website.manager.impls;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -13,19 +12,22 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.dao.interfaces.ChannelManagerDao;
 import com.mongolia.website.dao.interfaces.WebPageManagerDao;
 import com.mongolia.website.dao.interfaces.WebResourceDao;
 import com.mongolia.website.dao.interfaces.WebSiteVisitorDao;
+import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.manager.interfaces.WebSiteVisitorManager;
+import com.mongolia.website.model.BookStoreValue;
 import com.mongolia.website.model.DocumentValue;
+import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgNew;
 import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PageChannelRelationValue;
 import com.mongolia.website.model.PaingModel;
+import com.mongolia.website.model.ProfessionValue;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.model.TopDocumentValue;
@@ -33,7 +35,6 @@ import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.StaticConstants;
 
 @Service("webSiteVisitorManager")
-@Transactional(rollbackFor = Exception.class)
 public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		WebSiteVisitorManager {
 	@Autowired
@@ -44,6 +45,8 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 	private WebResourceDao webResourceDao;
 	@Autowired
 	private WebPageManagerDao webPageManagerDao;
+	@Autowired
+	private UserManager userManager;
 	@Autowired
 	private SysConfig sysConfig;
 
@@ -167,8 +170,9 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		PaingModel<DocumentValue> paingModel = new PaingModel<DocumentValue>();
 		paingModel.setDoctype(StaticConstants.RESOURCE_TYPE_IMG);
 		paingModel.setStartrow(0);
-		paingModel.setEndrow(10);
+		paingModel.setEndrow(11);
 		paingModel.setDocstatus(2);
+		paingModel.setInindex(1);
 		List<DocumentValue> images = this.webSiteVisitorDao
 				.pagingquerydoc(paingModel);
 		// 根据docid 获取img信息
@@ -183,30 +187,36 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		//
 		List<TopDocumentValue> tops = this.getTopDocuments(
 				StaticConstants.TOP_TYPE1, null, 7);
+		TopDocumentValue[] seldocs = new TopDocumentValue[tops.size()];
+		Arrays.sort(tops.toArray(seldocs), new Comparator<TopDocumentValue>() {
+
+			@Override
+			public int compare(TopDocumentValue o1, TopDocumentValue o2) {
+				// TODO Auto-generated method stub
+				if (o1.getPlayindex() != null && o2.getPlayindex() != null) {
+					return o1.getPlayindex() - o2.getPlayindex();
+				} else {
+					return 0;
+				}
+			}
+
+		});
 		File htmimgFile = new File(htmlpath, "html");
 		File imgFile = new File(htmimgFile, "img");
 		htmimgFile.mkdir();
 		imgFile.mkdir();
 		List<ImgNew> imgNews = new ArrayList<ImgNew>();
+		tops = Arrays.asList(seldocs);
 		for (TopDocumentValue topDocumentValue : tops) {
 			ImgNew imgNew = new ImgNew();
 			imgNew.setLink("getuserdocdetail.do?docid="
 					+ topDocumentValue.getDocid() + "");
-			imgNew.setUrl("html/img/" + topDocumentValue.getDocid() + ".jpg");
+			imgNew.setUrl("html/img/" + topDocumentValue.getDocimg());
 			imgNew.setTime(5000);
+			imgNew.setIndex(topDocumentValue.getPlayindex());
 			imgNew.setTitle(topDocumentValue.getTitle());
-
-			if (topDocumentValue.getDocimg() != null) {
-				File imgFilei = new File(imgFile, topDocumentValue.getDocid()
-						+ ".jpg");
-				FileOutputStream stream = new FileOutputStream(imgFilei);
-				stream.write(topDocumentValue.getDocimg());
-				stream.close();
-			}
-			topDocumentValue.setDocimg(null);
 			imgNews.add(imgNew);
 		}
-
 		net.sf.json.JSONArray jsonArray = net.sf.json.JSONArray
 				.fromObject(imgNews);
 		indexPageContent.put("pics", jsonArray.toString());
@@ -232,10 +242,31 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 			List<UserValue> activeusers = this.webResourceDao
 					.getRecentActiveUsers(sysConfig.getActiveusercount());
 			indexPageContent.put("activeusers", activeusers);
+			// 获取6个视频文章
+			PaingModel<DocumentValue> paingModelVide0 = new PaingModel<DocumentValue>();
+			// paingModelVide0.setDocchannel(channel.getChannelid());
+			paingModelVide0.setPageindex(1);
+			paingModelVide0.setPageindex(StaticConstants.INDEX_DOC_ROWCOUNT);
+			paingModelVide0.setStartrow(0);
+			paingModelVide0.setEndrow(9);// fetchcount
+			paingModelVide0.setDocstatus(2);
+			paingModelVide0.setFlash(1);
+			paingModelVide0.setInindex(1);
+			List<DocumentValue> documents = this.webSiteVisitorDao
+					.pagingquerydoc(paingModelVide0);
+			indexPageContent.put("videos", documents);
 		}
 		List<TopDocumentValue> selecteddocs = this.getTopDocuments(
-				StaticConstants.TOP_TYPE4, null, 15);
+				StaticConstants.TOP_TYPE4, null,
+				sysConfig.getSelecteddoccount());
 		indexPageContent.put("selecteddocs", selecteddocs);
+		List<ProfessionValue> professionValues = userManager
+				.getProfessionValues(null, null);
+		indexPageContent.put("professionValues", professionValues);
+		// 最近8本书
+		List<BookStoreValue> selBooks = this.webSiteVisitorDao
+				.getSeltectedBooks(this.sysConfig.getSelbookcount());
+		indexPageContent.put("selBooks", selBooks);
 		return indexPageContent;
 	}
 
@@ -271,7 +302,7 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 			Calendar cal = Calendar.getInstance(java.util.Locale.CHINA);
 			Date fetchDate = cal.getTime();
 			int fetchtime = 0;
-			while (topDocuments.size() == 0 && fetchtime > 10) {
+			while (topDocuments.size() == 0 && fetchtime < 10) {
 				topDocuments.addAll(this.webSiteVisitorDao.getTopDocuments(
 						fetchDate, type, docid, limit));
 				Calendar calendar = java.util.Calendar.getInstance();
@@ -309,4 +340,43 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		toSortUsers = Arrays.asList(sortuser);
 		return toSortUsers;
 	}
+
+	@Override
+	public List<DocumentValue> getRecentDocs(Integer count) throws Exception {
+		// TODO Auto-generated method stub
+		return this.webResourceDao.getRecentDocs(count);
+	}
+
+	@Override
+	public PaingModel<ImgGrpupValue> pagingqueryAlbum(
+			PaingModel<ImgGrpupValue> paingModel) throws Exception {
+		// TODO Auto-generated method stub
+		paingModel.setStartrow((paingModel.getPageindex() - 1)
+				* paingModel.getPagesize());
+		paingModel.setEndrow(paingModel.getPagesize());
+		List<ImgGrpupValue> documents = this.webSiteVisitorDao
+				.pagingqueryAlbum(paingModel);
+		paingModel.setModelList(documents);
+		Integer rowCount = this.webSiteVisitorDao.getAlbumRowCount(paingModel);
+		paingModel.setRowcount("" + rowCount);
+		int pageCount = rowCount / paingModel.getPagesize();
+		if (rowCount % paingModel.getPagesize() > 0) {
+			pageCount = pageCount + 1;
+		}
+		paingModel.setPagecount(pageCount);
+		if (paingModel.getPageindex() < paingModel.getPagecount()) {
+			paingModel.setNextindex(pageCount);
+		} else {
+			paingModel.setNextindex(paingModel.getPageindex() + 1);
+		}
+		if (paingModel.getPageindex() > 1) {
+			paingModel.setPreviousindex(paingModel.getPageindex() - 1);
+		} else {
+			paingModel.setPreviousindex(1);
+		}
+
+		return paingModel;
+
+	}
+
 }

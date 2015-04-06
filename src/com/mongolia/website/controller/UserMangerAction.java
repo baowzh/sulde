@@ -1,36 +1,45 @@
 package com.mongolia.website.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongolia.website.manager.impls.SysConfig;
 import com.mongolia.website.manager.interfaces.UserManager;
 import com.mongolia.website.model.DistrictValue;
 import com.mongolia.website.model.FriendValue;
@@ -38,12 +47,13 @@ import com.mongolia.website.model.ProfessionValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.util.ImgeUtil;
 import com.mongolia.website.util.StaticConstants;
-import com.mongolia.website.util.UUIDMaker;
 
 @Controller
 public class UserMangerAction {
 	@Autowired
 	private UserManager userManager;
+	@Autowired
+	private SysConfig sysConfig;
 
 	/**
 	 * 获取用户信息
@@ -101,6 +111,7 @@ public class UserMangerAction {
 					return new ModelAndView("jsonView", map);// 管理员用户不让从此url登录
 				}
 				sessionUserValue.setLogindate(new Date());
+				request.getSession().removeAttribute("validateCode");
 				request.getSession().setAttribute("user", sessionUserValue);// 在线session
 				map.put("success", "true");
 				map.put("user", sessionUserValue);
@@ -169,7 +180,9 @@ public class UserMangerAction {
 						return new ModelAndView("redirect:" + desurl, map);
 
 					} else {
-						return new ModelAndView("redirect:index.do", map);
+						map.put("loginsuccess", "loginsuccess");
+						return new ModelAndView(
+								"redirect:index.do?loginsuccess=1", map);
 					}
 
 				}
@@ -186,7 +199,7 @@ public class UserMangerAction {
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			map.put("mess", "3");
+			map.put("mess", ex.getMessage());
 			return new ModelAndView("userspace/login", map);
 		}
 
@@ -230,24 +243,47 @@ public class UserMangerAction {
 	 */
 	@RequestMapping("/doregiste.do")
 	public ModelAndView doregiste(HttpServletRequest request,
-			UserValue userValue, ModelMap map) {
+			UserValue userValue, ModelMap map, HttpServletResponse response) {
 		try {
 			userManager.doCreateUser(userValue);
 			List<UserValue> users = this.userManager.getUsers(null,
 					userValue.getUsername());
-			if (users != null && !users.isEmpty()) {
-				map.put("userinfo", users.get(0));
-				request.getSession().setAttribute("user", users.get(0));
-			}
+			request.getSession().setAttribute("user", users.get(0));
+			/*if (users != null && !users.isEmpty()) {
+				// map.put("userinfo", users.get(0));
+				// request.getSession().setAttribute("user", users.get(0));
+				map.put("errorMess", "成功注册系统,请登录邮箱" + userValue.getEmail()
+						+ "激活账号再登陆系统。");
+				map.put("success", "0");
+				return new ModelAndView("website/error", map);
+			}*/
 			map.put("success", "1");
-
+			Cookie cookie = new Cookie("userName", userValue.getName());
+			cookie.setMaxAge(30 * 24 * 60 * 60);
+			response.addCookie(cookie);
+			// 发送电子邮件
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			map.put("error", ex.getMessage());
+			map.put("errorMess", ex.getMessage());
 			map.put("success", "0");
-			return new ModelAndView("jsonView", map);
+			return new ModelAndView("website/error", map);
 		}
-		return new ModelAndView("forward:doedituserinifo.do", map);
+		if (this.isphoneagent(request)) {
+			return new ModelAndView("redirect:phoneuserindex.do");
+		} else {
+			return new ModelAndView("forward:doedituserinifo.do", map);
+		}
+
+	}
+
+	private boolean isphoneagent(HttpServletRequest request) {
+		// Enumeration<String> headers = request.getHeaderNames();
+		String user_agent = request.getHeader("user-agent");
+		if (user_agent.indexOf("Mobile") > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	@RequestMapping("/doedituserinifo.do")
@@ -330,55 +366,27 @@ public class UserMangerAction {
 			UserValue sessionUser = (UserValue) request.getSession()
 					.getAttribute("user");// 在线session
 			userValue.setUserid(sessionUser.getUserid());
-			// 获取头部图像
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultiValueMap file = multipartRequest.getMultiFileMap();
-			String path = request.getSession().getServletContext()
-					.getRealPath("/html/img");
-			Set<String> set = file.keySet();
-			Iterator iterator = set.iterator();
-			while (iterator.hasNext()) {
-				String name = (String) iterator.next();
-				List files = (List) file.get(name);
-				String imgname = "";
-				String imgnamesm = "";
-
-				for (int i = 0; i < files.size(); i++) {
-					CommonsMultipartFile commonsMultipartFile = (CommonsMultipartFile) files
-							.get(i);
-					String OriginalFilename = commonsMultipartFile
-							.getOriginalFilename();
-					if (OriginalFilename == null
-							|| OriginalFilename.equalsIgnoreCase("")) {
-						continue;
-					}
-					OriginalFilename = OriginalFilename.split("\\.")[1];
-					imgname = UUIDMaker.getUUID() + "." + OriginalFilename;
-					imgnamesm = UUIDMaker.getUUID() + "." + OriginalFilename;
-					ImgeUtil.CompressPic(commonsMultipartFile.getBytes(), path,
-							imgname);
-					ImgeUtil.CompressPic(commonsMultipartFile.getBytes(), path,
-							imgnamesm, StaticConstants.IMGWIDTHSM,
-							StaticConstants.IMGHEIGHTSM);
-					//
-					File headimgFile = new File(path, imgname);
-					FileInputStream stream = new FileInputStream(headimgFile);
-					int length = stream.available();
-					byte reader1[] = new byte[length];
-					stream.read(reader1);
-					stream.close();
-					File headimgFilesm = new File(path, imgname);
-					FileInputStream streamsm = new FileInputStream(
-							headimgFilesm);
-					length = streamsm.available();
-					byte reader2[] = new byte[length];
-					streamsm.read(reader2);
-					streamsm.close();
-					userValue.setHeadimg(reader1);
-					userValue.setHeadimgsm(reader2);
-				}
+			if (userValue.getSexsel() != null
+					&& !userValue.getSexsel().equalsIgnoreCase("")) {
+				userValue.setSex(Integer.parseInt(userValue.getSexsel()));
 			}
-			//
+			if (userValue.getBlogclasssel() != null
+					&& !userValue.getBlogclasssel().equalsIgnoreCase("")) {
+				userValue.setBlogclass(Integer.parseInt(userValue
+						.getBlogclasssel()));
+			}
+			// 获取头部图像
+			String path = request.getSession().getServletContext()
+					.getRealPath("/html/userhead");
+			String imgnamesm = "";
+			imgnamesm = userValue.getUserid() + ".jpg";
+			if (userValue.getImg() != null && userValue.getImg().length != 0) {
+				ImgeUtil.CompressPic(userValue.getImg(), path, imgnamesm,
+						StaticConstants.IMGWIDTHSM, StaticConstants.IMGHEIGHTSM);
+				userValue.setHeadurl(imgnamesm);
+			} else {
+				userValue.setHeadurl(null);
+			}
 			userManager.doUpdateUser(userValue);
 			List<UserValue> sessions = this.userManager.getUsers(
 					userValue.getUserid(), null);
@@ -392,71 +400,6 @@ public class UserMangerAction {
 		}
 		return new ModelAndView("redirect:gouserindex.do", map);
 
-	}
-
-	@RequestMapping("/userheadimgedit.do")
-	public ModelAndView editUserHeadImg(HttpServletRequest request, ModelMap map) {
-		//
-		try {
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultiValueMap file = multipartRequest.getMultiFileMap();
-			String path = request.getSession().getServletContext()
-					.getRealPath("/html/img");
-			Set<String> set = file.keySet();
-			Iterator iterator = set.iterator();
-			while (iterator.hasNext()) {
-				String name = (String) iterator.next();
-				List files = (List) file.get(name);
-				String imgname = "";
-				String imgnamesm = "";
-				UserValue sessionUser = (UserValue) request.getSession()
-						.getAttribute("user");// 在线session
-				try {
-					for (int i = 0; i < files.size(); i++) {
-						CommonsMultipartFile commonsMultipartFile = (CommonsMultipartFile) files
-								.get(i);
-						String OriginalFilename = commonsMultipartFile
-								.getOriginalFilename();
-						OriginalFilename = OriginalFilename.split("\\.")[1];
-						imgname = UUIDMaker.getUUID() + "." + OriginalFilename;
-						imgnamesm = UUIDMaker.getUUID() + "."
-								+ OriginalFilename;
-						ImgeUtil.CompressPic(commonsMultipartFile.getBytes(),
-								path, imgname);
-						ImgeUtil.CompressPic(commonsMultipartFile.getBytes(),
-								path, imgnamesm, StaticConstants.IMGWIDTHSM,
-								StaticConstants.IMGHEIGHTSM);
-						//
-						File headimgFile = new File(path, imgname);
-						FileInputStream stream = new FileInputStream(
-								headimgFile);
-						int length = stream.available();
-						byte reader1[] = new byte[length];
-						stream.read(reader1);
-						stream.close();
-						File headimgFilesm = new File(path, imgname);
-						FileInputStream streamsm = new FileInputStream(
-								headimgFilesm);
-						length = streamsm.available();
-						byte reader2[] = new byte[length];
-						streamsm.read(reader2);
-						streamsm.close();
-						sessionUser.setHeadimg(reader1);
-						sessionUser.setHeadimgsm(reader2);
-					}
-					// 修改用户头像
-					userManager.doUpdateUser(sessionUser);
-					// imgValue.setImgurl("img/" + imgname);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					return new ModelAndView("sitemanager/error", map);
-				}
-			}
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return new ModelAndView("userspace/userheadimgedit", map);
 	}
 
 	/**
@@ -523,13 +466,22 @@ public class UserMangerAction {
 	 * @return
 	 */
 	@RequestMapping("/checkuserisexists.do")
-	public ModelAndView checkUserIsExists(UserValue UserValue, ModelMap map) {
+	public ModelAndView checkUserIsExists(HttpServletRequest request,
+			UserValue UserValue, ModelMap map) {
 		List<UserValue> userValues = userManager.getUsers(
 				UserValue.getUserid(), UserValue.getUsername());
 		if (userValues == null || userValues.isEmpty()) {
 			map.put("exists", "0");
 		} else {
 			map.put("exists", "1");
+		}
+		Cookie cookies[] = request.getCookies();
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equalsIgnoreCase("userName")
+					&& cookie.getValue() != null) {
+				map.put("exists", "2");
+				break;
+			}
 		}
 		return new ModelAndView("jsonView", map);
 	}
@@ -542,38 +494,67 @@ public class UserMangerAction {
 	 */
 	@RequestMapping("/checkusernameandpassword.do")
 	public ModelAndView checkUserNameAndPassword(UserValue UserValue,
-			ModelMap map) {
+			ModelMap map) throws Exception {
 		List<UserValue> userValues = userManager.getUsers(
 				UserValue.getUserid(), UserValue.getUsername());
 		if (userValues == null || userValues.isEmpty()) {
 			map.put("result", "0");// 用户不存在
 		} else {
-			// 校验密码是否正确
-			UserValue userValuei = userValues.get(0);
-			if (!userValuei.getPassword().equalsIgnoreCase(
-					UserValue.getPassword())) {
+			UserValue sysUserValue = userValues.get(0);
+			if (sysConfig.getOnline().intValue() == 1
+					&& sysUserValue.getOldid() != null) {
+				String urlstr = sysConfig.getCheckpassurl() + "/pas.asp?pas="
+						+ UserValue.getPassword();
+				URL url = new URL(urlstr);
+				URLConnection rulConnection = url.openConnection();
+				HttpURLConnection httpUrlConnection = (HttpURLConnection) rulConnection;
+				httpUrlConnection.connect();
+				InputStream iniputStream = httpUrlConnection.getInputStream();
+				byte reader[] = new byte[1024];
+				int length = 0;
+				ByteArrayOutputStream ooutStream = new ByteArrayOutputStream();
+				while ((length = iniputStream.read(reader)) != -1) {
+					ooutStream.write(reader, 0, length);
+				}
+				String encripedPass = ooutStream.toString();
+				UserValue.setEncripedPass(encripedPass);
+				ooutStream.close();
+				iniputStream.close();
+			} else {
+				Md5PasswordEncoder md5 = new Md5PasswordEncoder();
+				String pass = md5.encodePassword(UserValue.getPassword(),
+						StaticConstants.encrypekey);
+				UserValue.setEncripedPass(pass);
+			}
+
+			if (!sysUserValue.getPassword().equalsIgnoreCase(
+					UserValue.getEncripedPass())) {
 				map.put("result", "1");// 用户密码不正确
 			} else {
 				map.put("result", "2");// 用户名和密码都正确
 			}
 		}
+
 		return new ModelAndView("jsonView", map);
 	}
 
 	@RequestMapping("/tologin.do")
 	public ModelAndView toLogin(ModelMap map) {
 		// 如果处于登陆状态则直接进入博客主页
-		// HttpServletRequest request = ((ServletRequestAttributes)
-		// RequestContextHolder
-		// .getRequestAttributes()).getRequest();
-		// UserValue sessionUser = (UserValue)
-		// request.getSession().getAttribute(
-		// "user");// 在线session
-		// if (sessionUser == null) {
-		return new ModelAndView("userspace/login", map);
-		// } else {
-		// return blogManagerAction.gointoroom(request, map);
-		// }
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes()).getRequest();
+		UserValue sessionUser = (UserValue) request.getSession().getAttribute(
+				"user");// 在线session
+		if (sessionUser == null) {
+			return new ModelAndView("userspace/login", map);
+		} else {
+			// if (this.isphoneagent(request)) {
+			// return new ModelAndView("redirect:phoneuserindex.do");
+			// }else{
+			return new ModelAndView("redirect:gouserindex.do", map);
+			// }
+
+		}
 	}
 
 	/**
@@ -833,7 +814,7 @@ public class UserMangerAction {
 					sessionUserValue.setMaillogin(1);
 					request.getSession().setAttribute("user", sessionUserValue);// 在线session
 					// 清楚mail登录秘钥
-					//request.getServletContext().removeAttribute(id);
+					// request.getServletContext().removeAttribute(id);
 					return new ModelAndView("redirect:gouserindex.do?userid="
 							+ sessionUserValue.getUserid());
 				}
@@ -841,6 +822,32 @@ public class UserMangerAction {
 			}
 		}
 
+	}
+
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) throws ServletException {
+		binder.registerCustomEditor(byte[].class,
+				new ByteArrayMultipartFileEditor());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
+	}
+
+	@RequestMapping("/activateUser.do")
+	public ModelAndView activateUser(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		try {
+			String userid = (String) request.getParameter("id");
+			String username = (String) request.getParameter("username");
+			this.userManager.activateUser(username, userid);
+			map.put("errorMess", "成功激活账号，请到主页进行登陆系统！");
+			map.put("success", "0");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			map.put("errorMess", ex.getMessage());
+		}
+		return new ModelAndView("website/error", map);
 	}
 
 }

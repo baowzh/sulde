@@ -11,213 +11,26 @@
 <link href="img/css/huh.css" type="text/css" rel="stylesheet" />
 <link href="img/css/imgSlider.css" type="text/css" rel="stylesheet" />
 <link href="img/css/login.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="site/css/scroll.css" />
+<link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/cls_photosliderV_b1_0.js"></script>
 <script type="text/javascript" src="js/sitejs/index.js"></script>
-<script type="text/javascript" src="js/sitejs/regist.js"></script>
-<script type="text/javascript" src="js/sitejs/imgnews.js"></script>
+<script type="text/javascript" src="js/sitejs/changevalidcode.js"></script>
 <script type="text/javascript" src="js/util/js/messageWindow.js"></script>
 <script type="text/javascript" src="js\tween.js"></script>
+<script type="text/javascript" src="js/sitejs/imgnews.js"></script>
 <script src="js/messagebox/jquery.msgbox.js"></script>
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
-<link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
-<style>
-<
-c
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:if
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-test
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-="${
-agentkind
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-==0
-}
-">
-body {
-	font-size: 16px;
-}
-</
-c
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:if
->
-</style>
+<script type="text/javascript" src="js/scroll/utilities.js"></script>
+<script type="text/javascript" src="js/scroll/sodon-min.js"></script>
+<script type="text/javascript" src="js/scroll/scrollview-min.js"></script>
+<script type="text/javascript" src="js/scroll/jquery.totemticker.min.js"></script>
+<script src="js/sitejs/galleria-1.4.2.min.js"></script>
 </head>
 <body>
 	<div style="background: #1b6dd2;">
-		<div class="lmainR ofh" style="text-align: center;">
-			<!-- 顶部广告 -->
-			<div id="rightOpen"
-				style="width: 16px; height: 16px; position: absolute; right: 165px; top: 65px;">
-				<img src="img/dispaly.png" width="16" height="16" />
-			</div>
-			<div id="banner" style="width: 985px; height: 291px; display: none;">
-				<img src="img/01.jpg" width="985" height="291" />
-			</div>
-			<!--对联广告的html代码结构-->
-			<div class="duilian duilian_left">
-				<div class="duilian_con">
-					<img src="img/hdoh.gif">
-				</div>
-				<a href="#" class="duilian_close">X</a>
-			</div>
-			<div class="duilian duilian_right">
-				<div class="duilian_con">
-					<img src="img/odonbater.gif">
-				</div>
-				<a href="#" class="duilian_close">X</a>
-			</div>
-			<!-- -->
-			<img src="img/logo.png" width="980" height="64" />
+		<div class="lmainR ofh" style="text-align: center; width: 990px;">
+			<img src="img/logo.png" width="990" height="64">
 		</div>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
@@ -248,9 +61,6 @@ c
 				<a href="pagingquery.do?docchannel=11111111111114"> 
 				</a>
 			</div>
-			<!-- 			<div class="m1ln navl"> -->
-			<!-- 				<a href="pagingquery.do?docchannel=11111111111123"></a> -->
-			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -274,9 +84,6 @@ c
 			<div class="m1ln navl">
 				<a href="pagingquery.do?docchannel=11111111111129"> </a>
 			</div>
-			<!-- 			<div class="m1ln navl"> -->
-			<!-- 				<a href="#"></a> -->
-			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -302,9 +109,6 @@ c
 				<a href="pagingquery.do?docchannel=11111111111135"> 
 				</a>
 			</div>
-			<!-- 			<div class="m1ln navl"> -->
-			<!-- 				<a href="pagingquery.do?docchannel=32222233332222"></a> -->
-			<!-- 			</div> -->
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -357,9 +161,12 @@ c
 				<a href="pagingquery.do?docchannel=11111111111123">
 					  </a>
 			</div>
-			<!-- 			<div class="m1ln navl"> -->
-			<!-- 				<a href="pagingquery.do?docchannel=32222233332222"></a> -->
-			<!-- 			</div> -->
+			<div class="m1ln navl">
+				<a href="pagingquery.do?docchannel=32222233332222"> </a>
+			</div>
+			<div class="m1ln navl">
+				<a href="pagingquery.do?docchannel=32222233332222"></a>
+			</div>
 			<div class="m1ln nav2">
 				<a href="javascript:;">  </a>
 			</div>
@@ -389,11 +196,7 @@ c
 		<div class="cbt"></div>
 	</div>
 	<div class="lmainR">
-		<!-- 		<div class="  lcell" style="width: 90px; height: 700px;"> -->
-		<!-- 			<div -->
-		<!-- 				style="width: 80px; height: 690px; background: url(img/huhsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div> -->
-		<!-- 		</div> -->
-		<div class="  lcell" style="width: 998x;">
+		<div class="  lcell" style="width: 1000x;">
 			<div class="lcell cell2" style="width: 390px;">
 				<div class="cardt2" style="width: 380px;">
 					<div style="width: 380px; height: 330px; padding: 5px;">
@@ -402,15 +205,14 @@ c
 					</div>
 				</div>
 			</div>
-			<!-- 			<div class="lcell cell1" style="width: 598px;"> -->
-			<div class="   cardt1  " style="width: 592px;">
+			<div class="   cardt1  " style="width: 602px;">
 				<div class="ttl1 m1ln">
 					<a href="javascript:void();">  </a>
 				</div>
 				<div class="nwsls1" style="width: 430px;">
 
-					<c:forEach items="${indexPageContent.selecteddocs}" var="documentValue"
-						varStatus="status">
+					<c:forEach items="${indexPageContent.selecteddocs}"
+						var="documentValue" varStatus="status">
 						<div class="nwsl1">
 							<div class="title">
 								<a
@@ -425,14 +227,16 @@ c
 							</div>
 						</div>
 					</c:forEach>
-
 				</div>
 				<div class="ttl1 m1ln">
 					<a href="javascript:void();"></a>
 				</div>
+
 				<div class="mnlist" style="width: 10px;"></div>
-				<div class="mnlist" style="width: 70px;">
+				<div class="mnlist" style="width: 80px;">
+
 					<form id="searchform" method="post">
+
 						<div class="search">
 							<input type="text" name="searchtext" id="searchtext" />
 						</div>
@@ -443,16 +247,17 @@ c
 								 </a> &nbsp;&nbsp; <a id="searchdoca"
 								href="javascript:search('searchdoc.do');">  </a>
 						</div>
+
 					</form>
 
 				</div>
+
 			</div>
-			<!-- 			</div> -->
 		</div>
 	</div>
 	<div class="lmainR">
 		<div class="  lcell" style="width: 150px; height: 315px;">
-			<div class="lcell cardlogin" id="logindiv" style="height: 315px;">
+			<div class="lcell cardlogin" id="logindiv" style="height: 302px;">
 				<div class="content" style="padding-left: 14px;">
 					<form class="mglForm" action="checkandlogin.do" id="loginform"
 						method="post">
@@ -481,75 +286,24 @@ c
 									&nbsp;&nbsp;&nbsp;&nbsp;</a> <a href="javascript:login();">
 								</a>
 							</div>
-							<!-- 						<input type="button" onclick="javascript:dosubmit();" value=" "> -->
-							<!-- 						<input type="button" onclick="registe.do;" value=""> -->
 						</div>
 					</form>
 				</div>
-				<!--  
-				<form id="loginform">
-					<table border="0" style="margin: 1em auto;">
-						<tr>
-							<td height="100"><div class="m1ln h100"> 
-								</div></td>
-							<td><div class="m1ln h100"></div></td>
-							<td><div class="m1ln h100">
-									  <a href="javascript:replaceverifycode();"></a>
-									
-								</div></td>
-							<td><div class="m1ln h100">								
-								</div></td>
-						</tr>
-						<tr>
-							<td><div class="mfl">
-									<input type="text" name="username" />
-								</div></td>
-							<td><div class="mfl">
-									<input type="password" name="password" />
-								</div></td>
-							<td align="center">
-								<div class="mfl" id="varifyimgdiv">
-									<table
-										style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; widht: 20px !important; height: 170px;">
-										<tr>
-											<td style="height: 100px; width: 20px; align: center">
-												<div class="mfl" style="height: 100px; width: 22px;">
-													<img src="verifyCodeServlet" id="varifyimg" width="21"
-														height="100" />&nbsp;&nbsp;
-												</div>
-											</td>
-											<td style="height: 70px; width: 20px; align: center"><input
-												type="text" name="validcode"
-												style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; height: 15px; width: 56px;" />
-											</td>
-										</tr>
-									</table>
-								</div>
-							</td>
-							<td><div class="m1ln h100">
-									<a href="registe.do"> </a> &nbsp;&nbsp;&nbsp;&nbsp;<a
-										href="javascript:login();"> </a>									
-								</div></td>
-						</tr>
-					</table>
-				</form>
-				-->
 			</div>
 		</div>
-		<div class="lcell " style="width: 840px; height: 315px;">
+		<div class="lcell " style="width: 850px; height: 315px;">
 			<div class="cardt5" style="height: 308px;">
 				<div class="ttl1 m1ln" style="height: 308px;">
 					<a href="#">  </a>
 				</div>
-				<div style="width: 720px; margin: 5px; height: 300px;">
+				<div style="width: 830px; height: 300px;">
 					<c:forEach items="${indexPageContent.topUsers}" var="userValue"
 						varStatus="status">
-						<div class="xldgurg" style="height: 70px;">
+						<div class="xldgurg">
 							<div class="avtr">
 								<a
 									href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
-									src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
-									width="570" height="447" /></a>
+									src="html/userhead/<c:out value="${userValue.headurl}" />" /></a>
 								<div class="frt" style="width: 20px; text-align: center;">
 									<div class="m1ln" style="text-align: center; font-size: 16px;">
 										<a
@@ -656,12 +410,6 @@ c
 				</div>
 			</div>
 		</div>
-		<!-- 		</div> -->
-		<!-- 	</div> -->
-		<!-- 	<div class="lmainR"> -->
-
-		<!-- 		<div class="  lcell" style="width: 750px;"> -->
-
 		<div class="lcell cell1">
 			<div class="cardt1">
 				<a name="sinljilge"></a>
@@ -745,7 +493,6 @@ c
 				</div>
 			</div>
 		</div>
-		<!-- 		</div> -->
 	</div>
 
 	<div class="lmainR">
@@ -753,7 +500,7 @@ c
 			<div
 				style="width: 80px; height: 690px; background: url(img/chagansuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 900px;">
+		<div class="  lcell" style="width: 910px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="#nairag"></a>
@@ -923,8 +670,8 @@ c
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 990px; height: 330px;">
-			<div class="lcell " style="width: 990px; height: 330px;">
+		<div class="  lcell" style="width: 1000px; height: 330px;">
+			<div class="lcell " style="width: 1000px; height: 330px;">
 				<div class="cardt4" style="height: 320px;">
 					<div class="ttl1 m1ln">
 						<a href="#">  </a>
@@ -933,14 +680,14 @@ c
 
 						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
 							varStatus="status">
-							<div class="xldgurg" style="height: 70px; width: 68px;">
-								<div class="avtr" style="width: 85px;">
+							<div class="xldgurg">
+								<div class="avtr">
 									<a
 										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
-										src="getsmheadimge.do?userid=<c:out value="${userValue.userid}" />"
-										style="width: 47px;" /></a>
+										src="html/userhead/<c:out value="${userValue.headurl}" />" /></a>
 									<div class="frt" style="width: 20px; text-align: center;">
-										<div class="m1ln" style="text-align: center; font-size: 16px;height:80px;">
+										<div class="m1ln"
+											style="text-align: center; font-size: 16px; height: 80px;">
 											<a
 												href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
 												&nbsp;<c:out value="${userValue.artname}" />
@@ -951,60 +698,16 @@ c
 								</div>
 							</div>
 						</c:forEach>
-						<!--  
-						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
-							varStatus="status">
-							<div class="xldgurg">
-								<div class="avtr">
-									<a
-										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
-										src="getsmheadimge.do?userid=<c:out value="${userValue.userid}"/>"
-										width="570" height="447" /></a>
-								</div>
-								<div class="desc  ">
-									<div class="m1ln">
-										<a
-											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><c:out
-												value="${userValue.artname}" /> : <c:out
-												value="${userValue.regdateStr}" /></a>
-									</div>
-									<div class="m1ln">
-										<a
-											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
-											  </a>
-									</div>
-									<div class="m1ln">
-										<a
-											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
-											: </a>
-										<c:choose>
-											<c:when test="${userValue.sex==1}">
-							         
-							       </c:when>
-											<c:when test="${userValue.sex==0}">
-							          
-							       </c:when>
-											<c:otherwise>
-							          
-							       </c:otherwise>
-										</c:choose>
-									</div>
-
-								</div>
-							</div>
-						</c:forEach>
-						-->
-
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="  lcell" style="width: 990px;">
+		<div class="  lcell" style="width: 1000px;">
 			<div class="lcell cardlogin   "
 				style="background: white; margin-top: 5px">
 				<img src="img/8.jpg" width="600" height="400" />
 			</div>
-			<div class="lcell " style="height: 350px; width: 238px;">
+			<div class="lcell " style="height: 350px; width: 246px;">
 				<div class="cardt3">
 					<div class="nwsls1">
 						<div class="nwsl1">
@@ -1117,13 +820,14 @@ c
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<div class="lmainR">
 		<div class="  lcell" style="width: 90px; height: 700px;">
 			<div
 				style="width: 80px; height: 690px; background: url(img/nogoonsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 900px;">
+		<div class="  lcell" style="width: 910px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="edin"></a>
@@ -1294,148 +998,34 @@ c
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 990px;">
-			<div class="lcell " style="width: 990px; height: 265px;">
-				<div class="cardt4" style="height: 255px;">
-					<div class="ttl1 m1ln" style="height: 255px;">
+		<div class="  lcell" style="width: 1000px;">
+			<div class="lcell " style="width: 1000px; height: 320px;">
+				<div class="cardt4" style="height: 310px;">
+					<div class="ttl1 m1ln" style="height: 310px;">
 						<a href="#">  </a>
 					</div>
-					<div style="width: 948px; margin: 0px; height: 255px" class="ofh">
-						<div class="picshow">
-							<c:forEach items="${indexPageContent.imgs}" var="imgValue"
-								varStatus="status" end="4">
-								<a
-									href="getimginfo.do?imgid=<c:out value="${imgValue.imgid}"/>&userid=<c:out value="${imgValue.userid}"/>"><img
-									src="getimg.do?imgid=<c:out value="${imgValue.imgid}"/>"
-									style="width: 168px; height: 110px;" /></a>
-							</c:forEach>
-						</div>
-						<div class="picshow">
-							<c:forEach items="${indexPageContent.imgs}" var="imgValue"
-								varStatus="status" begin="5">
-								<a
-									href="getimginfo.do?imgid=<c:out value="${imgValue.imgid}"/>&userid=<c:out value="${imgValue.userid}"/>"><img
-									src="getimg.do?imgid=<c:out value="${imgValue.imgid}"/>"
-									style="width: 168px; height: 110px;" /></a>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="  lcell" style="width: 990px;">
-			<div class="lcell cardlogin   "
-				style="background: white; margin-top: 5px">
-				<img src="img/8.jpg" width="600" height="400" />
-			</div>
-			<div class="lcell " style="height: 350px; width: 238px;">
-				<div class="cardt3">
-					<div class="nwsls1">
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
+					<div class="photo-slider">
+						<div class="photo-slider-wrapper h-scrollview-mask">
+							<div class="photo-slider-content" id="h-scroll-container">
+								<c:forEach items="${indexPageContent.imgs}" var="imgValue"
+									varStatus="status">
+									<div class="photo-slider-item"
+										style="overflow: hidden; float: left; display: inline; width: 235px; height: 280px;">
+										<a href="http://yellow.news.mn/content/208142.shtml"
+											style="display: inline-block; padding: 1px; background: #fff; border: 1px #d1d7dd solid;">
+											<div style="width: 235px; height: 270px; overflow: hidden;">
+												<img src="html/img/news2.jpg"
+													style="height: 270px; width: 235px;">
+											</div>
+										</a>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<div class="ttl1 m1ln">
-						<a href="#">  </a>
-					</div>
-					<div class="nwsls1">
-						<div class="ad">
-							<img src="img/6.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/14.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/01.jpg" width="240" />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<div class="ttl1 m1ln">
-						<a href="#">  </a>
-					</div>
-					<div class="nwsls1">
-						<div class="ad">
-							<img src="img/6.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/14.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/01.jpg" width="240" />
+						<div class="photo-slider-controls">
+							<a class="left-button" id="h-scrollview-prevbutton-bs"
+								href="javascript:void(0)"></a> <a class="right-button"
+								id="h-scrollview-nextbutton-bs" href="javascript:void(0)"></a>
 						</div>
 					</div>
 				</div>
@@ -1447,7 +1037,7 @@ c
 			<div
 				style="width: 80px; height: 690px; background: url(img/alagsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 900px;">
+		<div class="  lcell" style="width: 910px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="shog"></a>
@@ -1620,7 +1210,7 @@ c
 			<div
 				style="width: 80px; height: 690px; background: url(img/tanison.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 900px;">
+		<div class="  lcell" style="width: 910px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="biqilge"></a>
@@ -1795,7 +1385,7 @@ c
 			<div
 				style="width: 80px; height: 690px; background: url(img/harsuld.gif) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 900px;">
+		<div class="  lcell" style="width: 910px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="hvvl"></a>
@@ -1967,38 +1557,6 @@ c
 		<%@ include file="../website/tail.jsp"%>
 		<div class="cbt"></div>
 	</div>
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_share_slide jiathis_share_32x32"
-		id="jiathis_share_slide">
-		<div class="jiathis_share_slide_top" id="jiathis_share_title"></div>
-		<div class="jiathis_share_slide_inner">
-			<div class="jiathis_style_32x32">
-				<a class="jiathis_button_qzone"></a> <a class="jiathis_button_tsina"></a>
-				<a class="jiathis_button_tqq"></a> <a class="jiathis_button_weixin"></a>
-				<a class="jiathis_button_renren"></a> <a
-					href="http://www.jiathis.com/share"
-					class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-				<script type="text/javascript">
-					var jiathis_config = {
-						slide : {
-							divid : 'jiathis_main',//设定分享按钮的位置在哪个DIV的边缘，一般是主体内容的外层DIV框架ID,
-							pos : 'right'
-						}
-					};
-				</script>
-				<script type="text/javascript"
-					src="http://v3.jiathis.com/code/jia.js?uid=1408369689443257"
-					charset="utf-8"></script>
-				<script type="text/javascript"
-					src="http://v3.jiathis.com/code/jiathis_slide.js" charset="utf-8"></script>
-			</div>
-		</div>
-	</div>
-	<!-- JiaThis Button END -->
-	<!-- UJian Button BEGIN -->
-	<script type="text/javascript"
-		src="http://v1.ujian.cc/code/ujian.js?type=slide"></script>
-	<!-- UJian Button END -->
 </body>
 <script>
 	var pics1 = <c:out value="${indexPageContent.pics}" escapeXml="false" />;
@@ -2009,6 +1567,32 @@ c
 	if (/msie/.test(navigator.userAgent.toLowerCase())) {
 		$("#searchtext").attr("style", "width:18px;height:275px;");
 	}
+	/*
+	SODON.example.scrollViewHome = new SODON.widget.ScrollView("videoBox", {
+		nextButton : "flex-next",
+		prevButton : "flex-prev",
+		direction : "horizontal",
+		screenSize : 3,
+		itemWidth : 320,
+		itemHeight : 328,
+		itemSpace : 30,
+		waitTime : 4000, // Huleeh hugatsaa /by milli sec/
+		speed : 1, // Hudulguunii hurd /by sec/
+		auto : false,
+		repeat : "repeat-back"
+	});*/
+
+	SODON.example.scrollViewH = new SODON.widget.ScrollView(
+			"h-scroll-container", {
+				direction : "horizontal",
+				screenSize : 4,
+				itemWidth : 235,
+				itemHeight : 270,
+				itemSpace : 4,
+				prevButton : "h-scrollview-prevbutton-bs",
+				nextButton : "h-scrollview-nextbutton-bs",
+				auto : true
+			});
 </script>
 </html>
 

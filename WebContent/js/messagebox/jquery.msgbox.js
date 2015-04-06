@@ -76,16 +76,18 @@
 		this.titleWrap = $('<div />').css({
 			'float' : 'left',
 			'width' : 18+ 'px'
-		}).html('<div class="mnlist" style="width:18px;">'+this.opts.title+"</div>").appendTo(this.headWrap).addClass(
+		}).html('<div class="mnlist" style="width:20px;text-align:center">'+this.opts.title+"</div>").appendTo(this.headWrap).addClass(
 				'jMsgbox-titleWrap');
 		var _this = this;
 
 		this.contentWrapWrap = $('<div />').css({
 			'display' : 'block',
 			//'width' : this.opts.width + 'px',
-			'width' : 160 + 'px',
+			'width' : 151 + 'px',
 			'height' : 300 + 'px',
-			'overflow' : 'hidden'
+			'float':'left',
+			'class':'mnlist'
+			// 'overflow' : 'hidden'
 		}).appendTo(this.mainWrap);
 		// 调整工具栏的位置
 
@@ -100,7 +102,7 @@
 		//
 
 		this.contentWrap = $('<div />').appendTo(this.contentWrapWrap).html(
-				'<div class="mnlist" style="width:190px;">'+this.opts.content+'</div>').addClass('jMsgbox-contentWrap');
+				'<div class="mnlist" style="width:140px;">'+this.opts.content+'</div>').addClass('jMsgbox-contentWrap');
 
 		this._hook_domready();
 
@@ -516,14 +518,14 @@
 			switch (this.opts.type) {
 			case 'alert':
 
-				var closebutton = $('<div class="mnlist" style="width:12px;"><a href="#"></a></div>')
+				var closebutton = $('<div class="mnlist" style="width:30px;height:300px;float:left;text-align:center;"><a href="#"></a></div>')
 						.click(function() {
 							_this.close();
 						});
-				var center = $('<center />').css('padding', '8px').append(
-						closebutton);
-				this.mainWrap.append(center);
-
+				//var center = $('<center />').css('padding', '8px').append(
+						//closebutton);
+			//	this.mainWrap.append(center);
+				this.mainWrap.append(closebutton);
 				// fix contentWrapWrap height
 				_this.extend('show', function(self) {
 					self.apply(this, arguments);

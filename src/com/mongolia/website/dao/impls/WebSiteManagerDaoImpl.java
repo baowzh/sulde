@@ -147,4 +147,14 @@ public class WebSiteManagerDaoImpl extends BaseDaoiBatis implements
 
 	}
 
+	@Override
+	public void setVideoface(String docid, String imgpath) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("docid", docid);
+		params.put("facepath", imgpath);
+		this.getSqlMapClientTemplate().update("setvideoface", params);
+
+	}
+
 }

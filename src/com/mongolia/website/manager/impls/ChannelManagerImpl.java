@@ -1,5 +1,6 @@
 package com.mongolia.website.manager.impls;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import com.mongolia.website.model.Channel;
 import com.mongolia.website.util.UUIDMaker;
 
 @Service("channelManager")
-@Transactional(rollbackFor = Exception.class)
 public class ChannelManagerImpl implements ChannelManager {
 
 	@Autowired
@@ -29,18 +29,11 @@ public class ChannelManagerImpl implements ChannelManager {
 	public List<Channel> getChannelList(Map<String, Object> params) {
 		// TODO Auto-generated method stub
 		String types = "";
-		Object type = params.get("type");
-		if (type != null) {
-			String typestr = type.toString();
-			if (typestr.equalsIgnoreCase("1")) {
-				types = types + "1,2";
-			} else {
-				types = types + "2";
-			}
-		} else {
+		Object type = params.get("types");
+		if (type == null) {
 			types = "2";
+			params.put("types", types);
 		}
-		params.put("types", types);
 		return channelDao.getChannel(params);
 	}
 
@@ -56,6 +49,14 @@ public class ChannelManagerImpl implements ChannelManager {
 	public void doDeleteChannel(Map<String, String> params) throws Exception {
 		// TODO Auto-generated method stub
 		channelDao.deleteChannel(params);
+	}
+
+	@Override
+	public List<Channel> getRaceChannelList() throws Exception {
+		// TODO Auto-generated method stub
+
+		return this.channelDao
+				.getRaceChannelList(new HashMap<String, Object>());
 	}
 
 }

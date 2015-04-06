@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TAXSURVEY_USER">
+	<typeAlias alias="bookStoreValue" type="com.mongolia.website.model.BookStoreValue" />
+	<insert id="addBookStoreValue" parameterClass="bookStoreValue">
+		insert into
+		bookstore(
+		bookid,
+		bookimg,
+		bookname,
+		bookprice,
+		bookauthor,
+		booklink,
+		storedate
+		)
+		values
+		(
+		#bookid#,
+		#bookimg#,
+		#bookname#,
+		#bookprice#,
+		#bookauthor#,
+		#booklink#,
+		#storedate#
+		)
+	</insert>
+
+	<update id="updBookStoreValue" parameterClass="bookStoreValue">
+		update bookstore
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="bookimg">
+				bookimg=#bookimg#
+			</isNotNull>
+			<isNotNull prepend="," property="bookname">
+				bookname=#bookname#
+			</isNotNull>
+			<isNotNull prepend="," property="bookprice">
+				bookprice=#bookprice#
+			</isNotNull>
+			<isNotNull prepend="," property="bookauthor">
+				bookauthor=#bookauthor#
+			</isNotNull>
+			<isNotNull prepend="," property="booklink">
+				booklink=#booklink#
+			</isNotNull>
+			<isNotNull prepend="," property="storedate">
+				storedate=#storedate#
+			</isNotNull>
+		</dynamic>
+		where bookid=#bookid#
+	</update>
+	<select id="getBookStoreValues" parameterClass="java.util.Map"
+		resultClass="bookStoreValue">
+		select * from bookstore
+	</select>
+	<delete id="deletebook" parameterClass="java.util.Map">
+		delete from bookstore where bookstore.bookid=#bookid#
+	</delete>
+	<select id="querySeltedBooks" parameterClass="java.util.Map" resultClass="bookStoreValue" >
+	  select a.* from  bookstore a,topdocument b where a.bookid=b.docid  and b.type=8 order by 
+	  b.startdate desc LIMIT #selcount#
+	</select>
+</sqlMap>

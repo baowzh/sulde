@@ -4,14 +4,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.mongolia.website.model.BookStoreValue;
 import com.mongolia.website.model.DocumentValue;
+import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
 
-public interface WebSiteVisitorDao extends BaseDao {
+public interface WebSiteVisitorDao extends IBatisBaseDao {
 	/**
 	 * 获取栏目列表
 	 * 
@@ -47,8 +49,8 @@ public interface WebSiteVisitorDao extends BaseDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<DocumentValue> pagingquerydoc(PaingModel paingModel)
-			throws Exception;
+	public List<DocumentValue> pagingquerydoc(
+			PaingModel<DocumentValue> paingModel) throws Exception;
 
 	/**
 	 * 获取页数
@@ -57,7 +59,8 @@ public interface WebSiteVisitorDao extends BaseDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public Integer getRowCount(PaingModel paingModel) throws Exception;
+	public Integer getRowCount(PaingModel<DocumentValue> paingModel)
+			throws Exception;
 
 	/**
 	 * 获取当月最前面的几个用户
@@ -98,6 +101,35 @@ public interface WebSiteVisitorDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public List<UserValue> getRecentLoginUsers(Integer dispalycount)
+			throws Exception;
+
+	/**
+	 * 被选送的书籍个数
+	 * 
+	 * @param dispalycount
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BookStoreValue> getSeltectedBooks(Integer dispalycount)
+			throws Exception;
+
+	/**
+	 * 
+	 * @param paingModel
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ImgGrpupValue> pagingqueryAlbum(
+			PaingModel<ImgGrpupValue> paingModel) throws Exception;
+
+	/**
+	 * 获取页数
+	 * 
+	 * @param paingModel
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer getAlbumRowCount(PaingModel<ImgGrpupValue> paingModel)
 			throws Exception;
 
 }

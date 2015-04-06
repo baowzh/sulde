@@ -1,55 +1,76 @@
-﻿package com.mongolia.website.dao.interfaces;
+package com.mongolia.website.dao.interfaces;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-public interface BaseDao {
 
+import com.mongolia.website.model.PagingPrams;
+
+/**
+ * 
+ * @author baowzh
+ *
+ * @param <T>
+ *            业务数据类型
+ * @param <P>
+ *            参数类型
+ */
+public interface BaseDao<T, P extends PagingPrams> {
 	/**
-	 * 获取数据表所有的记录
-	 * @param clazz
+	 * 查询业务数据
+	 * 
+	 * @param pageValue
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	List getAll(Class clazz);
+	public List<T> pagingqueryData(P pageValue);
 
 	/**
-	 * 根据主键从数据表中取回一个对象
-	 * @param clazz
-	 * @param id
+	 * 查询业务数据行数
+	 * 
+	 * @param pageValue
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	Object get(Class clazz, Serializable id);
-
-	Object save(Object object);
+	public Integer queryRowCount(P pageValue);
 
 	/**
-	 * 增加记录到数据表中
+	 * 修改一个实体
+	 * 
+	 * @param t
+	 * @param params
+	 * @throws DaoException
 	 */
-	void insert(Object object) ;
+	public void update(T t, Object params) throws Exception;
 
 	/**
-	 * 根据主键删除一条数据库记录
-	 * @param clazz
-	 * @param id
+	 * 新增实体
+	 * 
+	 * @param t
+	 * @throws DaoException
 	 */
-	@SuppressWarnings("unchecked")
-	void remove(Class clazz, Serializable primaryKey);
+	public void insert(T t) throws Exception;
 
 	/**
-	 * 依据条件进行删除
-	 * @param clazz
-	 * @param paramMap
+	 * 校验是否存在
+	 * 
+	 * @param t
+	 * @return
+	 * @throws DaoException
 	 */
-	@SuppressWarnings("unchecked")
-	void remove(Class clazz, Map<String, Object> paramMap);
+	public boolean exists(T t) throws Exception;
 
 	/**
-	 * 验证对象是否已经被使用
+	 * 按一定条件获取T类型的数据
+	 * 
+	 * @param params
+	 * @return
+	 * @throws DaoException
 	 */
-	boolean exists(Object object);
-	
-	void update(Object object);
+	public List<T> getData(Object param) throws Exception;
+
+	/**
+	 * 删除实体 T
+	 * 
+	 * @param t
+	 * @throws DaoException
+	 */
+	public void del(T t) throws Exception;
 
 }

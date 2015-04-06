@@ -1,9 +1,8 @@
 .Wdate{
-	border:#999 1px solid;
-	height:20px;
-	background:#fff url(datePicker.gif) no-repeat right;
+	border:#e2e3ea 1px solid;
+	height:24px;
+	background:url(/style/images/icons/calendar.gif)  no-repeat right ;
 }
-.Wdate::-ms-clear{display:none;}
 
 .WdateFmtErr{
 	font-weight:bold;

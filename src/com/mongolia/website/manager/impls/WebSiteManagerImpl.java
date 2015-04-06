@@ -14,7 +14,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mongolia.website.controller.freemarker.CustomFreeMarkerConfigurer;
 import com.mongolia.website.dao.interfaces.UserManagerDao;
@@ -39,7 +38,6 @@ import com.mongolia.website.util.UUIDMaker;
 import freemarker.template.Template;
 
 @Service("webSiteManager")
-@Transactional(rollbackFor = Exception.class)
 public class WebSiteManagerImpl implements WebSiteManager {
 	@Autowired
 	private WebSiteManagerDao WebSiteManagerDao;
@@ -326,6 +324,11 @@ public class WebSiteManagerImpl implements WebSiteManager {
 				&& queryUserForm.getEndregtime().equalsIgnoreCase("")) {
 			queryparams.put("endregtime", null);
 		}
+		if (queryUserForm.getProfessioncode() != null
+				&& !queryUserForm.getProfessioncode().equalsIgnoreCase("")) {
+			queryparams
+					.put("professioncode", queryUserForm.getProfessioncode());
+		}
 		queryparams.put("userkind", StaticConstants.USER_KIND1);
 		// 计算
 		if (queryUserForm.getPageindex() == null
@@ -420,6 +423,13 @@ public class WebSiteManagerImpl implements WebSiteManager {
 			docids = docids.substring(0, docids.length() - 1);
 		}
 		this.WebSiteManagerDao.deleteTopDocument(docids);
+	}
+
+	@Override
+	public void setVideoface(String docid, String imgpath) throws Exception {
+		// TODO Auto-generated method stub
+		this.WebSiteManagerDao.setVideoface(docid, imgpath);
+
 	}
 
 }

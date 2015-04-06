@@ -2,27 +2,51 @@ var doregist = function() {
 	// 校验数据完整性
 	var username = $("#username").val();
 	if (username == null || username == '') {
-		MessageWindow.showMess("' '      ");
+		MessageWindow.showMess("' '    ");
+		return;
+	}
+	if (username.length < 6) {
+		MessageWindow.showMess("' '     ");
+		return;
+	}
+	if (!username.match(/[^\u4e00-\u9fa5]/g)) {
+		MessageWindow.showMess("' '      ");
 		return;
 	}
 	var artname = $("#artname").val();
 	if (artname == null || artname == '') {
-		MessageWindow.showMess("'  '      ");
+		MessageWindow.showMess("'  '    ");
 		return;
 	}
+	/*
+	if (artname.length < 8) {
+		MessageWindow.showMess("'  '     ");
+		return;
+	}*/
 	var password = $("#password").val();
 	if (password == null || password == '') {
-		MessageWindow.showMess("' '      ");
+		MessageWindow.showMess("' '     ");
 		return;
 	}
 	var varifycode = $("#varifycode").val();
 	if (varifycode == null || varifycode == '') {
-		MessageWindow.showMess("' '      ");
+		MessageWindow.showMess("' '     ");
 		return;
 	}
-	var agree = $("#agree")[0].checked;//checkbox.checked
-	if (agree==false||agree==undefined) {
-		MessageWindow.showMess("        ");
+	var email = $("#email").val();
+	if (email == null || email == '') {
+		MessageWindow.showMess("'email'     ");
+		return;
+	}
+	var reg=/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+	if(!reg.test(email)){
+		MessageWindow.showMess("'email'      ");
+		return;	
+	}
+	var agree = $("#agree")[0].checked;// checkbox.checked
+	if (agree == false || agree == undefined) {
+		MessageWindow
+				.showMess("        <br>  ");
 		return;
 	}
 	var error = false;
@@ -41,7 +65,7 @@ var doregist = function() {
 					var remotecode = data.validateCode;
 					if (remotecode != varifycode) {
 						MessageWindow
-								.showMess("' '            ");
+								.showMess("' '       ");
 						error = true;
 						return;
 					}
@@ -66,9 +90,7 @@ var doregist = function() {
 				},
 				success : function(data) { // 请求成功后处理函数。
 					if (data.exists == '1') {
-						exists = true;
-						MessageWindow
-								.showMess("' '          ");
+						exists = true;					
 						error = true;
 					}
 				}
@@ -79,29 +101,8 @@ var doregist = function() {
 	$("#userinfoform").submit();
 	// 全部通过则保存用户信息
 };
-/**
- * 更新验证码
- */
-var replaceverifycode = function() {
-	var imgSrc = $("#varifyimg");
-	var src = imgSrc.attr("src");
-	imgSrc.attr("src", chgUrl(src));
 
-};
-// 时间戳
-// 为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
-function chgUrl(url) {
-	var timestamp = (new Date()).valueOf();
-	url = url.substring(0, 17);
-	if ((url.indexOf("&") >= 0)) {
-		url = url + "¡Átamp=" + timestamp;
-	} else {
-		url = url + "?timestamp=" + timestamp;
-	}
-	return url;
-};
 var getverifycode = function() {
-	// 校验 getverifycode 是否跟图片相符
 	var remotecode = '';
 	$.ajax({
 		async : false,
@@ -137,11 +138,14 @@ var checkusreisexists = function() {
 		},
 		success : function(data) { // 请求成功后处理函数。
 			if (data.exists == '1') {
+				MessageWindow
+				.showMess("' '       <br>    ");
 				exists = true;
-				/*
-				 * MessageWindow .showMess("' '  
-				 *        "); return;
-				 */
+			}
+			if (data.exists == '2') {
+				MessageWindow
+				.showMess("'你已经注册过用户 ");
+				exists = true;
 			}
 		}
 	});

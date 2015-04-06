@@ -16,12 +16,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ClassUtils;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.mongolia.website.dao.interfaces.BaseDao;
+import com.mongolia.website.dao.interfaces.IBatisBaseDao;
 import com.mongolia.website.util.UUIDMaker;
 import com.mongolia.website.util.iBatisDaoUtils;
 
 @Repository("baseDao")
-public class BaseDaoiBatis extends DaoSupport  implements BaseDao {
+public class BaseDaoiBatis extends DaoSupport  implements IBatisBaseDao {
 
 	protected final Log log = LogFactory.getLog(getClass());
 	private SqlMapClientTemplate sqlMapClientTemplate = new SqlMapClientTemplate();

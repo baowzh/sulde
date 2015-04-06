@@ -1,7 +1,6 @@
 package com.mongolia.website.dao.impls;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +9,9 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.mongolia.website.dao.interfaces.WebSiteVisitorDao;
+import com.mongolia.website.model.BookStoreValue;
 import com.mongolia.website.model.DocumentValue;
+import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
@@ -45,22 +46,31 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 	@Override
 	public List<DocumentValue> pagingquerydoc(PaingModel paingModel)
 			throws Exception {
-		List<DocumentValue> docs = this.getSqlMapClientTemplate().queryForList(
-				"pagingquerydoc", paingModel);
-		DocumentValue docarray[] = new DocumentValue[docs.size()];
-		docs.toArray(docarray);
-		Arrays.sort(docarray, new Comparator<DocumentValue>() {
+		List<DocumentValue> docs = new ArrayList<DocumentValue>();
+		if (paingModel.getInindex() != null
+				&& paingModel.getInindex().intValue() == 1) {
+			docs = this.getSqlMapClientTemplate().queryForList(
+					"pagingqueryseldoc", paingModel);
 
-			@Override
-			public int compare(DocumentValue o1, DocumentValue o2) {
-				// TODO Auto-generated method stub
-				return o2.getIreadcount() - o1.getIreadcount();
-			}
+		} else {
+			docs = this.getSqlMapClientTemplate().queryForList(
+					"pagingquerydoc", paingModel);
 
-		});
-
-		return Arrays.asList(docarray);
-		// return docs;
+		}
+//		DocumentValue docarray[] = new DocumentValue[docs.size()];
+//		docs.toArray(docarray);
+//		Arrays.sort(docarray, new Comparator<DocumentValue>() {
+//
+//			@Override
+//			public int compare(DocumentValue o1, DocumentValue o2) {
+//				// TODO Auto-generated method stub
+//				return o2.getIreadcount() - o1.getIreadcount();
+//			}
+//
+//		});
+//
+//		return Arrays.asList(docarray);
+		return docs;
 	}
 
 	@Override
@@ -71,8 +81,8 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 	}
 
 	@Override
-	public List<UserValue> getTopUsers(Date startDate, Date endDate,Integer fetchcount)
-			throws Exception {
+	public List<UserValue> getTopUsers(Date startDate, Date endDate,
+			Integer fetchcount) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("startDate", startDate);
@@ -116,5 +126,30 @@ public class WebSiteVisitorDaoImpl extends BaseDaoiBatis implements
 				"getRecentLoginUsers", params);
 		return users;
 	}
+
+	@Override
+	public List<BookStoreValue> getSeltectedBooks(Integer dispalycount)
+			throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> queryparams = new HashMap<String, Object>();
+		queryparams.put("selcount", dispalycount);
+		return this.getSqlMapClientTemplate().queryForList("querySeltedBooks",
+				queryparams);
+	}
+
+	@Override
+	public List<ImgGrpupValue> pagingqueryAlbum(
+			PaingModel<ImgGrpupValue> paingModel) throws Exception {
+		// TODO Auto-generated method stub
+		return this.getSqlMapClientTemplate().queryForList("pagingAlbums", paingModel);
+	}
+
+	@Override
+	public Integer getAlbumRowCount(PaingModel<ImgGrpupValue> paingModel)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return (Integer)this.getSqlMapClientTemplate().queryForObject("pagingAlbumsCount", paingModel);
+	}
+	
 
 }

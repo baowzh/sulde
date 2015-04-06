@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.mongolia.website.model.TemplateValue;
 
-public interface TemplateManagerDao extends BaseDao {
+public interface TemplateManagerDao extends IBatisBaseDao {
 	public byte[] getWebTemplate(String tempname);
 
 	/**

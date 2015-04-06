@@ -68,7 +68,7 @@ public class StaticConstants {
 	public static Integer IMGWIDTHSM = 334;
 	public static Integer IMGHEIGHTSM = 446;
 	public static String NO_LOGIIN_USERID = "999";
-	public static Integer DEFAULT_PAGESIZE = 100;
+	public static Integer DEFAULT_PAGESIZE = 47;
 	public static Integer INDEX_DOC_ROWCOUNT = 12;
 	public static String IMGCHANNELID = "IMG";
 	public static Integer USER_KIND1 = 1;
@@ -92,6 +92,10 @@ public class StaticConstants {
 	public static Integer TOP_TYPE4 = 4;
 
 	public static Integer TOP_TYPE5 = 5;
+	/**
+	 * 书店书籍封面
+	 */
+	public static Integer TOP_TYPE8 = 8;
 
 	public static Integer IMG_NEWS_FETCHNUM = 7;
 	/**
@@ -134,4 +138,34 @@ public class StaticConstants {
 	public static String SEL_TYPE91 = "91";
 	public static String SEL_TYPE92 = "92";
 	public static String SEL_TYPE93 = "93";
+	public static String encrypekey = "hurd1@#";
+	/**
+	 * 浏览博客主页
+	 */
+	public static Integer VISIT_TYPE1 = 1;
+	/**
+	 * 浏览文章或者是图片等资源
+	 */
+	public static Integer VISIT_TYPE2 = 2;
+	/**
+	 * 参与比赛方式- 成人比赛
+	 */
+	public static Integer JOINRACE_TYPE1 = 1;
+	/**
+	 * 参与比赛方式- 儿童比赛
+	 */
+	public static Integer JOINRACE_TYPE2 = 2;
+	/**
+	 * 评分用户类型1-网友
+	 */
+	public static Integer SCORE_USER_TYPE1 = 1;
+	/**
+	 * 评分用户类型2-专家
+	 */
+	public static Integer SCORE_USER_TYPE2 = 2;
+	/**
+	 * 
+	 */
+	public static String bubaichanelid="50000000000005";
+
 }

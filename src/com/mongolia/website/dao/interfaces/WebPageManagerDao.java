@@ -6,7 +6,7 @@ import java.util.Map;
 import com.mongolia.website.model.PageChannelRelationValue;
 import com.mongolia.website.model.WebPageValue;
 
-public interface WebPageManagerDao extends BaseDao {
+public interface WebPageManagerDao extends IBatisBaseDao {
 	/**
 	 * 获取页面列表
 	 * 

@@ -12,7 +12,7 @@ import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.model.QueryOpinionFrom;
 import com.mongolia.website.model.TopDocumentValue;
 
-public interface WebSiteManagerDao extends BaseDao {
+public interface WebSiteManagerDao extends IBatisBaseDao {
 	/**
 	 * 网站栏目列表
 	 * 
@@ -154,5 +154,12 @@ public interface WebSiteManagerDao extends BaseDao {
 	 * @throws Exception
 	 */
 	public void deleteTopDocument(String docids) throws Exception;
+    /**
+     * 
+     * @param docid
+     * @param imgpath
+     * @throws Exception
+     */
+	public void setVideoface(String docid, String imgpath) throws Exception;
 
 }

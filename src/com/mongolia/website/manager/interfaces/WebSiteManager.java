@@ -170,5 +170,12 @@ public interface WebSiteManager {
 	 * @throws Exception
 	 */
 	public void deleteTopDocument(String ids[]) throws Exception;
+	/**
+	 * 
+	 * @param docid
+	 * @param imgpath
+	 * @throws Exception
+	 */
+	public void setVideoface(String docid,String imgpath)throws Exception;
 
 }

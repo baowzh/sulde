@@ -17,8 +17,10 @@ public class ImgGrpupValue {
 	private byte[] faceimg;
 	private String comm;
 	private Date createdtime;
-	private String  createdtimestr;
+	private String createdtimestr;
 	private String oldid;
+	private String faceurl;
+	private byte[] imgurl;
 
 	public String getImggroupid() {
 		return imggroupid;
@@ -77,9 +79,10 @@ public class ImgGrpupValue {
 	}
 
 	public String getCreatedtimestr() {
-		java.text.SimpleDateFormat dataformater=new SimpleDateFormat("yyyy-MM-dd");
+		java.text.SimpleDateFormat dataformater = new SimpleDateFormat(
+				"yyyy-MM-dd");
 		return dataformater.format(this.getCreatedtime());
-		//return createdtimestr;
+		// return createdtimestr;
 	}
 
 	public void setCreatedtimestr(String createdtimestr) {
@@ -93,6 +96,21 @@ public class ImgGrpupValue {
 	public void setOldid(String oldid) {
 		this.oldid = oldid;
 	}
-	
+
+	public String getFaceurl() {
+		return faceurl;
+	}
+
+	public void setFaceurl(String faceurl) {
+		this.faceurl = faceurl;
+	}
+
+	public byte[] getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(byte[] imgurl) {
+		this.imgurl = imgurl;
+	}
 
 }

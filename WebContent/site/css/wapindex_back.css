@@ -1,0 +1,136 @@
+@font-face {
+	font-family: Mongol;
+	src: url(../../font/Mongol.woff) format("woff"),
+		url(../../font/Mongol.ttf) format("truetype");
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-size: 1rem;
+}
+
+html {
+	/* 	background-color: #3aace8; */
+	
+}
+
+.wrap {
+	width: 100%;
+	height: 100%;
+	min-width: 320px;
+	/* 	height: 1346px; */
+}
+
+.header {
+	text-align: center;
+	background: #3aace8;
+	border-bottom: #50cff3 solid 2px;
+	height: 90px;
+	background: url("../img/phonehead.jpg")
+}
+
+.logo {
+	width: 634px;
+}
+
+.footer {
+/* 	background: #3aace8; */
+    background: url("../img/phonetail.jpg")
+	text-align: center;
+	border-top: #50cff3 solid 2px;
+	height: 40px;
+	font-size: 1rem;
+}
+
+.foot_liu {
+	font-size: 18px;
+	color: #bc1313;
+	font-weight: bold;
+}
+
+.main {
+	width: 100%;
+	/* 	background: url(mobile-css/bg.jpg); */
+	height: 300px;
+}
+
+.menudiv {
+	margin: 0px auto;
+	height: 100%;
+	width: 500px;
+}
+
+.menu {
+	float: left;
+	-moz-box-shadow: 3px 3px 15px #000;
+	-webkit-box-shadow: 3px 3px 15px #000;
+	box-shadow: 3px 3px 15px #000;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	margin: 8px;
+	height: 195.333333333333px;
+	width: 195.333333333333px;
+}
+
+.menu img {
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.montd {
+	-ms-transform-origin: right top;
+	-ms-transform: translate(-100%, 0px) rotate(270deg);
+	-moz-transform-origin: right top;
+	-moz-transform: translate(-100%, 0px) rotate(270deg);
+	-o-transform-orign: right top;
+	-o-transform: translate(-100%, 0px) rotate(270deg);
+	-webkit-transform-origin: right top;
+	-webkit-transform: translate(-100%, 0px) rotate(270deg);
+	/* 	width: 500px; */
+	/* 	width: 100% */
+}
+
+.montd * {
+	direction: rtl;
+	font-family: Mongol;
+	letter-spacing: -0.02em;
+	unicode-bidi: bidi-override;
+	word-break: keep-all;
+}
+
+.mon_title {
+	font-family: "Mongol";
+	direction: rtl;
+	display: block;
+	unicode-bidi: bidi-override;
+	word-break: keep-all;
+	border-bottom: #3aace8 dashed 1px;
+	text-align: right;
+	height: 32px;
+	/* 	width:180px; */
+	line-height: 32px;
+	overflow: hidden;
+}
+
+.mon_title a {
+	text-decoration: none;
+	color: #000;
+	letter-spacing: -0.025rem;
+	font-size: 1.2rem;
+	/* 	width: 1244px; */
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.mon_title a:hover {
+	background-color: #aed9f1;
+}
+
+.dian {
+	font-size: 0.8rem;
+	letter-spacing: -0.025rem;
+}

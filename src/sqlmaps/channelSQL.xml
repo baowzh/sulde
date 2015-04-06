@@ -17,12 +17,30 @@
 			<isNotNull prepend="and" property="chnlname">
 				CHNLNAME=#chnlname#
 			</isNotNull>
-			<isNotNull prepend="and" property="type">
+			<isNotNull prepend="and" property="types">
 				type in ($types$)
 			</isNotNull>
 		</dynamic>
 
 	</select>
+	<select id="getRaceChannes" parameterClass="java.util.Map"
+		resultClass="Channel">
+		select
+		channelid,chnlname,chnldesc,parentid,chnlorder,chnldatapath,chnlorderby,cruser,crtime,status,chnltype,linkurl
+		from racechannel
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="channelid">
+				channelid=#channelid#
+			</isNotNull>
+			<isNotNull prepend="and" property="chnlname">
+				CHNLNAME=#chnlname#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				type in ($types$)
+			</isNotNull>
+		</dynamic>
+	</select>
+	
 	<insert id="addChannel" parameterClass="Channel">
 		insert into channel(
 		channelid,

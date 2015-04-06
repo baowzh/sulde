@@ -34,7 +34,15 @@ public class ChannelManagerDaoImpl extends BaseDaoiBatis implements
 	@Override
 	public void updateChannel(Channel channel) throws Exception {
 		// TODO Auto-generated method stub
-		this.getSqlMapClientTemplate().update("updateChannel",channel);
+		this.getSqlMapClientTemplate().update("updateChannel", channel);
+	}
+
+	@Override
+	public List<Channel> getRaceChannelList(Map<String, Object> params)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return this.getSqlMapClientTemplate().queryForList("getRaceChannes",
+				params);
 	}
 
 }

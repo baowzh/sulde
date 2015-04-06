@@ -4,8 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -25,9 +27,13 @@ import java.util.zip.GZIPOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import au.id.jericho.lib.html.Element;
+import au.id.jericho.lib.html.HTMLElementName;
+import au.id.jericho.lib.html.Source;
 
 import com.mongolia.website.dao.interfaces.ChannelManagerDao;
+import com.mongolia.website.dao.interfaces.RaceDao;
 import com.mongolia.website.dao.interfaces.WebResourceDao;
 import com.mongolia.website.manager.ManagerException;
 import com.mongolia.website.manager.interfaces.UserManager;
@@ -43,8 +49,8 @@ import com.mongolia.website.model.MessageValue;
 import com.mongolia.website.model.PagingIndex;
 import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.QuestionValue;
+import com.mongolia.website.model.RaceModelValue;
 import com.mongolia.website.model.ShareResourceValue;
-import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
 import com.mongolia.website.model.VisitorValue;
 import com.mongolia.website.model.VoteDetailForm;
@@ -52,12 +58,12 @@ import com.mongolia.website.model.VoteDetailValue;
 import com.mongolia.website.model.VoteResultDetailValue;
 import com.mongolia.website.model.VoteResultValue;
 import com.mongolia.website.model.VoteValue;
+import com.mongolia.website.util.ImgeUtil;
 import com.mongolia.website.util.PageUtil;
 import com.mongolia.website.util.StaticConstants;
 import com.mongolia.website.util.UUIDMaker;
 
 @Service("webResourceManager")
-@Transactional(rollbackFor = Exception.class)
 public class WebResourceManagerImpl implements WebResourceManager {
 	@Autowired
 	private WebResourceDao webResourceDao;
@@ -69,6 +75,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	private ChannelManagerDao channelDao;
 	@Autowired
 	private SysConfig sysConfig;
+	@Autowired
+	private RaceDao raceDao;
 
 	@Override
 	public void doAddIImgGroup(ImgGrpupValue imgGrpupValue)
@@ -84,7 +92,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public void doAddImg(ImgValue imgValue) throws ManagerException {
+	public void doAddImg(ImgValue imgValue, String facepath)
+			throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
 			DocumentValue documentValue = new DocumentValue();
@@ -98,9 +107,17 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			documentValue.setDoctitle(imgValue.getImgdesc());
 			this.webResourceDao.adddoc(documentValue);
 			//
-			byte[] imgcontent = imgValue.getImgcontent();
-			byte[] newcontent = this.gzipdoccontent(imgcontent);
-			imgValue.setImgcontent(newcontent);
+			// byte[] imgcontent = imgValue.getImgcontent();
+			// byte[] newcontent = this.gzipdoccontent(imgcontent);
+			// imgValue.setImgcontent(newcontent);
+			if (imgValue.getForrace() != null
+					&& imgValue.getForrace().intValue() == 1) {
+				List<RaceModelValue> raceModelValues = this.raceDao
+						.getRaceModels(null, 1);
+				if (raceModelValues != null && !raceModelValues.isEmpty()) {
+					imgValue.setRaceid(raceModelValues.get(0).getRaceid());
+				}
+			}
 			webResourceDao.addImg(imgValue);
 			// 如果是封面修改相册封面
 			if (imgValue.getCover() == 1) {
@@ -110,7 +127,11 @@ public class WebResourceManagerImpl implements WebResourceManager {
 						.getImgGroupList(queryparams);
 				if (groups != null && !groups.isEmpty()) {
 					ImgGrpupValue imgGrpupValue = groups.get(0);
-					imgGrpupValue.setFaceimg(imgcontent);
+					String imgname = UUIDMaker.getUUID() + ".jpg";
+					imgGrpupValue.setFaceurl(imgname);
+					ImgValue tempImgValue = ImgeUtil.CompressPic(
+							imgValue.getImg(), facepath, imgname);
+					// imgGrpupValue.setFaceimg(imgcontent);
 					this.webResourceDao.updIImgGroup(imgGrpupValue);
 				}
 			}
@@ -158,11 +179,33 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	public void doAdddoc(DocumentValue docValue) throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
-			//
+			// 检测flash地址有flash地址
+			String docContent = new String(docValue.getDoccontent());
+			String matchStr = "\\[\\[http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?\\]\\]";
+			// String matchStr="<embed";
+			Pattern destStri = Pattern.compile(matchStr);// ^
+			Matcher mati = destStri.matcher(docContent);
+			while (mati.find()) {
+				String groupi = mati.group(0);
+				groupi = groupi.substring(2, groupi.length() - 2);
+				docValue.setFlashurl(groupi);
+				break;
+			}
 			byte[] content = docValue.getDoccontent();
 			if (content != null) {
 				byte[] newcontent = gzipdoccontent(content);
 				docValue.setDoccontent(newcontent);
+			}
+			Source source = new Source(new ByteArrayInputStream(content));
+			List embeds = source.findAllElements("embed");
+			for (int i = 0; i < embeds.size(); i++) {
+				Element el = (Element) embeds.get(i);
+				docValue.setFlashurl(el.getAttributeValue("src"));
+			}
+			List iframes = source.findAllElements(HTMLElementName.IFRAME);
+			for (int i = 0; i < iframes.size(); i++) {
+				Element el = (Element) iframes.get(i);
+				docValue.setFlashurl(el.getAttributeValue("src"));
 			}
 			webResourceDao.adddoc(docValue);
 		} catch (Exception ex) {
@@ -225,10 +268,15 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public void doDeleteImg(String imgId) throws ManagerException {
+	public void doDeleteImg(String imgId, String userid)
+			throws ManagerException {
 		// TODO Auto-generated method stub
 		try {
-			webResourceDao.deleteImg(imgId);
+			String ids[] = imgId.split(",");
+			for (String id : ids) {
+				webResourceDao.deleteImg(id);
+				this.webResourceDao.deleteDoc(userid, id);
+			}
 		} catch (Exception ex) {
 			throw new ManagerException(ex.getMessage());
 		}
@@ -300,7 +348,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	@Override
 	public Map<String, Object> getBlogInfo(UserValue blogUser,
 			UserValue sessionUser, Integer self, String docchannel,
-			Integer pageindex) throws ManagerException {
+			Integer pageindex, Integer clienttype) throws ManagerException {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -318,6 +366,11 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				pagingModel.setDocstatus(StaticConstants.DOCSTATUS2);
 			} else {
 				pagingModel.setPagesize(24);
+			}
+			if (clienttype.intValue() == 1) {
+				pagingModel.setPagesize(24);
+			} else {
+				pagingModel.setPagesize(14);
 			}
 			if (pageindex != null) {
 				pagingModel.setPageindex(pageindex);
@@ -401,9 +454,15 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			map.put("blogNews", this.webResourceDao.getBlogNews(
 					blogUser.getUserid(), queryDate1));
 			// 获取当前博主分享的作品
+			Integer fetchcount = 24;
+			if (clienttype.intValue() == 1) {
+				fetchcount = 24;
+			} else {
+				fetchcount = 14;
+			}
 			PaingModel<DocumentValue> sharePaingModel = this
 					.pagingQuerySharedDocs(params, StaticConstants.DOCTYPE_DOC,
-							1, 24);
+							1, fetchcount);
 			map.put("sharePaingModel", sharePaingModel);
 			List<PagingIndex> sharepageIndexs = new ArrayList<PagingIndex>();
 			for (int i = 0; i < sharePaingModel.getPagecount() && i < 3; i++) {
@@ -433,7 +492,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					visitorValue
 							.setVisitortype(StaticConstants.VISITOR_TYPE_NOREG);
 				}
-
+				visitorValue.setVisittype(StaticConstants.VISIT_TYPE1);
 				this.webResourceDao.addVisitLog(visitorValue);
 			} else {
 				Date queryDate = new Date();
@@ -454,13 +513,17 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			// if (StaticConstants.sitename2.equalsIgnoreCase(sitename)) {//
 			// 如果是altanhurd
 			// 获取热门文章
-			List<DocumentValue> topDocuments = this.webResourceDao
-					.getTopDocuments(sysConfig.getTopdocumentcount());
-			map.put("topDocuments", topDocuments);
+			/*
+			 * List<DocumentValue> topDocuments = this.webResourceDao
+			 * .getTopDocuments(sysConfig.getTopdocumentcount());
+			 * map.put("topDocuments", topDocuments);
+			 */
 			// 获取精选文章
-			List<TopDocumentValue> seleDocuments = this.webSiteVisitorManager
-					.getTopDocuments(StaticConstants.TOP_TYPE2, null, 24);
-			map.put("seleDocuments", seleDocuments);
+			/*
+			 * List<TopDocumentValue> seleDocuments = this.webSiteVisitorManager
+			 * .getTopDocuments(StaticConstants.TOP_TYPE2, null, 24);
+			 * map.put("seleDocuments", seleDocuments);
+			 */
 			// }
 
 		} catch (Exception ex) {
@@ -470,8 +533,8 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public DocumentValue readUserDDocument(String docid, UserValue userValue)
-			throws ManagerException {
+	public DocumentValue readUserDDocument(String docid, UserValue userValue,
+			Integer clienttype) throws ManagerException {
 		// TODO Auto-generated method stub
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("docid", docid);
@@ -546,7 +609,22 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					}
 					mati.appendTail(bufferi);
 					docContent = bufferi.toString();
-					//
+					// 替换MP3地址
+					matchStr = "\\{\\[[^\\)]+\\]\\}";
+					destStri = Pattern.compile(matchStr);// ^
+					mati = destStri.matcher(docContent);
+					bufferi = new StringBuffer();
+					while (mati.find()) {
+						String groupi = mati.group(0);
+						groupi = groupi.substring(2, groupi.length() - 2);
+						String embed = "<br><embed pluginspage=\"http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash\" type=\"video/x-ms-wmv\"  src=\""
+								+ groupi
+								+ "\" controls=\"smallconsole\" loop=\"false\" autostart=\"true\" quality=\"high\" width=\"430\" height=\"400\" ></embed>"
+								+ "";
+						mati.appendReplacement(bufferi, embed);
+					}
+					mati.appendTail(bufferi);
+					docContent = bufferi.toString();
 					documentValue.setHtmlstr(docContent);
 				}
 				// 添加读者次数
@@ -555,16 +633,22 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				if (userValue != null
 						&& userValue.getUserkind() != StaticConstants.USER_KIND2) {
 					visitorValue.setVisitorid(userValue.getUserid());
+					visitorValue.setVisitortype(2);
 				} else {
 					visitorValue.setVisitorid(StaticConstants.NO_LOGIIN_USERID);
+					visitorValue.setVisitortype(1);
 				}
-
 				visitorValue.setVisitdate(new Date());
 				List<UserValue> docusers = this.userManager.getUsers(
 						documentValue.getUserid(), null);
 				UserValue docuser = docusers.get(0);
-				visitorValue.setVisitorname(docuser.getArtname());
+				if (userValue != null) {
+					visitorValue.setVisitorname(userValue.getArtname());
+				} else {
+					visitorValue.setVisitorname("#");
+				}
 				visitorValue.setUserid(docuser.getUserid());
+				visitorValue.setVisittype(StaticConstants.VISIT_TYPE2);
 				this.webResourceDao.addDocReader(visitorValue);
 				// 修改文章被读次数
 				this.webResourceDao.doIsRead(docid);
@@ -652,6 +736,9 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				MessageValue messageValue = comments.get(i);
 				messageValue.setContenthtml(new String(messageValue
 						.getMessagecont(), "utf-8"));
+				String contenthtml = messageValue.getContenthtml();
+				contenthtml = contenthtml.replaceAll("<br />", "");
+				messageValue.setContenthtml(contenthtml);
 				java.text.SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");
 				if (messageValue.getSendtime() != null) {
@@ -842,6 +929,17 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		try {
 			byte[] content = docValue.getDoccontent();
 			if (content != null) {
+				Source source = new Source(new ByteArrayInputStream(content));
+				List embeds = source.findAllElements("embed");
+				for (int i = 0; i < embeds.size(); i++) {
+					Element el = (Element) embeds.get(i);
+					docValue.setFlashurl(el.getAttributeValue("src"));
+				}
+				List iframes = source.findAllElements(HTMLElementName.IFRAME);
+				for (int i = 0; i < iframes.size(); i++) {
+					Element el = (Element) iframes.get(i);
+					docValue.setFlashurl(el.getAttributeValue("src"));
+				}
 				byte[] newcontent = gzipdoccontent(content);
 				docValue.setDoccontent(newcontent);
 			}
@@ -858,6 +956,9 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		try {
 			List<MessageValue> messageList = this.getResourceCommentList(
 					resourceid, resourceType, userid, messageid, null, null);
+			List<MessageValue> res = this.getResourceCommentList(resourceid,
+					resourceType, null, messageid, userid, null);
+			messageList.addAll(res);
 			if (messageList == null || messageList.isEmpty()) {
 				throw new ManagerException("01");
 			}
@@ -872,12 +973,13 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public List<MessageValue> getReceMessList(String userid, String messid,
-			Integer pageIndex) throws ManagerException {
+	public PaingModel<MessageValue> getReceMessList(String userid,
+			String messid, Integer pageIndex, Integer rowcount)
+			throws ManagerException {
 		// TODO Auto-generated method stub
-		List<MessageValue> mess = this.webResourceDao.getMessList(userid, 1,
-				messid, userid, pageIndex);
-		for (MessageValue messageValue : mess) {
+		PaingModel<MessageValue> pagingmodel = this.webResourceDao.getMessList(
+				userid, 1, messid, userid, pageIndex, rowcount);
+		for (MessageValue messageValue : pagingmodel.getModelList()) {
 			if (messageValue.getMessagecont() != null) {
 				try {
 					messageValue.setContenthtml(new String(messageValue
@@ -888,16 +990,19 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			}
 
 		}
-		return mess;
+		return pagingmodel;
 	}
 
 	@Override
-	public List<MessageValue> getSendMessList(String userid, String messid,
-			Integer pageIndex) throws ManagerException {
+	public PaingModel<MessageValue> getSendMessList(String userid,
+			String messid, Integer pageIndex, Integer rowcount)
+			throws ManagerException {
 		// TODO Auto-generated method stub
-		List<MessageValue> mess = this.webResourceDao.getMessList(userid, 2,
-				messid, userid, pageIndex);
-		for (MessageValue messageValue : mess) {
+		PaingModel<MessageValue> pagingmodel = this.webResourceDao.getMessList(
+				userid, 2, messid, userid, pageIndex, rowcount);
+		// List<MessageValue> mess = this.webResourceDao.getMessList(userid, 2,
+		// messid, userid, pageIndex);
+		for (MessageValue messageValue : pagingmodel.getModelList()) {
 			if (messageValue.getMessagecont() != null) {
 				try {
 					messageValue.setContenthtml(new String(messageValue
@@ -907,7 +1012,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				}
 			}
 		}
-		return mess;
+		return pagingmodel;
 	}
 
 	@Override
@@ -954,7 +1059,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				sendmessageValue.setMessagecont(comment.getBytes("utf-8"));
 				sendmessageValue.setMessagesendername(messageSenderName);
 				sendmessageValue.setSendtime(new Date());
-				this.webResourceDao.addCommentOnResource(sendmessageValue);
+				// this.webResourceDao.addCommentOnResource(sendmessageValue);
 			} else if (messType.intValue() == StaticConstants.MESS_TYPE_QUSTION) {// 加为
 				// 校验是否已经添加为朋友
 				List<FriendValue> friends = webResourceDao.getFriendValues(
@@ -977,6 +1082,10 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		// Map<String, Object> returnMap = new HashMap<String, Object>();
 		try {
 			Integer startIndex = 0;
+			if (pagingmodel.getPageindex() == null
+					|| pagingmodel.getPageindex().intValue() == 0) {
+				pagingmodel.setPageindex(1);
+			}
 			startIndex = (pagingmodel.getPageindex() - 1)
 					* pagingmodel.getPagesize();
 			List<FriendValue> friends = this.webResourceDao.pagingQueryFriends(
@@ -1571,7 +1680,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public void synOldUser() throws Exception {
+	public void synOldUser(String headimgpath) throws Exception {
 		// TODO Auto-generated method stub
 		List<UserValue> users = this.webResourceDao.getOldUsers();
 		for (UserValue userValuei : users) {
@@ -1593,8 +1702,14 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				}
 				byte img[] = ooutStream.toByteArray();
 				ooutStream.close();
-				userValuei.setHeadimg(img);
-				userValuei.setHeadimgsm(img);
+				File file = new File(headimgpath, userValuei.getUserid()
+						+ ".jpg");
+				OutputStream outstream = new FileOutputStream(file);
+				outstream.write(img);
+				outstream.close();
+				userValuei.setHeadurl(userValuei.getUserid() + ".jpg");
+				// userValuei.setHeadimg(img);
+				// userValuei.setHeadimgsm(img);
 				iniputStream.close();
 				userManager.doCreateUser(userValuei);
 			} catch (Exception ex) {
@@ -1684,7 +1799,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 	}
 
 	@Override
-	public void synOldImg() throws Exception {
+	public void synOldImg(String path) throws Exception {
 		// TODO Auto-generated method stub
 		// 先创建图片相册
 		File file = new File("c:\\aa.bmp");
@@ -1719,21 +1834,39 @@ public class WebResourceManagerImpl implements WebResourceManager {
 				while ((length = iniputStream.read(reader)) != -1) {
 					ooutStream.write(reader, 0, length);
 				}
-				imgValuei.setImgcontent(ooutStream.toByteArray());
+				File imgFile = new File(path, imgValuei.getImgurl());
+				OutputStream outStream = new FileOutputStream(imgFile);
+				outStream.write(ooutStream.toByteArray());
+				outStream.close();
+				// imgValuei.setImgcontent(ooutStream.toByteArray());
 				iniputStream.close();
-				imgValuei.setImgid(imgValuei.getImgurl());
+				String imgid = imgValuei.getImgurl().split("\\.")[0];
+				imgValuei.setImgid(imgid);
 				imgValuei.setImgname(imgValuei.getImgid());
 				imgValuei.setImgdesc("tongbu");
+				imgValuei.setImgurl(imgValuei.getImgurl());
 				imgValuei.setWidth(200);
 				imgValuei.setHeight(210);
-				this.doAddImg(imgValuei);
+				this.doAddImg(imgValuei, null);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				continue;
 			}
 
 		}
+	}
 
+	@Override
+	public void delMessage(String userid, String messid) throws Exception {
+		// TODO Auto-generated method stub
+		this.webResourceDao.delMessage(messid);
+	}
+
+	@Override
+	public List<VisitorValue> getVisitorList(String resourceid,
+			Integer fechtcount) throws Exception {
+		// TODO Auto-generated method stub
+		return this.webResourceDao.getVisitorList(resourceid, fechtcount);
 	}
 
 }

@@ -30,6 +30,7 @@ public class UserValue implements UserDetails {
 	private Integer retnum;
 	private Integer weeke;
 	private Integer maillogin = 0;
+	private String encripedPass;
 	/**
 	 * 用户头像
 	 */
@@ -75,6 +76,15 @@ public class UserValue implements UserDetails {
 	private String professionname;
 	private String imguser;
 	private String oldid;
+	private String headurl;
+	private String sexsel;
+	private String blogclasssel;
+	private byte[] img;
+	private Integer managerflag;
+	private Integer expert;
+	private Double maxscore;
+	private Integer jointype;
+	private Integer active;
 
 	public String getLastip() {
 		return lastip;
@@ -638,6 +648,86 @@ public class UserValue implements UserDetails {
 
 	public void setMailloginid(String mailloginid) {
 		this.mailloginid = mailloginid;
+	}
+
+	public String getHeadurl() {
+		return headurl;
+	}
+
+	public void setHeadurl(String headurl) {
+		this.headurl = headurl;
+	}
+
+	public String getSexsel() {
+		return sexsel;
+	}
+
+	public void setSexsel(String sexsel) {
+		this.sexsel = sexsel;
+	}
+
+	public String getBlogclasssel() {
+		return blogclasssel;
+	}
+
+	public void setBlogclasssel(String blogclasssel) {
+		this.blogclasssel = blogclasssel;
+	}
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+
+	public String getEncripedPass() {
+		return encripedPass;
+	}
+
+	public void setEncripedPass(String encripedPass) {
+		this.encripedPass = encripedPass;
+	}
+
+	public Integer getManagerflag() {
+		return managerflag;
+	}
+
+	public void setManagerflag(Integer managerflag) {
+		this.managerflag = managerflag;
+	}
+
+	public Integer getExpert() {
+		return expert;
+	}
+
+	public void setExpert(Integer expert) {
+		this.expert = expert;
+	}
+
+	public Double getMaxscore() {
+		return maxscore;
+	}
+
+	public void setMaxscore(Double maxscore) {
+		this.maxscore = maxscore;
+	}
+
+	public Integer getJointype() {
+		return jointype;
+	}
+
+	public void setJointype(Integer jointype) {
+		this.jointype = jointype;
+	}
+
+	public Integer getActive() {
+		return active;
+	}
+
+	public void setActive(Integer active) {
+		this.active = active;
 	}
 
 }

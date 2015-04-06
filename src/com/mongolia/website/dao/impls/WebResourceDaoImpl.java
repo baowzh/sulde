@@ -1,5 +1,6 @@
 package com.mongolia.website.dao.impls;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.mongolia.website.model.ImgGrpupValue;
 import com.mongolia.website.model.ImgValue;
 import com.mongolia.website.model.MarkedResourceValue;
 import com.mongolia.website.model.MessageValue;
+import com.mongolia.website.model.PaingModel;
 import com.mongolia.website.model.QuestionValue;
 import com.mongolia.website.model.ShareResourceValue;
 import com.mongolia.website.model.UserValue;
@@ -139,6 +141,7 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 		params.put("userid", userid);
 		params.put("visitorname", visitorname);
 		params.put("visitortype", StaticConstants.VISITOR_TYPE_REG);
+		params.put("visittype", StaticConstants.VISIT_TYPE1);
 		List<VisitorValue> visitors = this.getSqlMapClientTemplate()
 				.queryForList("getVisitorList", params);
 		// 获取这20个用户访问时间
@@ -149,8 +152,8 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 		if (!inStr.equalsIgnoreCase("")) {
 			inStr = inStr.substring(0, inStr.length() - 1);
 		}
-		if(inStr.equalsIgnoreCase("")){
-			inStr="''";	
+		if (inStr.equalsIgnoreCase("")) {
+			inStr = "''";
 		}
 		params.put("instr", inStr);
 		List<VisitorValue> visitortimes = this.getSqlMapClientTemplate()
@@ -174,7 +177,9 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 		queryParams.put("visitorid", visitorid);
 		queryParams.put("userid", userid);
 		queryParams.put("visitorname", visitorname);
-		queryParams.put("visitdate", new Date());
+		SimpleDateFormat  simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		String date=simpleDateFormat.format(new Date());
+		queryParams.put("visitdate", date);
 		return (Integer) (this.getSqlMapClientTemplate().queryForObject(
 				"getDateVisitCount", queryParams));
 	}
@@ -195,7 +200,9 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 	public void addVisitLog(VisitorValue visitorValue) throws Exception {
 		// TODO Auto-generated method stub
 		this.getSqlMapClientTemplate().insert("addVisitorValue", visitorValue);
-
+		// 修改user表中的字段
+		this.getSqlMapClientTemplate().update("updatetotalvisitcount", visitorValue);
+		
 	}
 
 	@Override
@@ -454,33 +461,52 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 	}
 
 	@Override
-	public List<MessageValue> getMessList(String userid, Integer recorsend,
-			String messid, String desid, Integer pageIndex)
-			throws ManagerException {
+	public PaingModel<MessageValue> getMessList(String userid,
+			Integer recorsend, String messid, String desid, Integer pageIndex,
+			Integer rowcount) throws ManagerException {
 		// TODO Auto-generated method stub
 		Map<String, Object> queryParams = new HashMap<String, Object>();
 		queryParams.put("userid", userid);
 		queryParams.put("recorsend", recorsend);
+		queryParams.put("rowcount", rowcount);
 		if (recorsend.intValue() == 1) {
 			queryParams.put("receiveid", desid);
-			queryParams.put("messtype", StaticConstants.MESS_TYPE_RECEIVE);
+			// queryParams.put("messtype", StaticConstants.MESS_TYPE_RECEIVE);
+			queryParams.put("messtype", "1,2,4");
 		} else {
 			queryParams.put("messagesenderid", desid);
-			queryParams.put("messtype", StaticConstants.MESS_TYPE_SEND);
+			queryParams.put("messtype", "2,4");
 		}
 		queryParams.put("messid", messid);
 		queryParams.put("pageIndex", pageIndex);
+		Integer startindex = (pageIndex - 1) * rowcount;
+		queryParams.put("startindex", startindex);
 		// 获取信息时候连添加朋友请求一起获取
 		List<MessageValue> mess = this.getSqlMapClientTemplate().queryForList(
 				"getMessageList", queryParams);
 		if (recorsend.intValue() == 1) {
-			queryParams.put("messtype", StaticConstants.MESS_TYPE_QUSTION);
+			// queryParams.put("messtype", StaticConstants.MESS_TYPE_QUSTION);
 			queryParams.put("received", 0);
-			List<MessageValue> qustions = this.getSqlMapClientTemplate()
+			/*List<MessageValue> qustions = this.getSqlMapClientTemplate()
 					.queryForList("getMessageList", queryParams);
 			mess.addAll(qustions);
+			queryParams.put("messtype", StaticConstants.MESS_TYPE_COMM);
+			queryParams.put("received", 0);
+			List<MessageValue> commes = this.getSqlMapClientTemplate()
+					.queryForList("getMessageList", queryParams);
+			mess.addAll(commes);*/
 		}
-		return mess;
+		PaingModel<MessageValue> messpage = new PaingModel<MessageValue>();
+		messpage.setModelList(mess);
+		Integer rocount = (Integer) this.getSqlMapClientTemplate()
+				.queryForObject("messageCount", queryParams);
+		messpage.setRowcount("" + rocount);
+		Integer pagecount = rocount / rowcount;
+		if (rocount % rowcount > 0) {
+			pagecount = pagecount + 1;
+		}
+		messpage.setPagecount(pagecount);
+		return messpage;
 	}
 
 	@Override
@@ -516,6 +542,9 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 		// TODO Auto-generated method stub
 		Map<String, Object> queryparams = new HashMap<String, Object>();
 		queryparams.put("userid", userid);
+		if(startindex<0){
+			startindex=0;
+		}
 		queryparams.put("startindex", startindex);
 		queryparams.put("fetchcount", fetchcount);
 		return this.getSqlMapClientTemplate().queryForList(
@@ -898,8 +927,50 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 	public void updTopDocument(Map<String, Object> params) throws Exception {
 		// TODO Auto-generated method stub
 		this.getSqlMapClientTemplate().update("updtopdoc", params);
-		
+
 	}
-	
+
+	@Override
+	public void delMessage(String messid) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> deleteparams = new HashMap<String, Object>();
+		deleteparams.put("messid", messid);
+		this.getSqlMapClientTemplate().delete("deleteMessByid", deleteparams);
+	}
+
+	@Override
+	public List<VisitorValue> getVisitorList(String resourceid,
+			Integer fechtcount) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("visitobjid", resourceid);
+		// params.put("visitortype", StaticConstants.VISITOR_TYPE_REG);
+		params.put("visittype", StaticConstants.VISIT_TYPE2);
+		List<VisitorValue> visitors = this.getSqlMapClientTemplate()
+				.queryForList("getVisitorList", params);
+		// 获取这20个用户访问时间
+		String inStr = "";
+		for (VisitorValue visitorValue : visitors) {
+			inStr = inStr + "'" + visitorValue.getVisitorid() + "',";
+		}
+		if (!inStr.equalsIgnoreCase("")) {
+			inStr = inStr.substring(0, inStr.length() - 1);
+		}
+		if (inStr.equalsIgnoreCase("")) {
+			inStr = "''";
+		}
+		params.put("instr", inStr);
+		List<VisitorValue> visitortimes = this.getSqlMapClientTemplate()
+				.queryForList("getVisitTime", params);
+		for (VisitorValue visitorValue : visitors) {
+			for (VisitorValue time : visitortimes) {
+				if (time.getVisitorid().equalsIgnoreCase(
+						visitorValue.getVisitorid())) {
+					visitorValue.setVisitdate(time.getVisitdate());
+				}
+			}
+		}
+		return visitors;
+	}
 
 }

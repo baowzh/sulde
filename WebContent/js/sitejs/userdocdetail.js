@@ -6,47 +6,37 @@ $(document).ready(function() {
 		top : 25,
 		left : -27
 	});
+	CKEDITOR.config.height = 400;
 });
 /**
  * 给文章增加留言
  */
 var addcomment = function(dtype, hidden) {
-	//
-	var islogin = false;
-	$.ajax({
-		async : false,
-		cache : false,
-		type : 'POST',
-		dataType : "json",
-		url : 'checklogin.do',// 请求的action路径
-		error : function() {// 请求失败处理函数
-			MessageWindow.showMess('         ');
-		},
-		success : function(data) {
-			if (data.login == 'true') {
-				islogin = true;
-			} else {
-				islogin = false;
-			}
-		}
-	});
+	var islogin = checklogin();
 	if (islogin == false) {
-		MessageWindow
-				.showMess('         ');
+		openloginwin();
 		return;
 	}
-
 	//
 	var validcode = $("#validcode").val();
 	if (validcode == null || validcode == '') {
 		MessageWindow.showMess('     ');
 		return;
 	}
-	var commentdiv = $("#commentdiv").html();
-	var text = $('<div></div>').html('' + commentdiv).text();
-	$("#comment").val(text)
-	var comment = $("#comment").val();
-	if (comment == null || comment == '') {
+	var commentdiv = '';
+	var agentkind = $('#agentkind').val();
+	// if(agentkind=='1'){
+	commentdiv = CKEDITOR.instances.editor1.getData();
+	// }
+	// if(agentkind=='0'){
+	// commentdiv= $('#commentdiv').val();
+	// }
+
+	// var commentdiv = $("#commentdiv").html();
+	// var text = $('<div></div>').html('' + commentdiv).text();
+	// $("#comment").val(text)
+	// var comment = $("#comment").val();
+	if (commentdiv == null || commentdiv == '') {
 		MessageWindow.showMess("        ");
 		return;
 	}
@@ -61,7 +51,8 @@ var addcomment = function(dtype, hidden) {
 		},
 		data : {
 			docid : $("#docid").val(),
-			comment : $("#comment").val(),
+			// comment : $("#comment").val(),
+			comment : commentdiv,
 			userid : $("#userid").val(),
 			doctype : dtype,
 			ishidden : hidden,
@@ -71,7 +62,14 @@ var addcomment = function(dtype, hidden) {
 			if (data.success == 1) {
 				MessageWindow.showMess('     ');
 				$("#comment").val('');
-				$("#commentdiv").html('');
+				// $("#commentdiv").html('');
+				if (agentkind == '0') {
+					$('#commentdiv').val('');
+				} else {
+					$('#editor1').val('');
+				}
+				CKEDITOR.instances.editor1.setData(' ')
+				// CKEDITOR.instances.editor1.body.innerText='';
 				loaddoccomment();
 				$("#userid").val('');
 				$("#validcode").val('')
@@ -151,11 +149,11 @@ var loaddoccomment = function() {
 					for (i in data.comments) {// the channel
 						// 给div popDetail添加子div元素
 						innerHTML = innerHTML
-								+ '<div class=\"postSheet\">'
-								+ '<div class=\"posterInf\">'
-								+ '<div class=\"avtThumb flt\"><img src=\"getsmheadimge.do?userid='
+								+ '<div class=\"postSheet\" style=\"float: left; height: 500px;\">'
+								+ '<div class=\"posterInf\" style=\"float: left; height: 500px;\">'
+								+ '<div class=\"avtThumb flt\"><img src=\"html/userhead/'
 								+ data.comments[i].messagesenderid
-								+ '\" width=\"300\" height=\"400\" /></div>'
+								+ '.jpg \" width=\"300\" height=\"500\" /></div>'
 								+ '<div class=\"inf flt\">'
 								+ '<div class=\"row\"> <a href=\"gouserindex.do?userid='
 								+ data.comments[i].messagesenderid + '\">'
@@ -179,6 +177,7 @@ var loaddoccomment = function() {
 						innerHTML = innerHTML + '</div>';
 					}
 					$("#commentlist").html(innerHTML);
+					setpagewidth();
 				}
 			});
 
@@ -187,7 +186,11 @@ var loaddoccomment = function() {
  * 加载文章对应的留言信息
  */
 var sharedocument = function() {
-
+	var islogin = checklogin();
+	if (islogin == false) {
+		openloginwin();
+		return;
+	}
 	$.ajax({
 		async : true,
 		cache : false,
@@ -205,7 +208,7 @@ var sharedocument = function() {
 			if (data.success == '0') {
 				MessageWindow.showMess(data.message);
 			} else {
-				MessageWindow.showMess('  ');
+				MessageWindow.showMess('   ');
 				// 更新文章分享次数
 				$("#sharecount").html(data.documentValue.sharecount);
 			}
@@ -217,7 +220,11 @@ var sharedocument = function() {
  * 加载文章对应的留言信息
  */
 var markdocument = function() {
-
+	var islogin = checklogin();
+	if (islogin == false) {
+		openloginwin();
+		return;
+	}
 	$.ajax({
 		async : true,
 		cache : false,
@@ -235,7 +242,7 @@ var markdocument = function() {
 			if (data.success == '0') {
 				MessageWindow.showMess(data.message);
 			} else {
-				MessageWindow.showMess('   ');
+				MessageWindow.showMess('   ');
 				$("#markcount").html(data.documentValue.markcount);
 			}
 		}
@@ -329,15 +336,14 @@ var writemess = function(senderid, sendername) {
 	$("#comment").val(sendername + '  ');
 };
 var addemotion = function(emotionname) {
-	var agentkind = $("#agentkind").val();
-	if (agentkind == '1') {
-		$("#commentdiv").html(
-				$("#commentdiv").html()
-						+ $('<p>[' + emotionname + ']</p>').html());
-	} else {
-		$("#commentdiv")
-				.text($("#commentdiv").text() + '[' + emotionname + ']');
-	}
+	var img = "<img src=\"img/faces/" + emotionname + ".gif\"/>";
+	CKEDITOR.instances.editor1.insertHtml(img);
+	/*
+	 * var agentkind = $("#agentkind").val(); if (agentkind == '1') {
+	 * $("#commentdiv").html( $("#commentdiv").html() + $('<p>[' + emotionname + ']</p>').html()); }
+	 * else { $("#commentdiv") .text($("#commentdiv").text() + '[' + emotionname +
+	 * ']'); }
+	 */
 
 };
 /**
@@ -436,12 +442,11 @@ var previousdoc = function() {
 	});
 
 };
-var chgUrl = function(imgid) {
-	var timestamp = (new Date()).valueOf();
-	url = 'getimg.do?imgid=' + imgid + '&timestamp=' + timestamp;
-	alert(url);
-	return url;
-};
+/*
+ * var chgUrl = function(imgid) { var timestamp = (new Date()).valueOf(); url =
+ * 'getimg.do?imgid=' + imgid + '&timestamp=' + timestamp; alert(url); return
+ * url; };
+ */
 var test = function() {
 	//
 	showConfirmMess("             "
@@ -456,24 +461,16 @@ var test = function() {
 
 	//
 };
-var replaceverifycode = function() {
-	var imgSrc = $("#varifyimg");
-	var src = imgSrc.attr("src");
-	imgSrc.attr("src", changeurl(src));
-
-};
-// 时间戳
-// 为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
-function changeurl(url) {
-	var timestamp = (new Date()).valueOf();
-	url = url.substring(0, 17);
-	if ((url.indexOf("&") >= 0)) {
-		url = url + "¡Átamp=" + timestamp;
-	} else {
-		url = url + "?timestamp=" + timestamp;
-	}
-	return url;
-};
+/*
+ * var replaceverifycode = function(id) { var imgSrc='';
+ * if(id!=null&&id!=undefined){ imgSrc = $("#varifyimg"+id); }else{ imgSrc =
+ * $("#varifyimg"); } var src = imgSrc.attr("src"); imgSrc.attr("src",
+ * changeurl(src)); };
+ * 
+ * function changeurl(url) { var timestamp = (new Date()).valueOf(); url =
+ * url.substring(0, 17); if ((url.indexOf("&") >= 0)) { url = url + "¡Átamp=" +
+ * timestamp; } else { url = url + "?timestamp=" + timestamp; } return url; };
+ */
 function refreshdata(index) {
 	var obj1 = $('#imgsharecount' + index).val();
 	$("#imgtitle").text($("#imgtitle" + index).val());
@@ -512,4 +509,27 @@ var upload = function() {
 			}
 		}
 	});
-}
+};
+var checklogin = function() {
+	var islogin = false;
+	$.ajax({
+		async : false,
+		cache : false,
+		type : 'POST',
+		dataType : "json",
+		url : 'checklogin.do',// 请求的action路径
+		error : function() {// 请求失败处理函数
+			MessageWindow.showMess('         ');
+		},
+		success : function(data) {
+			if (data.login == 'true') {
+				islogin = true;
+			} else {
+				islogin = false;
+			}
+		}
+	});
+	return islogin;
+
+};
+

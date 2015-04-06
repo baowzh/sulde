@@ -2,7 +2,7 @@
 
 /* CSS Document */
 .roundCornerFrame {
-	border-radius: 5px;
+	border-radius: 2px;
 	border: solid 1px #ccc;
 	margin: 5px;
 	background: #1b6fbd;
@@ -10,10 +10,10 @@
 
 .content {
 	width: 950px;
-	margin: 9px;
+/* 	margin: 9px; */
 	background: white;
 	padding: 5px;
-	border-radius: 5px;
+/* 	border-radius: 5px; */
 }
 
 .label {

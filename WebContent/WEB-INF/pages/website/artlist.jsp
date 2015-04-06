@@ -19,19 +19,11 @@
 <script src="js/jqui/js/jquery-ui-1.10.3.custom.min.js"></script>
 </head>
 <body>
-	<div class="lmainR ofh" style="text-align: center; height: 64px;">
-		<img src="img/logo.png" width="980" />
-	</div>
-	<div class="lmainR ofh" style="text-align: center;">
-<!-- 		<div class="navCard "> -->
-			<%@ include file="head.jsp"%>
-<!-- 		</div> -->
-		<div class="cbt"></div>
-	</div>
-	<div class="lmainR ofh">
+	<%@ include file="head.jsp"%>
+	<div class="lmainR ofh" style="width: 990px;">
 		<form action="searchdoc.do" id="Form" method="post">
 			<div class="lmainR"
-				style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
+				style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;style="width: 990px;"">
 				<div style="height: 598px; border: solid 1px #eee;">
 					<table style="padding-top: 2em;" valign="top">
 						<tr>
@@ -53,8 +45,6 @@
 								<div class="inputHolder">
 									<select name="status" id="status"
 										style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
-<!-- 										<option value="2"> </option> -->
-<!-- 										<option value="1"> </option> -->
 										<option value="0" selected="true"></option>
 									</select>
 								</div>
@@ -123,12 +113,11 @@
 									&nbsp;&nbsp;<a href="javascript:clearQueryForm();"></a>
 								</div>
 							</td>
-
 						</tr>
 					</table>
 				</div>
 				<div class="  artlistcell"
-					style="width: 840px; height: 598px; overflow: scroll;">
+					style="width: 860px; height: 598px; overflow: scroll;">
 					<div class="artListcell acell1">
 						<div class="anwsls1">
 							<table>

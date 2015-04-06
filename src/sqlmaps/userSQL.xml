@@ -57,7 +57,11 @@
 		(select professionname from profession where
 		profession.professioncode=user.professioncode ) as professionname,
 		blogclass,
-		oldid
+		oldid,
+		headurl,
+		managerflag,
+		expert,
+		active
 		from
 		user
 		<dynamic prepend="where">
@@ -81,6 +85,9 @@
 			</isNotNull>
 			<isNotNull prepend="and" property="userkind">
 				userkind=#userkind#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				email=#email#
 			</isNotNull>
 		</dynamic>
 		order by regdate desc
@@ -117,7 +124,8 @@
 		nowhsien,
 		professioncode,
 		blogclass,
-		oldid
+		oldid,
+		headurl
 		)
 		values
 		(
@@ -150,7 +158,8 @@
 		#nowhsien#,
 		#professioncode#,
 		#blogclass#,
-		#oldid#
+		#oldid#,
+		#headurl#
 		)
 	</insert>
 
@@ -247,6 +256,9 @@
 			<isNotNull prepend="," property="blogclass">
 				blogclass=#blogclass#
 			</isNotNull>
+			<isNotNull prepend="," property="headurl">
+				headurl=#headurl#
+			</isNotNull>
 		</dynamic>
 		where userid=#userid#
 
@@ -271,7 +283,7 @@
 	</delete>
 	<select id="getFriendList" parameterClass="java.util.Map"
 		resultClass="FriendValue">
-		select friend.* from friend ,user where friend.friendid=user.userid
+		select friend.* ,user.headurl as headurl from friend ,user where friend.friendid=user.userid
 		<dynamic prepend="and">
 			<isNotNull prepend="and" property="userid">
 				friend.userid=#userid#
@@ -286,7 +298,7 @@
 	</select>
 	<select id="getVisitorList" parameterClass="java.util.Map"
 		resultClass="VisitorValue">
-		select DISTINCT visitorid,visitorname,visitorimg,visitorimgurl from
+		select DISTINCT visitorid,visitorname,visitorimg,visitorimgurl,user.headurl as headurl from
 		visitor,user where visitor.visitorid=user.userid
 		<dynamic prepend="and">
 			<isNotNull prepend="and" property="userid">
@@ -301,13 +313,19 @@
 			<isNotNull prepend="and" property="visitortype">
 				visitor.visitortype=#visitortype#
 			</isNotNull>
+			<isNotNull prepend="and" property="visittype">
+				visitor.visittype=#visittype#
+			</isNotNull>
+			<isNotNull prepend="and" property="visitobjid">
+				visitor.visitobjid=#visitobjid#
+			</isNotNull>
 		</dynamic>
 		order by visitdate desc limit 0,20
 	</select>
 
 	<select id="getTotalVisitorCount" parameterClass="java.util.Map"
 		resultClass="java.lang.Integer">
-		select count(1) from visitor
+		select visitcount from user
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="userid">
 				userid=#userid#
@@ -323,7 +341,7 @@
 				userid=#userid#
 			</isNotNull>
 			<isNotNull prepend="and" property="visitdate">
-				visitdate=#visitdate#
+				visitdate=#visitdate# 
 			</isNotNull>
 		</dynamic>
 	</select>
@@ -353,6 +371,9 @@
 		#visitortype#
 		)
 	</insert>
+	<update id="updatetotalvisitcount" parameterClass="com.mongolia.website.model.VisitorValue">
+	  update user set user.visitcount=ifnull(visitcount,0)+1 where userid=#userid#
+	</update>
 
 	<insert id="addFriendValue" parameterClass="com.mongolia.website.model.FriendValue">
 		insert into friend(
@@ -432,7 +453,7 @@
 	</update>
 	<select id="pagingQueryFriends" parameterClass="java.util.Map"
 		resultClass="FriendValue">
-		select friend.* from friend ,user where friend.friendid=user.userid
+		select friend.*,user.headurl as headurl from friend ,user where friend.friendid=user.userid
 		<dynamic prepend="and">
 			<isNotNull prepend="and" property="userid">
 				friend.userid=#userid#
@@ -486,7 +507,8 @@
 		hsien,
 		nowhsien,
 		professioncode,
-		blogclass
+		blogclass,
+		headurl
 		from
 		user
 		<dynamic prepend="where">
@@ -513,6 +535,9 @@
 			</isNotNull>
 			<isNotNull prepend="and" property="userkind">
 				userkind=#userkind#
+			</isNotNull>
+			<isNotNull prepend="and" property="professioncode">
+				professioncode=#professioncode#
 			</isNotNull>
 		</dynamic>
 		order by regdate desc LIMIT #startindex#, #fetchcount#
@@ -544,6 +569,9 @@
 			</isNotNull>
 			<isNotNull prepend="and" property="userkind">
 				userkind=#userkind#
+			</isNotNull>
+			<isNotNull prepend="and" property="professioncode">
+				professioncode=#professioncode#
 			</isNotNull>
 		</dynamic>
 		order by regdate desc
@@ -599,7 +627,19 @@
 	<select id="getVisitTime" parameterClass="java.util.Map"
 		resultClass="VisitorValue">
 		select visitorid,max(visitdate) as visitdate from visitor where visitorid
-		in($instr$ ) group by visitorid
+		in($instr$ ) 
+		<dynamic prepend="and">
+			<isNotNull prepend="and" property="visittype">
+				visittype=#visittype#
+			</isNotNull>
+			<isNotNull prepend="and" property="visitobjid">
+				visitobjid=#visitobjid#
+			</isNotNull>
+		</dynamic>
+		group by visitorid
 	</select>
+	<update id="activateUser" parameterClass="java.util.Map">
+		 update user set user.active=1 where username=#username#
+	</update>
 
 </sqlMap>

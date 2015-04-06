@@ -123,7 +123,7 @@
 											<div class="posterInf">
 												<div class="avtThumb flt">
 													<img
-														src="getsmheadimge.do?userid=<c:out value="${messageValue.messagesenderid}" />"
+														src="html/userhead/<c:out value="${messageValue.headurl}" />"
 														width="300" height="400" />
 												</div>
 												<div class="inf flt">
@@ -165,12 +165,10 @@
 		</div>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
-<!-- 		<div class="tailCard"> -->
-<!-- 			<div class="msheet" style="height: 100px; width: 800px;"> -->
-			<%@ include
-					file="../website/tail.jsp"%>
-<!-- 					</div> -->
-<!-- 		</div> -->
+		<div class="tailCard">
+			<div class="msheet" style="height: 100px; width: 800px;"><%@ include
+					file="../website/tail.jsp"%></div>
+		</div>
 		<div class="cbt"></div>
 	</div>
 	<div class="lcell cardlogin" style="display: none">

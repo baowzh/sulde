@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<div class="flt" style="width: 250px;">
+<div class="flt" style="width: 250px; border: solid 1px #014886;">
 	<div class="flt" style="width: 250px;">
 		<div class="flt"
 			style="position: relative; top: -190px; padding: 8px;" id="nameCard">
@@ -11,7 +11,7 @@
 						<c:out value="${user.artname}" />
 					</div>
 					<div class="avatar">
-						<img src="getheadimge.do?userid=<c:out value="${user.userid}" />"
+						<img src="html/userhead/<c:out value="${user.headurl}" />"
 							width="334" height="446" />
 					</div>
 				</div>
@@ -35,17 +35,17 @@
 					<!--  <div class="m1ln">     </div>-->
 					<div class="m1ln">
 						 
-						<c:out value="${user.age}" default="  " />
+						<c:out value="${user.age}" default="  " />
 					</div>
 					<!--  <div class="m1ln">       </div>-->
 					<div class="m1ln">
 						  
-						<c:out value="${user.nowprovincename}" default="  " />
+						<c:out value="${user.nowprovincename}" default="  " />
 					</div>
-					<!--  <div class="m1ln">   2010-1-1</div>-->
+					<!--  <div class="m1ln">    2010-1-1</div>-->
 					<div class="m1ln">
-						 
-						<c:out value="${user.regdatestr}" default="  " />
+						 
+						<c:out value="${user.regdatestr}" default="  " />
 					</div>
 					<!-- <div class="m1ln">   1000</div> -->
 					<div class="m1ln">
@@ -63,10 +63,10 @@
 					<div class="m1ln">
 						<a
 							href="javascript:writemessage('<c:out value="${user.userid}" />');">
-							&nbsp;&nbsp;&nbsp;</a>
+							&nbsp;&nbsp;&nbsp;</a>
 						<c:if test="${self==1}">
-							<a href="javascript:receivemessage();">(<c:out
-									value="${messageCount}" />)
+							<a href="javascript:receivemessage();">(<span style="color:#f00;"><c:out
+									value="${messageCount}" /></span>)
 							</a>
 						</c:if>
 					</div>
@@ -78,14 +78,13 @@
 							-->
 
 						<c:if test="${self==1}">
-							<a href="doedituserinifo.do">   &nbsp;&nbsp;&nbsp;
-							</a>
-							<a href="javascript:showpassdialog();">   </a>
+							<a href="doedituserinifo.do">  &nbsp;&nbsp;&nbsp; </a>
+							<a href="javascript:showpassdialog();">   </a>
 						</c:if>
 						<c:if test="${self==0}">
 							<a
 								href="javascript:showuserinfo('<c:out value="${user.userid}" />');">
-								  &nbsp;&nbsp;&nbsp; </a>
+								 &nbsp;&nbsp;&nbsp; </a>
 						</c:if>
 
 
@@ -93,9 +92,9 @@
 							<!--  
 							<a
 								href="javascript:addfriends('<c:out value="${user.userid}" />');">
-								 </a>
+								</a>
 								-->
-							<a href="javascript:openaddfrienddl();">  </a>
+							<a href="javascript:openaddfrienddl();"> </a>
 
 						</c:if>
 					</div>
@@ -108,24 +107,25 @@
 		<div class="frt blgNav blgNavC" style="width: 20px;">
 			<div class=" m1ln " style="padding-top: 8px;">
 				<a href="gouserindex.do?userid=<c:out value="${user.userid}" />">
-					<c:if test="${self==1}"> </c:if> <c:if test="${self==0}">  </c:if>
-				</a> 
-
-				<!--							  <a href="#">  </a>   -->
-				<!--							  <a href="#">   </a>   -->
-
-				<a href="photoAlbumList.do?userid=<c:out value="${user.userid}" />"></a>
+					<c:if test="${self==1}"> </c:if> <c:if test="${self==0}">  </c:if>
+				</a>  <a
+					href="photoAlbumList.do?userid=<c:out value="${user.userid}" />"></a>
 				 <a href="friendlist.do?userid=<c:out value="${user.userid}" />"></a>
-				 <a href="index.html">  </a>
+				<c:if test="${self==1||islogin==0}">
+				 <a href="#"> </a>
+				</c:if>
+				<c:if test="${self==0&&islogin==1}">
+				 <a href="gouserindex.do?userid=<c:out value="${loginuserid}" />">  </a>
+				</c:if>
 			</div>
 		</div>
 		<div class=" flt"
-			style="width: 225px; margin: 0px 8px 8px 8px; padding: 5px; background: white;">
+			style="width: 225px; margin: 0px 8px 8px 8px; padding: 5px; background: white; border: solid 1px #014886;">
 			<div class="friendL">
 				<div class="i">
 					<div class="m0a" style="width: 40px;">
-						<div class=" msheet" style="padding-top: 10px;font-size:16px;">
-							<a href="#"> <br />   :
+						<div class=" msheet" style="padding-top: 10px;">
+							<a href="#"> <br />  :
 							</a>
 						</div>
 					</div>
@@ -136,10 +136,10 @@
 					<div class="i">
 						<a
 							href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />"><img
-							src="getsmheadimge.do?userid=<c:out value="${friendValue.friendid}" />"
+							src="html/userhead/<c:out value="${friendValue.headurl}" />"
 							width="334" height="446" /></a>
 						<div class="frt" style="width: 20px;">
-							<div class="m1ln" style="font-size:16px;">
+							<div class="m1ln">
 								<a
 									href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />">
 									<c:out value="${friendValue.friendname}" />
@@ -151,11 +151,11 @@
 			</c:forEach>
 		</div>
 		<div class=" flt"
-			style="width: 225px; margin: 0px 8px 8px 8px; padding: 5px; background: white;">
+			style="width: 225px; margin: 0px 8px 8px 8px; padding: 5px; background: white; border: solid 1px #014886;">
 			<div class="friendL">
 				<div class="i">
 					<div class="m0a" style="width: 40px;">
-						<div class=" msheet" style="padding-top: 10px;font-size:16px;">
+						<div class=" msheet" style="padding-top: 10px;">
 							<a href="#"> <br />  :
 							</a>
 						</div>
@@ -166,23 +166,20 @@
 			<c:forEach items="${visitors}" var="visitorValue" varStatus="status">
 				<div class=" friendL">
 					<div class="i">
-						<img
-							src="getsmheadimge.do?userid=<c:out value="${visitorValue.visitorid}" />"
+						<img src="html/userhead/<c:out value="${visitorValue.headurl}" />"
 							width="334" height="446" />
-						<div class="frt" style="width: 20px;font-size:16px;">
+						<div class="frt" style="width: 20px;">
 							<div class="m1ln">
 								<a
 									href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">
 									<c:out value="${visitorValue.visitorname}" />
 								</a>
 							</div>
-
 						</div>
-<!-- 						<div class="time" -->
-<!-- 							style="width: 52px; height: 15px; position: relative; left: 0px; top: 70px; font-size: 10px;float:left;"> -->
-							 <font
-								size="1px;"><c:out value="${visitorValue.visitdatestr}" /></font>
-<!-- 						</div> -->
+						<div class="time">
+							<font size="1px;"><c:out
+									value="${visitorValue.visitdatestr}" /></font>
+						</div>
 					</div>
 				</div>
 			</c:forEach>

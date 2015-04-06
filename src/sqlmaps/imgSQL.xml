@@ -18,7 +18,8 @@
 		imgcontent,
 		width,
 		height,
-		oldid
+		oldid,
+		raceid
 		) values(
 		#imgid#,
 		#imgname#,
@@ -30,7 +31,8 @@
 		#imgcontent#,
 		#width#,
 		#height#,
-		#oldid#
+		#oldid#,
+		#raceid#
 		)
 	</insert>
 	<select id="getImgList" parameterClass="java.util.Map"
@@ -51,21 +53,24 @@
 		</dynamic>
 	</select>
 	<insert id="addImgGrpupValue" parameterClass="ImgGrpupValue">
-		insert into imggroup (
+		insert into
+		imggroup (
 		imggroupid,
 		imggroupname,
 		imggroupkind ,
 		userid,
 		faceimg,
 		createdtime,
-		oldid
+		oldid,
+		faceurl
 		) values( #imggroupid#,
 		#imggroupname#,
 		#imggroupkind# ,
 		#userid# ,
 		#faceimg#,
 		#createdtime#,
-		#oldid#
+		#oldid#,
+		#faceurl#
 		)
 	</insert>
 	<select id="getImgGrpupList" parameterClass="java.util.Map"
@@ -127,11 +132,24 @@
 			<isNotNull prepend="," property="faceimg">
 				faceimg=#faceimg#
 			</isNotNull>
+			<isNotNull prepend="," property="faceurl">
+				faceurl=#faceurl#
+			</isNotNull>
 
 		</dynamic>
 		where imggroupid=#imggroupid#
 	</update>
 	<update id="updateimgcontent" parameterClass="ImgValue">
-		update img set imgcontent=#imgcontent# where imgid= #imgid#
+		update img set
+		imgcontent=#imgcontent# where imgid= #imgid#
 	</update>
+	<select id="pagingAlbums" parameterClass="com.mongolia.website.model.PaingModel"
+		resultClass="ImgGrpupValue">
+		select * from imggroup order by createdtime 
+		LIMIT #startrow#, #endrow#
+	</select>
+	<select id="pagingAlbumsCount" parameterClass="com.mongolia.website.model.PaingModel"
+		resultClass="java.lang.Integer">
+		select count(1) from imggroup
+	</select>
 </sqlMap>

@@ -9,6 +9,7 @@ public class QueryUserForm {
 	private Integer pageindex;
 	private Integer pagesize;
 	private String searchtext;
+	private String professioncode;
 
 	public String getDistrict() {
 		return district;
@@ -73,6 +74,13 @@ public class QueryUserForm {
 	public void setSearchtext(String searchtext) {
 		this.searchtext = searchtext;
 	}
-	
+
+	public String getProfessioncode() {
+		return professioncode;
+	}
+
+	public void setProfessioncode(String professioncode) {
+		this.professioncode = professioncode;
+	}
 
 }

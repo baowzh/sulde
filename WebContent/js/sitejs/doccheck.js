@@ -57,16 +57,18 @@ var gotoPage = function(pageindex) {
  *            checkbox
  */
 var selectAllDoc = function(checkbox) {
-	var isselect = false;
-	if (checkbox.checked) {
-		isselect = true;
-	} else {
-		isselect = false;
-	}
-	var boxes = $("input[name='docnamecheckbox']");
-	boxes.each(function() {
-		$(this).attr("checked", isselect);
+	$("[name = docnamecheckbox]:checkbox").each(function() {
+		$(this).prop("checked", checkbox.checked);
 	});
+
+	/*
+	 * var isselect = false; if (checkbox.checked) { isselect = true; } else {
+	 * isselect = false; } var boxes = $("input[name='docnamecheckbox']");
+	 */
+	// boxes.attr("checked", isselect);
+	// boxes.each(function() {
+	// $(this).attr("checked", isselect);
+	// });
 };
 /**
  * 审核
@@ -158,6 +160,31 @@ var asTopWriting = function() {
 	$("#docid").val(selecteddocid);
 	$("#astopwriting").dialog();
 };
+var opensetvideofacediv = function() {
+	var boxes = $("input[name='docnamecheckbox']");
+	var checkedcount = 0;
+	var selecteddocid = "";
+	var seldoctitile = "";
+	boxes.each(function() {
+		if (this.checked) {
+			checkedcount++;
+			selecteddocid = this.id;
+			var docid = "#title" + this.id;
+			seldoctitile = $(docid).val();
+			// alert(seldoctitile);
+		}
+	});
+	if (checkedcount > 1) {
+		MessageWindow.showMess("     ");
+		return;
+	} else if (checkedcount == 0) {
+		MessageWindow.showMess("video   ");
+		return;
+	}
+	$("#videotitle").val(seldoctitile);
+	$("#videoid").val(selecteddocid);
+	$("#setvideofacediv").dialog();
+};
 var addtotopwriting = function() {
 	var playimg = $("#playimg").val();
 	if (playimg == null || playimg == '') {
@@ -170,6 +197,17 @@ var addtotopwriting = function() {
 		return;
 	}
 	$("#astopwritingform").submit();
+};
+/**
+ * 设置视频的封面
+ */
+var setvideoimgface = function() {
+	var playimg = $("#videoimg").val();
+	if (playimg == null || playimg == '') {
+		MessageWindow.showMess("video   ");
+		return;
+	}
+	$("#setvideofaceform").submit();
 };
 /**
  * 添加选送文章

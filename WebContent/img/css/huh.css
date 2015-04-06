@@ -32,9 +32,10 @@ body {
 
 .navCard {
 	height: 100px;
-	padding: 25px 35px;
+	padding: 25px 30px;
 	margin: 0 5px;
 	border: solid 1px #06F;
-	border-radius: 0px 0px 5px 5px;;
-	background: url(../navbg.png) left top no-repeat
+	border-radius: 0px 0px 5px 5px;
+	background:#1b6dd2
+/* 	background: url(../navbg.png) left top no-repeat */
 }
