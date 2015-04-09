@@ -236,11 +236,29 @@
 				<div class="mnlist" style="width: 80px;">
 
 					<form id="searchform" method="post">
-
+						<!--  
 						<div class="search">
 							<input type="text" name="searchtext" id="searchtext" />
 						</div>
-
+                       -->
+						<c:if test="${agentkind==1}">
+						<div class="inputHolder"
+								style="height: 300px; width:5px;  flaot: left">
+							</div>
+							<div class="inputHolder"
+								style="height: 300px; width: 40px; padding-left: 5px;flaot: left">
+								<input type="text" name="searchtext" id="searchtext"
+									class="webkitsearchtext" />
+							</div>
+						</c:if>
+						<c:if test="${agentkind==0}">
+							<div class="inputHolder"
+								style="height: 300px;  flaot: left">
+								<input type="text" name="searchtext" id="searchtext"
+									class="iesearchtext" />
+							</div>
+							<div class="inputHolder" style="width: 10px;"></div>
+						</c:if>
 						<div class="mnlist"
 							style="width: 40px; padding-left: 10px; text-align: center;">
 							<a id="searchbloga" href="javascript:search('searchblog.do');">
@@ -304,14 +322,15 @@
 								<a
 									href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
 									src="html/userhead/<c:out value="${userValue.headurl}" />" /></a>
-								<div class="frt" style="width: 20px; text-align: center;float:right;margin-right:3px;">
+								<div class="frt"
+									style="width: 20px; text-align: center; float: right; margin-right: 3px;">
 									<div class="m1ln" style="text-align: center; font-size: 16px;">
 										<a
 											href="gouserindex.do?userid=<c:out value="${userValue.userid}" />">
 											&nbsp;<c:out value="${userValue.artname}" />
 										</a>
 									</div>
-									
+
 
 								</div>
 							</div>
@@ -686,7 +705,8 @@
 									<a
 										href="gouserindex.do?userid=<c:out value="${userValue.userid}" />"><img
 										src="html/userhead/<c:out value="${userValue.headurl}" />" /></a>
-									<div class="frt" style="width: 20px; text-align: center;margin-right:3px;">
+									<div class="frt"
+										style="width: 20px; text-align: center; margin-right: 3px;">
 										<div class="m1ln"
 											style="text-align: center; font-size: 16px; height: 80px;">
 											<a

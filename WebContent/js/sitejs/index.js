@@ -108,7 +108,7 @@ $(document)
 
 					$
 							.ajax({
-								async : false,
+								async : true,
 								cache : false,
 								type : 'POST',
 								dataType : "json",

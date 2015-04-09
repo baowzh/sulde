@@ -288,9 +288,8 @@ body.alag {
 }
 
 .search input, button {
-	-webkit-transform: rotate(90deg); /* Safari and Chrome */
+	-webkit-transform: rotate(90deg); 
 	-webkit-transform-origin: 10px 10px;
-	/* 	font-family: "Menksoft  "; */
 	font-family: "MenksoftQagan";
 	writing-mode: tb-lr;
 }
@@ -798,6 +797,16 @@ body.alag {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	height: 105px;
+}
+.webkitsearchtext {
+	width: 290px;
+	height: 21px;
+	-webkit-transform-origin: 15px 18px;
+}
+
+.iesearchtext {
+	height: 290px;
+	width: 21px;
 }
 
 

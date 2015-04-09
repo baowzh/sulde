@@ -32,6 +32,7 @@ public class AutoResponseController {
 			PagingAutoResModel paingModel, ModelMap map) throws Exception {
 		paingModel = this.autoResponseManager.pagingquerydoc(paingModel);
 		map.put("paingModel", paingModel);
+		
 		return new ModelAndView("wechat/autoresponselist", map);
 	}
 
