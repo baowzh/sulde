@@ -33,10 +33,10 @@ import com.mongolia.website.manager.impls.SpringUtils;
 import com.mongolia.website.manager.interfaces.WeixinAccountServiceI;
 import com.mongolia.website.model.AccessToken;
 import com.mongolia.website.model.AccessTokenYw;
+import com.mongolia.website.model.Article;
 import com.mongolia.website.model.AttentionValue;
 import com.mongolia.website.model.WechatAccountEntity;
 import com.mongolia.website.model.WechatUserValue;
-import com.mongolia.website.model.WeixinAccountEntity;
 
 /**
  * 公众平台通用接口工具类
@@ -49,10 +49,10 @@ public class WeixinUtil {
 	public static String menu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 	public static String send_message_url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
 	public static Map<String, AccessTokenYw> accessTokens = new HashMap<String, AccessTokenYw>();
-	private static ResourceBundle bundler = ResourceBundle
-			.getBundle("vflyshop");
-	private static ResourceBundle bundler1 = ResourceBundle
-			.getBundle("sysConfig");
+//	private static ResourceBundle bundler = ResourceBundle
+//			.getBundle("config");
+//	private static ResourceBundle bundler1 = ResourceBundle
+//			.getBundle("config");
 	private static String authurl;
 	public static WechatAccountEntity defaultAccountEntity;
 
@@ -324,7 +324,7 @@ public class WeixinUtil {
 	public static String getAuth20Url(String appid, String directurl,
 			Map<String, Object> params) throws Exception {
 		if (authurl == null) {
-			authurl = bundler.getString("authurl");
+			//authurl = bundler.getString("authurl");
 		}
 		String auth2url = authurl + "/auth2dispatcher.jhtml";
 		Set<String> keys = params.keySet();
@@ -356,25 +356,31 @@ public class WeixinUtil {
 	}
 
 	public static JSONObject sendServiceMess(String accountid, String openid,
-			String mess) {
+			List<Article> mess) {
 		List<WechatAccountEntity> accounts = getAccountEntity(accountid);
 		AccessToken accesstokeni = getAccessToken(accounts.get(0)
 				.getAccountappid(), accounts.get(0).getAccountappsecret());
 
 		String url = send_message_url.replace("ACCESS_TOKEN",
 				accesstokeni.getToken());
-
 		Map<String, Object> jspnMap = new HashMap<String, Object>();
 		jspnMap.put("touser", openid);
-		jspnMap.put("msgtype", "text");
+		jspnMap.put("msgtype", "news");
 		Map<String, Object> contentMap = new HashMap<String, Object>();
-		contentMap.put("content", mess);
-		jspnMap.put("text", contentMap);
+		List<HashMap<String, Object>> messages = new ArrayList<HashMap<String, Object>>();
+		for (Article article : mess) {
+			HashMap<String, Object> messi = new HashMap<String, Object>();
+			messi.put("title", article.getTitle());
+			messi.put("description", article.getDescription());
+			messi.put("url", article.getUrl());
+			messi.put("picurl", article.getPicUrl());
+			messages.add(messi);
+		}
+		contentMap.put("articles", messages);
+		jspnMap.put("news", contentMap);
 		JSONObject jsonMess = JSONObject.fromObject(jspnMap);
-
 		JSONObject jsonObject = WeixinUtil.httpRequest(url, "POST",
 				jsonMess.toString());
-
 		return jsonObject;
 	}
 
@@ -437,7 +443,8 @@ public class WeixinUtil {
 		try {
 			WeixinAccountServiceI weixinAccountServiceI = (WeixinAccountServiceI) SpringUtils
 					.getBean("weixinAccountService");
-			String account_id = bundler1.getString("account_id");
+			String account_id = "";
+					//bundler1.getString("account_id");
 			if (defaultAccountEntity == null) {
 				List<WechatAccountEntity> accounts = weixinAccountServiceI
 						.getWechatAccounts(new HashMap<String, Object>());

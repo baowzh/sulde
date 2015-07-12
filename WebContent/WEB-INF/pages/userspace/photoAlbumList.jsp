@@ -1,169 +1,282 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="t" uri="/css-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Blog Home</title>
+<title><c:out value="${documentValue.doctitle}" /></title>
 <t:font_css type="jquery,easyui,tools"></t:font_css>
-<link href="site/css/main.css" rel="stylesheet" type="text/css" />
-<link href="site/css/index.css" rel="stylesheet" type="text/css" />
-<link href="img/css/main.css" type="text/css" rel="stylesheet" />
-<link href="img/css/listpages.css" type="text/css" rel="stylesheet" />
-<link href="img/css/blog.css" type="text/css" rel="stylesheet" />
-<link href="img/css/custom.css" type="text/css" rel="stylesheet" />
+<link href="css/blog.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/util/js/messageWindow.js"></script>
+<link href="site/css/waplist.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/sitejs/race.js"></script>
 <script type="text/javascript" src="js/sitejs/photoalbumlist.js"></script>
 <script type="text/javascript" src="js/sitejs/userhomeindex.js"></script>
-<link rel="stylesheet"
-	href="js/jqui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
-<script src="js/jqui/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/sitejs/userlogin.js"></script>
+<script type="text/javascript" src="js/sitejs/changevalidcode.js"></script>
+<script type="text/javascript"
+	src="js/sitejs/emotion/jquery.emoticons.js"></script>
+<link href="js/sitejs/emotion/emoticon.css" type="text/css"
+	rel="stylesheet" />
+<script type="text/javascript" src="js/util/js/messageWindow.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="plugins/jquery.jqGrid-4.4.3/css/jquery-ui.css" media="screen" />
+<script src="plugins/jquery.jqGrid-4.4.3/js/jquery-ui.min.js"
+	type="text/javascript"></script>
 <script src="js/messagebox/jquery.msgbox.js"></script>
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
-<link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
+<script type="text/javascript" src="ckeditorrot/ckeditor.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		function setheight() {
+			var sidebar = document.getElementById('myDIV');
+			sidebar.style.width = document.documentElement.clientHeight - 0
+					+ 'px';
+		}
+		setheight();
+		onresize = setheight;
+	};
+</script>
 </head>
-<body>
-	<form id="openalbumform" action="getimglist.do" method="post">
-		<%@ include file="bloghead.jsp"%>
-		<div class="lmainR">
-			<div class="  lcell"
-				style="width: 990px; margin-top: 196px; overflow: visible;">
-				<div class=" blogbody blogbodyC">
-					<div class="blgL blgLC" id="blgL">
-						<!-- 通过引用页面代替 -->
-						<%@ include file="blogpage.jsp"%>
-						<!--  -->
+
+<body onmousewheel="wheel(event)" onload="setmglconimgWidht();
+	style="
+	background-color: #fff; scroll:none; ">
+	<div class="rotatesection" style="width: 630px;" id="myDIV">
+		<div class="blogcon">
+			<div class="titlebar">
+				<div class="mglsection" style="width: 50px; padding-right: 15px;">
+					<a href="tologin.do"></a>
+				</div>
+				<div class="mglsection" style="width: 90px;">
+					<a href="index.do"> </a>
+				</div>
+				<div class="mglsection" style="width: 90px;">
+					<a href="gouserindex.do?userid=<c:out value="${user.userid}" />"> 
+						 </a>
+				</div>
+				<div class="mglsection" style="width: 80px;">
+					<a href="registe.do"></a>
+				</div>
+				<div class="mglsection" style="width: 100px;">
+					<a href="gouserindex.do?userid=<c:out value="${loginuserid}" />"> 
+						 </a>
+				</div>
+				<div class="mglsection" style="width: 100px;">
+					<a href="toadddoc.do">  </a>
+				</div>
+			</div>
+			<!--  -->
+			<div class="flt" style="width: 100%; height: 160px;">
+				<div class="persooninfo" style="margin: 6px;">
+					<div class="headimg rotate">
+						<img src="html/userhead/<c:out value="${user.headurl}" />" />
 					</div>
-					<div class="blgmain bglMainC" id="blgMain">
-						<div style="width: 692px; margin: 0px 10px 10px 10px;">
-							<div class="flt glryBox">
-								<div class="m0a"
-									style="width: 692px; height: 900px; margin: 0px;">
-									<c:if test="${self==1}">
-										<div class="addNewAlbum">
-											<div class="m1ln borderOuter" style="height: 110px;">
-												<a href="javascript:openaddphotoalbumdialog();">
-													  </a>
-											</div>
-											<div class="m1ln borderOuter"
-												style="height: 80px; margin-top: 5px; background: #eee url(img/delete.png) center top no-repeat;">
-												<a href="javascript:deletephotoalbum();"> </a>
-											</div>
-										</div>
-									</c:if>
-									<div class="folder photoAlbumC">
-										<div style="width: 80px; margin: 4em 2em;">
-											<div class=" msheet">
-												<a href="#">
-												 <br /><br /> <br />  <br>
-												</a>
-											</div>
-										</div>
-									</div>
-
-									<c:forEach items="${photoAlbumList}" var="imgGrpupValue"
-										varStatus="status">
-										<div class="folder" style="width:162px;height:180px;">
-											<a
-												href="javascript:openPhotoAlbum('<c:out value="${imgGrpupValue.imggroupid}"/>')">
-												<c:if test="${imgGrpupValue.faceurl!=null}">
-												<img
-												style="width:132px;height:150px;"
-												src="html/photoalbum/<c:out value="${imgGrpupValue.faceurl}"/>">
-												</c:if>
-												<c:if test="${imgGrpupValue.faceurl==null}">
-												<img
-												style="width:132px;height:150px;"
-												src="html/photoalbum/imgface.jpg">
-												</c:if>
-												</a>
-											<div class="m1ln" style="text-align: center;height:145px;">
-												<a title="<c:out value="${imgGrpupValue.imggroupname}"/>"
-													href="javascript:openPhotoAlbum('<c:out value="${imgGrpupValue.imggroupid}"/>')"><c:out
-														value="${imgGrpupValue.imggroupname}" /></a>
-											</div>
-
-											<div class="time">
-												<c:if test="${self==1}">
-													<input type="radio" name="selectedradio"
-														id="<c:out value="${imgGrpupValue.imggroupid}"/>">
-												</c:if>
-												<c:out value="${imgGrpupValue.createdtimestr}" />
-											</div>
-										</div>
-									</c:forEach>
-
-<!-- 									<div class="folder photoAlbumC"> -->
-<!-- 										<div style="width: 80px; margin: 4em 2em;"> -->
-<!-- 											<div class=" msheet" style="font-size: 14px;"> -->
-<!-- 												<a href="#"> <br> <br> <br /> <br /> -->
-<!-- 												</a> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-
-								</div>
-
-								<input type="hidden" name="userid" id="userid"
-									value="<c:out value="${user.userid}" />" /> <input
-									type="hidden" name="imggroupid" id="imggroupid" value="" />
-							</div>
-
-						</div>
-						<div style="height: 10px; width: 100%; float: left"></div>
-						<div class="cbt"></div>
+					<div class="m1ln" style="padding-right: 20px;">
+						<c:out value="${user.artname}" />
 					</div>
 				</div>
-				<div class="cbt"></div>
+				<div class="flt"
+					style="padding-top: 5px; padding-right: 10px; height: 130px; margin: 0 auto; float: right;">
+					<div class="m1ln">
+						 
+						<c:choose>
+							<c:when test="${user.sex==1}">
+							         
+							       </c:when>
+							<c:when test="${user.sex==0}">
+							          
+							       </c:when>
+							<c:otherwise>
+							          
+							       </c:otherwise>
+						</c:choose>
+					</div>
+					<div class="m1ln">
+						 
+						<c:out value="${user.age}" default="  " />
+					</div>
+					<div class="m1ln">
+						  
+						<c:out value="${user.nowprovincename}" default="  " />
+					</div>
+					<div class="m1ln">
+						 
+						<c:out value="${user.regdatestr}" default="  " />
+					</div>
+					<div class="m1ln">
+						 
+						<c:out value="${totalVisitCount}" />
+					</div>
+					<div class="m1ln">
+						 
+						<c:out value="${currentDateVisitCount}" />
+					</div>
+					<div class="m1ln">
+						    
+						<c:out value="${user.logindatestr}" default="" />
+					</div>
+					<div class="m1ln">
+						<a
+							href="javascript:writemessage('<c:out value="${user.userid}" />');">
+							&nbsp;&nbsp;&nbsp;</a>
+						<c:if test="${self==1}">
+							<a href="javascript:receivemessage();">(<span
+								style="color: #f00;"><c:out value="${messageCount}" /></span>)
+							</a>
+						</c:if>
+					</div>
+					<div class="m1ln">
+						<c:if test="${self==1}">
+							<a href="doedituserinifo.do">  &nbsp;&nbsp;&nbsp; </a>
+							<a href="javascript:showpassdialog();">   </a>
+						</c:if>
+						<c:if test="${self==0}">
+							<a
+								href="javascript:showuserinfo('<c:out value="${user.userid}" />');">
+								 &nbsp;&nbsp;&nbsp; </a>
+						</c:if>
+
+
+						<c:if test="${self==0}">
+							<a href="javascript:openaddfrienddl();"> </a>
+
+						</c:if>
+					</div>
+				</div>
+			</div>
+			<div class="titlebar" style="text-align: right;">
+				<div class="mglsection" style="width: 180px; padding-right: 15px;">
+					<a href="friendlist.do?userid=<c:out value="${user.userid}" />">
+						 :</a>
+				</div>
+			</div>
+			<div class="flt"
+				style="width: 100%; min-height: 230px; height: auto !important;">
+				<c:forEach items="${fvalues}" var="friendValue" varStatus="status">
+					<div class="persooninfo" style="height: 100px; width: 105px;">
+						<div class="headimg rotate" style="height: 75px; width: 90px;">
+							<a
+								href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />">
+								<img
+								src="html/userhead/<c:out value="${friendValue.headurl}" />"
+								style="width: 75px; height: 75px;">
+							</a>
+						</div>
+						<div class="m1ln" style="margin: 5px; padding-right: 5px;">
+							<a
+								href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />">
+								<c:out value="${friendValue.friendname}" />
+							</a>
+						</div>
+					</div>
+				</c:forEach>
+
+			</div>
+			<div style="clear: both"></div>
+
+			<div class="titlebar" style="text-align: right;">
+				<div class="mglsection" style="width: 180px; padding-right: 15px;">
+					<a href="photoAlbumList.do?userid=<c:out value="${user.userid}" />">   </a>
+				</div>
+				<c:if test="${self==1}">
+					<div class="mglsection" style="width: 180px; padding-right: 15px;">
+						<a href="javascript:openaddphotoalbumdialog();"> 
+							  </a>
+					</div>
+				</c:if>
+			</div>
+			<div class="flt"
+				style="width: 100%; margin: 2px; min-height: 185px; height: auto !important;">
+				<c:forEach items="${photoAlbumList}" var="imgGrpupValue"
+					varStatus="status">
+					<div class="photoalbum rotate" style="position: relative;">
+						<a
+							href="javascript:openPhotoList('<c:out value="${imgGrpupValue.imggroupid}"/>')">
+							<c:if test="${imgGrpupValue.faceurl!=null}">
+								<img
+									src="html/photoalbum/<c:out value="${imgGrpupValue.faceurl}"/>">
+							</c:if> <c:if test="${imgGrpupValue.faceurl==null}">
+								<img src="html/photoalbum/imgface.jpg">
+							</c:if>
+
+						</a>
+						<div class="m1ln"
+							style="text-align: center; width: 180px; margin: 5px;position: absolute; bottom: 0px; background: #000; opacity: 0.6;">
+							<a style="color: #fff;" title="<c:out value="${imgGrpupValue.imggroupname}"/>"
+								href="javascript:openPhotoList('<c:out value="${imgGrpupValue.imggroupid}"/>')" ><c:out
+									value="${imgGrpupValue.imggroupname}" escapeXml="false" /></a>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div style="clear: both"></div>
+			<div class="flt" style="width: 100%; margin: 2px; min-height: 40px;">
+				<div class="shareBookmark mgldiv"
+					style="margin: 10px 360px 0px 0px;">
+					<div class="mgldiv">
+						<c:if test="${self==1}">
+							<a href="javascript:deletephotoalbum();"> </a>
+						</c:if>
+					</div>
+				</div>
+
+			</div>
+			<div style="clear: both"></div>
+			<c:if test="${fn:length(visitors)!=0}">
+				<div class="titlebar" style="text-align: right;">
+					<div class="mglsection" style="width: 180px; padding-right: 15px;">
+						</div>
+				</div>
+				<div class="flt" style="width: 100%; max-height: 230px;">
+					<c:forEach items="${visitors}" var="visitorValue"
+						varStatus="status">
+						<div class="persooninfo" style="height: 100px; width: 105px;">
+							<div class="headimg rotate" style="height: 75px; width: 90px;">
+								<a
+									href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">
+									<img
+									src="html/userhead/<c:out value="${visitorValue.headurl}" />"
+									style="width: 75px; height: 75px;">
+								</a>
+							</div>
+							<div class="m1ln" style="margin: 5px; padding-right: 5px;">
+								<a
+									href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">
+									<c:out value="${visitorValue.visitorname}" />
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:if>
+			<div class="titlebar"
+				style="text-align: right; height: 60px; padding-top: 20px;">
+				<div class="mglsection" style="width: 100%; padding-right: 15px;">
+					  ************** 
+					     </div>
+				<div class="mglsection rotate">
+					<script language="javascript" type="text/javascript"
+						src="http://js.users.51.la/17667713.js"></script>
+					<noscript>
+						<a href="http://www.51.la/?17667713" target="_blank"> <img
+							alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;"
+							src="http://img.users.51.la/17667713.asp" style="border: none;" />
+						</a>
+					</noscript>
+				</div>
 			</div>
 		</div>
-		<div class="lmainR ofh" style="text-align: center;">
-		<%@ include file="../website/tail.jsp"%>
-		</div>
-	</form>
-	<div id="addphotoalbum"
-		style="width: 270px; height: 320px; display: none;">
-		<div class="content" style="width: 270px; height: 300px;background: white;padding: 5px;border-radius: 5px;">
-			<form action="addimggroup.do" 
-				id="addphotoalbumform" class="mglForm" method="post"
-				enctype="multipart/form-data" >
-				<div class="label" style="text-align: center;"> 
-					:</div>
-				<div class="inputHolder" style="width: 32px; height: 270px;">
-					<input type="text" name="imggroupname" id="imggroupname"
-						style="-webkit-transform-origin: 10px 20px;" /> <input
-						type="hidden" name="userid" id="userid"
-						value="<c:out value="${user.userid}" />"></input>
-				</div>
-
-				<div class="label" style="text-align: center;">:</div>
-				<div class="inputHolder" style="width: 32px; height: 270px;">
-					<input type="text" name="comm" id="comm"
-						style="-webkit-transform-origin: 10px 20px;" />
-				</div>
-				<div class="label" style="text-align: center;"> 
-					:</div>
-				<div class="inputHolder" style="width: 32px; height: 270px;">
-					<input type="file" name="imgurl" id="imgurl"
-						style="-webkit-transform-origin: 10px 20px;" />
-				</div>
-				<div class="mnlist" style="height: 270px;"></div>
-				<div class="mnlist"
-					style="width: 24px; height: 200px; text-align: center;">
-					<a href="javascript:addphotoalbum();"></a>
-
-				</div>
-			</form>
-		</div>
 	</div>
-
-
-	<!-- 隐藏的div -->
 	<%@ include file="bloghiddendiv.jsp"%>
-	<!-- 隐藏的div -->
+	<%@ include file="logindiv.jsp"%>
 </body>
+<script>
+	// 	var raceModelJson = <c:out value="${raceModelJson}" escapeXml="false" />;
+</script>
 </html>
-<script type="text/javascript" src="img/css/mSheetAutoHeight.js"></script>

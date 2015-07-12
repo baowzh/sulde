@@ -34,8 +34,8 @@ function initPicPlayer(pics, w, h) {
 				+ pics[i].url + '\" /></a>');
 	}
 	// 按钮容器，绝对定位在右下角
-	p.append('<div id=\"picbtnHolder\" style=\"position:absolute;top:' + (535)
-			+ 'px;width:348px;height:20px;z-index:88;\"></div>');
+	p.append('<div id=\"picbtnHolder\" style=\"position:absolute;top:' + (310)
+			+ 'px;width:350px;height:20px;z-index:88;\"></div>');
 	//
 	var btnHolder = $('#picbtnHolder');
 	btnHolder

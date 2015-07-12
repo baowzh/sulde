@@ -25,7 +25,7 @@ var addphotoalbum = function() {
 	var comm = $("#comm").val();
 	var faceimgurl = $("#imgurl").val();
 	if (imggroupname == null || imggroupname == '') {
-		MessageWindow.showMess('     ');
+		MessageWindow.showMess('    ');
 		return;
 	}
 	if (comm == null || comm == '') {
@@ -54,10 +54,10 @@ var deletephotoalbum = function() {
 		}
 	});
 	if (selecteddocid == '') {
-		MessageWindow.showMess('      ');
+		MessageWindow.showMess('      ');
 		return;
 	} else {
-		showConfirmMess("         ", function() {
+		showConfirmMess("         ", function() {
 			if (this.getValue() == true) {
 				delphotoalbum(selecteddocid);
 			}

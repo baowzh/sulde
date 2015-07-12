@@ -1,5 +1,7 @@
 package com.mongolia.website.controller;
 
+import java.io.PrintWriter;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,12 +52,16 @@ public class WechatController {
 		return echostr;
 	}
 
-	@ResponseBody
 	@RequestMapping(value = "/index/{uid}", method = RequestMethod.POST, produces = "application/xml; charset=utf-8")
-	public String wechatPost(HttpServletResponse response,
+	public void wechatPost(HttpServletResponse response,
 			HttpServletRequest reques) throws Exception {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/xml; charset=utf-8");
 		String respMessage = wechatService.coreService(reques);
-		return respMessage;
+		System.out.println("respMessage:" + respMessage);
+		PrintWriter out = response.getWriter();
+		out.print(respMessage);
+		out.close();
 	}
 
 }

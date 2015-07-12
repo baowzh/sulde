@@ -481,5 +481,6 @@ public interface WebResourceManager {
 	 */
 	public List<VisitorValue> getVisitorList(String resourceid,
 			Integer fechtcount) throws Exception;
+	public void  confiremMess(String messid) throws Exception;
 
 }

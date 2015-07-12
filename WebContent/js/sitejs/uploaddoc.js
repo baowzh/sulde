@@ -176,8 +176,8 @@ var insertvideo = function() {
 	 */
 	var element = CKEDITOR.dom.element.createFromHtml(url);
 	CKEDITOR.instances.editor1.insertElement(element);
-	// CKEDITOR.instances.editor1.insertHtml(embed);
-	// }
+   // var cleardiv = '<div style=\"clear: both\"></div>';
+	//CKEDITOR.instances.editor1.insertHtml(cleardiv);
 	$("#addflash").dialog("close");
 }
 /**

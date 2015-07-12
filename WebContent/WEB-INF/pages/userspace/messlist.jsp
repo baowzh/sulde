@@ -113,7 +113,7 @@
 
 			</div>
 			<div class="vpagenav mnlist"
-				style="height: 300px; width: 20px; float: left; padding-top: 0px; padding-bottom: 0px; text-indent: 0px;">
+				style="height: 350px; width: 20px; float: left; padding-top: 0px; padding-bottom: 0px; text-indent: 0px;">
 				<span id="picbtn1"
 					style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&lt;</a>&nbsp;
 				</span>
@@ -147,7 +147,7 @@
 				<span id="picbtn1"
 					style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&gt;</a>&nbsp;
 				</span> (
-				<c:out value="${doccount}" default="0" />
+				<c:out value="${rowcount}" default="0" />
 				)
 			</div>
 		</div>
@@ -197,7 +197,7 @@
 				</c:forEach>
 			</div>
 			<div class="vpagenav mnlist"
-				style="height: 300px; width: 20px; float: left; padding-top: 0px; padding-bottom: 0px; text-indent: 0px;">
+				style="height: 350px; width: 20px; float: left; padding-top: 0px; padding-bottom: 0px; text-indent: 0px;">
 				<span id="picbtn1"
 					style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&lt;</a>&nbsp;
 				</span>
@@ -231,7 +231,7 @@
 				<span id="picbtn1"
 					style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&gt;</a>&nbsp;
 				</span> (
-				<c:out value="${doccount}" default="0" />
+				<c:out value="${sendrowcount}" default="0" />
 				)
 			</div>
 		</div>

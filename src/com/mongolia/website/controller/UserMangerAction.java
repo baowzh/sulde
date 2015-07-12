@@ -777,10 +777,10 @@ public class UserMangerAction {
 			}
 			UserValue uservalue = this.userManager.getmaillogincode(username);
 			String maillogincode = uservalue.getMailloginid();
-			request.getServletContext().setAttribute(maillogincode, username);
-			request.getServletContext().setAttribute(username + "time",
+			request.getSession().getServletContext().setAttribute(maillogincode, username);
+			request.getSession().getServletContext().setAttribute(username + "time",
 					System.currentTimeMillis());
-			request.getServletContext().setAttribute(username, username);
+			request.getSession().getServletContext().setAttribute(username, username);
 			map.put("mailaddress", uservalue.getEmail());
 			map.put("mess", "1");
 		} catch (Exception ex) {
@@ -793,16 +793,16 @@ public class UserMangerAction {
 	@RequestMapping("/loginmail.do")
 	public ModelAndView loginmail(HttpServletRequest request, ModelMap map) {
 		String id = request.getParameter("id");
-		Object username = request.getServletContext().getAttribute(id);
+		Object username = request.getSession().getServletContext().getAttribute(id);
 		if (username == null) {
 			return new ModelAndView("redirect:tologin.do");
 		} else {
-			Long createtime = (Long) request.getServletContext().getAttribute(
+			Long createtime = (Long) request.getSession().getServletContext().getAttribute(
 					username + "time");
 			if (System.currentTimeMillis() - createtime > 2 * 60 * 60 * 1000) {// 超过2小时则不让登录
 				return new ModelAndView("redirect:tologin.do");
 			} else {
-				String username_name = (String) request.getServletContext()
+				String username_name = (String) request.getSession().getServletContext()
 						.getAttribute("" + username);
 				List<UserValue> users = this.userManager.getUsers(null,
 						username_name);

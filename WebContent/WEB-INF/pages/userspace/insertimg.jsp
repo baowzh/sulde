@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <t:font_css type="jquery,easyui,tools"></t:font_css>
+<link href="site/css/index.css" rel="stylesheet" type="text/css" />
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
-<link href="img/css/blog.css" type="text/css" rel="stylesheet" />
 <title>上传图片</title>
 </head>
 <body onload="javascript:insertimg();">

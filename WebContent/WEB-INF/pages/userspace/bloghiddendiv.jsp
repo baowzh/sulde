@@ -1,41 +1,109 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <div id="messdiv" style="display: none">
-	<div class="comment">
+	<div class="comment rotatesection">
 		<form action="addmessage.do" name="addmessageform" id="addmessageform">
-			<div class="mnlist"
-				style="width: 20px; height: 400px; text-align: center;">
+
+			<div class="m1ln"
+				style="height: 20px; width: 400px; text-align: center;">
 				</div>
 			<textarea name="messagecontent" id="messagecontent"
 				style="display: none">								    
 								</textarea>
-			<div class="flt mVsheet commentEdit" contentEditable="true"
-				id="messagediv" style="height: 400px;"></div>
+			<div class="flt mVsheet commentEdit mglcontent"
+				contentEditable="true" id="messagediv"
+				style="width: 420px; height: 200px; border: #CCC solid 1px; border-radius: 6px;"></div>
 			<input type="hidden" name="senduserid" id="senduserid">
-			<div class="m1ln" style="width: 110px; height: 400px">
+			<div class="m1ln" style="height: 110px; width: 400px">
 				<%@ include file="messface.jsp"%>
 			</div>
-			<div class="mnlist"
-				style="width: 20px; height: 400px; text-align: center;">
+			<div class="m1ln"
+				style="height: 20px; width: 400px; text-align: center;">
 				<a
 					href="javascript:sendmessage('<c:out value="${user.userid}" />');"></a>
 			</div>
+
 		</form>
 	</div>
 </div>
 <div id="addfrienddiv" style="display: none; background-color: #fff;">
-	<div class="comment">
+	<div class="comment rotatesection">
 		<form action="addfriend.do" name="addfriendform" id="addfriendform">
-			<div class="flt mVsheet commentEdit" contentEditable="true"
-				id="addfriendmess" style="height: 300px; width: 170px !important"></div>
-			<div class="mnlist" style="text-align: center;"></div>
-			<div class="mnlist" style="text-align: center;">
+			<div class="m1ln" contentEditable="false" id="addfriendmess"
+				style="width: 170px; height: 70px !important"></div>
+			<div class="m1ln" style="text-align: center;"></div>
+			<div class="m1ln" style="text-align: center;">
 				<a
 					href="javascript:sendaddfriendmess('<c:out value="${user.userid}" />');">
 				</a>
 			</div>
 		</form>
 	</div>
+</div>
+<div id="addphotoalbum"
+	style="width: 270px; height: 320px; display: none;">
+	<div class="content rotatesection"
+		style="height: 270px; width: 300px; background: white; padding: 5px; border-radius: 5px;">
+		<form action="addimggroup.do" id="addphotoalbumform" class="mglForm"
+			method="post" enctype="multipart/form-data">
+			<div class="m1ln" style="text-align: center;">  :</div>
+			<div class="m1ln" style="height: 32px; width: 270px;">
+				<input type="text" name="imggroupname" id="imggroupname"
+					style="-webkit-transform-origin: 10px 20px;" /> <input
+					type="hidden" name="userid" id="userid"
+					value="<c:out value="${user.userid}" />"></input>
+			</div>
+
+			<div class="m1ln" style="text-align: center;">  :</div>
+			<div class="m1ln" style="height: 32px; width: 270px;">
+				<input type="text" name="comm" id="comm"
+					style="-webkit-transform-origin: 10px 20px;" />
+			</div>
+			<div class="m1ln" style="text-align: center;"> :</div>
+			<div class="m1ln" style="height: 32px; width: 270px;">
+				<input type="file" name="imgurl" id="imgurl"
+					style="-webkit-transform-origin: 10px 20px;" />
+			</div>
+			<div class="m1ln" style="width: 270px;"></div>
+			<div class="m1ln"
+				style="height: 24px; width: 200px; text-align: center;">
+				<a href="javascript:addphotoalbum();"></a>
+
+			</div>
+		</form>
+	</div>
+</div>
+<div class="content rotatesection" id="updpassdiv"
+	style="padding-top: 8px; display: none; background: white; padding: 5px; border-radius: 5px;">
+	<form class="mglForm" action="#" id="loginform" method="post">
+		<c:if test="${maillogin==0}">
+			<div class="m1ln"> </div>
+			<div class="m1ln" style="height: 32px; width: 270px;">
+				<input name="oldpassword" id="oldpassword" type="password"
+					style="-webkit-transform-origin: 10px 20px;">
+			</div>
+		</c:if>
+		<div class="m1ln">   </div>
+		<div class="m1ln" style="height: 32px; width: 270px;">
+			<input name="password" id="password" type="password"
+				style="-webkit-transform-origin: 10px 20px;">
+		</div>
+		<div class="m1ln">
+			  <a href="javascript:replaceverifycode();"></a> :
+		</div>
+		<div class="m1ln" style="height: 20px;">
+			<img src="verifyCodeServlet" id="varifyimg" width="18" height="100">
+		</div>
+		<div class="m1ln" style="height: 32px; width: 270px;">
+			<input name="validcode" id="varifycode"
+				style="-webkit-transform-origin: 10px 20px;">
+		</div>
+		<div class="m1ln" style="text-align: center; width: 210px;">
+			<a href="javascript:modifypass();">  </a>
+		</div>
+		<input type="hidden" name="maillogin" id="maillogin"
+			value="<c:out value="${maillogin}" />">
+	</form>
 </div>
 <div id="messlist" style="display: none"></div>
 <style>
@@ -61,7 +129,7 @@
 <!-- class="lmainR" -->
 <!-- -webkit-writing-mode: vertical-lr; writing-mode: tb-lr;  -->
 <div id="accordion" style="display: none">
-	<div class="mnlist" style="float: left;"
+	<div class="m1ln rotatesection" style="height: 20px;"
 		onclick="javascript:switchdiv('receivediv','senddiv');">
 		</div>
 	<!--  -->
@@ -72,7 +140,7 @@
 				scrolling="auto" src="getMessage.do?type=1"></iframe>
 		</c:if>
 	</div>
-	<div class="mnlist" style="float: left;"
+	<div class="m1ln rotatesection" style="height: 20px;"
 		onclick="javascript:switchdiv('senddiv','receivediv');">
 		 </div>
 	<div class="  lcell"
@@ -87,8 +155,9 @@
 </div>
 <div class="cardt1" id="userinfo"
 	style="margin: 0px; height: 478px; width: 750px; display: none;">
-	<div class="  lcell" style="width: 600px; height: 470px;">
-		<div class="lcell userinfotab" style="width: 790px; height: 100%;">
+	<div class="  lcell" style="width: 280px; height: 200px;">
+		<div class="lcell userinfotab rotatesection"
+			style="height: 790px; width: 100%;">
 			<table class="m1ln h100">
 
 				<tr>
@@ -96,7 +165,7 @@
 						<div class="m1ln h100">  :</div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.bolgname}" />
 						</div>
 					</td>
@@ -108,7 +177,7 @@
 						<div class="m1ln h100">:</div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.firstname}" />
 						</div>
 					</td>
@@ -129,7 +198,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.birthday}" />
 						</div>
 					</td>
@@ -140,7 +209,7 @@
 						<div class="m1ln h100"> </div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 							<c:choose>
 								<c:when test="${user.sex==1}">
 									<input type="radio" name="sex" checked="true" id="sex"></input>
@@ -167,7 +236,7 @@
 						<div class="m1ln h100"> </div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.unit}" />
 						</div>
 					</td>
@@ -178,7 +247,7 @@
 						<div class="m1ln h100"> </div>
 					</td>
 					<td style="height: 90px">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.provincename}" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<c:out value="${user.hsienname}" />
@@ -192,7 +261,7 @@
 						<div class="m1ln h100">   </div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 
 							<c:out value="${user.nowprovincename}" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -207,7 +276,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.phone}" />
 						</div>
 					</td>
@@ -218,7 +287,7 @@
 						<div class="m1ln h100">  (QQ) </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.qq}" />
 						</div>
 					</td>
@@ -228,7 +297,7 @@
 						<div class="m1ln h100"> (Email) </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.email}" />
 						</div>
 					</td>
@@ -238,7 +307,7 @@
 						<div class="m1ln h100"> </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.hope}" />
 						</div>
 					</td>
@@ -248,7 +317,7 @@
 						<div class="m1ln h100"> </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.belief}" />
 						</div>
 					</td>
@@ -259,7 +328,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.idol}" />
 						</div>
 					</td>
@@ -270,7 +339,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.maxim}" />
 						</div>
 					</td>
@@ -280,7 +349,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.music}" />
 						</div>
 					</td>
@@ -290,7 +359,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td>
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.book}" />
 						</div>
 					</td>
@@ -300,7 +369,7 @@
 						<div class="m1ln h100">  </div>
 					</td>
 					<td colspan="3">
-						<div class="mfl">
+						<div class="m1ln">
 							<c:out value="${user.singer}" />
 						</div>
 					</td>
@@ -310,7 +379,7 @@
 	</div>
 </div>
 <div class="content" id="joinracediv"
-	style="padding-left: 8px; display: none; background: white; padding: 5px; border-radius: 5px;z-index:9999;position:relative;">
+	style="padding-left: 8px; display: none; background: white; padding: 5px; border-radius: 5px; z-index: 9999; position: relative;">
 	<form class="mglForm" action="#" id="joinrace" method="post">
 
 		<div class="inputHolder" style="width: 32px; height: 280px;">

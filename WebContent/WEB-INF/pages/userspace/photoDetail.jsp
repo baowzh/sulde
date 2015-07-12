@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="t" uri="/css-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title> </title>
+<title><c:out value="${documentValue.doctitle}" /></title>
 <t:font_css type="jquery,easyui,tools"></t:font_css>
-<link href="site/css/index.css" rel="stylesheet" type="text/css" />
-<link href="site/css/main.css" rel="stylesheet" type="text/css" />
-<link href="img/css/main.css" rel="stylesheet" type="text/css" />
-<link href="img/css/blog.css" rel="stylesheet" type="text/css" />
+<link href="css/blog.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/sitejs/viewdoc.js"></script>
+<link href="site/css/waplist.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/sitejs/userdocdetail.js"></script>
+<script type="text/javascript" src="js/sitejs/race.js"></script>
 <script type="text/javascript" src="js/sitejs/userhomeindex.js"></script>
 <script type="text/javascript" src="js/sitejs/userlogin.js"></script>
 <script type="text/javascript" src="js/sitejs/changevalidcode.js"></script>
@@ -24,71 +24,65 @@
 <link href="js/sitejs/emotion/emoticon.css" type="text/css"
 	rel="stylesheet" />
 <script type="text/javascript" src="js/util/js/messageWindow.js"></script>
-<link rel="stylesheet"
-	href="js/jqui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
-<script src="js/jqui/js/jquery-ui-1.10.3.custom.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="plugins/jquery.jqGrid-4.4.3/css/jquery-ui.css" media="screen" />
+<script src="plugins/jquery.jqGrid-4.4.3/js/jquery-ui.min.js"
+	type="text/javascript"></script>
 <script src="js/messagebox/jquery.msgbox.js"></script>
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditorrot/ckeditor.js"></script>
 <script src="js/sitejs/galleria-1.4.2.min.js"></script>
-<style>
-.content {
-	color: #777;
-	font: 12px/1.4 "helvetica neue", arial, sans-serif;
-	width: 510px;
-	margin: 0px auto;
-}
-
-.clear {
-	clear: both
-}
-</style>
+<script type="text/javascript">
+	window.onload = function() {
+		function setheight() {
+			var sidebar = document.getElementById('myDIV');
+			sidebar.style.width = document.documentElement.clientHeight - 0
+					+ 'px';
+		}
+		setheight();
+		onresize = setheight;
+	};
+</script>
 </head>
-<body style="background-color: #fff; scroll: none;">
-	<div id="viewhead" class="viewhead"
-		style="height: 30px; background-color: #dfa64f"></div>
-	<div id="condiv">
-		<div class="mln"
-			style="float: left; width: 5px; height: 100%; background-color: #dfa64f;">
-			<!-- 			#f2967b -->
-		</div>
-			<div class="mln"
-			style="float: left; width: 109px; height: 100%; font-size: 19px; background-color: #dfa64f; background: url(site/img/phonehead.jpg) center top no-repeat;">
-			<br> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-			     <br> <br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			     <br>
-		</div>
-		<div class="mln"
-			style="width: 30px; padding-left: 10px; float: left; background-color: #dfa64f; height: 100%;">
-			&nbsp;&nbsp;&nbsp;&nbsp;<a href="tologin.do"> &nbsp;
-				&nbsp;</a> <a href="index.do"> &nbsp; &nbsp; </a> <a
-				href="gouserindex.do?userid=<c:out value="${user.userid}" />">
-				  &nbsp; &nbsp;</a> <a href="registe.do"> </a>
-			<c:if test="${self==0&&islogin==1}">
-				<a href="gouserindex.do?userid=<c:out value="${loginuserid}" />">&nbsp;
-					&nbsp;  &nbsp; &nbsp;</a>
-				<!-- 				<a></a> -->
-			</c:if>
-		</div>
-		<div class="flt" style="top: 0px; padding: 0px; height: 100%;"
-			id="nameCard">
-			<div class=" flt nameCard nameCardC"
-				style="border: 0px; background: #dfa64f; height: 100%;">
-				<div class="flt">
-					<div class="avatar">
-						<img src="html/userhead/<c:out value="${user.headurl}" />"
-							width="334" height="446" />
+<body onmousewheel="wheel(event)"
+	style="background-color: #fff; scroll: none; height: 780px;">
+	<div class="rotatesection" style="width: 630px;" id="myDIV">
+		<div class="blogcon">
+			<div class="titlebar">
+				<div class="mglsection" style="width: 50px; padding-right: 15px;">
+					<a href="tologin.do"></a>
+				</div>
+				<div class="mglsection" style="width: 90px;">
+					<a href="index.do"> </a>
+				</div>
+				<div class="mglsection" style="width: 90px;">
+					<a href="gouserindex.do?userid=<c:out value="${user.userid}" />"> 
+						 </a>
+				</div>
+				<div class="mglsection" style="width: 80px;">
+					<a href="registe.do"></a>
+				</div>
+				<div class="mglsection" style="width: 100px;">
+					<a href="gouserindex.do?userid=<c:out value="${loginuserid}" />"> 
+						 </a>
+				</div>
+				<div class="mglsection" style="width: 100px;">
+					<a href="toadddoc.do">  </a>
+				</div>
+			</div>
+			<!--  -->
+			<div class="flt" style="width: 100%; height: 160px;">
+				<div class="persooninfo" style="margin: 6px;">
+					<div class="headimg rotate">
+						<img src="html/userhead/<c:out value="${user.headurl}" />" />
 					</div>
-					<div class="m1ln name"
-						style="padding-top: 30px; color: #fff; font-size: 23px;">
+					<div class="m1ln" style="padding-right: 20px;">
 						<c:out value="${user.artname}" />
 					</div>
 				</div>
-				<div class="cbt"></div>
-				<div class=" "
-					style="padding-top: 10px; width: 180px; margin: 0 auto; color: #fff;">
+				<div class="flt"
+					style="padding-top: 5px; padding-right: 10px; height: 130px; margin: 0 auto; float: right;">
 					<div class="m1ln">
 						 
 						<c:choose>
@@ -127,36 +121,72 @@
 						    
 						<c:out value="${user.logindatestr}" default="" />
 					</div>
+					<div class="m1ln">
+						<a
+							href="javascript:writemessage('<c:out value="${user.userid}" />');">
+							&nbsp;&nbsp;&nbsp;</a>
+						<c:if test="${self==1}">
+							<a href="javascript:receivemessage();">(<span
+								style="color: #f00;"><c:out value="${messageCount}" /></span>)
+							</a>
+						</c:if>
+					</div>
+					<div class="m1ln">
+						<c:if test="${self==1}">
+							<a href="doedituserinifo.do">  &nbsp;&nbsp;&nbsp; </a>
+							<a href="javascript:showpassdialog();">   </a>
+						</c:if>
+						<c:if test="${self==0}">
+							<a
+								href="javascript:showuserinfo('<c:out value="${user.userid}" />');">
+								 &nbsp;&nbsp;&nbsp; </a>
+						</c:if>
+
+
+						<c:if test="${self==0}">
+							<a href="javascript:openaddfrienddl();"> </a>
+
+						</c:if>
+					</div>
 				</div>
 			</div>
-		</div>
-		<!--  -->
-		<div class="mln" style="float: left; padding-top: 30px; height: 95%;">
-			<div id="doctitle" class="msheet titlediv"
-				style="line-height: 100%; margin: 20px;">
-				<c:out value="${documentValue.doctitle}" />
+			<div style="clear: both"></div>
+			<div class="titlebar" style="text-align: right;">
+				<div class="mglsection" style="width: 180px; padding-right: 15px;">
+					<a href="friendlist.do?userid=<c:out value="${user.userid}" />">
+						 :</a>
+				</div>
 			</div>
-		</div>
-		<div class="msheet shareBookmark" style="float: left; height: 300px;margin-top:0px;padding-top:150px;">
-			<div style="margin: 0px 20px 20px 20px;">
-				   <br> <a href="javascript:sharedocument()">
-					</a> <span id="sharecount"><c:out
-						value="${documentValue.sharecount}" default="0" /></span>   <a
-					href="javascript:markdocument()">  </a> <span
-					id="markcount"><c:out value="${documentValue.markcount}"
-						default="0" /></span>  <br />   <span id="readcount"><c:out
-						value="${documentValue.readcount}" default="0" /></span> <br />
-				  
-				<c:out value="${documentValue.docRelTimeStr}" />
-				<br /> <a href="#comment"> </a><span id="commentCount">
-					<c:out value="${documentValue.commentCount}" default="0" />
-				</span> 
+			<div class="flt"
+				style="width: 100%; min-height: 230px; height: auto !important;">
+				<c:forEach items="${fvalues}" var="friendValue" varStatus="status">
+					<div class="persooninfo" style="height: 100px; width: 105px;">
+						<div class="headimg rotate" style="height: 75px; width: 90px;">
+							<a
+								href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />">
+								<img
+								src="html/userhead/<c:out value="${friendValue.headurl}" />"
+								style="width: 75px; height: 75px;">
+							</a>
+						</div>
+						<div class="m1ln" style="margin: 5px; padding-right: 5px;">
+							<a
+								href="gouserindex.do?userid=<c:out value="${friendValue.friendid}" />">
+								<c:out value="${friendValue.friendname}" />
+							</a>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
-		</div>
-		<div class="msheet" style="padding: 10px; float: left; height: 95%;">
-			<div class="content"
-				style="-webkit-writing-mode: horizontal-tb; writing-mode: lr-tb;">
-				<div id="galleria" style="width: 500px; height: 410px;">
+			<div style="clear: both"></div>
+			<div class="titlebar" style="text-align: right;">
+				<div class="mglsection" style="width: 180px; padding-right: 15px;">
+					<c:out value="${documentValue.doctitle}" />
+				</div>
+			</div>
+			<div class="flt rerotatesection"
+				style="width: 100%; min-height: 230px;">
+				<div id="galleria" style="height: 500px; width: 410px;">
 
 					<c:forEach items="${imgs}" var="imgValue" varStatus="status">
 						<a href="html/img/<c:out value="${imgValue.imgid}"/>.jpg"> <img
@@ -190,154 +220,158 @@
 					id="crtime<c:out value="${status.index}"/>"
 					value="<c:out value="${imgValue.crtimestr}"/>">
 			</c:forEach>
-		</div>
-		<div class="msheet shareBookmark" style="float: left; height: 390px;margin-top:0px;padding-top:150px;">
-			<div style="margin: 0px 20px 20px 20px;">
-				<a href="javascript:sharedocument()"> </a> <span
-					id="sharecount"><c:out value="${documentValue.sharecount}"
-						default="0" /></span>   <a href="javascript:markdocument()">
-					 </a> <span id="markcount"><c:out
-						value="${documentValue.markcount}" default="0" /></span>  <br />
-				  <span id="readcount"><c:out
-						value="${documentValue.readcount}" default="0" /></span> <br />
-				  
-				<c:out value="${documentValue.docRelTimeStr}" />
-				<br /> <a href="#comment"> </a><span id="commentCount">
-					<c:out value="${documentValue.commentCount}" default="0" />
-				</span> 
+			<div class="titlebar" style="text-align: right;">
+				<div class="mglsection" style="width: 180px; padding-right: 15px;">
+					 </div>
 			</div>
-		</div>
-		<div class="mnlist"
-			style="background-color: #dfa64f;; width: 30px; color: #fff; padding-left: 10px; height: 100%;"></div>
-
-		<div class=" flt"
-			style="float: left; width: 270px; height: 98%; margin: 0px 8px 8px 8px; padding: 5px; background: white; border: solid 1px #dfa64f;">
-
-			<div class="readerl">
+			<div class="flt"
+				style="width: 100%; min-height: 230px; height: auto !important;">
 				<c:forEach items="${visitors}" var="visitorValue" varStatus="status">
-								<div class="i" style="float: left;">
-<!-- 					class="frt" -->
-						<div  style="width: 90px;height:85">
-							<div style="width:60px;height:85px;float:left;">
-							 <img src="html/userhead/<c:out value="${visitorValue.headurl}" />"
-							width="60" height="85" />
-							</div>
-							<div class="m1ln"
-								style="padding-top: 8px; overflow: hidden; height: 85px;width:22px;float:left;">
-								<a
-									href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">
-									<c:out value="${visitorValue.visitorname}" />
-								</a>
-							</div>
+					<div class="persooninfo" style="height: 100px; width: 105px;">
+						<div class="headimg rotate" style="height: 75px; width: 90px;">
+							<a
+								href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">
+								<img
+								src="html/userhead/<c:out value="${visitorValue.headurl}" />"
+								style="width: 75px; height: 75px;">
+							</a>
 						</div>
-						<div class="time" style="width:70px;">
-							<font size="1px;"><c:out
-									value="${visitorValue.visitdatestr}" /></font>
+						<div class="m1ln" style="margin: 5px; padding-right: 5px;">
+							<a
+								href="gouserindex.do?userid=<c:out value="${visitorValue.visitorid}" />">
+								<c:out value="${visitorValue.visitorname}" />
+							</a>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			<div class="titlebar" style="text-align: right;">
+				<div class="mglsection" style="width: 180px; padding-right: 15px;">
+					  </div>
+			</div>
+			<c:if test="${fn:length(comments)!=0}">
+				<div style="clear: both"></div>
+				<div class="flt"
+					style="width: 98%; min-height: 230px; height: auto !important;">
+					<c:forEach items="${comments}" var="messageValue"
+						varStatus="status">
+						<div class="postSheet" style="width: 600px;">
+							<div class="posterInf" style="width: 590px;">
+								<div class="avtThumb flt" style="float: right;">
+									<img
+										src="html/userhead/<c:out value="${messageValue.messagesenderurl}" />"
+										width="30" height="40" />
+								</div>
+								<div class="inf flt" style="float: right;">
+									<div class="m1ln" style="color: #fff;">
+										<a
+											href="gouserindex.do?userid=<c:out value="${messageValue.messagesenderid}" />"
+											style="color: #fff;"><c:out
+												value="${messageValue.messagesendername}" /> </a>
+									</div>
+									<div class="m1ln" style="color: #fff;">
 
-		</div>
-
-		<div class="mnlist"
-			style="background-color: #dfa64f;; width: 30px; color: #fff; padding-left: 10px; height: 100%;">
-			 </div>
-		<div class="msheet" id="commentlist"
-			style="float: left; overflow: auto;; padding-top: 10px; height: 100%;">
-			<c:forEach items="${comments}" var="messageValue" varStatus="status">
-				<div class="postSheet" style="float: left; height: 540px;">
-					<div class="posterInf" style="float: left; height: 540px;">
-						<div class="avtThumb flt">
-							<img
-								src="html/userhead/<c:out value="${messageValue.messagesenderurl}" />"
-								width="30" height="40" />
-						</div>
-						<div class="inf flt">
-							<div class="row">
-								<a
-									href="gouserindex.do?userid=<c:out value="${messageValue.messagesenderid}" />"><c:out
-										value="${messageValue.messagesendername}" /> </a><br /> <br />
-								<c:out value="${messageValue.sendtimestr}" />
+										<c:out value="${messageValue.sendtimestr}" />
+									</div>
+								</div>
 							</div>
-							<div class="row"></div>
-						</div>
-					</div>
-					<p>
-						<c:if test="${messageValue.hidden==0}">
-							<c:out value="${messageValue.contenthtml}" escapeXml="false" />
-						</c:if>
-						<c:if test="${messageValue.hidden==1}">
-												        
-												</c:if>
+							<p>
+								<c:if test="${messageValue.hidden==0}">
+									<div class="blogarea mglcontent"
+										style="line-height: 25px; border-radius: 10px 10px 10px 10px;">
+										<c:out value="${messageValue.contenthtml}" escapeXml="false" />
+									</div>
+								</c:if>
+								<c:if test="${messageValue.hidden==1}">
+									<div class="blogarea mglcontent"
+										style="line-height: 25px; border-radius: 10px 10px 10px 10px;">
+										      </div>
+								</c:if>
+							</p>
+							<c:if test="${messageValue.showdel==1}">
+								<div class="m1ln" style="color: #fff; margin-right: 210px;">
 
-					</p>
-					<c:if test="${messageValue.showdel==1}">
-						<p>
-							<a
-								href="javascript:delcomment('<c:out value="${messageValue.messageid}" />');"></a><a
-								href="javascript:writemess('<c:out value="${messageValue.messagesenderid}" />','
+									<a
+										href="javascript:delcomment('<c:out value="${messageValue.messageid}" />');"></a><a
+										href="javascript:writemess('<c:out value="${messageValue.messagesenderid}" />','
 									<c:out value="${messageValue.messagesendername}" />');">&nbsp;&nbsp;&nbsp;&nbsp;
-								</a>
-						</p>
-					</c:if>
+										</a>
+								</div>
+
+							</c:if>
+						</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
-		</div>
-		<nobr>
+			</c:if>
+			<div style="clear: both"></div>
 			<form action="addCommentOnResource.do" name="commentform"
 				id="commentform">
 				<div class="comment"
-					style="display: inline; width: 260px; float: left; padding: 20px;"
+					style="display: inline; height: 260px; padding: 20px; -webkit-transform-origin: right top; -webkit-transform: translate(-100%, 0px) rotate(270deg);"
 					id="commentcontainer">
 					<a name="comment"></a>
-
-
 					<textarea id="editor1" name="commentdiv" class="ckeditor"
-						style="width: 80px; height: 100px;"></textarea>
+						style="height: 80px; width: 100px;"></textarea>
 					<input type="hidden" name="agentkind" id="agentkind"
 						value="<c:out value="${agentkind}" />"> <input
 						type="hidden" name="userid" id="userid"> <input
 						type="hidden" name="doctype" id="doctype" value="1"> <input
 						type="hidden" name="docid" id="docid"
 						value="<c:out value="${documentValue.docid}" />">
-
 				</div>
-				<div style="display: block; float: left; padding-top: 20px;width: 50px;">
-					<div class="commoper">
-						<div class="mnlist"
-							style="width: 50px; height: 210px; padding-left: 10px;">
-							<a href="javascript:addcomment(1,0);" style="height: 80px;">
+				<div style="display: block; float: right; height: 50px;">
+					<div class="commoper" style="height: 40px; width: 100%">
+						<div class="m1ln"
+							style="height: 50px; width: 240px; padding-top: 10px; float: right;">
+							<a href="JavaScript:void(0)" id="message_face"
+								style="display: block; float: right;"> <img
+								src="img/pl_bq.png" />
+							</a> 
+							<!--  <a href="javascript:replaceverifycode();"
+								style="display: block; float: right; width: 80px; height: 30px;">
+								<img src="verifyCodeServlet" id="varifyimg" />
+							</a>&nbsp;&nbsp;
+							
+							<c:if test="${agentkind==1}">
+								<input type="text" name="validcode" id="validcode"
+									style="width: 100px; height: 20px;" />
+
+							</c:if>
+							<c:if test="${agentkind==0}">
+								<input type="text" name="validcode" id="validcode"
+									style="width: 100px; height: 20px;" />
+							</c:if>
+							-->
+						</div>
+						<div class="m1ln"
+							style="height: 40px; width: 150px; padding-top: 10px; float: right;">
+							<a href="javascript:addcomment(1,0);" style="width: 80px;">
 								&nbsp;  </a>&nbsp; <a href="javascript:addcomment(1,1);">
 							</a>
 						</div>
-						<a href="JavaScript:void(0)" id="message_face"><img
-							src="img/pl_bq.png" /></a> <a href="javascript:replaceverifycode();"><img
-							src="verifyCodeServlet" id="varifyimg" width="18" height="90" /></a>&nbsp;&nbsp;
-
-						<c:if test="${agentkind==1}">
-							<!-- 谷歌浏览器 -->
-							<input type="text" name="validcode" id="validcode"
-								style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; height: 15px; width: 60px; -webkit-transform: rotate(90deg); -webkit-transform-origin: 10px 10px;" />
-
-						</c:if>
-						<c:if test="${agentkind==0}">
-							<!-- 谷歌浏览器 -->
-							<input type="text" name="validcode" id="validcode"
-								style="-webkit-writing-mode: vertical-lr; writing-mode: tb-lr; height: 60px; width: 18px;" />
-						</c:if>
 						&nbsp;&nbsp;
-
 					</div>
 				</div>
 			</form>
-		</nobr>
-		<div class="mln"
-			style="float: right; width: 30px; height: 100%; background-color: #dfa64f;color:#fff;">
+			<div style="clear: both"></div>
+			<div class="titlebar"
+				style="text-align: right; height: 60px; padding-top: 20px;">
+				<div class="mglsection" style="width: 100%; padding-right: 15px;">
+					  ************** 
+					     </div>
+				<div class="mglsection rotate">
+					<script language="javascript" type="text/javascript"
+						src="http://js.users.51.la/17667713.js"></script>
+					<noscript>
+						<a href="http://www.51.la/?17667713" target="_blank"> <img
+							alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;"
+							src="http://img.users.51.la/17667713.asp" style="border: none;" />
+						</a>
+					</noscript>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div id="viewhead" class="viewhead"
-		style="height: 30px; background-color: #dfa64f"></div>
 	<%@ include file="bloghiddendiv.jsp"%>
 	<%@ include file="logindiv.jsp"%>
 </body>

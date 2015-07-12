@@ -8,11 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Blog Home</title>
 <t:font_css type="jquery,easyui,tools"></t:font_css>
-<link href="img/css/main.css" type="text/css" rel="stylesheet" />
+<link href="css/main.css" type="text/css" rel="stylesheet" />
 <link href="img/css/listpages.css" type="text/css" rel="stylesheet" />
 <link href="img/css/blog.css" type="text/css" rel="stylesheet" />
 <link href="img/css/createDoc.css" type="text/css" rel="stylesheet" />
-<!--<script type="text/javascript" src="js/jqGrid/js/jquery-1.9.1.js"></script>-->
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="js/jqGrid/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/sitejs/uploaddoc.js"></script>
@@ -50,20 +49,43 @@
 .cke_button__img_label {
 	display: inline !important;
 }
+.cke_editable {
+writing-mode: tb-lr;
+	-webkit-writing-mode: vertical-lr;
+	-webkit-text-orientation: sideways-right;
+	
+	font-family: "MenksoftQagan";
+	
+	height: 500px;
+	
+	color: #333;
+	
+	background-color: #fff;
+	margin: 20px;
+}
+@font-face {
+	font-family: "MenksoftQagan";
+	src: url(font/MenksoftQagan_cn.ttf);
+}
 </style>
 </head>
 <body>
 	<form id="upddocform" action="updatedoc.do" method="post">
-		<%@ include file="bloghead.jsp"%>
+		<div class="lmainR ofh" style="text-align: center; height: 64px;">
+			<img src="img/logo.png" width="980" />
+		</div>
+		<div class="lmainR ofh" style="text-align: center;">
+			<%@ include file="bloghead.jsp"%>
+		</div>
 		<div class="lmainR  ">
-			<div class="roundCornerFrame" style="width: 1000px; height: 600px; margin: 0px;">
+			<div class="roundCornerFrame">
 				<div class="content" id="contentdiv">
 
 					<div class="flt"
 						style="width: 90px; height: 600px; background: #def">
 						<div class="label">  </div>
 						<div class="label">   :</div>
-						<div class="label">   :</div>
+						<div class="label" style="height:150px;font-size:15px;">  (用汉子写微信转发使用):</div>
 						<c:if test="${agentkind==1}">
 							<div class="inputHolder">
 								<input name="doctitle" id="doctitle" class="title"
@@ -121,7 +143,7 @@
 						</div>
 						<div>
 							<div class="inputHolder" style="width: 15px;">
-								<a href="javascript:checkAndSubmit();"></a> <a
+								<a href="javascript:checkAndSubmit();"></a> <a
 									href="javascript:openemfacewindow"></a>
 
 							</div>
@@ -153,7 +175,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="lmainR" style="text-align: center;">
+		<div class="lmainR ofh" style="text-align: center;">
 			<div class="tailCard">
 				<div class="msheet" style="height: 100px; width: 800px;">
 					<%@ include file="../website/tail.jsp"%>
@@ -175,7 +197,7 @@
 			return;
 		}
 		if (docabstract == null || docabstract == '') {
-			MessageWindow.showMess('        ');
+			MessageWindow.showMess('    ');
 			return;
 		}
 		if (docchannel == null || docchannel == '') {

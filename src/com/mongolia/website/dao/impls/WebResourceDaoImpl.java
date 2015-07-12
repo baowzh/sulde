@@ -473,6 +473,7 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 			queryParams.put("receiveid", desid);
 			// queryParams.put("messtype", StaticConstants.MESS_TYPE_RECEIVE);
 			queryParams.put("messtype", "1,2,4");
+			queryParams.put("received", 0);
 		} else {
 			queryParams.put("messagesenderid", desid);
 			queryParams.put("messtype", "2,4");
@@ -506,6 +507,7 @@ public class WebResourceDaoImpl extends BaseDaoiBatis implements WebResourceDao 
 			pagecount = pagecount + 1;
 		}
 		messpage.setPagecount(pagecount);
+		messpage.setRowcount(""+rocount);
 		return messpage;
 	}
 

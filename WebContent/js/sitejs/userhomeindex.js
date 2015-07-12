@@ -54,14 +54,78 @@ var openpage = function(index, currentuserid, type, pagetype, neebarlocation) {
 						if (type == 1) {
 
 							if (pagetype == 1) {
+								// 一片文章
+								var cont_boxdiv = $('<div></div>').addClass(
+										'cont_box');
+								// 标题
+								var doctitlediv = $('<div></div>').addClass(
+										'title mglcontent');
+								doctitlediv.text(data.doclist[i].doctitle);
+								cont_boxdiv.append(doctitlediv);
+								// 相关信息
+								var sharediv = $('<div></div>').addClass(
+										'shareBookmark mgldiv');
+								cont_boxdiv.append(sharediv);
+								// 相关信息
+								var shareBookmarkdiv = $('<div></div>')
+										.addClass('mgldiv');
+								shareBookmarkdiv.css('margin-top', 0);
+								shareBookmarkdiv.css('margin-right', 20);
+								shareBookmarkdiv.css('margin-bottom', 20);
+								shareBookmarkdiv.css('margin-left', 20);
+								shareBookmarkdiv.append(' '
+										+ data.doclist[i].chnaname + '<br>');
+								var sharedoca = $('<a></a>').prop('href',
+										'javascript:sharedocument()').text(
+										'');
+								shareBookmarkdiv.append(sharedoca);
+								shareBookmarkdiv.append(''
+										+ data.doclist[i].sharecount + ' ');
+								var marka = $('<a></a>').prop('href',
+										'javascript:markdocument()').text(
+										'');
+								shareBookmarkdiv.append(marka);
+								shareBookmarkdiv.append(''
+										+ data.doclist[i].markcount + ' <br>');
+								shareBookmarkdiv.append('  '
+										+ data.doclist[i].readcount + '<br>');
+								shareBookmarkdiv.append('   '
+										+ data.doclist[i].docRelTimeStr
+										+ '<br>');
+								shareBookmarkdiv.append($('<a></a>').prop(
+										'href', '#comment').text(''));
+								shareBookmarkdiv.append(''
+										+ data.doclist[i].commentCount + '');
+								sharediv.append(shareBookmarkdiv);
+								// 摘要
+								var mglcontent = $('<div></div>').addClass(
+										'blogarea mglcontent').append(
+										data.doclist[i].htmlabc);
+
+								// 打开
+								var opendiv = $('<div></div>').addClass(
+										'shareBookmark mgldiv');
+								mglcontent.append(opendiv);
+								cont_boxdiv.append(mglcontent);
+								opendiv.css('margin-top', 10);
+								opendiv.css('margin-right', 360);
+								opendiv.css('margin-bottom', 0);
+								opendiv.css('margin-left', 0);
+								opendiv
+										.append($('<div></div>')
+												.addClass('mgldiv')
+												.append(
+														$('<a></a>')
+																.prop(
+																		'href',
+																		'getuserdocdetail.do?docid='
+																				+ data.doclist[i].docid)
+																.text(
+																		'     ')));
 								htmlstrr = htmlstrr
-										+ '<div class=\"m1ln\"><a><img src="site/img/qig_1_v.png"></a>&nbsp;&nbsp;'
-										+ '<a '
-										+ 'href=\"getuserdocdetail.do?docid='
-										+ data.doclist[i].docid + '&pageindex='
-										+ index + '\">'
-										+ data.doclist[i].doctitle
-										+ '</a>&nbsp;' + '</div>';
+										+ '<div class="cont_box">'
+										+ cont_boxdiv.html()
+										+ '</div><div style="clear: both"></div>';
 							} else {
 								htmlstrr = htmlstrr
 										+ '<div class=\"m1ln\"><a><img src="img/dot.gif"></a>'
@@ -73,26 +137,49 @@ var openpage = function(index, currentuserid, type, pagetype, neebarlocation) {
 							}
 
 						} else if (type == 2) {
-							htmlstrr = htmlstrr
-									+ '<div class=\"sharenwsl1\"><div class="title" style="height:380px;">'
-									+ '<a '
-									+ 'href=\"getuserdocdetail.do?docid='
-									+ data.doclist[i].docid
-									+ '\">'
-									+ data.doclist[i].doctitle
-									+ '</a>'
-									+ '</div><div class=\"author\"><a href=\"gouserindex.do?userid='
-									+ data.doclist[i].userid + '\">'
-									+ data.doclist[i].docauthor
-									+ '</a></div></div>';
-
+							var listdiv = $('<div></div>');
+							var dotimgdiv = $('<div></div>').addClass('"m1ln"');
+							dotimgdiv.css({
+								"width" : "10px",
+								"height" : "10px",
+								"float" : "right",
+								" padding-top" : 5
+							});
+							dotimgdiv.append($('img').prop('src',
+									'site/img/qig_1_v.png'))
+							listdiv.append(dotimgdiv);
+							// 标题
+							var m1lndiv = $('<div></div>').addClass('m1ln');
+							m1lndiv.css({
+								"width" : "480px",
+								"float" : "right"
+							});
+							m1lndiv.append($('<a></a>').prop(
+									'href',
+									'getuserdocdetail.do?docid='
+											+ data.doclist[i].docid).text(
+									data.doclist[i].doctitle));
+							listdiv.append(m1lndiv);
+							var authdiv = $('<div></div>').addClass('m1ln');
+							authdiv.css({
+								"width" : " 100px",
+								" float" : "right"
+							});
+							authdiv.append($('<a></a>').prop(
+									'href',
+									'gouserindex.do?userid='
+											+ data.doclist[i].userid).text(
+									data.doclist[i].docauthor));
+							listdiv.append(authdiv);
+							htmlstrr = htmlstrr + '<div class="sharenwsl1">'
+									+ listdiv.html() + '</div>';
 						}
-
 					}
 					if (type == 1) {
-						$(".artclList:eq(0)").html(htmlstrr);
+						$("#doclist").html(htmlstrr);
+						setmglconimgWidht();
 					} else if (type == 2) {
-						$(".artclList:eq(1)").html(htmlstrr);
+						// $("#sharedoclist").html(htmlstrr);
 					} else {
 
 					}
@@ -101,7 +188,7 @@ var openpage = function(index, currentuserid, type, pagetype, neebarlocation) {
 						// 设置当前 连接的
 					} else if (type == 2) {
 						// 设置当前 连接的
-						$("#sharedoclist").html(data.pagingstr);
+						// $("#sharedoclist").html(data.pagingstr);
 					}
 
 				}
@@ -326,11 +413,16 @@ var sendaddfriendmess = function(visiteduserid) {
 
 };
 var delfriend = function() {
-	showConfirmMess("      ", function() {
-		if (this.getValue() == true) {
-			delfriend();
-		}
-	});
+	var ids = $("[name=selectedradio]").filter(':checked');
+	if (ids.length > 0) {
+		showConfirmMess("      ", function() {
+			if (this.getValue() == true) {
+				delfriend();
+			}
+		});
+	}else{
+		MessageWindow.showMess('    ');
+	}
 
 }
 var deletefriend = function() {
@@ -486,4 +578,85 @@ var modifypass = function() {
 				}
 			});
 };
+$(document).ready(function() {
+	$('.rotate img').each(function(i, val) {
+		var distance = val.clientHeight - val.clientWidth;
+		if (distance != 0 && distance > 0) {
+			$(val).css('width', val.clientWidth + distance);
+		}
+	});
+	var availWidth = $(window).height();
+	var availheight = $(window).width();
+	$('body').css('height', availWidth);
+	$('#myDIV').css('width', availWidth - 10);
+	$('#myDIV').css('min-height', availheight);
+	$('#blogcon').css('min-height', availheight);
+	//
+	/*
+	 * $("#message_face").jqfaceedit({ txtAreaObj : $("#commentdiv"),
+	 * containerObj : $('#commentcontainer'), top : 25, right : -27 });
+	 */
+});
+var setmglconimgWidht = function() {
 
+	$(".mglcontent img").each(
+			function() {
+				// $(this).addClass("rotateimg");
+				var height = this.height;
+				var width = this.width;
+				if (height == undefined || height == null) {
+					height = this.clientHeight;
+				}
+				if (width == undefined || width == null) {
+					width = this.clientWidth;
+				}
+				$(this).attr('height', height);
+				$(this).attr('width', width);
+				if (width - height > 0) {
+					$(this).after(
+							'<div style="height:' + (width - height)
+									+ 'px;"></div>');
+				}
+
+			});
+	$(".mglcontent iframe").each(
+			function() {
+				// $(this).addClass("rotateimg");
+				var height = this.height;
+				var width = this.width;
+				if (height == undefined || height == null) {
+					height = this.clientHeight;
+				}
+				if (width == undefined || width == null) {
+					width = this.clientWidth;
+				}
+				$(this).attr('height', height);
+				$(this).attr('width', width);
+				if (width - height > 0) {
+					$(this).after(
+							'<div style="height:' + (width - height)
+									+ 'px;"></div>');
+				}
+
+			});
+	$(".mglcontent embed").each(
+			function() {
+				// $(this).addClass("rotateimg");
+				var height = this.height;
+				var width = this.width;
+				if (height == undefined || height == null) {
+					height = this.clientHeight;
+				}
+				if (width == undefined || width == null) {
+					width = this.clientWidth;
+				}
+				$(this).attr('height', height);
+				$(this).attr('width', width);
+				if (width - height - 0 > 0) {
+					$(this).after(
+							'<div style="height:' + (width - height)
+									+ 'px;"></div>');
+				}
+
+			});
+};

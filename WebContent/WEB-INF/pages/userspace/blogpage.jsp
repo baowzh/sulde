@@ -115,7 +115,7 @@
 				 <a href="#"> </a>
 				</c:if>
 				<c:if test="${self==0&&islogin==1}">
-				 <a href="gouserindex.do?userid=<c:out value="${loginuserid}" />">  </a>
+				 <a href="gouserindex.do?userid=<c:out value="${loginuserid}" />">   </a>
 				</c:if>
 			</div>
 		</div>

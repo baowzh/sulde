@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.mongolia.website.model.AutoResponse;
 import com.mongolia.website.model.PagingAutoResModel;
+import com.mongolia.website.model.WechatDocValue;
 
 public interface AutoResponseManager {
 	/**
@@ -40,7 +41,7 @@ public interface AutoResponseManager {
 	 * @return
 	 * @throws Exception
 	 */
-	public PagingAutoResModel pagingquerydoc(PagingAutoResModel paingModel)
+	public PagingAutoResModel pagingqueryAutoResp(PagingAutoResModel paingModel)
 			throws Exception;
 
 	/**
@@ -50,7 +51,7 @@ public interface AutoResponseManager {
 	 * @param autoresid
 	 * @throws Exception
 	 */
-	public void addWechatDoc(String docid, String autoresid) throws Exception;
+	public void addWechatDoc(WechatDocValue wechatDocValue) throws Exception;
 
 	/**
 	 * 删除自动回复文档
@@ -60,4 +61,17 @@ public interface AutoResponseManager {
 	 * @throws Exception
 	 */
 	public void delWechatDoc(String docid, String autoresid) throws Exception;
+
+	/**
+	 * 
+	 * @param autoresid
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WechatDocValue> getWechatDocValues(String autoresid)
+			throws Exception;
+   /**
+    * 
+    */
+	public void sendServiceMess();
 }

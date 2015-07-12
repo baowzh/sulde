@@ -9,6 +9,7 @@ public class AutoResponse {
 	private String accountid;
 	private String id;
 	private String servicveid;
+	private Integer defaultmess;
 
 	public String getKeyword() {
 		return keyword;
@@ -72,6 +73,14 @@ public class AutoResponse {
 
 	public void setServicveid(String servicveid) {
 		this.servicveid = servicveid;
+	}
+
+	public Integer getDefaultmess() {
+		return defaultmess;
+	}
+
+	public void setDefaultmess(Integer defaultmess) {
+		this.defaultmess = defaultmess;
 	}
 
 }

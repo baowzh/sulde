@@ -3,6 +3,7 @@ package com.mongolia.website.model;
 import java.util.Date;
 
 public class WechatDocValue {
+	private String id;
 	/**
 	 * 自动回复设置id
 	 */
@@ -31,6 +32,10 @@ public class WechatDocValue {
 	 * 
 	 */
 	private String docurl;
+
+	private String mgltitle;
+
+	private byte[] img;
 
 	public String getResponseid() {
 		return responseid;
@@ -87,5 +92,30 @@ public class WechatDocValue {
 	public void setDocurl(String docurl) {
 		this.docurl = docurl;
 	}
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+
+	public String getMgltitle() {
+		return mgltitle;
+	}
+
+	public void setMgltitle(String mgltitle) {
+		this.mgltitle = mgltitle;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 
 }

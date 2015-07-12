@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "MenksoftQagan";
+/*     background-color:#eecf88; */
+}
+
+.m0a {
+	margin: 0 auto;
+}
+
+.wrp {
+	width: 1000px;
+}
+
+.cls {
+	clear: both
+}
+
+a img {
+	border: none;
+}
+
+/*分页*/
+.pagenav {
+	margin: 0px 5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	/* 	height: 3em; */
+	/* 	background: #eee; */
+	/* 	border: solid 1px #ddd; */
+	border-radius: 5px;
+	text-align: center;
+	line-height: 2em;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+}
+
+.pagenav input {
+	height: 24px;
+	width: 30px;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.pagenav a {
+	color: #666;
+	text-decoration: none;
+}

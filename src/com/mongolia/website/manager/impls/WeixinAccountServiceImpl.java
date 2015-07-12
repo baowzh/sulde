@@ -17,7 +17,6 @@ import com.mongolia.website.manager.interfaces.WeixinAccountServiceI;
 import com.mongolia.website.model.AccessTokenYw;
 import com.mongolia.website.model.AttentionValue;
 import com.mongolia.website.model.WechatAccountEntity;
-import com.mongolia.website.model.WeixinAccountEntity;
 import com.mongolia.website.util.WeixinUtil;
 
 @Service("weixinAccountService")

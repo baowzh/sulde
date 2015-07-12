@@ -68,7 +68,8 @@ public class WechatServiceImpl implements WechatService {
 				// 根据收到的文本消息返回内容
 				String content = requestMap.get("Content");
 				AutoResponse autoResponse = findKey(content, toUserName);
-				if (autoResponse != null) {
+				if (autoResponse != null
+						&& autoResponse.getMsgtype().equalsIgnoreCase("1")) {
 					// 根据此自动回复设置组织图文消息比你更返回
 					List<WechatDocValue> WechatDocValues = this.WechatDocDao
 							.getWechatDocWithAutoResId(autoResponse.getId());
@@ -76,8 +77,11 @@ public class WechatServiceImpl implements WechatService {
 					for (WechatDocValue wechatDocValue : WechatDocValues) {
 						Article article = new Article();
 						article.setTitle(wechatDocValue.getDoctitle());
-						article.setPicUrl(wechatDocValue.getDocimg());
-						article.setUrl(wechatDocValue.getDocurl());
+						article.setPicUrl(sysConfig.getSiteaddress()
+								+ "/html/img/" + wechatDocValue.getDocimg());
+						article.setUrl(sysConfig.getSiteaddress()
+								+ "/phonedetail.do?docid="
+								+ wechatDocValue.getDocid());
 						article.setDescription(wechatDocValue.getDocabc());
 						articleList.add(article);
 					}
@@ -89,34 +93,37 @@ public class WechatServiceImpl implements WechatService {
 					newsResp.setArticleCount(articleList.size());
 					newsResp.setArticles(articleList);
 					respMessage = MessageUtil.newsMessageToXml(newsResp);
+				} else {
+					String mess = getDefaultMess();
+					textMessage.setContent(mess);
+					respMessage = MessageUtil.textMessageToXml(textMessage);
 				}
 				receiveMessValue.setContent(requestMap.get("Content"));
-
 			}
 			// 图片消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-				respContent = "您发送的是图片消息！";
+				respContent = getDefaultMess();
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
 				receiveMessValue.setContent(requestMap.get("PicUrl"));
 			}
 			// 地理位置消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
-				respContent = "您发送的是地理位置消息！";
+				respContent = getDefaultMess();
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
 				receiveMessValue.setContent(requestMap.get("Label"));
 			}
 			// 链接消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
-				respContent = "您发送的是链接消息！";
+				respContent = getDefaultMess();
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
 				receiveMessValue.setContent(requestMap.get("Url"));
 			}
 			// 音频消息
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
-				respContent = "您发送的是音频消息！";
+				respContent = getDefaultMess();
 				textMessage.setContent(respContent);
 				respMessage = MessageUtil.textMessageToXml(textMessage);
 				receiveMessValue.setContent(requestMap.get("MediaId"));
@@ -128,7 +135,7 @@ public class WechatServiceImpl implements WechatService {
 				receiveMessValue.setContent(eventType);
 				// 订阅
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-					textMessage.setContent("谢谢您的关注");
+					textMessage.setContent(getDefaultMess());
 					respMessage = MessageUtil.textMessageToXml(textMessage);
 				}
 				// 取消订阅
@@ -138,7 +145,7 @@ public class WechatServiceImpl implements WechatService {
 				}
 				// 自定义菜单点击事件
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
-					textMessage.setContent("谢谢您的关注");
+					textMessage.setContent(getDefaultMess());
 					respMessage = MessageUtil.textMessageToXml(textMessage);
 					// 如果是点击了优秀作品
 				}
@@ -164,25 +171,44 @@ public class WechatServiceImpl implements WechatService {
 		// 获取关键字管理的列表，匹配后返回信息
 		Map<String, Object> prams = new HashMap<String, Object>();
 		prams.put("accountId", accountId);
+		prams.put("keyword", content);
 		try {
 			List<AutoResponse> autoResponses = this.autoResponseManager
 					.getAutoResponses(prams);
-			// (
-			// AutoResponse.class, "accountId", accountId);
-			for (AutoResponse r : autoResponses) {
-				// 如果包含关键字
-				String kw = r.getKeyword();
-				String[] allkw = kw.split(",");
-				for (String k : allkw) {
-					if (k.equalsIgnoreCase(content)) {
-						return r;
-					}
-				}
+			if(autoResponses!=null&&!autoResponses.isEmpty()){
+				return autoResponses.get(0);
+			}else{
+				return null;	
 			}
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return null;
+	}
+
+	private String getDefaultMess() throws Exception {
+		Map<String, Object> prams = new HashMap<String, Object>();
+		java.text.SimpleDateFormat format = new java.text.SimpleDateFormat(
+				"yyyy-MM-dd");
+		prams.put("addtime", format.format(new Date()));
+		List<AutoResponse> autoResponses = this.autoResponseManager
+				.getAutoResponses(prams);
+		if (autoResponses != null && !autoResponses.isEmpty()) {
+			Date currentdate = new Date();
+			return "今天回复\"" + autoResponses.get(0).getKeyword() + "\"即可欣赏金轮文化网"
+					+ format.format(currentdate) + "日的精选文章。";
+		} else {
+			prams.remove("addtime");
+			prams.put("defaultmess", 1);
+			autoResponses = this.autoResponseManager.getAutoResponses(prams);
+			if (autoResponses != null && !autoResponses.isEmpty()) {
+				return autoResponses.get(0).getKeyword();
+			} else {
+				return "欢迎您关注金轮文化网！";
+			}
+		}
+
 	}
 
 }

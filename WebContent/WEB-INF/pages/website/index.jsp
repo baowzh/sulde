@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Blog</title>
+<title> </title>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
 <link href="img/css/blog.css" type="text/css" rel="stylesheet" />
 <link href="img/css/huh.css" type="text/css" rel="stylesheet" />
@@ -201,7 +201,7 @@
 				<div class="cardt2" style="width: 380px;">
 					<div style="width: 380px; height: 330px; padding: 5px;">
 						<div class="sldrFrm" id="picplayer"
-							style="width: 375px; height: 330px;"></div>
+							style="width: 375px; height: 330px;position:relative;"></div>
 					</div>
 				</div>
 			</div>

@@ -32,6 +32,7 @@ import com.mongolia.website.model.ProgramItem;
 import com.mongolia.website.model.ProgramValue;
 import com.mongolia.website.model.TopDocumentValue;
 import com.mongolia.website.model.UserValue;
+import com.mongolia.website.util.DocAbstractUtil;
 import com.mongolia.website.util.StaticConstants;
 
 @Service("webSiteVisitorManager")
@@ -81,6 +82,10 @@ public class WebSiteVisitorManagerImpl extends BaseManagerImpl implements
 		paingModel.setEndrow(paingModel.getPagesize());
 		List<DocumentValue> documents = this.webSiteVisitorDao
 				.pagingquerydoc(paingModel);
+		//
+		for (DocumentValue documentValue : documents) {
+			DocAbstractUtil.setdocview(documentValue);
+		}
 		paingModel.setModelList(documents);
 		Integer rowCount = this.webSiteVisitorDao.getRowCount(paingModel);
 		paingModel.setRowcount("" + rowCount);

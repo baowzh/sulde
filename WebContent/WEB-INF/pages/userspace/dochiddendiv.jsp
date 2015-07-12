@@ -13,7 +13,7 @@
 			<div class="folder photoAlbumC">
 				<div style="width: 80px; margin: 2em 1em;">
 					<div class=" msheet">
-						<a href="#"> <br />  <br />  <br /> <br />
+						<a href="#"> <br />   <br />   <br /> <br />
 							 <br />
 						</a>
 					</div>

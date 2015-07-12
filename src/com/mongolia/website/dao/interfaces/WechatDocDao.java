@@ -45,4 +45,10 @@ public interface WechatDocDao {
 	 * @throws Exception
 	 */
 	public void addWechatReceiveMessValue(WechatReceiveMessValue receiveMessValue)throws Exception;
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> getRecentReqUserId()throws Exception;
 }

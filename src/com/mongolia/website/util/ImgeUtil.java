@@ -25,7 +25,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class ImgeUtil {
 	public static ImgValue CompressPic(byte[] imgContent, String destpath,
-			String filename) throws IOException {
+			String filename,boolean comp) throws IOException {
 		ByteArrayInputStream stram = new ByteArrayInputStream(imgContent);
 		ByteArrayInputStream imgstram = new ByteArrayInputStream(imgContent);
 		Image img = ImageIO.read(stram);
@@ -35,7 +35,7 @@ public class ImgeUtil {
 		int originalWidth = img.getWidth(null);
 		int originalHeight = img.getHeight(null);
 		File destFile = new File(destpath, filename);
-		if (originalWidth > 485 || originalHeight > 400) {
+		if ((originalWidth > 485 || originalHeight > 400)&&comp) {
 			Thumbnails.of(imgstram).size(485, 400).toFile(destFile);
 			imgValue.setWidth(485);
 			imgValue.setHeight(400);

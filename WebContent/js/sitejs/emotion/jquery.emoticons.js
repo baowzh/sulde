@@ -281,8 +281,8 @@
 				jqfaceedit : function(options) {
 					var defaults = {
 						txtAreaObj : '', // TextArea对象
-						containerObj : '', // 表情框父对象
-						textareaid : 'msg',// textarea元素的id
+						containerObj : 'commdiv', // 表情框父对象
+						textareaid : 'editor1',// textarea元素的id
 						popName : '', // iframe弹出框名称,containerObj为父窗体时使用
 						emotions : em, // 表情信息json格式，id表情排序号
 						// phrase表情使用的替代短语url表情文件名
@@ -320,7 +320,7 @@
 													var faceHtml = '<div id="face" >';
 													faceHtml += '<div id="texttb"><a class="f_close" title="关闭" href="javascript:void(0);"></a></div>';
 													faceHtml += '<div id="facebox">';
-													faceHtml += '<div id="face_detail" class="facebox clearfix" ><ul>';
+													faceHtml += '<div id="face_detail" class="facebox clearfix rerotatesection" ><ul>';
 
 													for (i = 0; i < options.emotions.length; i++) {
 														faceHtml += '<li text='
@@ -399,8 +399,9 @@
 																		 * pos;
 																		 * setCursorPosition(tc,
 																		 * pos);//设置焦点
-																		 * container.find("#face").remove();
 																		 */
+																		 container.find("#face").remove();
+																		
 																		// alert("dd");
 																	});
 													// 关闭表情框

@@ -24,9 +24,11 @@
 <title> </title>
 </head>
 <body>
+     <!--
 	<div class="lmainR ofh" style="text-align: center; height: 64px;">
 		<img src="img/logo.png" width="980" />
 	</div>
+	-->
 	<div class="lmainR  ">
 		<div class="loginSheet">
 			<div class="iconContainer"></div>

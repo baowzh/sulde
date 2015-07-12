@@ -25,6 +25,12 @@ import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import org.htmlparser.NodeFilter;
+import org.htmlparser.Parser;
+import org.htmlparser.filters.NodeClassFilter;
+import org.htmlparser.filters.OrFilter;
+import org.htmlparser.tags.ParagraphTag;
+import org.htmlparser.util.NodeList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -130,7 +136,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 					String imgname = UUIDMaker.getUUID() + ".jpg";
 					imgGrpupValue.setFaceurl(imgname);
 					ImgValue tempImgValue = ImgeUtil.CompressPic(
-							imgValue.getImg(), facepath, imgname);
+							imgValue.getImg(), facepath, imgname,true);
 					// imgGrpupValue.setFaceimg(imgcontent);
 					this.webResourceDao.updIImgGroup(imgGrpupValue);
 				}
@@ -381,10 +387,6 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			PaingModel<DocumentValue> pagingModel1 = webSiteVisitorManager
 					.pagingquerydoc(pagingModel);
 			List<DocumentValue> docList = pagingModel1.getModelList();
-			for (int i = 0; i < docList.size(); i++) {
-				DocumentValue documentValue = docList.get(i);
-				documentValue.setSelf(self);
-			}
 			map.put("docList", docList);
 			if (docchannel != null && !docchannel.equalsIgnoreCase("")) {
 				Map<String, Object> queryChannelParams = new HashMap<String, Object>();
@@ -546,87 +548,7 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			} else {
 				DocumentValue documentValue = documentvalues.get(0);
 				//
-				if (documentValue.getDoccontent() != null) {
-					byte newcontent[] = ungzipdoccontent(documentValue
-							.getDoccontent());
-					documentValue.setDoccontent(newcontent);
-				}
-
-				//
-				if (documentValue.getDoctype().intValue() == StaticConstants.RESOURCE_TYPE_DOC) {
-					String docContent = new String(
-							documentValue.getDoccontent());
-					// 替换flash 视频地址
-					String matchStr = "\\[\\[http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?\\]\\]";
-					Pattern destStri = Pattern.compile(matchStr);// ^
-					Matcher mati = destStri.matcher(docContent);
-					StringBuffer bufferi = new StringBuffer();
-					while (mati.find()) {
-						String groupi = mati.group(0);
-						groupi = groupi.substring(2, groupi.length() - 2);
-						String embed = "<br><embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
-								+ groupi
-								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>"
-								+ "";
-
-						// String embed =
-						// "<iframe height=498 width=510 src=\"http://player.youku.com/embed/XODE0MDY0NzY4\" frameborder=0 allowfullscreen></iframe>";
-						mati.appendReplacement(bufferi, embed);
-					}
-					mati.appendTail(bufferi);
-					docContent = bufferi.toString();
-					//
-					matchStr = "\\[FLASH=http:\\//(player.ku6.com|player.youku.com|www.tudou.com|v.ifeng.com|you.video.sina.com.cn){1}(/\\w+[.[\\w|\\W]+]*)+(/(\\s)*\\w+.swf){1}\\]";
-					destStri = Pattern.compile(matchStr);// ^
-					mati = destStri.matcher(docContent);
-					bufferi = new StringBuffer();
-					while (mati.find()) {
-						String groupi = mati.group(0);
-						groupi = groupi.substring(1, groupi.length() - 1);
-						String flashurl = groupi.split("=")[1];
-						flashurl = flashurl.replaceAll(" ", "");
-						String embed = "<br><embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
-								+ flashurl
-								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
-						mati.appendReplacement(bufferi, embed);
-					}
-					mati.appendTail(bufferi);
-					docContent = bufferi.toString();
-
-					matchStr = "\\[FLASH=http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?\\]";
-					destStri = Pattern.compile(matchStr);// ^
-					mati = destStri.matcher(docContent);
-					bufferi = new StringBuffer();
-					while (mati.find()) {
-						String groupi = mati.group(0);
-						groupi = groupi.substring(1, groupi.length() - 1);
-						String flashurl = groupi.split("=")[1];
-						flashurl = flashurl.replaceAll(" ", "");
-						String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
-								+ flashurl
-								+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
-						mati.appendReplacement(bufferi, embed);
-					}
-					mati.appendTail(bufferi);
-					docContent = bufferi.toString();
-					// 替换MP3地址
-					matchStr = "\\{\\[[^\\)]+\\]\\}";
-					destStri = Pattern.compile(matchStr);// ^
-					mati = destStri.matcher(docContent);
-					bufferi = new StringBuffer();
-					while (mati.find()) {
-						String groupi = mati.group(0);
-						groupi = groupi.substring(2, groupi.length() - 2);
-						String embed = "<br><embed pluginspage=\"http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash\" type=\"video/x-ms-wmv\"  src=\""
-								+ groupi
-								+ "\" controls=\"smallconsole\" loop=\"false\" autostart=\"true\" quality=\"high\" width=\"430\" height=\"400\" ></embed>"
-								+ "";
-						mati.appendReplacement(bufferi, embed);
-					}
-					mati.appendTail(bufferi);
-					docContent = bufferi.toString();
-					documentValue.setHtmlstr(docContent);
-				}
+				this.setdocview(documentValue);
 				// 添加读者次数
 				VisitorValue visitorValue = new VisitorValue();
 				visitorValue.setVisitobjid(docid);
@@ -664,6 +586,148 @@ public class WebResourceManagerImpl implements WebResourceManager {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new ManagerException(ex.getMessage());
+		}
+	}
+
+	private void setdocview(DocumentValue documentValue) throws Exception{
+		byte newcontent[] = null;
+		if (documentValue.getDoccontent() != null) {
+			newcontent = ungzipdoccontent(documentValue.getDoccontent());
+			documentValue.setDoccontent(newcontent);
+		}
+		//
+		if (documentValue.getDoctype().intValue() == StaticConstants.RESOURCE_TYPE_DOC) {
+			String docContent = new String(documentValue.getDoccontent(),"GBK");
+			// 替换flash 视频地址
+			String matchStr = "\\[\\[http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?\\]\\]";
+			Pattern destStri = Pattern.compile(matchStr);// ^
+			Matcher mati = destStri.matcher(docContent);
+			StringBuffer bufferi = new StringBuffer();
+			while (mati.find()) {
+				String groupi = mati.group(0);
+				groupi = groupi.substring(2, groupi.length() - 2);
+				String embed = "<br><embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+						+ groupi
+						+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>"
+						+ "";
+
+				// String embed =
+				// "<iframe height=498 width=510 src=\"http://player.youku.com/embed/XODE0MDY0NzY4\" frameborder=0 allowfullscreen></iframe>";
+				mati.appendReplacement(bufferi, embed);
+			}
+			mati.appendTail(bufferi);
+			docContent = bufferi.toString();
+			//
+			matchStr = "\\[FLASH=http:\\//(player.ku6.com|player.youku.com|www.tudou.com|v.ifeng.com|you.video.sina.com.cn){1}(/\\w+[.[\\w|\\W]+]*)+(/(\\s)*\\w+.swf){1}\\]";
+			destStri = Pattern.compile(matchStr);// ^
+			mati = destStri.matcher(docContent);
+			bufferi = new StringBuffer();
+			while (mati.find()) {
+				String groupi = mati.group(0);
+				groupi = groupi.substring(1, groupi.length() - 1);
+				String flashurl = groupi.split("=")[1];
+				flashurl = flashurl.replaceAll(" ", "");
+				String embed = "<br><embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+						+ flashurl
+						+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
+				mati.appendReplacement(bufferi, embed);
+			}
+			mati.appendTail(bufferi);
+			docContent = bufferi.toString();
+
+			matchStr = "\\[FLASH=http[s]?:\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?\\]";
+			destStri = Pattern.compile(matchStr);// ^
+			mati = destStri.matcher(docContent);
+			bufferi = new StringBuffer();
+			while (mati.find()) {
+				String groupi = mati.group(0);
+				groupi = groupi.substring(1, groupi.length() - 1);
+				String flashurl = groupi.split("=")[1];
+				flashurl = flashurl.replaceAll(" ", "");
+				String embed = "<embed pluginspage=\"http://www.macromedia.com/go/getflashplayer\"  src=\""
+						+ flashurl
+						+ "\" allowFullScreen=\"true\" quality=\"high\" width=\"430\" height=\"400\" align=\"middle\" allowScriptAccess=\"always\" type=\"application/x-shockwave-flash\"></embed>";
+				mati.appendReplacement(bufferi, embed);
+			}
+			mati.appendTail(bufferi);
+			docContent = bufferi.toString();
+			// 替换MP3地址
+			matchStr = "\\{\\[[^\\)]+\\]\\}";
+			destStri = Pattern.compile(matchStr);// ^
+			mati = destStri.matcher(docContent);
+			bufferi = new StringBuffer();
+			while (mati.find()) {
+				String groupi = mati.group(0);
+				groupi = groupi.substring(2, groupi.length() - 2);
+				String embed = "<br><embed pluginspage=\"http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash\" type=\"video/x-ms-wmv\"  src=\""
+						+ groupi
+						+ "\" controls=\"smallconsole\" loop=\"false\" autostart=\"true\" quality=\"high\" width=\"430\" height=\"400\" ></embed>"
+						+ "";
+				mati.appendReplacement(bufferi, embed);
+			}
+			mati.appendTail(bufferi);
+			docContent = bufferi.toString();
+			documentValue.setHtmlstr(docContent);
+			Parser parser = Parser.createParser(documentValue.getHtmlstr(),
+					"UTF-8");
+			NodeFilter[] filters = new NodeFilter[1];
+			filters[0] = new NodeClassFilter(ParagraphTag.class);
+			NodeFilter filter = new OrFilter(filters);
+
+			try {
+				NodeList list = parser.extractAllNodesThatMatch(filter);
+				String brhtml = "";
+				int roundcount = 0;
+				for (int i = 0; i < list.size(); i++) {
+					NodeList childrenlist = list.elementAt(i).getChildren();
+					if (childrenlist != null && childrenlist.size() > 5) {
+						int substrposition = 0;
+						for (int j = 0; j < childrenlist.size(); j++) {
+							brhtml = brhtml
+									+ childrenlist.elementAt(j).toHtml();
+							String teststr = childrenlist.elementAt(j).toHtml()
+									.replaceAll("&nbsp;", "");
+							teststr = teststr.replaceAll("\r\n", "");
+							teststr = teststr.replaceAll("<p>", "");
+							teststr = teststr.replaceAll("</p>", "");
+							if (!teststr.equalsIgnoreCase("")) {
+								substrposition++;
+								if (substrposition >= 10) {
+									break;
+
+								}
+							}
+
+						}
+						// documentValue.setHtmlabc(brhtml);
+						break;
+					} else {
+						brhtml = brhtml + list.elementAt(i).toHtml();
+						String teststr = list.elementAt(i).toHtml()
+								.replaceAll("&nbsp;", "");
+						teststr = teststr.replaceAll("\r\n", "");
+						teststr = teststr.replaceAll("<p>", "");
+						teststr = teststr.replaceAll("</p>", "");
+						if (!teststr.equalsIgnoreCase("")) {
+							roundcount++;
+							if (roundcount >= 10) {
+								break;
+							}
+						}
+
+					}
+				}
+				if (!brhtml.equalsIgnoreCase("")) {
+					documentValue.setHtmlabc(brhtml);
+				} else {
+					brhtml = documentValue.getHtmlstr().substring(0,
+							documentValue.getHtmlstr().length() / 3);
+					documentValue.setHtmlabc(brhtml);
+				}
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
@@ -1867,6 +1931,20 @@ public class WebResourceManagerImpl implements WebResourceManager {
 			Integer fechtcount) throws Exception {
 		// TODO Auto-generated method stub
 		return this.webResourceDao.getVisitorList(resourceid, fechtcount);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mongolia.website.manager.interfaces.WebResourceManager#confiremMess
+	 * (java.lang.String)
+	 */
+	@Override
+	public void confiremMess(String messid) throws Exception {
+		// TODO Auto-generated method stub
+		this.webResourceDao.confiremMess(messid);
+
 	}
 
 }

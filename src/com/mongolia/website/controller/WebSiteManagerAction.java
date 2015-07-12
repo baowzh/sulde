@@ -391,7 +391,7 @@ public class WebSiteManagerAction {
 			if (topDocumentValue.getPlayimg() != null
 					&& topDocumentValue.getPlayimg().length != 0) {
 				ImgeUtil.CompressPic(topDocumentValue.getPlayimg(), path,
-						imgname);
+						imgname,true);
 				topDocumentValue.setDocimg(imgname);
 			}
 			this.webSiteManager.doCreateTopDocument(topDocumentValue);
@@ -425,7 +425,7 @@ public class WebSiteManagerAction {
 							.getOriginalFilename();
 					imgname = UUIDMaker.getUUID() + OriginalFilename;
 					ImgeUtil.CompressPic(commonsMultipartFile.getBytes(), path,
-							imgname);
+							imgname,true);
 				}
 			}
 			this.webSiteManager.setVideoface(topDocumentValue.getVideoid(),

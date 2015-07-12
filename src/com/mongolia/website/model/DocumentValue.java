@@ -79,6 +79,7 @@ public class DocumentValue {
 	private String flashurl;
 	private String facepath;
 	private String imgurl;
+	private String htmlabc;
 	private SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
 	public String getDocid() {
@@ -689,4 +690,19 @@ public class DocumentValue {
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
 	}
+
+	/**
+	 * @return the htmlabc
+	 */
+	public String getHtmlabc() {
+		return htmlabc;
+	}
+
+	/**
+	 * @param htmlabc the htmlabc to set
+	 */
+	public void setHtmlabc(String htmlabc) {
+		this.htmlabc = htmlabc;
+	}
+	
 }

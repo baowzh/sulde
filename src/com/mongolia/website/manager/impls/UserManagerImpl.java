@@ -68,37 +68,26 @@ public class UserManagerImpl implements UserManager {
 		//
 		userManagerDao.createUser(userValue);
 		/*
-		MimeMessage mailMessage = this.mailSender.createMimeMessage();
-		this.mailSender.setUsername("imubwz@126.com");
-		this.mailSender.setHost("smtp.126.com");
-		this.mailSender.getPassword();
-		this.mailSender.getHost();
-		Properties prop = new Properties();
-		prop.put("mail.smtp.auth", "true"); // 将这个参数设为true，让服务器进行认证,认证用户名和密码是否正确
-		prop.put("mail.smtp.timeout", "25000");
-		mailSender.setJavaMailProperties(prop);
-		MimeMessageHelper messageHelper = new MimeMessageHelper(mailMessage,
-				true, "utf-8");
-		messageHelper.setTo(userValue.getEmail());
-		messageHelper.setSubject(this.sysConfig.getSitename() + "激活账号地址");
-		String uuid = md5.encodePassword(userValue.getUsername(),
-				StaticConstants.encrypekey);
-		messageHelper
-				.setFrom(new InternetAddress(this.mailSender.getUsername()));
-		String mailstr = "您好！请点击这里<a href=\""
-				+ this.sysConfig.getSiteaddress()
-				+ "/activateUser.do?username="
-				+ userValue.getUsername()
-				+ "&id="
-				+ uuid
-				+ "\"</a>激活账号，激活成功以后登陆系统,如果无法点击请把下列地址写浏览器中访问"
-				+ ""+ this.sysConfig.getSiteaddress()
-				+ "/activateUser.do?username="
-				+ userValue.getUsername()
-				+ "&id="
-				+ uuid;
-		messageHelper.setText(mailstr, true);
-		mailSender.send(mailMessage);*/
+		 * MimeMessage mailMessage = this.mailSender.createMimeMessage();
+		 * this.mailSender.setUsername("imubwz@126.com");
+		 * this.mailSender.setHost("smtp.126.com");
+		 * this.mailSender.getPassword(); this.mailSender.getHost(); Properties
+		 * prop = new Properties(); prop.put("mail.smtp.auth", "true"); //
+		 * 将这个参数设为true，让服务器进行认证,认证用户名和密码是否正确 prop.put("mail.smtp.timeout",
+		 * "25000"); mailSender.setJavaMailProperties(prop); MimeMessageHelper
+		 * messageHelper = new MimeMessageHelper(mailMessage, true, "utf-8");
+		 * messageHelper.setTo(userValue.getEmail());
+		 * messageHelper.setSubject(this.sysConfig.getSitename() + "激活账号地址");
+		 * String uuid = md5.encodePassword(userValue.getUsername(),
+		 * StaticConstants.encrypekey); messageHelper .setFrom(new
+		 * InternetAddress(this.mailSender.getUsername())); String mailstr =
+		 * "您好！请点击这里<a href=\"" + this.sysConfig.getSiteaddress() +
+		 * "/activateUser.do?username=" + userValue.getUsername() + "&id=" +
+		 * uuid + "\"</a>激活账号，激活成功以后登陆系统,如果无法点击请把下列地址写浏览器中访问" + ""+
+		 * this.sysConfig.getSiteaddress() + "/activateUser.do?username=" +
+		 * userValue.getUsername() + "&id=" + uuid;
+		 * messageHelper.setText(mailstr, true); mailSender.send(mailMessage);
+		 */
 	}
 
 	@Override
@@ -144,10 +133,10 @@ public class UserManagerImpl implements UserManager {
 		}
 		UserValue sysUserValue = users.get(0);
 		/*
-		if (sysUserValue.getActive() == null
-				|| sysUserValue.getActive().intValue() == 0) {
-			throw new Exception("5");
-		}*/
+		 * if (sysUserValue.getActive() == null ||
+		 * sysUserValue.getActive().intValue() == 0) { throw new Exception("5");
+		 * }
+		 */
 		//
 		if (sysConfig.getOnline().intValue() == 1
 				&& sysUserValue.getOldid() != null) {
@@ -372,7 +361,11 @@ public class UserManagerImpl implements UserManager {
 				+ this.sysConfig.getSiteaddress()
 				+ "/loginmail.do?id="
 				+ uuid
-				+ "\"</a>登陆系统，并修改密码</h1></body></html>";
+				+ "\"</a>登陆系统，并修改密码</h1>如果连接无法点击请把此地址输入浏览器"
+				+ this.sysConfig.getSiteaddress()
+				+ "/loginmail.do?id="
+				+ uuid
+				+ "</body></html>";
 		messageHelper.setText(mailstr, true);
 		mailSender.send(mailMessage);
 		userValue.setMailloginid(uuid);

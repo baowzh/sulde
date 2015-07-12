@@ -9,6 +9,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -39,6 +44,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
@@ -354,6 +360,17 @@ public class BlogManagerAction {
 					StaticConstants.DOCTYPE_DOC, null, null, null, null);
 			// 计算每个comments 是否要显示
 		}
+		// 获取上一个文章和下一个文章
+		List<DocumentValue> nextdocs = this.webResourceManager.getNextDoc(
+				docid, null);
+		if (nextdocs != null && !nextdocs.isEmpty()) {
+			map.put("nextdoc", nextdocs.get(0));
+		}
+		List<DocumentValue> previousdocs = this.webResourceManager
+				.getPreviousDoc(docid, null);
+		if (previousdocs != null && !previousdocs.isEmpty()) {
+			map.put("previousdocsdoc", previousdocs.get(0));
+		}
 		if (sessionUser != null) {
 			map.put("login", 1);
 		} else {
@@ -452,7 +469,7 @@ public class BlogManagerAction {
 				DocumentValue documentValue = (DocumentValue) docList.get(0);
 				if (documentValue.getDoctype().intValue() == StaticConstants.RESOURCE_TYPE_DOC) {
 					String docContent = new String(
-							documentValue.getDoccontent());
+							documentValue.getDoccontent(),"GBK");
 					if (opertype != null && opertype.equalsIgnoreCase("2")) {
 						documentValue.setHtmlstr(docContent);
 					} else {
@@ -504,7 +521,7 @@ public class BlogManagerAction {
 					.getRealPath("html/img");
 			imgname = UUIDMaker.getUUID() + ".jpg";
 			if (imgValue.getImg() != null && imgValue.getImg().length != 0) {
-				ImgeUtil.CompressPic(imgValue.getImg(), path, imgname);
+				ImgeUtil.CompressPic(imgValue.getImg(), path, imgname,true);
 			}
 			//
 		} catch (Exception ex) {
@@ -537,15 +554,18 @@ public class BlogManagerAction {
 	 */
 	@RequestMapping("/adddoc.do")
 	public ModelAndView adddoc(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map, DocumentValue docValue) {
+			HttpServletResponse response, ModelMap map, DocumentValue docValue) throws Exception{
 		UserValue sessionUser = (UserValue) request.getSession().getAttribute(
 				"user");// 在线session
+		if(sessionUser==null){
+			return new ModelAndView("redirect:tologin.do");
+		}
 		List<UserValue> users = this.userManager.getUsers(
 				sessionUser.getUserid(), sessionUser.getUsername());
 		UserValue userValue = users.get(0);
 		SamplePostData samplePostData = new SamplePostData(request);
 		String content = samplePostData.getAllFormFieldsAndValues();
-		docValue.setDoccontent(content.getBytes());
+		docValue.setDoccontent(content.getBytes("GBK"));
 		docValue.setDocauthor(userValue.getArtname());
 		docValue.setUserid(userValue.getUserid());
 		docValue.setDocstatus(1);
@@ -652,6 +672,9 @@ public class BlogManagerAction {
 			HttpServletResponse response, ModelMap map, DocumentValue docValue) {
 		UserValue sessionUser = (UserValue) request.getSession().getAttribute(
 				"user");// 在线session
+		if(sessionUser==null){
+			return new ModelAndView("redirect:tologin.do");
+		}
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("docid", docValue.getDocid());
@@ -666,7 +689,7 @@ public class BlogManagerAction {
 			DocumentValue documentValue = docList.get(0);
 			SamplePostData samplePostData = new SamplePostData(request);
 			String content = samplePostData.getAllFormFieldsAndValues();
-			documentValue.setDoccontent(content.getBytes());
+			documentValue.setDoccontent(content.getBytes("GBK"));
 			documentValue.setDocstatus(1);
 			documentValue.setDocsource(new Double(1));
 			documentValue.setDoctype(1);
@@ -715,8 +738,8 @@ public class BlogManagerAction {
 			if (imgGrpupValue.getImgurl() != null
 					&& imgGrpupValue.getImgurl().length != 0) {
 				tempImgValue = ImgeUtil.CompressPic(imgGrpupValue.getImgurl(),
-						path, imgname);
-				ImgeUtil.CompressPic(imgGrpupValue.getImgurl(), path1, imgname);
+						path, imgname,true);
+				ImgeUtil.CompressPic(imgGrpupValue.getImgurl(), path1, imgname,true);
 				imgValue.setImgurl(imgname);
 				// ImgeUtil.CompressPic(imgGrpupValue.getImgurl(), path,
 				// imgname);
@@ -761,7 +784,7 @@ public class BlogManagerAction {
 			imgname = UUIDMaker.getUUID() + ".jpg";
 			if (imgGrpupValue.getImgurl() != null
 					&& imgGrpupValue.getImgurl() != null) {
-				ImgeUtil.CompressPic(imgGrpupValue.getImgurl(), path, imgname);
+				ImgeUtil.CompressPic(imgGrpupValue.getImgurl(), path, imgname,true);
 			}
 			this.webResourceManager.doUpdIImgGroup(imgGrpupValue);
 		} catch (Exception ex) {
@@ -791,7 +814,7 @@ public class BlogManagerAction {
 			String imgname = imgid + ".jpg";
 			if (imgValue.getImg() != null && imgValue.getImg().length != 0) {
 				ImgValue tempImgValue = ImgeUtil.CompressPic(imgValue.getImg(),
-						path, imgname);
+						path, imgname,true);
 				imgValue.setImgurl(imgname);
 				imgValue.setImgid(imgid);
 				imgValue.setImgname(imgValue.getImgid());
@@ -1157,6 +1180,7 @@ public class BlogManagerAction {
 			String validcode = request.getParameter("validcode");
 			Map<String, Object> queryParams = new HashMap<String, Object>();
 			queryParams.put("docid", docid);
+			/*
 			Object sysValidcode = request.getSession().getAttribute(
 					"validateCode");
 			if (sysValidcode == null) {
@@ -1170,6 +1194,7 @@ public class BlogManagerAction {
 				return new ModelAndView("jsonView", map);
 			}
 			request.getSession().removeAttribute("validateCode");
+			*/
 			List<DocumentValue> docList = this.webResourceManager
 					.getDocList(queryParams);
 			if (docList != null && !docList.isEmpty()) {
@@ -1393,6 +1418,8 @@ public class BlogManagerAction {
 					.getSendMessList(currentuserid, null,
 							Integer.parseInt(pageIndex), 8);
 			map.put("pageindexs", pageindexs);
+			map.put("rowcount", messagepage.getRowcount());
+			map.put("sendrowcount", messagepage1.getRowcount());
 			List<MessageValue> sendMessList = messagepage1.getModelList();
 			showemotion(sendMessList);
 			List<PagingIndex> pageindexs1 = getMessagePageindexs(
@@ -1467,7 +1494,7 @@ public class BlogManagerAction {
 			PaingModel<FriendValue> pagingModel, HttpServletResponse response,
 			ModelMap map) {
 		try {
-			// String userid = request.getParameter("userid");
+			//String userid = request.getParameter("userid");
 			// String pageIndex = pagingModel.getPageindex();
 			// Integer index = 0;
 			// if (pageIndex == null || pageIndex.equalsIgnoreCase("")) {
@@ -1875,6 +1902,14 @@ public class BlogManagerAction {
 		try {
 			MessageValue messageValue = this.webResourceManager
 					.getMessageValueContent(messageid);
+			UserValue sessionUser = (UserValue) request.getSession()
+					.getAttribute("user");
+			if (sessionUser != null
+					&& sessionUser.getUserid().equalsIgnoreCase(
+							messageValue.getUserid())) {
+				this.webResourceManager.confiremMess(messageValue
+						.getMessageid());
+			}
 			// 修改格式
 			List<MessageValue> mess = new ArrayList<MessageValue>();
 			mess.add(messageValue);
@@ -2457,7 +2492,7 @@ public class BlogManagerAction {
 			imgname = UUIDMaker.getUUID() + ".jpg";
 			if (bookStoreValue.getImgurl() != null
 					&& bookStoreValue.getImgurl().length != 0) {
-				ImgeUtil.CompressPic(bookStoreValue.getImgurl(), path, imgname);
+				ImgeUtil.CompressPic(bookStoreValue.getImgurl(), path, imgname,false);
 				map.put("picurl", "html/img/" + imgname);
 			}
 
@@ -2526,5 +2561,36 @@ public class BlogManagerAction {
 		return new ResponseEntity<byte[]>(imgcontent, responseHeaders,
 				HttpStatus.OK);
 	}
+	@RequestMapping("/senDuanxin.do")
+	public ModelAndView senDuanxin(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		try{
+		Md5PasswordEncoder md5 = new Md5PasswordEncoder();
+		String urlstr = "http://api.duanxin.cm/?action=send&username=70208213&password=8cf99706f967d0c04c19d18d2f3a0fb6&phone=15184707203&content="+URLEncoder.encode("测试短信","gbk")+"";
+		URL url = new URL(urlstr);
+		URLConnection rulConnection = url.openConnection();
+		HttpURLConnection httpUrlConnection = (HttpURLConnection) rulConnection;
+		httpUrlConnection.connect();
+		InputStream iniputStream = httpUrlConnection.getInputStream();
+		byte reader[] = new byte[1024];
+		int length = 0;
+		ByteArrayOutputStream ooutStream = new ByteArrayOutputStream();
+		while ((length = iniputStream.read(reader)) != -1) {
+			ooutStream.write(reader, 0, length);
+		}
+		String encripedPass = ooutStream.toString();
+		map.put("result", encripedPass);
+		map.put("urlstr", urlstr);
+		map.put("url", url.toString());
+		
+		//UserValue.setEncripedPass(encripedPass);
+		ooutStream.close();
+		iniputStream.close();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return new ModelAndView("jsonView", map);
+	}
+	
 
 }
