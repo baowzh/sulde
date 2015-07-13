@@ -218,7 +218,7 @@
 						<c:if test="${self==1}">
 							<div style="position:absolute;bottom:3px;left:6px;">
 								<input type="radio" name="selectedradio"
-										id="<c:out value="${friendValue.friendid}" />" />
+										id="<c:out value="${imgGrpupValue.imggroupid}" />" />
 							</div>
 						</c:if>
 					</div>

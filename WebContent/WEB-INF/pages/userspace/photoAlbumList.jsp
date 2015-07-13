@@ -11,7 +11,7 @@
 <title><c:out value="${documentValue.doctitle}" /></title>
 <t:font_css type="jquery,easyui,tools"></t:font_css>
 <link href="css/blog.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
+<link rel="stylesheet" href="js\messagebox\jquery.rotmsgbox.css" />
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 <link href="site/css/waplist.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/sitejs/race.js"></script>
@@ -28,7 +28,7 @@
 	href="plugins/jquery.jqGrid-4.4.3/css/jquery-ui.css" media="screen" />
 <script src="plugins/jquery.jqGrid-4.4.3/js/jquery-ui.min.js"
 	type="text/javascript"></script>
-<script src="js/messagebox/jquery.msgbox.js"></script>
+<script src="js/messagebox/jquery.rotmsgbox.js"></script>
 <script src="js/messagebox/jquery.dragndrop.min.js"></script>
 <script type="text/javascript" src="ckeditorrot/ckeditor.js"></script>
 <script type="text/javascript">
@@ -212,6 +212,12 @@
 								href="javascript:openPhotoList('<c:out value="${imgGrpupValue.imggroupid}"/>')" ><c:out
 									value="${imgGrpupValue.imggroupname}" escapeXml="false" /></a>
 						</div>
+						<c:if test="${self==1}">
+							<div style="position:absolute;bottom:3px;left:6px;">
+								<input type="radio" name="selectedradio"
+										id="<c:out value="${imgGrpupValue.imggroupid}" />" />
+							</div>
+						</c:if>
 					</div>
 				</c:forEach>
 			</div>
