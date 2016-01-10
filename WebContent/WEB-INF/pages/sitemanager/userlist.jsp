@@ -24,9 +24,9 @@
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 </head>
 <body>
-	<div style="background: #1b6dd2;">
+	<div >
 		<div class="lmainR" style="text-align: center;">
-			<img src="img/logo.png" width="990" height="64">
+			<img src="img/logo.png" width="1100" height="160">
 		</div>
 	</div>
 	<div class="lmainR">
@@ -87,12 +87,12 @@
 
 					</tr>
 				</table>
-				<div class="lcell " style="width: 874px; height: 603px;">				
+				<div class="lcell " style="width: 974px; height: 603px;">				
 					<div class="ttl1 m1ln" style="height: 600px;">
 						<a href="#"> </a>
 					</div>
 					<div
-						style="width: 820px; margin: 0px; height: 600px; border-bottom: solid 1px #eee;"
+						style="width: 900px; margin: 0px; height: 600px; border-bottom: solid 1px #eee;"
 						class="ofh">
 						<c:forEach items="${users}" var="userValue" varStatus="status">
 							<div class="xldgurg" style="width: 124px; height: 470px;">

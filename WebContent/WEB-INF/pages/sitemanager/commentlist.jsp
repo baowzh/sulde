@@ -21,15 +21,15 @@
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 </head>
 <body>
-	<div class="lmainR ofh" style="text-align: center; height: 64px;">
-		<img src="img/logo.png" width="980" />
+	<div class="lmainR ofh" style="text-align: center; height: 160px;">
+		<img src="img/logo.png" width="1100" />
 	</div>
 	<div class="lmainR ofh">
 		<form action="articlelist.do" id="Form" method="post">
 			<div class="lmainR"
 				style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
 				<div class="  artlistcell"
-					style="width: 975px; height: 598px; overflow: scroll;">
+					style="width: 1075px; height: 598px; overflow: scroll;">
 					<div class="artListcell acell1" style="width: 800px;">
 						<div class="anwsls1" style="width: 800px;">
 							<table>

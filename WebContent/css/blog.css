@@ -91,11 +91,11 @@ body {
 	height: 28px;
 	float: left;
 	border-radius: 5px 5px 5px 5px;
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#006699),
-		to(#6da8c5));
-	background: -ms-linear-gradient(top, #006699, #6da8c5);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#227dc5;),
+		to(#227dc5));
+	background: -ms-linear-gradient(top, #227dc5, #227dc5);
 	text-align: right;
-	background-color: #006699;
+	background-color: #227dc5;
 }
 /* 内容段落 */
 .mglsection {

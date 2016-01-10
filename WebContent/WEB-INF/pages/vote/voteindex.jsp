@@ -16,15 +16,15 @@
 <title></title>
 </head>
 <body>
-	<div class="lmainR ofh" style="text-align: center; height: 64px;">
-		<img src="img/logo.png" width="980" />
+	<div class="lmainR ofh" style="text-align: center; height: 160px;">
+		<img src="img/logo.png" width="1100" />
 	</div>
 	<div class="lmainR ofh">
 	<form id="actionform" method="post">
 		<div class="lmainR"
 			style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
 			<div class="  artlistcell"
-				style="width: 960px; height: 600px; overflow: scroll;">
+				style="width: 1060px; height: 600px; overflow: scroll;">
 				<div class="artListcell acell1">
 					<div class="anwsls1" style="height: 480px;">
 						<table style="height: 480px;">

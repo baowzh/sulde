@@ -21,12 +21,12 @@
 <link rel="stylesheet" href="js\messagebox\jquery.msgbox.css" />
 </head>
 <body>
-	<div style="background: #1b6dd2;">
+	<div >
 		<div class="lmainR" style="text-align: center;">
-			<img src="img/logo.png" width="990" height="64">
+			<img src="img/logo.png" width="1100" height="160">
 		</div>
 	</div>
-	<div class="lmainR ofh" style="width:990px;">
+	<div class="lmainR ofh" style="width:1100px;">
 		<form action="articlelist.do" id="Form" method="post">
 			<div class="lmainR"
 				style="writing-mode: tb-lr; -webkit-writing-mode: vertical-lr;">
@@ -126,7 +126,7 @@
 					</table>
 				</div>
 				<div class="  artlistcell"
-					style="width: 840px; height: 730px; overflow: auto;border-bottom: solid 1px #eee;">
+					style="width: 930px; height: 730px; overflow: auto;border-bottom: solid 1px #eee;">
 					<div class="artListcell acell1">
 						<div class="anwsls1">
 							<table>
@@ -243,7 +243,7 @@
 							</c:forEach>
 
 							<span id="picbtn1"
-								style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&lt;</a>&nbsp;
+								style="cursor: pointer; border: 1px solid rgb(204, 204, 204); display: inline-block; color: rgb(0, 0, 0); background-color: rgb(238, 238, 238); line-height: 15px; width: 15px;">&nbsp;<a>&gt;</a>&nbsp;
 							</span> (
 							<c:out value="${doccount}" default="0" />
 							)
@@ -323,9 +323,7 @@
 		</div>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
-		<!-- 		<div class="tailCard"> -->
 		<%@ include file="../website/tail.jsp"%>
-		<!-- 		</div> -->
 		<div class="cbt"></div>
 	</div>
 </body>

@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">  
+<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">  
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title> </title>
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
@@ -27,10 +29,10 @@
 <script type="text/javascript" src="js/scroll/jquery.totemticker.min.js"></script>
 <script src="js/sitejs/galleria-1.4.2.min.js"></script>
 </head>
-<body>
-	<div style="background: #1b6dd2;">
-		<div class="lmainR ofh" style="text-align: center; width: 990px;">
-			<img src="img/logo.png" width="990" height="64">
+<body style="background: #036;">
+	<div>
+		<div class="lmainR ofh" style="text-align: center; width: 1100px;">
+			<img src="img/logo.png" width="1100" height="160">
 		</div>
 	</div>
 	<div class="lmainR ofh" style="text-align: center;">
@@ -196,20 +198,21 @@
 		<div class="cbt"></div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 1000x;">
+		<div class="  lcell" style="width: 1100x;">
 			<div class="lcell cell2" style="width: 390px;">
 				<div class="cardt2" style="width: 380px;">
 					<div style="width: 380px; height: 330px; padding: 5px;">
 						<div class="sldrFrm" id="picplayer"
-							style="width: 375px; height: 330px;position:relative;"></div>
+							style="width: 375px; height: 330px; position: relative;"></div>
 					</div>
 				</div>
 			</div>
-			<div class="   cardt1  " style="width: 602px;">
-				<div class="ttl1 m1ln">
+			<div class="   cardt1  " style="width: 702px;">
+				<div class="ttl1 m1ln"
+					style="background: url(img/arv_g.png) no-repeat; width: 40px; padding-left: 5px;">
 					<a href="javascript:void();">  </a>
 				</div>
-				<div class="nwsls1" style="width: 430px;">
+				<div class="nwsls1" style="width: 480px;">
 
 					<c:forEach items="${indexPageContent.selecteddocs}"
 						var="documentValue" varStatus="status">
@@ -228,7 +231,8 @@
 						</div>
 					</c:forEach>
 				</div>
-				<div class="ttl1 m1ln">
+				<div class="ttl1 m1ln"
+					style="background: url(img/arv_g.png) no-repeat; width: 40px; padding-left: 5px;">
 					<a href="javascript:void();"></a>
 				</div>
 
@@ -242,18 +246,16 @@
 						</div>
                        -->
 						<c:if test="${agentkind==1}">
-						<div class="inputHolder"
-								style="height: 300px; width:5px;  flaot: left">
-							</div>
 							<div class="inputHolder"
-								style="height: 300px; width: 40px; padding-left: 5px;flaot: left">
+								style="height: 300px; width: 5px; flaot: left"></div>
+							<div class="inputHolder"
+								style="height: 300px; width: 40px; padding-left: 5px; flaot: left">
 								<input type="text" name="searchtext" id="searchtext"
 									class="webkitsearchtext" />
 							</div>
 						</c:if>
 						<c:if test="${agentkind==0}">
-							<div class="inputHolder"
-								style="height: 300px;  flaot: left">
+							<div class="inputHolder" style="height: 300px; flaot: left">
 								<input type="text" name="searchtext" id="searchtext"
 									class="iesearchtext" />
 							</div>
@@ -309,12 +311,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="lcell " style="width: 850px; height: 315px;">
-			<div class="cardt5" style="height: 308px;">
+		<div class="lcell " style="width: 950px; height: 315px;">
+			<div class="cardt5" style="height: 308px; width: 930px;">
 				<div class="ttl1 m1ln" style="height: 308px;">
 					<a href="#">  </a>
 				</div>
-				<div style="width: 830px; height: 300px;">
+				<div style="width: 930px; height: 300px;">
 					<c:forEach items="${indexPageContent.topUsers}" var="userValue"
 						varStatus="status">
 						<div class="xldgurg">
@@ -520,7 +522,7 @@
 			<div
 				style="width: 80px; height: 690px; background: url(img/chagansuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 910px;">
+		<div class="  lcell" style="width: 1010px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="#nairag"></a>
@@ -690,13 +692,13 @@
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 1000px; height: 330px;">
-			<div class="lcell " style="width: 1000px; height: 330px;">
+		<div class="  lcell" style="width: 1100px; height: 330px;">
+			<div class="lcell " style="width: 1100px; height: 330px;">
 				<div class="cardt4" style="height: 320px;">
 					<div class="ttl1 m1ln">
 						<a href="#">  </a>
 					</div>
-					<div style="width: 948px; margin: 0px; height: 320px" class="ofh">
+					<div style="width: 1048px; margin: 0px; height: 320px" class="ofh">
 
 						<c:forEach items="${indexPageContent.newUsers}" var="userValue"
 							varStatus="status">
@@ -723,132 +725,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="  lcell" style="width: 1000px;">
-			<div class="lcell cardlogin   "
-				style="background: white; margin-top: 5px">
-				<img src="img/8.jpg" width="600" height="400" />
-			</div>
-			<div class="lcell " style="height: 350px; width: 246px;">
-				<div class="cardt3">
-					<div class="nwsls1">
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-						<div class="nwsl1">
-							<div class="title" style="height: 320px;">
-								<a href="textDetail.html">    
-									         
-									     </a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<div class="ttl1 m1ln">
-						<a href="#">   </a>
-					</div>
-					<div class="nwsls1">
-						<div class="ad">
-							<img src="img/6.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/14.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/01.jpg" width="240" />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="lcell cell1">
-				<div class="cardt1">
-					<div class="ttl1 m1ln">
-						<a href="#"> </a>
-					</div>
-					<div class="nwsls1">
-						<div class="ad">
-							<img src="img/6.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/14.jpg" width="240" />
-						</div>
-						<div class="ad">
-							<img src="img/01.jpg" width="240" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 	</div>
 	<div class="lmainR">
 		<div class="  lcell" style="width: 90px; height: 700px;">
 			<div
 				style="width: 80px; height: 690px; background: url(img/nogoonsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 910px;">
+		<div class="  lcell" style="width: 1010px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="edin"></a>
@@ -1019,8 +902,8 @@
 		</div>
 	</div>
 	<div class="lmainR">
-		<div class="  lcell" style="width: 1000px;">
-			<div class="lcell " style="width: 1000px; height: 320px;">
+		<div class="  lcell" style="width: 1100px;">
+			<div class="lcell " style="width: 1100px; height: 320px;">
 				<div class="cardt4" style="height: 310px;">
 					<div class="ttl1 m1ln" style="height: 310px;">
 						<a href="#">  </a>
@@ -1031,12 +914,12 @@
 								<c:forEach items="${indexPageContent.imgs}" var="imgValue"
 									varStatus="status">
 									<div class="photo-slider-item"
-										style="overflow: hidden; float: left; display: inline; width: 235px; height: 280px;">
+										style="overflow: hidden; float: left; display: inline; width: 300px; height: 280px;">
 										<a href="http://yellow.news.mn/content/208142.shtml"
 											style="display: inline-block; padding: 1px; background: #fff; border: 1px #d1d7dd solid;">
-											<div style="width: 235px; height: 270px; overflow: hidden;">
+											<div style="width: 300px; height: 270px; overflow: hidden;">
 												<img src="html/img/news2.jpg"
-													style="height: 270px; width: 235px;">
+													style="height: 270px; width: 300px;">
 											</div>
 										</a>
 									</div>
@@ -1058,7 +941,7 @@
 			<div
 				style="width: 80px; height: 690px; background: url(img/alagsuld.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 910px;">
+		<div class="  lcell" style="width: 1010px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="shog"></a>
@@ -1231,7 +1114,7 @@
 			<div
 				style="width: 80px; height: 690px; background: url(img/tanison.png) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 910px;">
+		<div class="  lcell" style="width: 1010px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="biqilge"></a>
@@ -1406,7 +1289,7 @@
 			<div
 				style="width: 80px; height: 690px; background: url(img/harsuld.gif) center no-repeat; margin: 5px; border: solid 1px #39F; border-radius: 5px;"></div>
 		</div>
-		<div class="  lcell" style="width: 910px;">
+		<div class="  lcell" style="width: 1010px;">
 			<div class="lcell cell1">
 				<div class="cardt1">
 					<a name="hvvl"></a>
@@ -1573,7 +1456,7 @@
 		</div>
 	</div>
 
-	<div class="lmainR ofh">
+	<div class="lmainR ofh" style="text-align: center;">
 		<!-- 尾部 -->
 		<%@ include file="../website/tail.jsp"%>
 		<div class="cbt"></div>
@@ -1607,7 +1490,7 @@
 			"h-scroll-container", {
 				direction : "horizontal",
 				screenSize : 4,
-				itemWidth : 235,
+				itemWidth : 260,
 				itemHeight : 270,
 				itemSpace : 4,
 				prevButton : "h-scrollview-prevbutton-bs",

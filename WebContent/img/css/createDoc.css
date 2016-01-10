@@ -46,7 +46,7 @@
 	writing-mode: tb-lr;
 	/*-webkit-writing-mode: vertical-lr !important;*/
 	/* 	font-family: "Menksoft  "; */
-	font-family: "MenksoftQagan";
+	font-family: "MenksoftQagan" !important;
 }
 
 .inputHolder input.title {
@@ -90,7 +90,7 @@
 
 .richeditBox {
 	height: 520px;
-	width: 800px;
+	width: 900px;
 	background: #eee;
 	float: left;
 }

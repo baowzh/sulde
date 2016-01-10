@@ -16,12 +16,12 @@
 		<%@ include file="head.jsp"%>
 		<form action="pagingquery.do" method="post">
 			<div class=" listSheet">
-				<div class="ttl1 m1ln" style="height: 480px;">
+				<div class="ttl1 m1ln" >
 					<a href="#"><c:out value="${channel.chnlname}" /></a>
 				</div>
-				<div style="width: 958px; margin: 0px;" class="ofh">
+				<div style="width: 1000px; margin: 0px;" class="ofh">
 
-					<div class="flt" style="width: 970px">
+					<div class="flt" style="width: 990px">
 						<div style="height: 410px; margin: 10px;">
 							<c:forEach items="${paingModel.modelList}" var="documentValue"
 								varStatus="status">

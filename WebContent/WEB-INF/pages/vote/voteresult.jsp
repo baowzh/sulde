@@ -17,13 +17,13 @@
 <script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-	<div class="lmainR ofh" style="text-align: center; height: 64px;">
-		<img src="img/logo.png" width="980" />
+	<div class="lmainR ofh" style="text-align: center; height: 160px;">
+		<img src="img/logo.png" width="1100" />
 	</div>
 	<!-- 	<div class="news1"> -->
 	<div class="lmainR">
 		<div class="mnlist"
-			style="width: 990px; height: 600px; margin-left: 4px;">
+			style="width: 1090px; height: 600px; margin-left: 4px;">
 			<div class="voteDesc" style="width: 90px; height: 600px;"
 				id="commentdiv">
 				<c:if test="${votevalue!=null}">

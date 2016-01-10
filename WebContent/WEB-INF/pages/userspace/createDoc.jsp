@@ -8,7 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Blog Home</title>
 <t:font_css type="jquery,easyui,tools"></t:font_css>
-<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="img/css/main.css" type="text/css" rel="stylesheet" />
+<!-- <link href="css/main.css" rel="stylesheet" type="text/css" /> -->
+<link href="img/css/huh.css" type="text/css" rel="stylesheet" />
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 <link href="img/css/main.css" type="text/css" rel="stylesheet" />
 <link href="img/css/listpages.css" type="text/css" rel="stylesheet" />
@@ -62,18 +64,16 @@
 </head>
 <body>
 	<form id="addnews" action="adddoc.do" method="post">
-		<div class="wrp m0a logo">
-			<div class="naveFrame">
+
 				<%@ include file="bloghead.jsp"%>
-			</div>
+
 			<div class="cbt"></div>
-		</div>
-<!-- 		<div class="wrp m0a ribbon"></div> -->
-		<div class="lmainR  " style="width: 1000px;">
+
+		<div class="lmainR  " style="width: 1100px;">
 			<div class="roundCornerFrame"
-				style="width: 1000px; height: 620px; margin: 0px;">
+				style="width: 1100px; height: 620px; margin: 0px;">
 				<div class="content" id="contentdiv"
-					style="width: 970px; height: 570px; padding-top: 30px;">
+					style="width: 1070px; height: 570px; padding-top: 30px;">
 					<div class="flt"
 						style="width: 95px; height: 520px; background: #def; border-radius: 5px; border: solid 1px #def; padding-top: 1px;">
 						<div class="label">  </div>

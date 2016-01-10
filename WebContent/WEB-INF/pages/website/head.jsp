@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<div style="background: #1b6dd2;">
+<div >
 	<div class="lmainR" style="text-align: center;">
-		<img src="img/logo.png" width="990" height="64">
+		<img src="img/logo.png" width="1100" height="160">
 	</div>
 </div>
 <div class="lmainR" style="text-align: center;">

@@ -21,8 +21,8 @@
 <title>  </title>
 </head>
 <body>
-	<div class="lmainR ofh" style="text-align: center; height: 64px;">
-		<img src="img/logo.png" width="982" />
+	<div class="lmainR ofh" style="text-align: center; width:1100px; height: 160px;">
+		<img src="img/logo.png"  />
 	</div>
 	<div class="lmainR  ">
 		<div class="loginSheet">
@@ -30,7 +30,7 @@
 			<div class="border" style="padding-left: 10px;">
 				<div class="loginWindow" style="width: 500px; height: 430px;">
 					<div class="content"
-						style="width: 478px; height: 430px; padding-left: 10px;">
+						style="width: 478px; height: 430px; ">
 						<form class="mglForm" action="edituserinfo.do" id="userinfoform"
 							method="post" enctype="multipart/form-data">
 							<div class="label">

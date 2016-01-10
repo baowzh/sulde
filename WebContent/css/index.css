@@ -9,7 +9,6 @@ body {
 
 .logo {
 	height: 203px;
-	background: url(../img/LOGO.png) no-repeat;
 }
 
 .navItem {
@@ -331,6 +330,7 @@ body {
 	/* 	background: url(../icon.png) no-repeat center 0px; */
 	text-indent: 20px;
 	width: 20px;
+	font-family: "MenksoftQagan" !important;
 }
 
 .mnlist a {

@@ -608,7 +608,7 @@
 	</select>
 	<select id="getProfessions" parameterClass="java.util.Map"
 		resultClass="ProfessionValue">
-		select * from Profession
+		select * from profession
 		<dynamic prepend="where">
 			<isNotNull prepend="and" property="professioncode">
 				professioncode=#professioncode#

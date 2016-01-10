@@ -33,7 +33,7 @@ html {
 
 .header {
 	text-align: center;
-	background: #d29130;
+	background: #42A7D7;
 	/* 	border-bottom: #50cff3 solid 2px; */
 	height: 90px;
 	/* 	background:url("../img/phonehead.jpg") */
@@ -195,7 +195,7 @@ html {
 	-webkit-text-orientation: sideways-right;
 	border-radius: 5px;
 	border-color: #014886;
-	background-color: #c90;
+	background-color: #00B9CC;
 }
 
 .mln a {

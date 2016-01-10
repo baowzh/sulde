@@ -24,19 +24,19 @@
 </head>
 <body>
 	<form id="Form" action="pagingimglist.do" method="post">
-		<div style="background: #1b6dd2;">
+		<div >
 			<div class="lmainR" style="text-align: center;">
-				<img src="img/logo.png" width="990" height="64">
+				<img src="img/logo.png" width="1100" height="160">
 			</div>
 		</div>
 		<div class="lmainR">
-			<div class="flt glryBox" style="width: 986px; margin-top: 0px;">
+			<div class="flt glryBox" style="width: 1100px; margin-top: 0px;">
 				<c:if test="${isempty==1}">
 					<div class="mnlist">    </div>
 				</c:if>
 				<c:forEach items="${imgList}" var="imgValue" varStatus="status">
 					<div class="displayfolder"
-						style="width: 159px; height: 170px; margin: 2px; 2 px; 2 px; 2 px; overflow: visible; padding-bottom: 2px;">
+						style="width: 179px; height: 170px; margin: 2px; 2 px; 2 px; 2 px; overflow: visible; padding-bottom: 2px;">
 						<a
 							href="javaScript:photoDetail('<c:out value="${imgValue.docid}" />')"><img
 							class="displayimg" style="width: 152px; height: 148px;"
@@ -115,6 +115,10 @@
 			</div>
 		</div>
 	</form>
+	<div class="lmainR ofh" style="text-align: center;">
+		<%@ include file="../website/tail.jsp"%>
+		<div class="cbt"></div>
+	</div>
 </body>
 <script>
  var queryimgs=function(){

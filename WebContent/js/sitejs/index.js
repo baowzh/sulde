@@ -212,14 +212,14 @@ var initloginform = function() {
 							})));
 	loginform.append(label4);
 	var inputHolder1 = $('<div></div>').addClass('inputHolder').append(
-			$('<input>').prop('name', 'username').prop('id', 'username'));
+			$('<input>').prop('name', 'username').prop('id', 'username')).css({height: '7em',width: '27px'});
 	loginform.append(inputHolder1);
 	var inputHolder2 = $('<div></div>').addClass('inputHolder').append(
 			$('<input>').prop('name', 'password').prop('id', 'password').prop(
-					'type', 'password'));
+					'type', 'password')).css({height: '7em',width: '27px'});
 	loginform.append(inputHolder2);
 	var inputHolder3 = $('<div></div>').addClass('inputHolder').append(
-			$('<input>').prop('name', 'validcode').prop('id', 'varifycode'));
+			$('<input>').prop('name', 'validcode').prop('id', 'varifycode')).css({height: '7em',width: '27px'});
 	loginform.append(inputHolder3);
 	var operdiv = $('<div></div>').addClass('mnlist').css({
 		height : 150,

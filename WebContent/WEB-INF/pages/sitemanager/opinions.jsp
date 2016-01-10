@@ -17,8 +17,8 @@
 <script src="js/jqui/js/jquery-ui-1.10.3.custom.min.js"></script>
 </head>
 <body>
-<div class="lmainR ofh" style="text-align: center; height:64px;">
-			<img src="img/logo.png" width="980" />
+<div class="lmainR ofh" style="text-align: center; height:160px;">
+			<img src="img/logo.png" width="1100" />
 		</div>
 	<form action="articlelist.do" id="Form" method="post">
 		<div class="lmainR"
@@ -59,7 +59,7 @@
 				</table>
 			</div>
 			<div class="  artlistcell"
-				style="width: 900px; height: 440px; overflow: scroll;">
+				style="width: 1000px; height: 440px; overflow: scroll;">
 				<div class="artListcell acell1" style="height: 410px; width: 880px;">
 					<div class="anwsls1">
 						<c:forEach items="${opinionValues}" var="opinionValue"

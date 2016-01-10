@@ -31,15 +31,7 @@ a img {
 	color: #fff;
 }
 
-.navCard {
-	height: 100px;
-	padding: 25px 30px;
-	margin: 0 5px;
-	border: solid 1px #06F;
-	border-radius: 0px 0px 5px 5px;
-	background: #1b6dd2;
-	/* 	background: url(../navbg.png) left top no-repeat */
-}
+
 
 .contentArea h1 {
 	line-height: 120%;
@@ -520,6 +512,6 @@ a img {
 	-webkit-transform-origin: 10px 14px;
 	writing-mode: tb-lr;
 	font-family: "MenksoftQagan";
-	background-color: #00A1E9;
-	color: #fff;
+/* 	background-color: #00A1E9; */
+/* 	color: #fff; */
 }
