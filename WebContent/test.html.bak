@@ -1,0 +1,70 @@
+
+<head>
+<meta charset="utf-8">
+<title>accordion demo</title>
+<link rel="stylesheet"
+	href="js\jqui\css\ui-lightness\jquery-ui-1.10.3.custom.min.css">
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript"
+	src="js/jqui/js/jquery-ui-1.10.3.custom.min.js"></script>
+</head>
+<body>
+
+	<div id="accordion"
+		>
+		<h3>Section 1</h3>
+		<div>
+			<p>Mauris mauris ante, blandit et, ultrices a, suscipit eget.
+				Integer ut neque. Vivamus nisi metus, molestie vel, gravida in,
+				condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi.
+				Proin viverra leo ut odio.</p>
+		</div>
+		<h3>Section 2</h3>
+		<div>
+			<p>Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus.
+				Vivamus hendrerit, dolor aliquet laoreet, mauris turpis velit,
+				faucibus interdum tellus libero ac justo.</p>
+		</div>
+		<h3>Section 3</h3>
+		<div>
+			<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
+				Quisque lobortis.Phasellus pellentesque purus in massa.</p>
+			<ul>
+				<li>List item one</li>
+				<li>List item two</li>
+				<li>List item three</li>
+			</ul>
+		</div>
+	</div>
+	<p>Date: <input type="text" id="datepicker"></p>
+	
+
+	<script>
+$( "#accordion" ).accordion();
+ $(function() {
+    $( "#datepicker" ).datepicker({//添加日期选择功能  
+            numberOfMonths:1,//显示几个月  
+            showButtonPanel:true,//是否显示按钮面板  
+            dateFormat: 'yy-mm-dd',//日期格式  
+            clearText:"清除",//清除日期的按钮名称  
+            closeText:"关闭",//关闭选择框的按钮名称  
+            yearSuffix: '年', //年的后缀  
+            showMonthAfterYear:true,//是否把月放在年的后面  
+            defaultDate:'2011-03-10',//默认日期  
+            minDate:'2011-03-05',//最小日期  
+            maxDate:'2011-03-20',//最大日期  
+            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
+            dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],  
+            dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],  
+            dayNamesMin: ['日','一','二','三','四','五','六'],  
+            onSelect: function(selectedDate) {//选择日期后执行的操作  
+                alert(selectedDate);  
+            }  
+            });  
+
+  
+  });
+</script>
+
+</body>
+</html>
