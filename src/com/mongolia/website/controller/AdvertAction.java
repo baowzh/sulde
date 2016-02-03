@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdvertAction {
+	private int a=0;
 	@RequestMapping("/advertindex.do")
 	public ModelAndView advertindex(HttpServletRequest request, ModelMap map) {
 		return new ModelAndView("advert/advertindex.jsp", map);
