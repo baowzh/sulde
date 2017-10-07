@@ -69,7 +69,7 @@ public class UserManagerImpl implements UserManager {
 		userManagerDao.createUser(userValue);
 		/*
 		 * MimeMessage mailMessage = this.mailSender.createMimeMessage();
-		 * this.mailSender.setUsername("imubwz@126.com");
+		 * this.mailSender.setUsername("imz@126.com");
 		 * this.mailSender.setHost("smtp.126.com");
 		 * this.mailSender.getPassword(); this.mailSender.getHost(); Properties
 		 * prop = new Properties(); prop.put("mail.smtp.auth", "true"); //
